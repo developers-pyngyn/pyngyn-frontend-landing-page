@@ -1,0 +1,1054 @@
+// Detailed per-competitor content used by the /compare/[slug] pages and the
+// /compare landscape matrix. Edit copy here without touching the page layout.
+//
+// Positioning, in one line:
+//   "No one has built this for PS. That's the opportunity."
+//   PYNGYN = PS-native, SMB, operationally deep.
+//   Sana (Workday) = learning-first, enterprise, horizontal.
+
+export type Cell = boolean | "partial";
+
+export type CapabilityRow = {
+  label: string;
+  detail?: string;
+  pyngyn: Cell;
+  // keyed by competitor slug
+  competitor: Record<string, Cell>;
+};
+
+export type CompareDifference = {
+  title: string;
+  pyngyn: string;
+  them: string;
+};
+
+export type CompareFaq = { q: string; a: string };
+
+export type CompareContent = {
+  slug: string;
+  name: string;
+  // Short positioning of the competitor (one line)
+  tagline: string;
+  // 1–2 sentence intro that frames the comparison
+  intro: string;
+  // TL;DR verdict shown near the top
+  verdict: {
+    pickPyngyn: string;
+    pickThem: string;
+  };
+  // 4–5 detailed differences (the meat of the page)
+  differences: CompareDifference[];
+  // Honest "they're better for this" list
+  bestFor: string[];
+  // Pricing context, kept generic on purpose
+  pricingNote: string;
+  // 3–4 step migration outline
+  migrationSteps: { title: string; body: string }[];
+  // Quotable line a customer might say about switching
+  switcherQuote?: { quote: string; attribution: string };
+  // FAQs
+  faqs: CompareFaq[];
+};
+
+// Shared capability matrix. The slug page filters columns to the active
+// competitor; the /compare landing page renders the full landscape grid.
+// Cell values mirror the competitive landscape slide:
+// ✓ Native · ~ Partial · ✗ Not available
+export const CAPABILITY_ROWS: CapabilityRow[] = [
+  {
+    label: "PS & consulting native",
+    detail:
+      "Designed for professional services firms (engagements, utilization, deliverables, SOWs), not adapted from a generic doc or task tool.",
+    pyngyn: true,
+    competitor: {
+      notion: false,
+      "sana-labs": "partial",
+      guru: false,
+      atlas: "partial",
+      clickup: false,
+      asana: false,
+      jira: false,
+      twenty: false,
+      wrike: "partial",
+    },
+  },
+  {
+    label: "Knowledge + tasks unified",
+    detail:
+      "One system where the SOP, the project plan, and the deliverable live together, not a wiki next to a tracker next to a chat.",
+    pyngyn: true,
+    competitor: {
+      notion: false,
+      "sana-labs": false,
+      guru: false,
+      atlas: false,
+      clickup: false,
+      asana: false,
+      jira: false,
+      twenty: false,
+      wrike: false,
+    },
+  },
+  {
+    label: "AI on firm's context",
+    detail:
+      "AI grounded in your engagements, methodologies, and past deliverables, not a generic chatbot bolted onto a public model.",
+    pyngyn: true,
+    competitor: {
+      notion: "partial",
+      "sana-labs": true,
+      guru: "partial",
+      atlas: false,
+      clickup: false,
+      asana: "partial",
+      jira: "partial",
+      twenty: false,
+      wrike: "partial",
+    },
+  },
+  {
+    label: "Active SOPs in workflow",
+    detail:
+      "Standard operating procedures that actually execute, checklists, gates, and AI assists fire inside the work, not buried in a doc.",
+    pyngyn: true,
+    competitor: {
+      notion: false,
+      "sana-labs": false,
+      guru: "partial",
+      atlas: false,
+      clickup: false,
+      asana: "partial",
+      jira: "partial",
+      twenty: false,
+      wrike: "partial",
+    },
+  },
+  {
+    label: "Replaces 5+ tools",
+    detail:
+      "Knowledge base, task tracker, SOP runner, AI assistant, and engagement workspace in one, instead of five subscriptions and five integrations.",
+    pyngyn: true,
+    competitor: {
+      notion: false,
+      "sana-labs": false,
+      guru: false,
+      atlas: false,
+      clickup: false,
+      asana: false,
+      jira: false,
+      twenty: false,
+      wrike: false,
+    },
+  },
+  {
+    label: "Standalone platform",
+    detail:
+      "Works on its own as the operating system of the firm, not a layer that only exists inside a parent suite or LMS.",
+    pyngyn: true,
+    competitor: {
+      notion: "partial",
+      "sana-labs": "partial",
+      guru: "partial",
+      atlas: false,
+      clickup: false,
+      asana: true,
+      jira: true,
+      twenty: true,
+      wrike: true,
+    },
+  },
+  {
+    label: "Transparent per-seat pricing",
+    detail:
+      "Priced for SMB professional-services firms at $9 per seat/month, not enterprise-only contracts with long procurement cycles.",
+    pyngyn: true,
+    competitor: {
+      notion: true,
+      "sana-labs": false,
+      guru: "partial",
+      atlas: false,
+      clickup: true,
+      asana: "partial",
+      jira: "partial",
+      twenty: true,
+      wrike: "partial",
+    },
+  },
+  {
+    label: "2x task completion proven",
+    detail:
+      "Measured outcome: pilot firms see roughly 2x improvement in task completion versus their previous stack.",
+    pyngyn: true,
+    competitor: {
+      notion: false,
+      "sana-labs": false,
+      guru: false,
+      atlas: false,
+      clickup: false,
+      asana: false,
+      jira: false,
+      twenty: false,
+      wrike: false,
+    },
+  },
+];
+
+// Short legend shown on every comparison surface. Mirrors the slide footer.
+export const COMPARE_LEGEND =
+  "✓ Native · ~ Partial · ✗ Not available";
+
+// Positioning footnote shown under the landscape matrix.
+export const COMPARE_FOOTNOTE =
+  "Sana (Workday) = learning-first, enterprise, horizontal. PYNGYN = PS-native, SMB, operationally deep.";
+
+export const COMPARE_CONTENT: Record<string, CompareContent> = {
+  notion: {
+    slug: "notion",
+    name: "Notion",
+    tagline: "All-in-one workspace for docs, databases, and lightweight projects",
+    intro:
+      "Notion is a flexible workspace where docs, wikis, and databases live together, a popular starting point for consulting firms. PYNGYN is purpose-built for professional services: knowledge and tasks unified, AI grounded in your firm's context, and SOPs that execute inside the workflow.",
+    verdict: {
+      pickPyngyn:
+        "You run a consulting or services firm and need engagements, SOPs, AI, and deliverables in one operationally deep platform, not a database you have to keep duct-taping together.",
+      pickThem:
+        "You mostly need a wiki, internal handbook, or light task lists, and you're happy to maintain the structure yourself.",
+    },
+    differences: [
+      {
+        title: "PS-native vs. blank canvas",
+        pyngyn:
+          "Engagements, deliverables, utilization, SOWs, and methodologies are first-class, designed for how PS firms actually run.",
+        them:
+          "Notion is a general workspace. To get a PS firm working, you build templates, databases, and relations from scratch, then maintain them forever.",
+      },
+      {
+        title: "Knowledge + tasks unified",
+        pyngyn:
+          "The SOP, the project plan, and the deliverable live in one record. There's no 'wiki page' and 'tracker' to keep in sync.",
+        them:
+          "Docs and databases coexist, but pulling a SOP into actual task execution still requires manual rollups and habits.",
+      },
+      {
+        title: "AI on firm's context, not generic text",
+        pyngyn:
+          "AI is grounded in your engagements, methodologies, and past deliverables, it can draft a status update or scope a new engagement using your real context.",
+        them:
+          "Notion AI is great at writing and Q&A across the pages it can see, but it doesn't model your firm's operations.",
+      },
+      {
+        title: "Active SOPs vs. static docs",
+        pyngyn:
+          "SOPs run inside the workflow (checklists, gates, owners, AI assists), so the playbook is enforced, not just documented.",
+        them:
+          "SOPs in Notion are documents. Reading them is opt-in; following them is on the team.",
+      },
+      {
+        title: "Replaces a stack of tools",
+        pyngyn:
+          "Knowledge base, task tracker, SOP runner, AI assistant, and engagement workspace, one subscription, one source of truth.",
+        them:
+          "Most Notion-based firms still bolt on a tracker, a chat, an LMS, and an AI tool, and pay to keep them in sync.",
+      },
+    ],
+    bestFor: [
+      "Internal wikis, handbooks, and SOPs that are read but not executed",
+      "Lightweight personal or small-team task lists",
+      "Companies that already love building their own database templates",
+    ],
+    pricingNote:
+      "Notion is inexpensive per seat; AI is an add-on. PYNGYN starts at $9 per seat/month and replaces 5+ tools you'd otherwise stitch around Notion.",
+    migrationSteps: [
+      {
+        title: "Identify the project & engagement databases",
+        body: "Pick the databases that actually run engagements, not the doc pages.",
+      },
+      {
+        title: "Import via CSV or the Notion API",
+        body: "PYNGYN ingests engagements, tasks, owners, statuses, and due dates from the databases you select.",
+      },
+      {
+        title: "Convert SOPs into active playbooks",
+        body: "Notion SOP pages become PYNGYN playbooks with steps, gates, and AI assists attached.",
+      },
+      {
+        title: "Keep Notion as your handbook",
+        body: "Many firms keep Notion as the company wiki and run PYNGYN as the operating system of the firm.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Can we keep our handbook in Notion?",
+        a: "Yes. Most firms do. PYNGYN handles engagements, SOPs, and delivery; Notion stays the source of truth for static documents and the company wiki.",
+      },
+      {
+        q: "We have beautiful project templates in Notion. Are they lost?",
+        a: "No. PYNGYN imports the database structure and turns it into a real engagement workspace with status, SOPs, and AI built in.",
+      },
+      {
+        q: "Will PYNGYN's AI see our Notion content?",
+        a: "Yes, with permission. You can connect Notion as a knowledge source so PYNGYN's AI grounds answers in both your handbook and your engagements.",
+      },
+      {
+        q: "Is PYNGYN really cheaper than Notion + add-ons?",
+        a: "For most PS firms, yes. PYNGYN consolidates the tracker, SOP runner, AI, and client portal into one bill that starts at $9 per seat/month.",
+      },
+    ],
+  },
+
+  "sana-labs": {
+    slug: "sana-labs",
+    name: "Sana Labs",
+    tagline: "Learning-first, enterprise, horizontal AI platform (now Workday)",
+    intro:
+      "Sana Labs is a strong learning-first AI platform aimed at enterprises across industries, and now part of Workday. PYNGYN is the opposite end of the spectrum on purpose: PS-native, SMB, and operationally deep, with AI grounded in how a consulting firm actually delivers work.",
+    verdict: {
+      pickPyngyn:
+        "You're a professional services firm that needs an operating system for engagements, SOPs, and delivery, priced for SMB and ready in days, not quarters.",
+      pickThem:
+        "You're a large enterprise looking primarily for AI-powered learning and assistants across many functions, with a long procurement and rollout horizon.",
+    },
+    differences: [
+      {
+        title: "PS-native vs. horizontal enterprise AI",
+        pyngyn:
+          "Built specifically for professional services firms: engagements, utilization, deliverables, and SOPs are first-class.",
+        them:
+          "Sana is horizontal, designed to serve learning and AI assistant use cases across every department of a large enterprise.",
+      },
+      {
+        title: "Operationally deep vs. learning-first",
+        pyngyn:
+          "Knowledge + tasks unified. SOPs execute inside the workflow. The platform runs the firm, not just its training.",
+        them:
+          "Sana started as a learning platform and now extends into AI assistants. It's strong on knowledge surfacing, lighter on running the engagement.",
+      },
+      {
+        title: "SMB pricing vs. enterprise contracts",
+        pyngyn:
+          "Priced at $9 per seat/month so a 10–100 person firm can start this quarter.",
+        them:
+          "Enterprise pricing, long procurement, and a sales cycle sized for global organizations.",
+      },
+      {
+        title: "Replaces 5+ tools vs. sits beside them",
+        pyngyn:
+          "Knowledge base, tracker, SOP runner, AI assistant, and engagement workspace in one platform.",
+        them:
+          "Typically deployed alongside an existing LMS, HRIS, project tool, and ticketing system, it does not replace the operating stack.",
+      },
+      {
+        title: "Standalone platform vs. suite component",
+        pyngyn:
+          "PYNGYN runs as the firm's standalone operating platform.",
+        them:
+          "Increasingly anchored within the Workday ecosystem, which is powerful at enterprise scale but heavy for an SMB firm.",
+      },
+    ],
+    bestFor: [
+      "Global enterprises rolling out AI assistants across departments",
+      "Organizations already standardized on Workday for HR and finance",
+      "Learning & development teams that want a modern AI-driven LMS",
+    ],
+    pricingNote:
+      "Sana / Workday pricing is enterprise. PYNGYN is priced for SMB professional-services firms at $9 per seat/month with no procurement-grade rollout required.",
+    migrationSteps: [
+      {
+        title: "Identify the PS workflows you actually run",
+        body: "Engagement intake, scoping, delivery, status, and close-out, the things Sana isn't designed to operationalize.",
+      },
+      {
+        title: "Bring over your SOPs",
+        body: "Import existing playbooks and methodologies; PYNGYN turns them into active workflows with gates and AI assists.",
+      },
+      {
+        title: "Connect knowledge sources",
+        body: "Point PYNGYN at your existing doc store so the firm's context grounds every AI response.",
+      },
+      {
+        title: "Keep learning where it lives",
+        body: "If you already use Sana for training, keep it. PYNGYN handles engagement delivery, not corporate L&D.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is PYNGYN a learning platform like Sana?",
+        a: "No. PYNGYN is an operating platform for PS and consulting firms. Learning content can live alongside it, but training is not the primary use case.",
+      },
+      {
+        q: "We're an SMB firm, could we deploy Sana / Workday?",
+        a: "Technically yes, but it's typically over-scoped and over-priced for a 10–100 person firm. PYNGYN is sized for exactly that band.",
+      },
+      {
+        q: "Does PYNGYN's AI compete with Sana's AI?",
+        a: "PYNGYN's AI is intentionally narrower: grounded in your engagements, deliverables, and SOPs. That's where it beats generic enterprise AI for PS work.",
+      },
+      {
+        q: "How fast can we go live?",
+        a: "Most SMB consulting firms pilot a single engagement type in a week or two and roll the rest of the firm onto PYNGYN inside a quarter.",
+      },
+    ],
+  },
+
+  guru: {
+    slug: "guru",
+    name: "Guru",
+    tagline: "AI-powered enterprise knowledge management",
+    intro:
+      "Guru is a strong enterprise wiki and AI-powered knowledge surface, great for answering questions in chat. PYNGYN goes further: knowledge and tasks unified, SOPs that execute inside the workflow, and AI grounded in how a PS firm actually delivers engagements.",
+    verdict: {
+      pickPyngyn:
+        "You need knowledge to drive action (engagements, SOPs, deliverables), not just to be searchable in Slack.",
+      pickThem:
+        "Your primary problem is 'we have answers somewhere and people can't find them,' and you don't need to run engagements in the same tool.",
+    },
+    differences: [
+      {
+        title: "Knowledge + tasks unified vs. knowledge alone",
+        pyngyn:
+          "The SOP, the engagement plan, and the deliverable live together. Knowledge isn't a separate sidebar.",
+        them:
+          "Guru is a knowledge layer. Tasks, projects, and engagements still live in another tool that has to be kept in sync.",
+      },
+      {
+        title: "Active SOPs vs. answer surfacing",
+        pyngyn:
+          "Playbooks run inside the workflow (steps, gates, AI assists), so the right thing happens, not just gets surfaced when asked.",
+        them:
+          "Guru can show the SOP card when prompted. Whether it gets followed is up to the human.",
+      },
+      {
+        title: "PS-native vs. horizontal KM",
+        pyngyn:
+          "Designed for consulting and services firms: engagements, utilization, deliverables, and methodologies are core concepts.",
+        them:
+          "Guru is horizontal knowledge management, strong for support, ops, and sales enablement; not a PS operating system.",
+      },
+      {
+        title: "Replaces 5+ tools vs. one of five",
+        pyngyn:
+          "One platform for knowledge, tasks, SOPs, AI, and engagement workspace.",
+        them:
+          "Guru typically lives next to a project tool, a chat, a ticketing system, and an AI assistant.",
+      },
+      {
+        title: "Firm-context AI vs. card-surfacing AI",
+        pyngyn:
+          "AI is grounded in your engagements, deliverables, and SOPs, it can draft a scope or status, not just answer FAQs.",
+        them:
+          "Guru's AI is strong at surfacing the right card from your wiki. It doesn't reason about your engagements.",
+      },
+    ],
+    bestFor: [
+      "Customer support and CX teams that need answer-in-Slack workflows",
+      "Sales enablement libraries and onboarding content",
+      "Companies that just want a verified internal wiki",
+    ],
+    pricingNote:
+      "Guru is priced per knowledge seat. PYNGYN starts at $9 per seat/month and includes knowledge, tasks, SOPs, and AI in one bill.",
+    migrationSteps: [
+      {
+        title: "Export your verified cards",
+        body: "Bring over Guru cards, collections, and verification metadata.",
+      },
+      {
+        title: "Map cards to SOPs and playbooks",
+        body: "PYNGYN converts how-to cards into active SOPs with gates and owners.",
+      },
+      {
+        title: "Connect engagements",
+        body: "Link SOPs and knowledge to the engagements they actually run, knowledge stops being a separate tab.",
+      },
+      {
+        title: "Sunset standalone KM",
+        body: "Once SOPs run inside engagements, most teams retire the standalone wiki.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does PYNGYN replace Guru entirely?",
+        a: "For PS firms, almost always yes, knowledge in PYNGYN drives engagements directly. Customer support orgs may still prefer Guru.",
+      },
+      {
+        q: "Can we keep verified-knowledge workflows?",
+        a: "Yes. PYNGYN supports owners, freshness, and verification on SOPs and knowledge entries.",
+      },
+      {
+        q: "What about Slack / browser extensions?",
+        a: "PYNGYN surfaces knowledge and SOP actions where work happens, including chat and browser. The difference is that those actions kick off real workflows.",
+      },
+      {
+        q: "How is the AI different?",
+        a: "Guru's AI is excellent at retrieving the right card. PYNGYN's AI is grounded in your engagements and can act on them, drafting scopes, status, deliverables.",
+      },
+    ],
+  },
+
+  atlas: {
+    slug: "atlas",
+    name: "Atlas",
+    tagline: "Adjacent PS / consulting workspace tooling",
+    intro:
+      "Atlas is one of several adjacent tools that PS and consulting firms try when their Notion + tracker + wiki stack stops scaling. It moves in the right direction but stops short: still horizontal, still missing the operationally deep SOP and engagement layer a firm needs.",
+    verdict: {
+      pickPyngyn:
+        "You want a single, PS-native operating platform with active SOPs, unified knowledge + tasks, and AI grounded in your firm's context.",
+      pickThem:
+        "You're already invested in Atlas as a generic workspace and only need lightweight project structure on top of docs.",
+    },
+    differences: [
+      {
+        title: "PS-native depth",
+        pyngyn:
+          "Engagements, utilization, SOWs, deliverables, and methodologies are first-class, not bolted onto a docs tool.",
+        them:
+          "Atlas leans general-purpose; consulting-specific concepts are partial and often left to the customer to model.",
+      },
+      {
+        title: "Knowledge + tasks unified",
+        pyngyn:
+          "One record carries the SOP, the plan, and the deliverable.",
+        them:
+          "Docs and projects are nearby, but unifying them into a single execution flow still requires manual structure.",
+      },
+      {
+        title: "Active SOPs in workflow",
+        pyngyn:
+          "Playbooks execute inside the engagement (checklists, gates, AI assists, owners), instead of living as documentation.",
+        them:
+          "SOPs are essentially pages. They're not enforced inside the work.",
+      },
+      {
+        title: "AI on firm's context",
+        pyngyn:
+          "AI is grounded in your engagements, methodologies, and past deliverables.",
+        them:
+          "AI features are limited or generic; not specifically grounded in how a consulting firm runs.",
+      },
+      {
+        title: "Standalone, PS-priced platform",
+        pyngyn:
+          "A standalone platform priced at $9 per seat/month for SMB professional-services firms.",
+        them:
+          "Pricing and packaging are typically built for broader audiences, not specifically a 10–100 person consulting firm.",
+      },
+    ],
+    bestFor: [
+      "Generalist teams that need a clean docs + light-projects tool",
+      "Workspaces that mostly use the doc layer and don't need deep PS modeling",
+      "Customers already standardized on Atlas as a horizontal platform",
+    ],
+    pricingNote:
+      "Atlas is generally priced as a general workspace and does not target SMB PS firms specifically. PYNGYN is purpose-priced at $9 per seat/month for that exact band.",
+    migrationSteps: [
+      {
+        title: "Pick the engagements that need real structure",
+        body: "Start with the work that's currently slow because Atlas can't model it.",
+      },
+      {
+        title: "Import projects and docs",
+        body: "Bring over active engagements, owners, statuses, and the SOP-style docs that should be playbooks.",
+      },
+      {
+        title: "Turn docs into active SOPs",
+        body: "PYNGYN converts the relevant Atlas pages into playbooks that execute inside engagements.",
+      },
+      {
+        title: "Run both briefly, then cut over",
+        body: "Keep Atlas read-only as a reference, then sunset once PYNGYN is the system of record.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Why a separate page for Atlas?",
+        a: "Because it's in the consideration set for PS firms. We want to be honest about where it overlaps and where PYNGYN is purpose-built deeper.",
+      },
+      {
+        q: "Can we use both?",
+        a: "Some teams keep Atlas as a generic workspace and use PYNGYN as the operating system for engagements. Most consolidate over time.",
+      },
+      {
+        q: "How long does it take to migrate?",
+        a: "An SMB consulting firm usually pilots one engagement type in a week or two and migrates the rest inside a quarter.",
+      },
+      {
+        q: "Does PYNGYN model utilization and SOWs?",
+        a: "Yes. Engagements, utilization, SOWs, and deliverables are first-class concepts, not custom fields.",
+      },
+    ],
+  },
+
+  clickup: {
+    slug: "clickup",
+    name: "ClickUp",
+    tagline: "Configurable everything-app for tasks, docs, and dashboards",
+    intro:
+      "ClickUp is a broad, configurable platform for tasks, docs, and dashboards across all kinds of teams. PYNGYN takes a sharper stance: PS-native, knowledge + tasks unified, SOPs that execute in the workflow, and AI grounded in your firm's context, not a general-purpose canvas.",
+    verdict: {
+      pickPyngyn:
+        "You run a consulting or services firm and want an opinionated operating platform that already knows what 'engagement', 'utilization', and 'SOP' mean.",
+      pickThem:
+        "You want maximum configurability across a mix of teams (marketing, ops, support) and you have someone who'll own the setup.",
+    },
+    differences: [
+      {
+        title: "Opinionated PS platform vs. configurable canvas",
+        pyngyn:
+          "Engagements, SOWs, utilization, deliverables, and methodologies are first-class out of the box.",
+        them:
+          "ClickUp is intentionally generic. To get a PS firm working well, someone has to build and maintain a heavy custom configuration.",
+      },
+      {
+        title: "Active SOPs vs. checklists in docs",
+        pyngyn:
+          "SOPs execute inside the workflow (gates, owners, AI assists), and stay current as the firm evolves.",
+        them:
+          "ClickUp has docs and checklists, but turning them into enforced playbooks is on you.",
+      },
+      {
+        title: "Knowledge + tasks unified",
+        pyngyn:
+          "One record carries the SOP, the plan, and the deliverable, no separate wiki to sync.",
+        them:
+          "Docs and tasks live nearby but in different surfaces; unifying them is a project of its own.",
+      },
+      {
+        title: "AI grounded in your firm",
+        pyngyn:
+          "AI knows your engagements, deliverables, and methodologies, it drafts scopes, status notes, and next steps inside the work.",
+        them:
+          "ClickUp AI is useful for generic writing and summarization across tasks. It doesn't model PS-specific concepts.",
+      },
+      {
+        title: "Operational depth, not feature breadth",
+        pyngyn:
+          "Focused on the depth a PS firm needs: utilization, engagements, SOPs, deliverables, AI on firm context.",
+        them:
+          "Broad feature set across many use cases. Breadth comes at the cost of operational depth in any single discipline.",
+      },
+    ],
+    bestFor: [
+      "Generalist teams that want one tool for tasks, docs, and dashboards",
+      "Customers who enjoy configuring statuses, views, and automations themselves",
+      "Cross-departmental setups where PS isn't the primary use case",
+    ],
+    pricingNote:
+      "ClickUp has a strong SMB-friendly price point per seat. PYNGYN's pricing is purpose-built for SMB professional-services firms at $9 per seat/month, and it replaces multiple tools rather than competing on per-seat cost alone.",
+    migrationSteps: [
+      {
+        title: "Pick the engagements to bring over",
+        body: "Start with active engagements where ClickUp configuration has gotten heavy.",
+      },
+      {
+        title: "Import spaces, lists, and docs",
+        body: "Tasks, owners, statuses, custom fields, and docs come into PYNGYN.",
+      },
+      {
+        title: "Convert configurations into PS concepts",
+        body: "Your ClickUp scaffolding maps onto engagements, SOPs, and deliverables, not freeform spaces.",
+      },
+      {
+        title: "Run both briefly, then consolidate",
+        body: "Keep ClickUp read-only while the team validates the new shape, then make PYNGYN the system of record.",
+      },
+    ],
+    faqs: [
+      {
+        q: "We've built a complex ClickUp setup. Do we lose it?",
+        a: "The investment isn't lost, most of it exists because ClickUp had to be molded into a PS shape. PYNGYN already has that shape, so much of the custom work goes away.",
+      },
+      {
+        q: "Is PYNGYN as configurable as ClickUp?",
+        a: "Less so, on purpose. PYNGYN is opinionated about PS workflows. You get less tinkering, and a system that actually runs the firm.",
+      },
+      {
+        q: "Does PYNGYN have dashboards and reporting?",
+        a: "Yes, engagement health, utilization, SOP compliance, and delivery status are first-class views, not custom dashboards you have to build.",
+      },
+      {
+        q: "Will my team have to relearn everything?",
+        a: "The core interactions (lists, boards, timelines, docs) are familiar. What changes is that the platform already understands engagements and SOPs.",
+      },
+    ],
+  },
+
+  asana: {
+    slug: "asana",
+    name: "Asana",
+    tagline: "Work management for cross-functional projects, goals, and reporting",
+    intro:
+      "Asana is a polished work management platform for cross-functional teams running projects, goals, and portfolios. PYNGYN is purpose-built for professional services firms: engagements, utilization, SOWs, deliverables, and active SOPs unified with knowledge, and AI grounded in how your firm actually delivers work.",
+    verdict: {
+      pickPyngyn:
+        "You run a consulting or services firm and need an operating system for engagements, SOPs, knowledge, and AI, not just task lists, timelines, and portfolio dashboards.",
+      pickThem:
+        "You manage cross-functional marketing, ops, or product projects across many teams and mostly need polished task tracking, timelines, and goals reporting.",
+    },
+    differences: [
+      {
+        title: "PS-native vs. horizontal work management",
+        pyngyn:
+          "Engagements, utilization, SOWs, deliverables, and methodologies are first-class, not modeled as projects, custom fields, and portfolios you have to design.",
+        them:
+          "Asana is intentionally horizontal. To run a PS firm well, someone has to design projects, custom fields, rules, and portfolios, and keep them in sync as the firm evolves.",
+      },
+      {
+        title: "Knowledge + tasks unified vs. tasks beside docs",
+        pyngyn:
+          "The SOP, the engagement plan, and the deliverable live in one record. There is no separate wiki, tracker, or doc tool to keep aligned.",
+        them:
+          "Asana focuses on tasks, timelines, and projects. Knowledge typically lives in Confluence, Notion, or Google Docs, kept in sync by hand.",
+      },
+      {
+        title: "Active SOPs vs. templates and rules",
+        pyngyn:
+          "Playbooks execute inside the engagement (checklists, gates, owners, AI assists), so the right thing actually happens, not just gets templated.",
+        them:
+          "Asana has project templates and rules, which are powerful, but SOPs still live as task lists or external docs and aren't enforced as gates.",
+      },
+      {
+        title: "AI on firm's context vs. generic task AI",
+        pyngyn:
+          "AI is grounded in your engagements, methodologies, and past deliverables, it can draft a scope, status note, or next step using your real context.",
+        them:
+          "Asana Intelligence is useful for summarizing tasks, drafting updates, and surfacing risk across projects, but it doesn't model PS-specific concepts.",
+      },
+      {
+        title: "Replaces 5+ tools vs. one of the stack",
+        pyngyn:
+          "Knowledge base, task tracker, SOP runner, AI assistant, and engagement workspace consolidated into one platform and one bill.",
+        them:
+          "Asana typically sits next to a wiki, a doc tool, a chat, an AI assistant, and sometimes a separate PSA, each with its own subscription and integration.",
+      },
+    ],
+    bestFor: [
+      "Marketing, ops, and product teams running cross-functional projects",
+      "Companies that need goal-tracking and portfolio dashboards across many teams",
+      "Organizations already standardized on Asana as their shared work management tool",
+    ],
+    pricingNote:
+      "Asana is priced per user with feature tiers; Enterprise and AI features sit at higher plans. PYNGYN starts around $9 per seat/month for an SMB consulting firm and includes knowledge, tasks, SOPs, and AI in a single bill.",
+    migrationSteps: [
+      {
+        title: "Pick the PS projects to bring over first",
+        body: "Start with active client engagements where Asana's generic project shape has gotten stretched thin.",
+      },
+      {
+        title: "Import projects, tasks, and custom fields",
+        body: "PYNGYN ingests projects, sections, tasks, owners, due dates, and custom fields, and maps them to engagements and deliverables.",
+      },
+      {
+        title: "Convert templates into active SOPs",
+        body: "Your best Asana project templates become PYNGYN playbooks with steps, gates, owners, and AI assists attached.",
+      },
+      {
+        title: "Keep Asana for non-PS work, or sunset over time",
+        body: "Many firms keep Asana for internal cross-functional work and run PYNGYN as the operating system for client delivery; others consolidate fully.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is PYNGYN a project management tool like Asana?",
+        a: "It includes everything Asana does at the task and project layer, but it goes deeper: engagements, utilization, SOWs, deliverables, SOPs, knowledge, and AI live in one record, not next to a tracker.",
+      },
+      {
+        q: "We have hundreds of Asana projects. Can we migrate?",
+        a: "Yes. PYNGYN imports projects, tasks, custom fields, and owners. The high-value step is converting your best project templates into active SOPs that enforce themselves inside engagements.",
+      },
+      {
+        q: "Does PYNGYN have timelines, boards, and portfolios?",
+        a: "Yes, list, board, timeline, and engagement health views are first-class, but they're driven by PS-native concepts like engagements and utilization rather than generic portfolios.",
+      },
+      {
+        q: "What about Asana Goals and reporting?",
+        a: "PYNGYN reports on engagement health, utilization, SOP compliance, and delivery status out of the box. If you need company-wide OKRs across non-PS teams, many firms keep Asana Goals alongside PYNGYN.",
+      },
+    ],
+  },
+
+  jira: {
+    slug: "jira",
+    name: "Jira",
+    tagline: "Atlassian's issue tracker for software teams, sprints, and backlogs",
+    intro:
+      "Jira is the industry-standard issue tracker for software engineering, sprints, epics, backlogs, and workflows. PYNGYN is purpose-built for professional services firms: it unifies engagements, SOPs, knowledge, and AI for the way a consulting team actually delivers, instead of being adapted from a software development tool.",
+    verdict: {
+      pickPyngyn:
+        "You run a consulting, services, or delivery firm and need an operating system designed for engagements, SOWs, utilization, and SOPs, not sprints, story points, and bug backlogs.",
+      pickThem:
+        "You manage software engineering teams, ship product, and need an industry-standard issue tracker with sprints, backlogs, and deep developer integrations.",
+    },
+    differences: [
+      {
+        title: "PS-native vs. software-engineering-native",
+        pyngyn:
+          "Engagements, utilization, SOWs, deliverables, and methodologies are first-class. The data model is consulting and services, not tickets and sprints.",
+        them:
+          "Jira's data model is issues, sprints, epics, and workflows, engineered for product development. Forcing it to run a PS firm means rebuilding it as a generic ticket tracker.",
+      },
+      {
+        title: "Knowledge + tasks unified vs. Jira + Confluence",
+        pyngyn:
+          "The SOP, the engagement plan, and the deliverable live in one record, there's no separate wiki to keep in sync.",
+        them:
+          "Atlassian splits work and knowledge across Jira and Confluence. The integration is good, but they remain two products, two surfaces, and two sets of permissions.",
+      },
+      {
+        title: "Active SOPs vs. configurable workflows",
+        pyngyn:
+          "Playbooks execute inside the engagement (checklists, gates, owners, AI assists), without needing an admin to configure workflow schemes for each one.",
+        them:
+          "Jira workflows are powerful but require careful administration. SOPs typically live in Confluence docs that the workflow doesn't actually enforce.",
+      },
+      {
+        title: "AI on firm's context vs. ticket-level AI",
+        pyngyn:
+          "AI is grounded in your engagements, deliverables, methodologies, and SOPs, it can draft a scope, status note, or next step using real firm context.",
+        them:
+          "Atlassian Intelligence helps with issue summaries, smart links, and natural-language search across Jira/Confluence, but it doesn't model PS engagements or methodologies.",
+      },
+      {
+        title: "Operating platform vs. configurable tracker",
+        pyngyn:
+          "PYNGYN is the firm's operating platform: opinionated, PS-shaped, and ready to run engagements out of the box.",
+        them:
+          "Jira is extraordinarily configurable. Getting it to behave like a PSA usually means heavy customization, ScriptRunner-style plugins, and ongoing admin overhead.",
+      },
+    ],
+    bestFor: [
+      "Software engineering teams running sprints, backlogs, and releases",
+      "Organizations standardized on the Atlassian suite (Jira, Confluence, Bitbucket)",
+      "Companies that need deep developer tool integrations (Git, CI, code review)",
+    ],
+    pricingNote:
+      "Jira is priced per user and pairs with Confluence for knowledge. A typical PS firm ends up paying for Jira + Confluence + an AI add-on + a separate PSA. PYNGYN starts around $9 per seat/month and replaces that stack for SMB consulting firms.",
+    migrationSteps: [
+      {
+        title: "Identify PS-shaped work hiding in Jira",
+        body: "Client engagements, methodologies, and delivery playbooks that have been forced into projects, epics, and issues.",
+      },
+      {
+        title: "Import projects, issues, and custom fields",
+        body: "PYNGYN ingests Jira projects, issues, statuses, assignees, and custom fields, then maps them onto engagements and deliverables.",
+      },
+      {
+        title: "Convert Confluence runbooks into active SOPs",
+        body: "Your best Confluence playbooks become PYNGYN SOPs that execute inside the work with gates, owners, and AI assists.",
+      },
+      {
+        title: "Keep Jira for engineering, run PYNGYN for delivery",
+        body: "Many firms keep Jira for product engineering and use PYNGYN as the operating system for client engagements and consulting delivery.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is PYNGYN a Jira replacement for engineering teams?",
+        a: "No, Jira remains a great fit for software engineering with sprints, backlogs, and dev integrations. PYNGYN is built for professional services and consulting delivery, not product engineering.",
+      },
+      {
+        q: "We force Jira to run client projects today. Should we migrate?",
+        a: "Probably yes. PS firms that 'live in Jira' usually rebuild it into a ticket tracker that fights the firm's real shape. PYNGYN already has that shape and removes the admin burden.",
+      },
+      {
+        q: "What about Confluence? Does PYNGYN replace it?",
+        a: "For PS firms, largely yes, knowledge in PYNGYN drives engagements directly. Some teams keep Confluence as a general company wiki; most consolidate over time.",
+      },
+      {
+        q: "Can PYNGYN integrate with Jira if engineering still uses it?",
+        a: "Yes. PYNGYN can connect to Jira so engineering work stays in Jira while client engagements, SOPs, and delivery live in PYNGYN, with status reflected in both places.",
+      },
+    ],
+  },
+
+  twenty: {
+    slug: "twenty",
+    name: "Twenty",
+    tagline: "Open-source CRM and customer workspace, a Salesforce/HubSpot alternative",
+    intro:
+      "Twenty is a modern, open-source CRM positioned as an alternative to Salesforce and HubSpot, strong at managing companies, people, opportunities, and pipelines. PYNGYN is not a CRM: it is the PS-native operating platform that runs the work after a deal closes, with engagements, SOPs, knowledge, and AI unified.",
+    verdict: {
+      pickPyngyn:
+        "You need an operating system for delivery (engagements, utilization, SOWs, SOPs, deliverables, and AI grounded in your firm's context), not a sales CRM.",
+      pickThem:
+        "Your primary need is a modern, open-source CRM for tracking companies, contacts, deals, and sales pipeline activity, with full control over the data model.",
+    },
+    differences: [
+      {
+        title: "Delivery platform vs. CRM",
+        pyngyn:
+          "PYNGYN runs the work after the deal closes: engagements, deliverables, utilization, SOWs, and SOPs are first-class.",
+        them:
+          "Twenty is a CRM. It models companies, people, opportunities, and activities, not how a consulting firm actually delivers an engagement.",
+      },
+      {
+        title: "Knowledge + tasks unified vs. records + relations",
+        pyngyn:
+          "The SOP, the engagement plan, and the deliverable live in one record, knowledge isn't a separate sidebar or external wiki.",
+        them:
+          "Twenty's strength is structured records and relations. Knowledge work, SOPs, and delivery typically live in other tools that the CRM doesn't replace.",
+      },
+      {
+        title: "Active SOPs vs. configurable objects",
+        pyngyn:
+          "Playbooks execute inside the engagement (checklists, gates, owners, AI assists), so the firm's methodology is enforced inside the work.",
+        them:
+          "Twenty lets you model objects, fields, and views beautifully. Turning that into enforced SOPs with gates and AI assists is outside the CRM's job.",
+      },
+      {
+        title: "AI on firm's context vs. AI on the CRM",
+        pyngyn:
+          "AI is grounded in your engagements, methodologies, and past deliverables, it drafts scopes, status notes, and next steps inside the work.",
+        them:
+          "AI features in modern CRMs focus on lead scoring, email drafting, and pipeline insights, useful for sales, but not for running PS delivery.",
+      },
+      {
+        title: "Opinionated platform vs. open-source flexibility",
+        pyngyn:
+          "PYNGYN is opinionated and PS-shaped out of the box, no schema design required to start running engagements.",
+        them:
+          "Twenty's value is flexibility and openness, you control the schema, host it yourself if you want, and bend it to your sales process. That same flexibility is overhead if you only need an operating platform.",
+      },
+    ],
+    bestFor: [
+      "Teams that want an open-source CRM they can self-host and customize",
+      "Sales-led organizations managing companies, contacts, and pipeline",
+      "Builders who prefer a flexible data model and full control of their stack",
+    ],
+    pricingNote:
+      "Twenty is open-source with a generous free tier and paid cloud plans for hosting and scale. PYNGYN is a managed platform priced at $9 per seat/month and replaces the tracker, wiki, SOP runner, and AI assistant in one bill.",
+    migrationSteps: [
+      {
+        title: "Keep Twenty for sales, add PYNGYN for delivery",
+        body: "Most teams don't migrate off Twenty, they pair it with PYNGYN, which takes over once a deal becomes an engagement.",
+      },
+      {
+        title: "Sync companies and deals into engagements",
+        body: "PYNGYN ingests closed-won opportunities from Twenty and stands them up as engagements with the right SOP and methodology attached.",
+      },
+      {
+        title: "Run delivery with active SOPs",
+        body: "Engagement plans, deliverables, utilization, and SOPs all run inside PYNGYN, your CRM stays focused on pipeline.",
+      },
+      {
+        title: "Report end-to-end",
+        body: "Pipeline lives in Twenty; engagement health, utilization, and delivery status live in PYNGYN. The handoff between them stops being a spreadsheet.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is PYNGYN a CRM like Twenty?",
+        a: "No. PYNGYN is the operating platform for professional services delivery. We don't compete with Twenty's CRM, we pick up where it leaves off, after a deal closes.",
+      },
+      {
+        q: "Can we use Twenty and PYNGYN together?",
+        a: "Yes. The clean pattern is Twenty for sales (companies, contacts, deals) and PYNGYN for delivery (engagements, SOPs, deliverables). Closed-won syncs into PYNGYN as an engagement.",
+      },
+      {
+        q: "We tried to run delivery in Twenty. Should we keep going?",
+        a: "Modern open-source CRMs are excellent for sales, but they aren't built for utilization, SOWs, SOPs, or engagement delivery. PS firms eventually hit a wall there, PYNGYN is the layer for that work.",
+      },
+      {
+        q: "Is PYNGYN open-source?",
+        a: "PYNGYN is a managed SaaS platform, not open-source. The trade-off is that you get a PS-native operating system out of the box, without standing up and maintaining your own stack.",
+      },
+    ],
+  },
+
+  wrike: {
+    slug: "wrike",
+    name: "Wrike",
+    tagline: "Collaborative work management for agencies, marketing, and PMOs",
+    intro:
+      "Wrike is a capable, well-established work-management platform, strong on Gantt charts, request forms, approvals, and resource management, and it markets itself toward creative agencies and services teams. PYNGYN takes a narrower, deeper stance: purpose-built for professional-services delivery specifically, with a standalone branded client portal and simple, published pricing instead of seat bands and paid add-ons.",
+    verdict: {
+      pickPyngyn:
+        "You run a professional-services or consulting firm and want engagements, utilization, and client-facing status built in, plus a client portal you don't have to configure from scratch.",
+      pickThem:
+        "You run creative or marketing production work with heavy approval chains and want Wrike's mature Blueprints, resource charts, and enterprise reporting, and you're comfortable with its tiered, add-on-based pricing.",
+    },
+    differences: [
+      {
+        title: "A client portal, not just external collaborator access",
+        pyngyn:
+          "Client Space is a standalone, branded portal, its own product, isolated per client, with status, documents, approvals, and invoices, sold on its own at $19 per client/month.",
+        them:
+          "Wrike offers external collaborator seats and request forms inside a shared workspace, useful, but not a dedicated, brandable portal product a client returns to on their own.",
+      },
+      {
+        title: "Published, simple pricing vs. seat bands and add-ons",
+        pyngyn:
+          "$9 per seat/month for Workspace, $19 per client/month for Client Space, or $24.99/month bundled, one line, no minimums.",
+        them:
+          "Wrike's Business plan carries a 5-seat minimum and sells in fixed seat bands above that. Premium capabilities like Wrike Integrate, Sync, Whiteboard, and Datahub are separate paid add-ons at the Business and Pinnacle tiers, and the top two tiers are custom-quote only.",
+      },
+      {
+        title: "PS-native concepts vs. configurable templates",
+        pyngyn:
+          "Engagements, SOWs, and utilization are first-class objects in the product, not something you build with custom fields and Blueprints.",
+        them:
+          "Wrike's Blueprints and custom workflows can be shaped to fit services delivery, but the underlying platform is a general work-management tool, the PS shape is something your team configures and maintains.",
+      },
+      {
+        title: "AI grounded in the engagement, not general workflow automation",
+        pyngyn:
+          "AI drafts plans, status updates, and risk flags from your firm's actual engagement data.",
+        them:
+          "Wrike's AI Agents and Copilot (expanded significantly in early 2026) are genuinely capable at triggering automations and summarizing work, but they operate on generic task and project data, not PS-specific concepts like utilization or SOWs.",
+      },
+      {
+        title: "One operating layer vs. a platform plus add-ons",
+        pyngyn:
+          "Workspace and Client Space cover firm operations and client delivery in two clear products.",
+        them:
+          "Reaching Wrike's full capability set commonly means the Business or Pinnacle tier plus separately purchased add-ons, several line items instead of one.",
+      },
+    ],
+    bestFor: [
+      "Creative and marketing production teams with heavy approval and proofing chains",
+      "Larger PMOs that need Wrike's mature resource-planning and portfolio-reporting tools",
+      "Teams already invested in Wrike's add-on ecosystem (Integrate, Sync, Datahub)",
+    ],
+    pricingNote:
+      "Wrike's published pricing starts at $10/user/month (Team) and $25/user/month (Business, 5-seat minimum), with Pinnacle and the newer Apex tier priced on request and several premium capabilities sold as separate add-ons. PYNGYN publishes one number per product: $9/seat for Workspace, $19/client for Client Space, no seat minimums or paid add-ons.",
+    migrationSteps: [
+      {
+        title: "Pick the projects to bring over",
+        body: "Start with active engagements, not your full historical Wrike archive.",
+      },
+      {
+        title: "Import folders, tasks, and Gantt data",
+        body: "Tasks, owners, statuses, dependencies, and timelines come into PYNGYN's engagement view.",
+      },
+      {
+        title: "Rebuild client-facing work as a Client Space",
+        body: "Anything you shared with external collaborators in Wrike becomes a branded, isolated Client Space per client instead.",
+      },
+      {
+        title: "Run both briefly, then consolidate",
+        body: "Keep Wrike read-only while your team validates the new setup, then make PYNGYN the system of record.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does PYNGYN have Gantt charts and resource views like Wrike?",
+        a: "Yes, timeline and dependency views are built in. What's different is that engagements, utilization, and client delivery are native concepts, not something layered on top of a generic project view.",
+      },
+      {
+        q: "We use Wrike's external collaborators for client visibility. What's the PYNGYN equivalent?",
+        a: "Client Space, a standalone branded portal per client, isolated from your internal workspace and from other clients, sold on its own so you don't need to buy the internal product to get it.",
+      },
+      {
+        q: "Is PYNGYN cheaper than Wrike?",
+        a: "For most PS firm sizes, yes, and more predictably: PYNGYN's pricing is one number per product with no seat minimums. Wrike's Business plan has a 5-seat minimum and sells in fixed seat bands, and several premium features are separate paid add-ons rather than included in the listed price.",
+      },
+      {
+        q: "Does Wrike's new AI change this comparison?",
+        a: "Wrike's AI Agents and Copilot are genuinely useful for general workflow automation. PYNGYN's AI is narrower by design, grounded specifically in your firm's engagements and deliverables rather than general task automation.",
+      },
+    ],
+  },
+};
+
+export function getCompareContent(slug: string): CompareContent | undefined {
+  return COMPARE_CONTENT[slug];
+}

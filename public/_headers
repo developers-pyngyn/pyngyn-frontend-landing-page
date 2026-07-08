@@ -1,0 +1,46 @@
+# Cloudflare Pages custom response headers.
+# Files in /public are copied to the build output root (.vercel/output/static),
+# so this file is served as /_headers and applies to every response — static
+# pages and the /api/chat edge function alike.
+#
+# Strict-Transport-Security (HSTS) tells browsers to only ever reach this site
+# over HTTPS for the given max-age. 31536000s = 1 year; includeSubDomains
+# extends the policy to every subdomain (e.g. app.pyngyn.ai), which must all
+# serve HTTPS. To become eligible for the browser preload list, raise max-age
+# to 63072000 and append `preload` — note that is a long-lived, hard-to-undo
+# commitment, so only add it once every subdomain is confirmed HTTPS-only.
+#
+# Clickjacking protection. frame-ancestors (CSP) is the modern control for which
+# origins may embed this site in a frame/iframe; X-Frame-Options is the legacy
+# equivalent kept for older browsers. 'self' / SAMEORIGIN blocks all cross-origin
+# framing (the clickjacking threat) while still allowing same-origin embedding.
+# This site only ever frames third parties (Calendly, GTM) and is never framed
+# itself, so you can tighten these to `frame-ancestors 'none'` + `DENY` if you
+# want to forbid framing entirely. Note: a CSP with only frame-ancestors does
+# not restrict scripts/styles/connections — it solely governs framing.
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: frame-ancestors 'self'
+
+# Cache lifetimes. HTML is intentionally NOT long-cached (it must stay under the
+# /* block only) so content updates go live immediately. The rules below give
+# immutable, content-hashed build output a one-year TTL and static media a long
+# TTL, which is what PageSpeed's "use efficient cache lifetimes" audit wants.
+# Next.js fingerprints files under /_next/static, so they can be cached forever.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+/screens/*
+  Cache-Control: public, max-age=31536000, immutable
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/*.webp
+  Cache-Control: public, max-age=2592000
+/*.png
+  Cache-Control: public, max-age=2592000
+/*.svg
+  Cache-Control: public, max-age=2592000
+/*.ico
+  Cache-Control: public, max-age=2592000
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
