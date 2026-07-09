@@ -131,6 +131,13 @@ const RAW_KB_ARTICLES: KbArticle[] = [
     ],
   },
   { slug: "connect-quickbooks", title: "Connect QuickBooks for billing", excerpt: "Sync clients, invoices, and time entries so billable work flows straight into your books.", category: "Integrations", readingTime: "5 min", date: "May 13",
+    // No cover art exists for this article yet — explicitly overriding the
+    // auto-generated `/kb/connect-quickbooks.png` path (which 404s) back to
+    // undefined so it falls through to the existing placeholder UI in
+    // KnowledgeBase.tsx and the article page, instead of a broken image.
+    // Replace with a real `cover: "/kb/connect-quickbooks.png"` once the
+    // asset exists in public/kb/.
+    cover: undefined,
     body: [
       { paragraphs: ["The QuickBooks integration keeps billable work and your books in sync, so approved time and invoices flow through without manual re-entry, and clients see invoice status inside their own Client Space automatically."] },
       { heading: "1. Connect QuickBooks", paragraphs: ["From Workspace Settings → Integrations → QuickBooks, click Connect and sign in to your QuickBooks account to authorize the connection."] },

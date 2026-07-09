@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { SIGNUP_URL, DEMO_URL } from "./config";
+import { ProductPreviewCard } from "./ProductPreviewCard";
 
 // ---------------------------------------------------------------------------
 // Live status pill strip. Three client-facing items, each cycling through
@@ -200,17 +200,7 @@ export function Hero() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.21, 0.6, 0.35, 1] }}
             >
-              <div className="overflow-hidden rounded-[18px] border border-white/10 bg-white shadow-art">
-                <Image
-                  src="/screens/clientspace-space.webp"
-                  alt="Clientspace portal showing needs-your-attention items, active engagements, engagement value, and upcoming sessions for a client logging in"
-                  width={1909}
-                  height={940}
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 620px"
-                  className="h-auto w-full"
-                />
-              </div>
+              <ProductPreviewCard />
             </motion.div>
           </motion.div>
         </div>

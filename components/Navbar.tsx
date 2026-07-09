@@ -106,7 +106,7 @@ export function Navbar() {
           <button
             type="button"
             className={`grid h-10 w-10 place-items-center rounded-lg border lg:hidden ${
-              onDarkHero ? "border-white/15 bg-white/5 text-white" : "border-line bg-white text-ink"
+              onDarkHero ? "border-white bg-white text-ink shadow-cta" : "border-line bg-white text-ink"
             }`}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}

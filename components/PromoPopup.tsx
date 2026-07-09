@@ -5,13 +5,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { DEMO_URL, SIGNUP_URL } from "./config";
 
-// Session-persisted, not per-mount: a visitor who dismisses this, or lets the
-// timer run, gets the same real deadline on every page for the rest of their
-// browser session, not a fresh 15:00 on every navigation. Cleared when the
-// tab/browser session ends, same as a normal "today only" style offer.
+// Session-persisted: a visitor who dismisses this doesn't see it again for
+// the rest of their browser session, on any page. Cleared when the tab
+// closes.
 const DISMISSED_KEY = "pyngyn-promo-dismissed";
-const DEADLINE_KEY = "pyngyn-promo-deadline";
-const DURATION_SECONDS = 15 * 60; // 15 minutes
 
 // Trigger tuning: interrupting on a blind timer before anyone's had a
 // chance to read the page costs more conversions than it wins. Instead we
@@ -33,35 +30,14 @@ const SCROLL_TRIGGER_PCT = 0.5;
 // noise right where a visitor is already deep in the decision.
 const EXCLUDED_PREFIXES = ["/lp", "/pricing", "/demo"];
 
-function format(s: number) {
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
-  return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
-}
-
-function readOrCreateDeadline(): number {
-  try {
-    const stored = sessionStorage.getItem(DEADLINE_KEY);
-    if (stored) return Number(stored);
-    const deadline = Date.now() + DURATION_SECONDS * 1000;
-    sessionStorage.setItem(DEADLINE_KEY, String(deadline));
-    return deadline;
-  } catch {
-    return Date.now() + DURATION_SECONDS * 1000;
-  }
-}
-
 export function PromoPopup() {
   const pathname = usePathname();
   const excluded = EXCLUDED_PREFIXES.some((p) => pathname?.startsWith(p)) ?? false;
   const [open, setOpen] = useState(false);
   const [dismissed, setDismissed] = useState(false);
-  const [remaining, setRemaining] = useState(DURATION_SECONDS);
   const firedRef = useRef(false);
 
-  // On mount, check whether this session already dismissed it or already has
-  // a running deadline (from an earlier page). Never re-show after dismiss,
-  // never reset the countdown just because the visitor navigated.
+  // On mount, check whether this session already dismissed it.
   useEffect(() => {
     try {
       if (sessionStorage.getItem(DISMISSED_KEY)) {
@@ -80,13 +56,6 @@ export function PromoPopup() {
     function trigger() {
       if (firedRef.current) return;
       firedRef.current = true;
-      const deadline = readOrCreateDeadline();
-      const secondsLeft = Math.max(0, Math.round((deadline - Date.now()) / 1000));
-      if (secondsLeft <= 0) {
-        close();
-        return;
-      }
-      setRemaining(secondsLeft);
       setOpen(true);
     }
 
@@ -116,25 +85,6 @@ export function PromoPopup() {
       window.removeEventListener("scroll", onScroll);
     };
   }, [dismissed, excluded]);
-
-  // Countdown, driven by the real persisted deadline so it stays accurate
-  // even if the tab was inactive or the interval drifted.
-  useEffect(() => {
-    if (!open) return;
-    const id = setInterval(() => {
-      let deadline: number | null = null;
-      try {
-        const stored = sessionStorage.getItem(DEADLINE_KEY);
-        if (stored) deadline = Number(stored);
-      } catch {
-        /* ignore */
-      }
-      const next = deadline ? Math.max(0, Math.round((deadline - Date.now()) / 1000)) : null;
-      setRemaining((prev) => (next !== null ? next : prev > 0 ? prev - 1 : 0));
-      if (next === 0) close();
-    }, 1000);
-    return () => clearInterval(id);
-  }, [open]);
 
   // Close on Escape.
   useEffect(() => {
@@ -197,26 +147,15 @@ export function PromoPopup() {
               </button>
               <span className="eyebrow-dark justify-center">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
-                Limited-time offer
+                Trusted by 500+ firms
               </span>
               <h2 id="promo-title" className="mt-3 font-display text-[26px] font-semibold leading-tight text-white">
                 Start free, set up in minutes
               </h2>
               <p className="mt-2 text-[14px] text-white/65">
-                Book a 30-minute demo and we&apos;ll extend your trial with white-glove onboarding.
+                Book a 30-minute demo, or start your 7-day free trial right now. No credit
+                card required.
               </p>
-
-              {/* evergreen timer */}
-              <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="text-accent">
-                  <circle cx="12" cy="13" r="8" stroke="currentColor" strokeWidth="2" />
-                  <path d="M12 9v4l2.5 2M9 2h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-                <span className="font-mono text-[16px] font-semibold tabular-nums text-white">
-                  {format(remaining)}
-                </span>
-                <span className="text-[12px] text-white/55">left</span>
-              </div>
             </div>
 
             {/* actions */}
@@ -225,10 +164,10 @@ export function PromoPopup() {
                 Book a demo →
               </a>
               <a href={SIGNUP_URL} className="btn btn-ghost justify-center">
-                Start free
+                Start free trial
               </a>
               <p className="mt-0.5 text-center text-[12px] text-muted">
-                30 minutes · Tailored to your firm · No commitment
+                7-day free trial · No credit card required · Cancel anytime
               </p>
               <button
                 type="button"

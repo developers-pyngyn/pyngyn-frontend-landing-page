@@ -330,7 +330,7 @@ export function Footer() {
 
         {/* Bottom legal bar */}
         <div className="mt-8 flex flex-col flex-wrap items-center justify-between gap-2 border-t border-line pt-6 text-[12.5px] xl:flex-row xl:flex-nowrap">
-          <span className="flex-shrink-0 whitespace-nowrap">© 2026 PYNGYN, a product of VIMOVI GlobalTech Private Limited. All rights reserved.</span>
+          <span className="flex-shrink-0 xl:whitespace-nowrap">© 2026 PYNGYN, a product of VIMOVI GlobalTech Private Limited. All rights reserved.</span>
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 xl:flex-nowrap xl:whitespace-nowrap">
             {legal.map(([label, href]) => (
               <Link key={label} href={href} className="hover:text-accent">
