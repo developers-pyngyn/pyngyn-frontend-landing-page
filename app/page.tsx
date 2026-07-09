@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
+import { Partners } from "@/components/Partners";
 import {
   Proof,
   Problem,
@@ -17,6 +18,7 @@ import { Connections } from "@/components/Connections";
 import { VideoTestimonials } from "@/components/VideoTestimonials";
 import { ProductShowcase } from "@/components/ProductShowcase";
 import { SpacesExplainer } from "@/components/SpacesExplainer";
+import { OldWayNewWay } from "@/components/OldWayNewWay";
 import type { Metadata } from "next";
 import {
   JsonLd,
@@ -73,6 +75,7 @@ export default function Home() {
       <Navbar />
       <main id="main">
         <Hero />
+        <Partners />
         <Proof />
         <Problem />
         <SpacesExplainer />
@@ -80,6 +83,7 @@ export default function Home() {
         <HowItWorks />
         <IndustrySolutions />
         <ProductShowcase />
+        <OldWayNewWay />
         <VideoTestimonials />
         <Testimonials />
         <Metrics />

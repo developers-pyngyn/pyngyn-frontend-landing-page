@@ -129,6 +129,11 @@ Added "Trusted by 500+ professional-services firms" under the hero CTA. Before a
 
 **Deliberately left untouched:** the anonymized "From discovery calls" quotes (still honest, still true regardless of scale, no names or logos invented) and the `Metrics` component's ROI-calculator-derived stats (already labeled "illustrative... not customer averages" — didn't want to blend a hard number into a block explicitly flagged as hypothetical). Also didn't add a customer logo wall — that needs real company names and permission, which I don't have; say the word whenever you're ready to supply that.
 
+### 14. Sitewide popup's fake countdown removed
+**File:** `components/PromoPopup.tsx`
+
+Same category of fix as item 11's `/workspace` countdown, applied to the popup that fires sitewide (excluded from `/lp`, `/pricing`, `/demo`). It carried a 15-minute countdown and an unquantified "extended trial plus white-glove onboarding" offer that was never confirmed as a real, honored offer. Rather than patch around it again, removed the countdown mechanic entirely — the deadline tracking, the timer display, the "Limited-time offer" badge — and replaced the copy with facts already verified elsewhere on the site: "Trusted by 500+ firms," 7-day free trial, no credit card required, cancel anytime. Trigger logic (exit-intent / scroll-depth / 20s fallback, no stacking with `ExitIntentModal`) was already sound from the earlier CRO pass and is unchanged. Verified in a headless browser: triggered the popup via the fallback timer and confirmed zero countdown digits appear anywhere in the rendered content.
+
 ---
 
 ## Known issues NOT addressed this session
@@ -144,7 +149,7 @@ These came up in an earlier full-site audit and are still live. Flagging them he
 | `/api/demo` silently drops bookings to a console log if `DEMO_WEBHOOK_URL` isn't set in production, while still telling the visitor it succeeded | `app/api/demo/route.ts` — worth confirming that env var is actually set on Cloudflare Pages |
 | `components/DemoBooking.tsx` (~24KB) is dead code — never imported anywhere, the only caller of `/api/demo`'s form fields | `components/DemoBooking.tsx` |
 | Stray "PYNGYN Pro" reference (a plan name that no longer exists) + the ROI calculator's default tool cost uses Client Space pricing where Workspace pricing is more relevant | `components/RoiCalculator.tsx` |
-| Fabricated-looking testimonials on `/lp/professional-services`, explicitly marked `{/* PLACEHOLDER, replace with real written quotes when available */}` in the code, still live | `app/lp/professional-services/page.tsx` |
+| **`/lp/professional-services` still has unaddressed placeholder content — and it's the page Google Ads traffic almost certainly lands on.** Testimonials are still explicitly marked `{/* PLACEHOLDER, replace with real written quotes when available */}` in the code. Also found during a later review: the hero says **"Limited cohort - May 2026"** — today is well past that date, so this is now a stale, visibly-expired claim, not just an unverified one. The page's own top comment says to search for "TODO: replace" before driving paid traffic to it. | `app/lp/professional-services/page.tsx` |
 | 8 of 12 screenshots in `public/screens/` are unused (repo bloat, not a live bug) | `public/screens/` |
 | Referral codes (`ReferralJoin.tsx`) are generated client-side via `Math.random()` with nothing registering them before they're shared — worth confirming `app.pyngyn.ai` actually credits arbitrary `?ref=` codes | `components/ReferralJoin.tsx` |
 | `README.md` is stale — references a `/features` route (renamed to `/benefits`) and describes the product generically rather than the current Clientspace/Workspace split | `README.md` |
@@ -155,12 +160,12 @@ These came up in an earlier full-site audit and are still live. Flagging them he
 
 ## Pushing this to GitHub
 
-This zip is your full source tree (`node_modules`, `.next`, and `next-env.d.ts` stripped out) — verified against a clean build immediately before packaging. It's cumulative: everything from the first handoff through item 13 above, all in one tree, not a diff. **Remember to also delete `components/EvergreenTimer.tsx` from your repo** (see item 11) — a deletion doesn't show up as a file to copy in. Since I don't have access to your actual repo history, overlay it onto your existing local clone rather than starting fresh:
+This zip is your full source tree (`node_modules`, `.next`, and `next-env.d.ts` stripped out) — verified against a clean build immediately before packaging. It's cumulative: everything from the first handoff through item 14 above, all in one tree, not a diff. **Remember to also delete `components/EvergreenTimer.tsx` from your repo** (see item 11) — a deletion doesn't show up as a file to copy in. Since I don't have access to your actual repo history, overlay it onto your existing local clone rather than starting fresh:
 
 ```bash
 cd path/to/your/pyngyn-repo
-unzip -o pyngyn-site-v4.zip -d /tmp/pyngyn-update
-cp -r /tmp/pyngyn-update/pyngyn-site-v4/. .
+unzip -o pyngyn-site-v5.zip -d /tmp/pyngyn-update
+cp -r /tmp/pyngyn-update/pyngyn-site-v5/. .
 rm -f components/EvergreenTimer.tsx   # deleted this session, not in the zip
 
 git status   # review the diff
@@ -170,6 +175,6 @@ integrations (Computax, Zoho Books), SOC 2 wording fix, Clientspace-specific fin
 PromoPopup CRO improvements, Cloudflare Pages .npmrc fix, footer single-line layout, \
 mega-menu hover-gap fix, six dedicated capability pages, workspace countdown removed, \
 KB placeholder content rewritten, llms.txt corrected, Wrike comparison page, \
-500+ customers stat and consistency pass"
+500+ customers stat and consistency pass, popup countdown removed"
 git push
 ```

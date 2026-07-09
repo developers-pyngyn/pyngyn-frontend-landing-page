@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { DEMO_URL, SIGNUP_URL, ROI_URL } from "@/components/config";
-import { StickyOfferBar } from "@/components/StickyOfferBar";
+import { StickyCTABar } from "@/components/StickyCTABar";
 import { ExitIntentModal } from "@/components/ExitIntentModal";
 import { VIDEO_TESTIMONIALS, TestimonialVideo } from "@/components/VideoTestimonials";
 
@@ -177,7 +177,7 @@ export default function ProfessionalServicesLP() {
         <PainSection />
         <StatStrip />
         <MidCTA
-          eyebrow="Limited cohort - May 2026"
+          eyebrow="7-day trial · No credit card"
           title="Stop running client work through chaos."
           body="In 30 minutes we map a real engagement of yours and show exactly where PYNGYN saves time."
         />
@@ -194,7 +194,11 @@ export default function ProfessionalServicesLP() {
         <FooterMini />
       </div>
 
-      <StickyOfferBar ctaHref={PRIMARY_CTA} />
+      <StickyCTABar
+        label="7-day free trial · No credit card required"
+        ctaHref={PRIMARY_CTA}
+        ctaLabel="Book a demo"
+      />
       <ExitIntentModal ctaHref={PRIMARY_CTA} />
     </main>
   );
@@ -303,7 +307,7 @@ function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
-            Limited onboarding cohort - May 2026
+            7-day free trial · No credit card required
           </span>
 
           <h1 className="mt-6 font-display text-[clamp(38px,6.8vw,72px)] font-semibold leading-[0.98] tracking-[-0.035em] text-white">

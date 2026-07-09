@@ -84,6 +84,16 @@ textarea:focus-visible,
     background-size: 44px 44px;
     mask-image: radial-gradient(800px 500px at 60% 20%, #000 30%, transparent 80%);
   }
+  /* Flat continuation of .hero-dark's own end color (#0f1115), for a dark
+     section that sits directly beneath Hero with no light section between
+     them (currently: Partners). Using .hero-dark again there would restart
+     its gradient + purple glow from that section's own top, creating a
+     visible seam where Hero's fade-to-black meets a second glow starting
+     fresh right below it. This continues the same flat black instead, so
+     the two sections read as one continuous canvas. */
+  .dark-panel {
+    background: #0f1115;
+  }
   .eyebrow-dark {
     @apply inline-flex items-center gap-2 font-mono text-[12px] font-medium uppercase tracking-[0.14em] text-white/55;
   }

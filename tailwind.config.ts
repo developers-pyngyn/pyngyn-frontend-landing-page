@@ -21,6 +21,15 @@ const config: Config = {
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       maxWidth: { content: "1180px" },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        marquee: "marquee 28s linear infinite",
+      },
       boxShadow: {
         // softer, layered card shadows (the floating look)
         soft: "0 2px 4px rgba(15,17,21,.04), 0 12px 32px -12px rgba(15,17,21,.12)",
