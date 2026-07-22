@@ -66,6 +66,14 @@ export const metadata: Metadata = {
     icon: "/icon.png",
     apple: "/apple-icon.png",
   },
+  // Google Search Console's "HTML tag" verification method: paste the
+  // content value (just the code, not the whole <meta> tag) into
+  // GOOGLE_SITE_VERIFICATION as a build-time env var in the Cloudflare
+  // Pages project settings. Renders nothing if unset, so this is safe to
+  // ship before you have a value.
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
   openGraph: {
     title: "PYNGYN: The operating system for professional-services firms",
     description:

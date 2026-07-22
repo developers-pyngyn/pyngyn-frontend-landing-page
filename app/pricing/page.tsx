@@ -1,15 +1,27 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Navbar } from "@/components/Navbar";
 import { Pricing, Compare, Security } from "@/components/Sections";
 import { FAQ, FinalCTA, Footer } from "@/components/Footer";
 import { ExitIntentModal } from "@/components/ExitIntentModal";
 import { DEMO_URL } from "@/components/config";
+import { resolveRegion } from "@/components/regionPricing";
 import {
   JsonLd,
   breadcrumbSchema,
   productSchema,
   webPageSchema,
 } from "@/components/schema";
+
+// Cloudflare stamps `CF-IPCountry` on every request that hits its edge —
+// reading it via headers() is what makes this page IP-aware, and it's also
+// what forces this route out of static prerendering (it must be resolved
+// per-request, not once at build time). `runtime = "edge"` is required for
+// any dynamic route under @cloudflare/next-on-pages. Structured data (JSON-LD
+// below) intentionally stays in USD regardless of visitor region — that's
+// the canonical price search engines index, not what a given visitor sees.
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Pricing | PYNGYN",
@@ -19,6 +31,7 @@ export const metadata: Metadata = {
 };
 
 export default function PricingPage() {
+  const region = resolveRegion(headers().get("cf-ipcountry"));
   return (
     <>
       <JsonLd
@@ -91,7 +104,7 @@ export default function PricingPage() {
             a demo when you&apos;re evaluating for your firm.
           </p>
         </section>
-        <Pricing showHeader={false} />
+        <Pricing showHeader={false} region={region} />
         <Compare />
         <Security />
         <FAQ />

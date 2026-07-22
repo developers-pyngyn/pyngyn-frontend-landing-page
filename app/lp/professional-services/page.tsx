@@ -775,14 +775,6 @@ function SocialProofSection() {
               label={v.label}
               className="border border-white/10 bg-white/[0.03]"
             />
-            <figcaption className="mt-3 flex items-center gap-2 text-[12.5px] font-medium text-white/65">
-              <span className="grid h-5 w-5 place-items-center rounded-full bg-accent/20 text-accent">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </span>
-              {v.label}
-            </figcaption>
           </figure>
         ))}
       </div>
