@@ -11,9 +11,9 @@ import { useState } from "react";
 //
 // This is decorative hero art, not a live product view — nothing here is
 // wired to a backend. The row checkboxes are cosmetically interactive
-// (toggle on click, keyboard-operable) purely so the card doesn't feel like
-// a dead image next to real, working CTAs. Toggling never changes the
-// status pill text, so it can't be mistaken for a real state change.
+// (toggle on click, keyboard-operable) so the card doesn't feel dead next
+// to real, working CTAs, and the status pill now updates with the checkbox
+// so the two stay visually consistent.
 
 type RowTone = "amber" | "positive" | "accent" | "neutral";
 
@@ -24,11 +24,43 @@ const rowTone: Record<RowTone, { pill: string; dot: string }> = {
   neutral: { pill: "bg-canvas text-muted", dot: "bg-muted" },
 };
 
-const ROWS: { label: string; sub: string; status: string; tone: RowTone; done?: boolean }[] = [
-  { label: "Engagement letter", sub: "Compliance Audit Q3 · Agreement", status: "Awaiting signature", tone: "amber" },
-  { label: "Change Request #CR-001", sub: "Compliance Audit Q3 · Addendum", status: "Signed ✓", tone: "positive", done: true },
-  { label: "Vendor API credentials", sub: "Compliance Audit Q3 · File requested", status: "Action needed", tone: "accent" },
-  { label: "Expand controls testing", sub: "Include Q2 retroactively", status: "In review", tone: "neutral" },
+type RowConfig = {
+  label: string;
+  sub: string;
+  done?: boolean;
+  // Status shown while unchecked, and while checked — kept distinct per row
+  // so ticking a box reads as a real state change ("Signed", "Received"),
+  // not a generic "Done" slapped on every row.
+  notDone: { status: string; tone: RowTone };
+  onDone: { status: string; tone: RowTone };
+};
+
+const ROWS: RowConfig[] = [
+  {
+    label: "Engagement letter",
+    sub: "Compliance Audit Q3 · Agreement",
+    notDone: { status: "Awaiting signature", tone: "amber" },
+    onDone: { status: "Signed ✓", tone: "positive" },
+  },
+  {
+    label: "Change Request #CR-001",
+    sub: "Compliance Audit Q3 · Addendum",
+    done: true,
+    notDone: { status: "Awaiting signature", tone: "amber" },
+    onDone: { status: "Signed ✓", tone: "positive" },
+  },
+  {
+    label: "Vendor API credentials",
+    sub: "Compliance Audit Q3 · File requested",
+    notDone: { status: "Action needed", tone: "accent" },
+    onDone: { status: "Received ✓", tone: "positive" },
+  },
+  {
+    label: "Expand controls testing",
+    sub: "Include Q2 retroactively",
+    notDone: { status: "In review", tone: "neutral" },
+    onDone: { status: "Done ✓", tone: "positive" },
+  },
 ];
 
 export function ProductPreviewCard() {
@@ -62,6 +94,7 @@ export function ProductPreviewCard() {
       <div className="divide-y divide-line">
         {ROWS.map((r, i) => {
           const done = checked[i];
+          const pill = done ? r.onDone : r.notDone;
           return (
             <div
               key={r.label}
@@ -92,9 +125,9 @@ export function ProductPreviewCard() {
                 </div>
               </div>
               <span
-                className={`flex-none rounded-full px-3 py-1.5 text-[12.5px] font-semibold ${rowTone[r.tone].pill}`}
+                className={`flex-none rounded-full px-3 py-1.5 text-[12.5px] font-semibold transition-colors duration-200 ${rowTone[pill.tone].pill}`}
               >
-                {r.status}
+                {pill.status}
               </span>
             </div>
           );

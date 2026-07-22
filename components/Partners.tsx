@@ -10,7 +10,26 @@ import { Reveal } from "./Reveal";
 // section renders on a dark strip rather than white — matches how they were
 // originally designed and keeps every logo legible without re-coloring
 // anyone's brand mark.
-const PARTNERS: { name: string; src: string; width: number; height: number; className: string }[] = [
+type ImagePartner = {
+  kind?: "image";
+  name: string;
+  src: string;
+  width: number;
+  height: number;
+  className: string;
+};
+
+// A partner without a supplied image asset — rendered as crisp inline
+// markup (avatar + wordmark) instead of a rasterized/guessed-at PNG, so it
+// stays sharp at any size and doesn't require font-matching a screenshot.
+type MarkPartner = {
+  kind: "mark";
+  name: string;
+  initials: string;
+  tagline?: string;
+};
+
+const PARTNERS: (ImagePartner | MarkPartner)[] = [
   {
     name: "Hashtag Consultancy",
     src: "/partners/hashtag-consultancy.png",
@@ -46,7 +65,27 @@ const PARTNERS: { name: string; src: string; width: number; height: number; clas
     height: 256,
     className: "h-16 w-auto",
   },
+  {
+    kind: "mark",
+    name: "BigBirdLuxe",
+    initials: "BB",
+    tagline: "Elevated Living",
+  },
 ];
+
+function LogoMark({ initials, name, tagline }: { initials: string; name: string; tagline?: string }) {
+  return (
+    <div className="flex shrink-0 items-center gap-2.5">
+      <span className="grid h-10 w-10 flex-none place-items-center rounded-full bg-[#f0b84b] text-[13px] font-bold text-black">
+        {initials}
+      </span>
+      <span className="flex flex-col leading-tight">
+        <span className="text-[16px] font-bold text-white">{name}</span>
+        {tagline && <span className="text-[12px] text-white/50">{tagline}</span>}
+      </span>
+    </div>
+  );
+}
 
 function LogoRow({ ariaHidden }: { ariaHidden?: boolean }) {
   return (
@@ -54,16 +93,20 @@ function LogoRow({ ariaHidden }: { ariaHidden?: boolean }) {
       className="flex h-16 w-max flex-none items-center gap-16 pr-16"
       aria-hidden={ariaHidden}
     >
-      {PARTNERS.map((p, i) => (
-        <Image
-          key={`${p.name}-${i}`}
-          src={p.src}
-          alt={ariaHidden ? "" : p.name}
-          width={p.width}
-          height={p.height}
-          className={`${p.className} shrink-0 opacity-90 transition-opacity hover:opacity-100`}
-        />
-      ))}
+      {PARTNERS.map((p, i) =>
+        p.kind === "mark" ? (
+          <LogoMark key={`${p.name}-${i}`} initials={p.initials} name={p.name} tagline={p.tagline} />
+        ) : (
+          <Image
+            key={`${p.name}-${i}`}
+            src={p.src}
+            alt={ariaHidden ? "" : p.name}
+            width={p.width}
+            height={p.height}
+            className={`${p.className} shrink-0 opacity-90 transition-opacity hover:opacity-100`}
+          />
+        )
+      )}
     </div>
   );
 }

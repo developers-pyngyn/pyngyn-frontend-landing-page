@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { SIGNUP_URL, DEMO_URL } from "./config";
+import { formatRegionPrice, regionConfig, type RegionCode } from "./regionPricing";
 
 type Group = { heading?: string; items: string[] };
 type Tier = {
@@ -80,11 +81,6 @@ const TIERS: Tier[] = [
   },
 ];
 
-function formatPrice(n: number): string {
-  const rounded = Math.round(n * 100) / 100;
-  return Number.isInteger(rounded) ? `$${rounded}` : `$${rounded.toFixed(2)}`;
-}
-
 function Check() {
   return (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="mt-1 flex-none text-positive">
@@ -93,8 +89,15 @@ function Check() {
   );
 }
 
-export function PricingTiers({ className = "" }: { className?: string }) {
+export function PricingTiers({
+  className = "",
+  region = "US",
+}: {
+  className?: string;
+  region?: RegionCode;
+}) {
   const [annual, setAnnual] = useState(false);
+  const currency = regionConfig(region);
 
   return (
     <div className={className}>
@@ -128,20 +131,29 @@ export function PricingTiers({ className = "" }: { className?: string }) {
         </span>
       </div>
 
+      {currency.currency !== "USD" && (
+        <p className="mt-3 text-center text-[12px] text-muted">
+          Prices shown in {currency.currency}, converted from USD at an approximate rate. You&apos;ll
+          be charged in USD at checkout.
+        </p>
+      )}
+
       {/* Tiers */}
       <div className="mt-8 grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {TIERS.map((t) => {
           const isCustom = t.monthlyPrice === null;
           const displayPrice = isCustom
             ? "Custom"
-            : formatPrice(annual ? t.monthlyPrice! * ANNUAL_MONTHS_CHARGED : t.monthlyPrice!);
+            : formatRegionPrice(annual ? t.monthlyPrice! * ANNUAL_MONTHS_CHARGED : t.monthlyPrice!, region);
           const cadence = isCustom
             ? "Tailored to your firm"
             : annual
             ? `/${t.unit} · per year`
             : `/${t.unit} · per month`;
           const monthlyEquivalent =
-            !isCustom && annual ? `${formatPrice(t.monthlyPrice!)}/mo equivalent, billed yearly` : null;
+            !isCustom && annual
+              ? `${formatRegionPrice(t.monthlyPrice!, region)}/mo equivalent, billed yearly`
+              : null;
 
           return (
             <div

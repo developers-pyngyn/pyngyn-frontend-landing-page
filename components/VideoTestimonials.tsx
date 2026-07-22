@@ -69,14 +69,6 @@ export function VideoTestimonials() {
             <Reveal key={v.src}>
               <figure>
                 <TestimonialVideo src={v.src} label={v.label} className="border border-line shadow-card" />
-                <figcaption className="mt-3 flex items-center gap-2 text-[13px] font-medium text-muted">
-                  <span className="grid h-5 w-5 place-items-center rounded-full bg-accent-lt text-accent">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </span>
-                  {v.label}
-                </figcaption>
               </figure>
             </Reveal>
           ))}
