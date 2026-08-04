@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --content: 1180px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* grey canvas, white cards float on top (Apptics look) */
+  background: #f1f2f5;
+  color: #0f1115;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Visible keyboard focus for all interactive elements */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer components {
+  /* Indigo radial glow layered behind the calculator headline cards.
+     Static; shared by the ROI, cost-margin and utilization tools. */
+  .glow-radial {
+    background: radial-gradient(620px 320px at 78% -20%, rgba(79, 70, 229, 0.45), transparent 60%);
+  }
+  /* Custom dropdown chevron for native <select> elements paired with
+     `appearance-none`. */
+  .select-chevron {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none'><path d='M6 9l6 6 6-6' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+  .wrap {
+    @apply mx-auto w-full px-7;
+    max-width: var(--content);
+  }
+  /* Composio-style all-caps mono micro-label */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-[12px] font-medium uppercase tracking-[0.14em] text-muted;
+  }
+  .eyebrow-dot {
+    @apply h-1.5 w-1.5 rounded-full bg-accent;
+  }
+  /* Large index number for numbered feature sections (01, 02...) */
+  .index-num {
+    @apply font-mono text-[14px] font-medium tracking-[0.1em] text-accent;
+  }
+  /* Dark hero (Composio-style) — terminal grid + glow on near-black */
+  .hero-dark {
+    background:
+      radial-gradient(900px 500px at 70% -10%, rgba(79, 70, 229, 0.35), transparent 60%),
+      linear-gradient(180deg, #0b0d12 0%, #0f1115 100%);
+  }
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(800px 500px at 60% 20%, #000 30%, transparent 80%);
+  }
+  /* Flat continuation of .hero-dark's own end color (#0f1115), for a dark
+     section that sits directly beneath Hero with no light section between
+     them (currently: Partners). Using .hero-dark again there would restart
+     its gradient + purple glow from that section's own top, creating a
+     visible seam where Hero's fade-to-black meets a second glow starting
+     fresh right below it. This continues the same flat black instead, so
+     the two sections read as one continuous canvas. */
+  .dark-panel {
+    background: #0f1115;
+  }
+  .eyebrow-dark {
+    @apply inline-flex items-center gap-2 font-mono text-[12px] font-medium uppercase tracking-[0.14em] text-white/55;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-full px-[22px] py-[13px] text-[15px] font-semibold transition-all duration-150;
+  }
+  /* Black pill primary button */
+  .btn-primary {
+    @apply bg-ink text-white shadow-cta hover:-translate-y-0.5 hover:bg-black;
+  }
+  /* White pill secondary */
+  .btn-ghost {
+    @apply border border-line bg-white text-ink hover:-translate-y-0.5 hover:border-ink/30;
+  }
+  /* Blue accent button (used sparingly) */
+  .btn-accent {
+    @apply bg-accent text-white hover:-translate-y-0.5 hover:bg-accent-dk;
+  }
+  /* White floating card on the grey canvas */
+  .card {
+    @apply rounded-[20px] border border-line bg-white p-7 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft;
+  }
+  /* small inline app-icon chip used inside headlines */
+  .chip {
+    @apply inline-grid h-[0.95em] w-[0.95em] -translate-y-[0.05em] place-items-center rounded-[0.28em] bg-accent align-middle text-white;
+  }
+  .section {
+    @apply py-[104px];
+  }
+  .section-tight {
+    @apply py-[72px];
+  }
+  .title {
+    @apply font-display text-[clamp(30px,4.4vw,46px)] font-semibold leading-[1.08] tracking-[-0.03em];
+  }
+  .lead {
+    @apply max-w-[620px] text-[18px] text-muted;
+  }
+  /* Form fields used on the native demo booking page (and reusable elsewhere). */
+  .input {
+    @apply w-full rounded-xl border border-line bg-white px-3 py-2.5 text-[14px] text-ink placeholder:text-muted/70 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20;
+  }
+}

@@ -1,0 +1,272 @@
+export type KbSection = { heading?: string; paragraphs: string[]; bullets?: string[] };
+
+export type KbArticle = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  readingTime: string;
+  date: string; // display string
+  popular?: boolean;
+  editorsPick?: boolean;
+  // Featured image. Knowledge-base articles default to /kb/<slug>.png below.
+  // Set this to override the generated cover path for a specific article.
+  cover?: string;
+  // Optional article body. If omitted, a sensible default intro is shown.
+  body?: KbSection[];
+};
+
+export const KB_CATEGORIES = [
+  "All",
+  "Getting started",
+  "Planning",
+  "AI features",
+  "Integrations",
+  "Collaboration",
+  "Admin & security",
+  "Troubleshooting",
+] as const;
+
+const RAW_KB_ARTICLES: KbArticle[] = [
+  // Getting started
+  { slug: "create-your-first-project", title: "Create your first project in PYNGYN", excerpt: "Go from a one-line goal to a full plan with tasks, owners, and a timeline in minutes.", category: "Getting started", readingTime: "4 min", date: "May 20", popular: true,
+    cover: "/kb/create-your-first-project.png",
+    body: [
+      { paragraphs: ["The fastest way to learn PYNGYN is to create a project from a single sentence and watch it turn into a working plan. This guide walks you through it end to end."] },
+      { heading: "1. Describe your goal", paragraphs: ["From your workspace, click New project and type a plain-language goal, for example \"Complete the Northwind year-end audit and file by March 31.\" Be specific about the outcome and any hard dates."] },
+      { heading: "2. Review the generated plan", paragraphs: ["PYNGYN drafts tasks, suggested owners, and a timeline. Nothing is locked, the AI gives you a starting point you can reshape."], bullets: ["Reassign owners by clicking any avatar", "Drag tasks to adjust the schedule", "Add or remove tasks as needed"] },
+      { heading: "3. Invite your team", paragraphs: ["Add teammates and assign them to tasks. Everyone sees the same live plan, and status stays current automatically as work moves."] },
+      { heading: "You're set", paragraphs: ["That's the core loop: describe, review, and run. Explore the rest of this knowledge base to go deeper on AI planning, integrations, and collaboration."] },
+    ],
+  },
+  { slug: "invite-your-team", title: "Invite your team and set roles", excerpt: "Add teammates, assign roles, and get everyone working in the same workspace.", category: "Getting started", readingTime: "3 min", date: "May 18",
+    body: [
+      { paragraphs: ["Every teammate you add gets exactly the access their role needs, nothing more. This guide covers inviting people and choosing the right role."] },
+      { heading: "1. Send an invite", paragraphs: ["From Workspace Settings → Members, click Invite and enter an email address. New teammates get a link by email and are working inside your workspace as soon as they accept, no setup on their end."] },
+      { heading: "2. Choose a role", paragraphs: ["PYNGYN has three internal roles, each with a different scope:"], bullets: ["Director: full visibility across every engagement, financials, and workspace settings", "Manager: runs specific engagements, assigns work, and sees team-level reporting", "Individual contributor: sees and updates the tasks assigned to them"] },
+      { heading: "3. Adjust access later", paragraphs: ["Roles aren't permanent. Change anyone's role at any time from Members, and the change takes effect immediately, no re-invite required."] },
+      { heading: "A note on client access", paragraphs: ["Clients are a separate access tier entirely, scoped to their own Client Space, not to internal roles. See \"Sharing plans with clients and stakeholders\" for how that works."] },
+    ],
+  },
+  { slug: "import-from-another-tool", title: "Import projects from another tool", excerpt: "One-click import from common trackers, with field mapping handled for you.", category: "Getting started", readingTime: "5 min", date: "May 15", popular: true,
+    body: [
+      { paragraphs: ["Moving from another project tracker doesn't mean starting from a blank page. PYNGYN imports your existing projects, tasks, and assignees directly."] },
+      { heading: "1. Start an import", paragraphs: ["From Workspace Settings → Import, choose the tool you're importing from. PYNGYN reads projects, tasks, statuses, due dates, and assignees where the source tool provides them."] },
+      { heading: "2. Review the field mapping", paragraphs: ["PYNGYN maps common fields (status, priority, due date, assignee) automatically. You'll see a preview before anything is imported, so you can adjust mappings that don't line up with how your team names things."] },
+      { heading: "3. Confirm and import", paragraphs: ["Once the mapping looks right, confirm the import. Large imports run in the background, you'll get a notification when it's done."] },
+      { heading: "If something looks off", paragraphs: ["See \"Fixing common import issues\" for the most frequent mapping problems and how to resolve them."] },
+    ],
+  },
+  { slug: "workspace-basics", title: "Workspace basics: spaces, projects, and tasks", excerpt: "Understand how PYNGYN organizes work so your team can find anything fast.", category: "Getting started", readingTime: "6 min", date: "May 12",
+    body: [
+      { paragraphs: ["PYNGYN organizes work in three layers. Understanding them makes everything else in the product click into place."] },
+      { heading: "Workspace", paragraphs: ["Your workspace is your firm's whole operating layer, everyone on your team, every project, and your firm-level settings live here. Most firms have exactly one workspace."] },
+      { heading: "Projects", paragraphs: ["A project is a body of work with a goal, usually mapped to a client engagement, an internal initiative, or a matter. Projects hold the tasks, timeline, and documents for that piece of work."] },
+      { heading: "Tasks", paragraphs: ["Tasks are the individual units of work inside a project, each with an owner, a status, and (usually) a due date. Tasks can depend on each other, so the schedule reflects how work actually flows."] },
+      { heading: "How it fits together", paragraphs: ["A director sees every project across the workspace. A manager runs specific projects. An individual contributor sees the tasks assigned to them. Clients, if you use Client Space, see only their own project's client-facing view, never your workspace."] },
+    ],
+  },
+
+  // Planning
+  { slug: "describe-a-goal", title: "How to describe a goal so PYNGYN plans it well", excerpt: "Write goals the AI understands, and get a sharper plan on the first try.", category: "Planning", readingTime: "5 min", date: "May 19", editorsPick: true,
+    body: [
+      { paragraphs: ["The plan PYNGYN generates is only as good as the goal you give it. A specific goal produces a specific plan, a vague one produces a generic starting point you'll spend more time reshaping."] },
+      { heading: "What makes a goal specific", paragraphs: ["A well-written goal usually includes three things:"], bullets: ["The outcome: what \"done\" actually looks like", "Any hard date: a filing deadline, a launch date, a client commitment", "Relevant constraints: budget, team size, or dependencies on someone outside the project"] },
+      { heading: "Example", paragraphs: ["Weak: \"Redesign the client onboarding process.\"", "Stronger: \"Redesign client onboarding to cut time-to-first-invoice from 3 weeks to 1, ready to pilot with two clients by June 15.\""] },
+      { heading: "You can always refine after", paragraphs: ["You don't need a perfect goal on the first try. Generate a plan, then use \"Editing and refining an AI-generated plan\" to reshape it, adding detail is often easier once you can see a draft to react to."] },
+    ],
+  },
+  { slug: "timelines-and-dependencies", title: "Working with timelines and dependencies", excerpt: "Set up dependencies so the schedule reflects how the work actually flows.", category: "Planning", readingTime: "7 min", date: "May 14",
+    body: [
+      { paragraphs: ["Most schedules slip not because a single task ran late, but because a downstream task couldn't start until an upstream one finished. Dependencies make that visible before it becomes a problem."] },
+      { heading: "Setting a dependency", paragraphs: ["Open any task and add a \"blocked by\" relationship to another task. Once set, PYNGYN's timeline view shows the chain, and the dependent task's earliest start date updates automatically if the upstream task's date changes."] },
+      { heading: "Reading the timeline view", paragraphs: ["The timeline (Gantt) view lays out every task against the calendar, with dependency lines connecting related tasks. Tasks at risk of pushing a downstream deadline are flagged, see \"How AI risk detection works\" for how that flagging works."] },
+      { heading: "A common pattern: client sign-off", paragraphs: ["In professional-services work, the most common dependency is a client approval blocking the next phase. Model the approval as its own task with an owner (often the client, if you're sharing the project via Client Space) so a late sign-off shows up as a flagged dependency, not a silent delay."] },
+    ],
+  },
+  { slug: "edit-the-ai-plan", title: "Editing and refining an AI-generated plan", excerpt: "The AI drafts, you decide. Reshape any plan to fit how your team works.", category: "Planning", readingTime: "4 min", date: "May 10",
+    body: [
+      { paragraphs: ["Every AI-generated plan in PYNGYN is a starting point, not a final answer. Nothing is locked, and editing a plan doesn't require any special mode."] },
+      { heading: "What you can change", paragraphs: [], bullets: ["Reassign any task to a different owner", "Add, remove, split, or merge tasks", "Adjust dates and dependencies directly on the timeline", "Rewrite task descriptions to match how your team actually talks about the work"] },
+      { heading: "Regenerating vs. editing", paragraphs: ["If a plan is close but not quite right, editing individual tasks is usually faster than starting over. If the underlying goal was wrong or incomplete, it's often faster to rewrite the goal and regenerate, see \"How to describe a goal so PYNGYN plans it well.\""] },
+      { heading: "Your edits improve future suggestions", paragraphs: ["The more you reshape plans to match how your firm actually works, the closer future AI-generated drafts get to what you'd have built yourself."] },
+    ],
+  },
+
+  // AI features
+  { slug: "risk-detection", title: "How AI risk detection works", excerpt: "PYNGYN reads workload and dependencies to flag what threatens your deadline, early.", category: "AI features", readingTime: "6 min", date: "May 17", popular: true, editorsPick: true,
+    body: [
+      { paragraphs: ["Risk detection watches every active project for the patterns that typically cause professional-services work to run late, and flags them while there's still time to act."] },
+      { heading: "What it actually looks at", paragraphs: [], bullets: ["Task dependencies: a task blocking a downstream deadline that's falling behind", "Workload: an owner with more at-risk work than they can realistically finish on time", "Stalled tasks: work that hasn't moved in longer than is typical for that kind of task"] },
+      { heading: "Where flags show up", paragraphs: ["Risk flags appear directly on the project board and in your portfolio dashboard, not in a separate tool you have to remember to check. See \"Keeping status current automatically\" for how status and risk work together."] },
+      { heading: "Tuning what you see", paragraphs: ["If your team finds a particular kind of flag noisy, tell us in a support request, risk detection is tuned over time based on real usage patterns, not a fixed one-size-fits-all threshold."] },
+      { heading: "Read more", paragraphs: ["For the full picture of how this fits into your firm's workflow, see the Risk detection page."] },
+    ],
+  },
+  { slug: "auto-status", title: "Keeping status current automatically", excerpt: "Let PYNGYN derive status from the work itself, so the board is never stale.", category: "AI features", readingTime: "5 min", date: "May 11",
+    body: [
+      { paragraphs: ["Status that has to be manually updated is status that goes stale. PYNGYN derives status from the work itself wherever it can, so the board reflects reality without someone having to remember to update it."] },
+      { heading: "What updates automatically", paragraphs: [], bullets: ["Task status changes as dependencies complete and work moves through your pipeline", "Overall project health rolls up from the status of its tasks", "Client-visible status (in Client Space) reflects the same live state, not a separately maintained summary"] },
+      { heading: "What still needs a person", paragraphs: ["Judgment calls, like whether a project is genuinely \"on track\" despite one slipped task, are yours to make. Automatic status handles the mechanical parts so your team's judgment goes toward the calls that actually need it."] },
+      { heading: "Overriding a status", paragraphs: ["Any automatically derived status can be manually overridden on a task or project if you know something the system doesn't yet."] },
+    ],
+  },
+  { slug: "ask-pyng", title: "Asking Pyng, your AI assistant", excerpt: "Get quick answers about your plan and PYNGYN without leaving your workspace.", category: "AI features", readingTime: "3 min", date: "May 8",
+    body: [
+      { paragraphs: ["Pyng is the AI assistant built into your workspace, for quick questions about your projects or about how to use PYNGYN itself, without switching tools or digging through settings."] },
+      { heading: "What you can ask", paragraphs: [], bullets: ["\"What's at risk this week across my projects?\"", "\"Summarize the status of the Northwind engagement.\"", "\"How do I set up SSO for my team?\"", "\"What changed on this project since Monday?\""] },
+      { heading: "Where to find it", paragraphs: ["Pyng is available from the assistant icon in your workspace, on any page. It has context on the project you're currently viewing, so you don't need to re-explain what you're looking at."] },
+      { heading: "A note on your data", paragraphs: ["Questions you ask Pyng are processed to generate an answer and are not used to train AI models without your explicit consent."] },
+    ],
+  },
+
+  // Integrations
+  { slug: "connect-slack", title: "Connect Slack to PYNGYN", excerpt: "Push status updates and risk flags into the channels your team already watches.", category: "Integrations", readingTime: "4 min", date: "May 16",
+    body: [
+      { paragraphs: ["Connecting Slack turns requests and action items your team already discusses into trackable PYNGYN tasks, and pushes status back into the channels people are already watching."] },
+      { heading: "1. Connect your workspace", paragraphs: ["From Workspace Settings → Integrations → Slack, click Connect and authorize PYNGYN in your Slack workspace. This takes under a minute and doesn't require your Slack admin unless your workspace restricts app installs."] },
+      { heading: "2. Choose what gets posted", paragraphs: ["Pick which channels receive updates, and which kinds: task assignments, risk flags, or daily status digests. Most teams start with one channel per active engagement."] },
+      { heading: "3. Turn any Slack message into a task", paragraphs: ["Use the PYNGYN shortcut on any Slack message to create a task from it, pre-filled with the message content and a link back to the original thread."] },
+      { heading: "If updates stop arriving", paragraphs: ["See \"An integration isn't syncing, what to do\" for the most common causes and fixes."] },
+    ],
+  },
+  { slug: "connect-quickbooks", title: "Connect QuickBooks for billing", excerpt: "Sync clients, invoices, and time entries so billable work flows straight into your books.", category: "Integrations", readingTime: "5 min", date: "May 13",
+    // No cover art exists for this article yet — explicitly overriding the
+    // auto-generated `/kb/connect-quickbooks.png` path (which 404s) back to
+    // undefined so it falls through to the existing placeholder UI in
+    // KnowledgeBase.tsx and the article page, instead of a broken image.
+    // Replace with a real `cover: "/kb/connect-quickbooks.png"` once the
+    // asset exists in public/kb/.
+    cover: undefined,
+    body: [
+      { paragraphs: ["The QuickBooks integration keeps billable work and your books in sync, so approved time and invoices flow through without manual re-entry, and clients see invoice status inside their own Client Space automatically."] },
+      { heading: "1. Connect QuickBooks", paragraphs: ["From Workspace Settings → Integrations → QuickBooks, click Connect and sign in to your QuickBooks account to authorize the connection."] },
+      { heading: "2. Match clients", paragraphs: ["PYNGYN matches your existing PYNGYN clients to QuickBooks customers where the names line up, and lets you manually match anything that doesn't. New clients created in either system can be set to sync automatically."] },
+      { heading: "3. Sync time and invoices", paragraphs: [], bullets: ["Billable time entries logged in PYNGYN flow into QuickBooks for invoicing", "Invoices created in QuickBooks appear in the client's Client Space once sent", "Payment status updates flow back, so \"paid\" reflects reality on both sides"] },
+      { heading: "Standalone Client Space customers", paragraphs: ["If you use Client Space without Workspace, invoices you create directly in QuickBooks can still be shared into a client's portal, ask support to help you set this up."] },
+    ],
+  },
+  { slug: "connect-calendar", title: "Sync milestones to Google Calendar", excerpt: "Keep deadlines where your team plans their day.", category: "Integrations", readingTime: "3 min", date: "May 9",
+    body: [
+      { paragraphs: ["Rather than asking your team to check PYNGYN for upcoming deadlines, sync milestones and due dates straight into the Google Calendar they already plan their day around."] },
+      { heading: "1. Connect your calendar", paragraphs: ["From Workspace Settings → Integrations → Google Calendar, connect your account. Each teammate connects their own calendar individually, from their own settings."] },
+      { heading: "2. Choose what syncs", paragraphs: ["You can sync project milestones only, or every task with a due date assigned to you. Most people start with milestones and add more once they see how it looks."] },
+      { heading: "3. Two-way updates", paragraphs: ["If a date changes in PYNGYN, the calendar event updates automatically, no stale meeting invites left behind after a deadline moves."] },
+      { heading: "Client-facing sessions", paragraphs: ["Upcoming client sessions and calls also appear automatically in the client's own Client Space, so this isn't only an internal-team feature."] },
+    ],
+  },
+
+  // Collaboration
+  { slug: "comments-and-mentions", title: "Comments, mentions, and notifications", excerpt: "Keep conversation next to the work and loop in the right people.", category: "Collaboration", readingTime: "4 min", date: "May 7",
+    body: [
+      { paragraphs: ["Conversation about a task belongs on the task, not scattered across email and chat. Comments keep that context attached to the work, permanently."] },
+      { heading: "Commenting", paragraphs: ["Every task and project has a comment thread. Comments support basic formatting and file attachments, and stay with the task even if it's reassigned or its due date changes."] },
+      { heading: "Mentions", paragraphs: ["Type @ followed by a name to mention a teammate. They get a notification and a direct link to the comment, so they don't have to hunt for what you're referring to."] },
+      { heading: "Notification settings", paragraphs: ["Control what you're notified about, and how (in-app, email, or Slack if connected) from your personal notification settings. If notifications have stopped arriving altogether, see \"Notifications aren't arriving.\""] },
+    ],
+  },
+  { slug: "share-with-clients", title: "Sharing plans with clients and stakeholders", excerpt: "Give the right people a clean, read-only view of progress.", category: "Collaboration", readingTime: "5 min", date: "May 5",
+    body: [
+      { paragraphs: ["There are two ways to give a client visibility into their work: a lightweight read-only share, or a full Client Space. This guide covers both, and when to use each."] },
+      { heading: "Lightweight sharing", paragraphs: ["From any project, click Share to generate a link showing a clean, read-only view of status and timeline. No login required. This is a fast way to give a one-off stakeholder visibility without any setup."] },
+      { heading: "Client Space, for ongoing client relationships", paragraphs: ["For clients you work with on an ongoing basis, Client Space gives them a branded, persistent portal, status, documents, approvals, and invoices, that they can return to any time, joining with a one-click magic link rather than a link you have to re-send."] },
+      { heading: "Which one to use", paragraphs: ["A one-off share is enough for a single stakeholder update. If a client will be checking in repeatedly over the life of an engagement, Client Space removes the repeated \"can you send me the latest link\" back-and-forth entirely."] },
+    ],
+  },
+
+  // Admin & security
+  { slug: "sso-setup", title: "Set up SSO and SAML", excerpt: "Configure single sign-on so your team logs in securely with your identity provider.", category: "Admin & security", readingTime: "7 min", date: "May 6",
+    body: [
+      { paragraphs: ["Single sign-on lets your team log in with the identity provider your firm already uses, so access is centrally managed and follows your existing offboarding process when someone leaves."] },
+      { heading: "1. Start setup", paragraphs: ["From Workspace Settings → Security → SSO, choose your identity provider. PYNGYN supports standard SAML, so most identity providers work with the same general steps."] },
+      { heading: "2. Configure your identity provider", paragraphs: ["You'll need to create a new application in your identity provider using the metadata PYNGYN provides on this screen (entity ID and ACS URL). Your IT admin typically handles this step."] },
+      { heading: "3. Test before enforcing", paragraphs: ["Once connected, test with a single account before requiring SSO for your whole team, this avoids locking anyone out if a configuration detail needs adjusting."] },
+      { heading: "4. Enforce SSO", paragraphs: ["When you're ready, turn on enforcement so all team members must sign in through your identity provider. Existing password-based logins are disabled at that point."] },
+      { heading: "Need help with your specific provider?", paragraphs: ["Reach out to support with your identity provider's name and we'll walk through the specifics with you."] },
+    ],
+  },
+  { slug: "roles-and-permissions", title: "Roles and permissions explained", excerpt: "Control who can view, edit, and manage across your workspace.", category: "Admin & security", readingTime: "6 min", date: "May 4",
+    body: [
+      { paragraphs: ["PYNGYN uses role-based access control so each person sees and can do exactly what their role requires, nothing more."] },
+      { heading: "Internal roles", paragraphs: [], bullets: ["Director: full visibility and control across every project, financials, and workspace settings", "Manager: runs assigned projects, manages their team's work, sees team-level reporting", "Individual contributor: sees and updates only the tasks assigned to them"] },
+      { heading: "Client role", paragraphs: ["Clients are a separate access tier scoped entirely to their own Client Space. A client can never see another client's data, or any of your firm's internal Workspace, regardless of their role."] },
+      { heading: "Changing a role", paragraphs: ["Update anyone's role from Workspace Settings → Members at any time. Changes apply immediately, no re-login required."] },
+      { heading: "Auditing access", paragraphs: ["Key actions, logins, permission changes, and document access, are logged. See \"How PYNGYN handles your data\" for more on audit logging and data isolation."] },
+    ],
+  },
+  { slug: "data-and-privacy", title: "How PYNGYN handles your data", excerpt: "Where your data lives, how it's protected, and the controls you have.", category: "Admin & security", readingTime: "5 min", date: "May 2",
+    body: [
+      { paragraphs: ["This is a practical summary of how your firm's and your clients' data is handled. For the full legal terms, see our Privacy Policy and DPA."] },
+      { heading: "Encryption", paragraphs: ["Data is encrypted both in transit and at rest. This applies to everything in your workspace and every Client Space, not just documents specifically marked sensitive."] },
+      { heading: "Data isolation", paragraphs: ["Each Client Space is fully isolated. A client can only ever access their own engagement, never another client's data, and never your firm's internal Workspace unless you explicitly choose to share something specific."] },
+      { heading: "Security posture", paragraphs: ["Our security program is SOC 2 aligned, and we maintain GDPR alignment for data handling. Key actions are logged in an audit trail."] },
+      { heading: "AI and your data", paragraphs: ["Customer data is not used to train AI models without your explicit consent. AI-powered features process what's needed to generate a response and nothing more."] },
+      { heading: "Questions for a security review", paragraphs: ["If you're running a vendor security review and need documentation beyond this summary, ask on a demo call or contact support, we're used to this and can move quickly."] },
+    ],
+  },
+
+  // Troubleshooting
+  { slug: "import-issues", title: "Fixing common import issues", excerpt: "What to check when an import doesn't map the way you expected.", category: "Troubleshooting", readingTime: "4 min", date: "Apr 30",
+    body: [
+      { paragraphs: ["Most import problems come down to a small number of causes. Work through these before reaching out to support, it'll usually save you a round trip."] },
+      { heading: "Tasks imported with the wrong owner", paragraphs: ["This usually means the email address in the source tool didn't exactly match a teammate's PYNGYN email. Check Workspace Settings → Members and confirm the addresses match, then re-run the import for the affected project."] },
+      { heading: "Statuses look wrong", paragraphs: ["Custom status names in the source tool don't always map cleanly to PYNGYN's default statuses. Review the field mapping screen during import and manually map any status that doesn't look right before confirming."] },
+      { heading: "Some tasks are missing entirely", paragraphs: ["Archived, deleted, or completed items in the source tool are sometimes excluded by default. Check your source tool's export settings if you expected archived items to come across too."] },
+      { heading: "Still stuck?", paragraphs: ["Contact support with the name of the tool you're importing from and roughly how many items you expected, we can look at what happened on our end."] },
+    ],
+  },
+  { slug: "integration-not-syncing", title: "An integration isn't syncing, what to do", excerpt: "Step-by-step checks to get a connection working again.", category: "Troubleshooting", readingTime: "5 min", date: "Apr 28",
+    body: [
+      { paragraphs: ["When an integration stops syncing, it's almost always one of a few common causes. Work through these in order."] },
+      { heading: "1. Check the connection is still authorized", paragraphs: ["Go to Workspace Settings → Integrations and check the integration's status. A connection can be revoked from the other side (for example, if a Slack admin removes the app), which shows here as \"disconnected.\" Reconnect if so."] },
+      { heading: "2. Check permissions haven't changed", paragraphs: ["If the account that originally connected the integration has since lost access on the other side (left the company, had permissions reduced), the sync will silently stop. Reconnect using an account that currently has the right access."] },
+      { heading: "3. Check what's actually configured to sync", paragraphs: ["It's easy to assume everything syncs by default. Revisit the integration's settings and confirm the specific channels, projects, or data types you expect are actually turned on."] },
+      { heading: "4. Give it a few minutes", paragraphs: ["Most syncs run on a short delay, not instantly. If you just made a change, wait a few minutes before assuming something's broken."] },
+      { heading: "Still not syncing?", paragraphs: ["Contact support with the integration name and roughly when it last worked correctly."] },
+    ],
+  },
+  { slug: "notifications-not-arriving", title: "Notifications aren't arriving", excerpt: "Common reasons alerts go quiet, and how to turn them back on.", category: "Troubleshooting", readingTime: "3 min", date: "Apr 25",
+    body: [
+      { paragraphs: ["If notifications have gone quiet, it's usually a settings or delivery issue rather than anything wrong with your account. Check these in order."] },
+      { heading: "1. Check your notification settings", paragraphs: ["From your personal settings → Notifications, confirm the notification types you expect (mentions, assignments, risk flags) are actually turned on, and for the right channel, in-app, email, or Slack."] },
+      { heading: "2. Check email delivery", paragraphs: ["Email notifications occasionally land in spam or get filtered by a corporate mail gateway. Search your inbox (including spam) for a recent PYNGYN notification, and ask your IT team to allowlist our sending domain if needed."] },
+      { heading: "3. Check Slack notification settings", paragraphs: ["If you expect Slack notifications specifically, confirm the Slack integration is still connected (see \"An integration isn't syncing, what to do\") and that you haven't muted the channel PYNGYN posts to."] },
+      { heading: "Still not arriving?", paragraphs: ["Contact support and let us know which notification type is missing and which delivery channel you expected it on."] },
+    ],
+  },
+];
+
+export const KB_ARTICLES: KbArticle[] = RAW_KB_ARTICLES.map((article) => ({
+  cover: `/kb/${article.slug}.png`,
+  ...article,
+}));
+
+// Lookup helpers
+export function getArticle(slug: string): KbArticle | undefined {
+  return KB_ARTICLES.find((a) => a.slug === slug);
+}
+
+export function relatedArticles(slug: string, limit = 3): KbArticle[] {
+  const current = getArticle(slug);
+  if (!current) return [];
+  const sameCat = KB_ARTICLES.filter((a) => a.slug !== slug && a.category === current.category);
+  const others = KB_ARTICLES.filter((a) => a.slug !== slug && a.category !== current.category);
+  return [...sameCat, ...others].slice(0, limit);
+}
+
+// Default body shown when an article has no custom `body` yet.
+export function defaultBody(a: KbArticle): KbSection[] {
+  return [
+    { paragraphs: [a.excerpt] },
+    {
+      heading: "Overview",
+      paragraphs: [
+        `This guide covers ${a.title.toLowerCase()}, part of the ${a.category} section of the PYNGYN knowledge base.`,
+      ],
+    },
+    {
+      heading: "Need more help?",
+      paragraphs: ["This article is still being written. If you need an answer now, reach out to our support team and we'll help you directly."],
+    },
+  ];
+}
