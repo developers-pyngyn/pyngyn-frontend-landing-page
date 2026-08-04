@@ -1,0 +1,16 @@
+# Cloudflare Pages configuration.
+#
+# Declaring these in the repo means the Git-connected Pages build uses them,
+# so they cannot drift out of sync with the dashboard.
+#
+# IMPORTANT: this file controls the OUTPUT directory and compatibility flags,
+# but NOT the build command. For a Git-connected project the build command is
+# still set in the Cloudflare dashboard and MUST be:
+#     npx @cloudflare/next-on-pages@1
+#
+# `name` is informational for CI builds; set it to match your Pages project if
+# you also deploy with `wrangler` from the CLI.
+name = "pyngyn-website"
+pages_build_output_dir = ".vercel/output/static"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
