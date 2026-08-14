@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import Link from "next/link";
 import { ClientSpaceShowcase } from "@/components/showcase/ClientSpaceShowcase";
-import { detectCountry } from "@/lib/pricing/detect-country";
-import { canonicalPriceCopy, priceCopy } from "@/lib/pricing/copy";
+import { canonicalPriceCopy } from "@/lib/pricing/copy";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SIGNUP_URL, ANY_UPDATE_URL } from "@/components/config";
@@ -15,11 +13,11 @@ import {
   webPageSchema,
 } from "@/components/schema";
 
-// Reading the visitor's region forces this route out of static prerendering,
-// so prices are resolved per request. `runtime = "edge"` is required for any
-// dynamic route under @cloudflare/next-on-pages.
-export const runtime = "edge";
-export const dynamic = "force-dynamic";
+// This page is statically prerendered. Making it a per-request edge route to
+// localise prices (runtime="edge" + force-dynamic + detectCountry) turned this
+// heavy page into an edge Function that 500s on Cloudflare, so the on-page
+// price copy uses the canonical USD figures below; per-visitor currency lives
+// on /pricing and in the client-localised pricing tables.
 
 // USD figures, straight from lib/pricing/config.ts. Metadata, JSON-LD and the
 // FAQ are indexed once and must not vary per visitor, so they quote these.
@@ -164,9 +162,8 @@ function Check() {
   );
 }
 
-export default async function ClientspacePage() {
-  const { market } = await detectCountry({ headers: await headers() });
-  const price = priceCopy(market);
+export default function ClientspacePage() {
+  const price = CANON;
   return (
     <>
       <JsonLd

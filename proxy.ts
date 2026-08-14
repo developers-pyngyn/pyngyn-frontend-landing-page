@@ -47,6 +47,11 @@ export function proxy(req: NextRequest) {
       }
     }
 
+    // No geo header (e.g. localhost, or a host that doesn't stamp one): leave the
+    // cookie unset so PricingTiers falls back to browser-side IP geolocation,
+    // which can see the visitor's real public IP. Only cache a real header hit.
+    if (!country) return NextResponse.next();
+
     const res = NextResponse.next();
     res.cookies.set(MARKET_COOKIE, marketFromCountry(country), {
       path: "/",
@@ -61,7 +66,8 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  // Pages that show the pricing tables. Kept narrow so the proxy doesn't run
-  // on assets or every marketing route.
-  matcher: ["/", "/pricing"],
+  // Pages that show the pricing tables. Kept narrow so the proxy doesn't run on
+  // assets or every marketing route. Both /pricing forms are listed because
+  // trailingSlash is enabled (next.config.js).
+  matcher: ["/", "/pricing", "/pricing/"],
 };

@@ -23,13 +23,19 @@ import {
   type MarketCode,
   type ProductKey,
 } from "@/lib/pricing/config";
-import { MARKET_COOKIE, SELECTABLE_MARKETS } from "@/lib/pricing/detect-country";
+import {
+  MARKET_COOKIE,
+  MARKET_COOKIE_MAX_AGE,
+  SELECTABLE_MARKETS,
+  marketFromCountry,
+} from "@/lib/pricing/detect-country";
 
 /**
- * Read the first-party `pyngyn_market` cookie (set by the edge middleware from
- * CF-IPCountry, or by a manual override). Client-only: lets a *static* page —
- * the homepage, which can't detect the visitor server-side without becoming a
- * per-request edge route — still show local currency, resolved after hydration.
+ * Read the first-party `pyngyn_market` cookie (set by the edge proxy from
+ * CF-IPCountry, or by a browser-side geolocation below). Client-only: lets a
+ * *static* page — the homepage, which can't detect the visitor server-side
+ * without becoming a per-request edge route — still show local currency,
+ * resolved after hydration.
  */
 function readMarketCookie(): MarketCode | null {
   if (typeof document === "undefined") return null;
@@ -41,6 +47,50 @@ function readMarketCookie(): MarketCode | null {
   return (SELECTABLE_MARKETS as readonly string[]).includes(value)
     ? (value as MarketCode)
     : null;
+}
+
+function writeMarketCookie(market: MarketCode): void {
+  if (typeof document === "undefined") return;
+  document.cookie = `${MARKET_COOKIE}=${market}; Path=/; Max-Age=${MARKET_COOKIE_MAX_AGE}; SameSite=Lax`;
+}
+
+/**
+ * Resolve the visitor's market from the browser itself, via a free, no-key,
+ * CORS-enabled IP-geolocation service. This is what makes detection work when
+ * the server can't see a real client IP — notably on localhost, but also any
+ * host that doesn't stamp a geo header — because the request goes out with the
+ * visitor's own public IP. Tries two providers, then gives up (stays on USD).
+ */
+async function geolocateMarket(signal: AbortSignal): Promise<MarketCode | null> {
+  const providers: { url: string; pick: (data: unknown) => string | null }[] = [
+    {
+      url: "https://ipwho.is/?fields=country_code,success",
+      pick: (d) => {
+        const o = d as { success?: boolean; country_code?: unknown };
+        if (o?.success === false) return null;
+        return typeof o?.country_code === "string" ? o.country_code : null;
+      },
+    },
+    {
+      url: "https://ipapi.co/json/",
+      pick: (d) => {
+        const o = d as { country_code?: unknown };
+        return typeof o?.country_code === "string" ? o.country_code : null;
+      },
+    },
+  ];
+
+  for (const provider of providers) {
+    try {
+      const res = await fetch(provider.url, { signal, headers: { accept: "application/json" } });
+      if (!res.ok) continue;
+      const country = provider.pick(await res.json());
+      if (country) return marketFromCountry(country);
+    } catch {
+      /* provider unreachable / aborted — try the next one */
+    }
+  }
+  return null;
 }
 
 type Group = { heading?: string; items: string[]; /** hidden until Stage 1 */ aiStage?: boolean };
@@ -200,7 +250,33 @@ export function PricingTiers({
   // is what makes the currency localise.
   const [activeMarket, setActiveMarket] = useState<MarketCode>(market);
   useEffect(() => {
-    setActiveMarket(readMarketCookie() ?? market);
+    // 1) A cookie (edge proxy from CF-IPCountry, or a previous geolocation) wins.
+    const cookie = readMarketCookie();
+    if (cookie) {
+      setActiveMarket(cookie);
+      return;
+    }
+    // 2) The server already resolved a specific market (e.g. /pricing) — trust it.
+    if (market !== "DEFAULT") {
+      setActiveMarket(market);
+      return;
+    }
+    // 3) No cookie and the server fell back to USD (e.g. the static homepage, or
+    //    localhost where it can't see a real IP): geolocate from the browser.
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 3500);
+    geolocateMarket(controller.signal)
+      .then((detected) => {
+        if (detected) {
+          setActiveMarket(detected);
+          writeMarketCookie(detected);
+        }
+      })
+      .finally(() => clearTimeout(timer));
+    return () => {
+      controller.abort();
+      clearTimeout(timer);
+    };
   }, [market]);
 
   const marketConfig = PRICING[activeMarket];
