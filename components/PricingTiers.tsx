@@ -31,11 +31,10 @@ import {
 } from "@/lib/pricing/detect-country";
 
 /**
- * Read the first-party `pyngyn_market` cookie (set by the edge proxy from
- * CF-IPCountry, or by a browser-side geolocation below). Client-only: lets a
- * *static* page — the homepage, which can't detect the visitor server-side
- * without becoming a per-request edge route — still show local currency,
- * resolved after hydration.
+ * Read the first-party `pyngyn_market` cookie (cached by the browser-side
+ * geolocation below on a previous visit). Client-only: lets a *static* page —
+ * the homepage, which can't detect the visitor server-side without becoming a
+ * per-request edge route — still show local currency, resolved after hydration.
  */
 function readMarketCookie(): MarketCode | null {
   if (typeof document === "undefined") return null;
@@ -250,7 +249,7 @@ export function PricingTiers({
   // is what makes the currency localise.
   const [activeMarket, setActiveMarket] = useState<MarketCode>(market);
   useEffect(() => {
-    // 1) A cookie (edge proxy from CF-IPCountry, or a previous geolocation) wins.
+    // 1) A cookie cached by a previous browser geolocation wins.
     const cookie = readMarketCookie();
     if (cookie) {
       setActiveMarket(cookie);
