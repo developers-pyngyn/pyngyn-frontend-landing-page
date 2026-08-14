@@ -31,6 +31,85 @@ textarea:focus-visible,
   border-radius: 6px;
 }
 
+/* Modern overlay scrollbars: 6px wide, invisible track, no stepper arrows, and
+   a pill thumb that only paints while the user is actually scrolling (or while
+   the pointer is on the bar). ScrollbarActivity toggles `.scrollbars-active`
+   on <html>; with JS off the thumb still appears on hover and drag.
+
+   Chromium note: setting the standard `scrollbar-width`/`scrollbar-color` makes
+   Chromium ignore ::-webkit-scrollbar altogether, which brings its native
+   stepper arrows back — so those two properties are scoped to engines that
+   don't implement the webkit pseudo-elements (i.e. Firefox). */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(15, 17, 21, 0.28) transparent;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece,
+::-webkit-scrollbar-corner {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+::-webkit-scrollbar-thumb {
+  /* 1px transparent inset keeps the pill off the very edge */
+  border: 1px solid transparent;
+  background-clip: content-box;
+  /* hidden at rest — this is the overlay behaviour */
+  background-color: transparent;
+  border-radius: 999px;
+}
+
+/* visible while scrolling (root scroller and any inner scroller) */
+html.scrollbars-active::-webkit-scrollbar-thumb,
+html.scrollbars-active *::-webkit-scrollbar-thumb {
+  background-color: rgba(15, 17, 21, 0.28);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(15, 17, 21, 0.42);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #4f46e5;
+}
+
+/* Kill the stepper arrows at both ends. Chromium draws these from its own UA
+   sheet and only backs off when every button variant is matched, hence the
+   long list and the !important — without it the arrows keep their slots. */
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment,
+::-webkit-scrollbar-button:vertical:start:decrement,
+::-webkit-scrollbar-button:vertical:end:increment,
+::-webkit-scrollbar-button:horizontal:start:decrement,
+::-webkit-scrollbar-button:horizontal:end:increment {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent;
+}
+
+/* Dark sections need a light thumb to stay visible */
+html.scrollbars-active .hero-dark *::-webkit-scrollbar-thumb,
+html.scrollbars-active .dark-panel *::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.32);
+}
+.hero-dark *::-webkit-scrollbar-thumb:hover,
+.dark-panel *::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,

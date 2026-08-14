@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Reveal } from "./Reveal";
 import { PricingTiers } from "./PricingTiers";
-import type { RegionCode } from "./regionPricing";
+import type { MarketCode } from "@/lib/pricing/config";
 import { INTEGRATIONS_URL, ROI_URL } from "./config";
 
 // Section label pill with an accent dot (Apptics style).
@@ -375,10 +375,11 @@ export function Security() {
 
 export function Pricing({
   showHeader = true,
-  region,
+  market,
 }: {
   showHeader?: boolean;
-  region?: RegionCode;
+  /** resolved server-side so the currency is right in the initial HTML */
+  market?: MarketCode;
 }) {
   return (
     <section id="pricing" className="section">
@@ -394,7 +395,7 @@ export function Pricing({
             </div>
           </Reveal>
         )}
-        <PricingTiers className={showHeader ? "mt-[46px]" : ""} region={region} />
+        <PricingTiers className={showHeader ? "mt-[46px]" : ""} market={market} />
       </div>
     </section>
   );

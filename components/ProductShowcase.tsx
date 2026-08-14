@@ -1,51 +1,22 @@
-import Image from "next/image";
 import { Reveal } from "./Reveal";
+import { ClientSpaceShowcase } from "./showcase/ClientSpaceShowcase";
+import { BusinessBrainShowcase } from "./showcase/BusinessBrainShowcase";
 
-type Shot = {
-  src: string;
-  alt: string;
-  w: number;
-  h: number;
-};
-
-// Real product screenshots (converted to WebP, served from /public/screens).
-const LEAD: Shot = {
-  src: "/screens/clientspace-space.webp",
-  alt: "PYNGYN Clientspace showing a client's branded portal with needs-your-attention items, active engagements, engagement value, and upcoming sessions at a glance",
-  w: 1909,
-  h: 940,
-};
-
-const ROWS: { shot: Shot; eyebrow: string; title: string; body: string; reverse?: boolean }[] = [
+const ROWS: {
+  eyebrow: string;
+  title: string;
+  body: string;
+  bullets: string[];
+  reverse?: boolean;
+}[] = [
   {
-    shot: {
-      src: "/screens/smart-inbox.webp",
-      alt: "PYNGYN Smart Inbox, AI-triaged, sorting items into Needs response, FYI, and Low priority with a one-line reason and confidence score for each",
-      w: 1920,
-      h: 949,
-    },
     eyebrow: "Business Brain",
-    title: "AI triages everything that needs you.",
-    body: "Smart Inbox sorts client replies, approvals, and updates into Needs response, FYI, and Low priority, each with a one-line reason, so partners spend their time deciding, not sifting through a feed.",
+    title: "Grounded in your live ClientSpace, under your own permissions - sources on every answer",
+    body: "Ask about workload, money, risk, the team, or deadlines - or tap a quick action. Answers use only what your role can see.",
+    bullets: ["Weekly pulse", "At-risk work", "Collections", "Team load", "Deadlines"],
     reverse: true,
   },
 ];
-
-function Screenshot({ shot, priority = false }: { shot: Shot; priority?: boolean }) {
-  return (
-    <div className="overflow-hidden rounded-[16px] border border-line bg-white shadow-art">
-      <Image
-        src={shot.src}
-        alt={shot.alt}
-        width={shot.w}
-        height={shot.h}
-        priority={priority}
-        sizes="(max-width: 768px) 100vw, 900px"
-        className="h-auto w-full"
-      />
-    </div>
-  );
-}
 
 export function ProductShowcase() {
   return (
@@ -64,10 +35,14 @@ export function ProductShowcase() {
           </div>
         </Reveal>
 
-        {/* Lead screenshot */}
+        {/* Lead screen: the live, interactive Clientspace mockup (was a
+            static /screens/clientspace-space.webp shot). Same frame as the
+            <Screenshot> below it so the section is visually unchanged. */}
         <Reveal i={1}>
           <figure className="mx-auto mt-[46px] max-w-[1000px]">
-            <Screenshot shot={LEAD} />
+            <div className="overflow-hidden rounded-[16px] border border-line bg-white shadow-art">
+              <ClientSpaceShowcase />
+            </div>
             <figcaption className="mt-3 text-center text-[13px] text-muted">
               Your client&apos;s Clientspace: engagements, approvals, and status in one branded portal.
             </figcaption>
@@ -77,9 +52,12 @@ export function ProductShowcase() {
         {/* Alternating feature rows */}
         <div className="mt-[72px] space-y-[72px]">
           {ROWS.map((row, i) => (
-            <Reveal key={row.shot.src} i={i}>
-              <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-                <div className={row.reverse ? "md:order-2" : ""}>
+            <Reveal key={row.eyebrow} i={i}>
+              {/* Copy left, mockup in the right column, flush to the section
+                  container's right edge. The column — not a margin on the
+                  child — is what sets the mockup's width and position. */}
+              <div className="grid items-center gap-8 md:grid-cols-[1fr_520px] md:gap-12 xl:grid-cols-[1fr_620px]">
+                <div>
                   <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
                     {row.eyebrow}
                   </span>
@@ -89,9 +67,25 @@ export function ProductShowcase() {
                   <p className="mt-3 max-w-[480px] text-[16px] leading-relaxed text-muted">
                     {row.body}
                   </p>
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {row.bullets.map((bullet) => (
+                      <li
+                        key={bullet}
+                        className="rounded-full border border-line bg-white px-3 py-1 text-[13px] font-medium text-ink"
+                      >
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className={row.reverse ? "md:order-1" : ""}>
-                  <Screenshot shot={row.shot} />
+                <div className="w-full md:justify-self-end">
+                  {/* Live Business Brain mockup, in the slot that used to hold
+                      the static /screens/smart-inbox.webp screenshot. The shell
+                      inside is authored at 1600px and scaled down to fit this
+                      column, so it reads as a real screenshot. */}
+                  <div className="overflow-hidden rounded-[16px] border border-line bg-white shadow-art">
+                    <BusinessBrainShowcase />
+                  </div>
                 </div>
               </div>
             </Reveal>

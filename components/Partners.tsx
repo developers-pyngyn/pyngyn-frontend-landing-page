@@ -58,13 +58,13 @@ const PARTNERS: (ImagePartner | MarkPartner)[] = [
     height: 195,
     className: "h-9 w-auto",
   },
-  {
-    name: "Tagioni School of Performing Arts",
-    src: "/partners/tagioni.png",
-    width: 256,
-    height: 256,
-    className: "h-16 w-auto",
-  },
+  // {
+  //   name: "Tagioni School of Performing Arts",
+  //   src: "/partners/tagioni.png",
+  //   width: 256,
+  //   height: 256,
+  //   className: "h-16 w-auto",
+  // },
   {
     kind: "mark",
     name: "BigBirdLuxe",

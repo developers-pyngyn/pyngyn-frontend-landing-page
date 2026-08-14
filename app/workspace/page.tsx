@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
+import { detectCountry } from "@/lib/pricing/detect-country";
+import { canonicalPriceCopy, priceCopy } from "@/lib/pricing/copy";
 import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
@@ -19,6 +22,16 @@ import {
 // ---------------------------------------------------------------------------
 // Metadata
 // ---------------------------------------------------------------------------
+
+// Region-aware prices have to be resolved per request, which takes this route
+// out of static prerendering; `runtime = "edge"` is required for any dynamic
+// route under @cloudflare/next-on-pages.
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
+
+// USD, from lib/pricing/config.ts — metadata, JSON-LD and FAQ answers are
+// indexed once and must not vary by visitor.
+const CANON = canonicalPriceCopy();
 
 export const metadata: Metadata = {
   title: "Workspace | PYNGYN, the operating system for your firm",
@@ -46,11 +59,11 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "How is Workspace different from Client Space?",
-    a: "Workspace is where your firm runs internal work: projects, finances, billable timesheets, Business Brain AI, automations, and team management, all at $9 per seat/month. Client Space is a standalone branded client portal at $19 per client/month, giving each client their own isolated space with client-visible tasks, approvals, and sign-off. Bundle both for $24.99/month.",
+    a: `Workspace is where your firm runs internal work: projects, finances, billable timesheets, and team management, all at ${CANON.workspace} per seat/month. Clientspace is a standalone branded client portal at ${CANON.clientspace} per seat/month with unlimited free client access, giving each client their own isolated space with client-visible tasks, approvals, and sign-off. Bundle both for ${CANON.bundle}/month.`,
   },
   {
     q: "How many people can use Workspace?",
-    a: "Workspace is $9 per seat per month with no seat cap. Add as many directors, managers, and ICs as your firm needs. See the pricing page for the latest details.",
+    a: `Workspace is ${CANON.workspace} per seat per month with no seat cap. Add as many directors, managers, and ICs as your firm needs. Prices are shown in your local currency on the pricing page.`,
   },
   {
     q: "Can the AI draft client messages for a change request?",
@@ -66,7 +79,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What happens after the free trial?",
-    a: "You can keep your firm on Workspace at $9 per seat/month, and add Client Space at $19 per client whenever you want a client portal, or bundle both for $24.99/month. See the pricing page for what each plan includes.",
+    a: `You can keep your firm on Workspace at ${CANON.workspace} per seat/month, and add Clientspace at ${CANON.clientspace} per seat whenever you want a client portal, or bundle both for ${CANON.bundle}/month. See the pricing page for what each plan includes.`,
   },
   {
     q: "Do you help with onboarding and support?",
@@ -200,7 +213,7 @@ const OUTCOMES: { pain: string; gain: string }[] = [
 const STEPS: { title: string; blurb: string }[] = [
   { title: "Create your workspace", blurb: "Set up your firm's workspace in a couple of clicks. No setup project required." },
   { title: "Add your engagements", blurb: "Build them directly, or let the AI draft the plan from your goal." },
-  { title: "Invite your firm", blurb: "$9 per seat, no cap. Directors, managers, and ICs each see the work that matters to their role." },
+  { title: "Invite your firm", blurb: `${CANON.workspace} per seat, no cap. Directors, managers, and ICs each see the work that matters to their role.` },
   { title: "Let the AI take the busywork", blurb: "Status updates, summaries, and risk flags are drafted for you from day one." },
 ];
 
@@ -229,7 +242,9 @@ const WS_VOICES: { quote: string; role: string }[] = [
   },
 ];
 
-export default function WorkspacePage() {
+export default async function WorkspacePage() {
+  const { market } = await detectCountry({ headers: await headers() });
+  const price = priceCopy(market);
   return (
     <>
       <JsonLd
@@ -238,7 +253,7 @@ export default function WorkspacePage() {
             url: "/workspace",
             name: "Workspace, your internal delivery command center | PYNGYN",
             description:
-              "Workspace is PYNGYN's operating system for professional-services firms: projects, finances, billable timesheets, Business Brain AI, automations, and team management at $9 per seat.",
+              `Workspace is PYNGYN's operating system for professional-services firms: projects, finances, billable timesheets, and team management at ${CANON.workspace} per seat.`,
             breadcrumbId: "/workspace#breadcrumb",
           }),
           breadcrumbSchema(
@@ -276,7 +291,7 @@ export default function WorkspacePage() {
                 </a>
               </div>
               <p className="mt-4 text-[13.5px] text-muted">
-                $9 per seat / month · pair with Client Space at $19 per client, or bundle for $24.99/mo.{" "}
+                {price.workspace} per seat / month · pair with Clientspace at {price.clientspace} per seat, or bundle for {price.bundle}/mo.{" "}
                 <Link href="/pricing" className="font-semibold text-accent hover:underline">
                   See pricing
                 </Link>

@@ -69,8 +69,23 @@ function loadMetaPixel() {
   window.fbq?.("track", "PageView");
 }
 
+/**
+ * Local development is not a measurable audience, and loading the tags there
+ * pollutes the real analytics while filling the console with third-party noise
+ * — e.g. the GTM container's Factors.ai tag calls api.factors.ai/sdk/get_info,
+ * which only allows the production origin, so on localhost it always fails CORS.
+ * Nothing in this repo can add that response header; skipping the tags locally
+ * is the part that is ours to fix.
+ */
+function isLocalOrigin() {
+  if (typeof window === "undefined") return false;
+  const { hostname } = window.location;
+  return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]";
+}
+
 function applyConsent(state: ConsentState | null) {
   if (!state) return;
+  if (isLocalOrigin()) return;
   if (state.analytics) loadGoogleTagManager();
   if (state.marketing) loadMetaPixel();
 }

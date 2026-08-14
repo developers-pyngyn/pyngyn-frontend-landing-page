@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { headers } from "next/headers";
 import Link from "next/link";
+import { ClientSpaceShowcase } from "@/components/showcase/ClientSpaceShowcase";
+import { detectCountry } from "@/lib/pricing/detect-country";
+import { canonicalPriceCopy, priceCopy } from "@/lib/pricing/copy";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SIGNUP_URL, ANY_UPDATE_URL } from "@/components/config";
@@ -12,10 +15,20 @@ import {
   webPageSchema,
 } from "@/components/schema";
 
+// Reading the visitor's region forces this route out of static prerendering,
+// so prices are resolved per request. `runtime = "edge"` is required for any
+// dynamic route under @cloudflare/next-on-pages.
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
+
+// USD figures, straight from lib/pricing/config.ts. Metadata, JSON-LD and the
+// FAQ are indexed once and must not vary per visitor, so they quote these.
+const CANON = canonicalPriceCopy();
+
 export const metadata: Metadata = {
   title: "Client Space | PYNGYN, the standalone branded client portal for professional-services firms",
   description:
-    "Give every client a branded portal where they see status, documents, and approvals 24/7, instead of emailing you for updates. Client Space is $19 per client / month, standalone. No Workspace purchase required.",
+    `Give every client a branded portal where they see status, documents, and approvals 24/7, instead of emailing you for updates. Clientspace is ${CANON.clientspace} per seat / month, standalone, with unlimited free client access. No Workspace purchase required.`,
   alternates: { canonical: "/clientspace" },
   openGraph: {
     images: [OG_IMAGE],
@@ -135,12 +148,12 @@ const VERTICALS: { label: string; href: string; line: string }[] = [
 
 const FAQS: { q: string; a: string }[] = [
   { q: "What is Client Space?", a: "Client Space is a branded client portal for your firm, sold on its own. Each client gets their own secure, isolated space showing the status of their engagement, their documents, approvals, and invoices, so they stop emailing you for updates and start self-serving 24/7." },
-  { q: "How much does Client Space cost?", a: "Client Space is $19 per client per month, standalone, you don't need to buy Workspace to use it. If your firm also wants Workspace (your internal back office, $9 per seat/month), you can bundle both for $24.99/month." },
+  { q: "How much does Client Space cost?", a: `Client Space is ${CANON.clientspace} per seat per month, standalone, with unlimited free client and guest access — you don't need to buy Workspace to use it. If your firm also wants Workspace (your internal back office, ${CANON.workspace} per seat/month), you can bundle both for ${CANON.bundle}/month. Prices are shown in your local currency on the pricing page.` },
   { q: "Do my clients need to create an account or remember a password?", a: "No. Clients join with a one-click magic link, no password to remember and no login friction. Login frustration is the number-one reason client portals go unused, so we removed it entirely." },
   { q: "Can clients see my other clients, or my internal work?", a: "Never. Each Client Space is fully isolated. A client sees only their own engagement, never another client's work, and never your internal operations. You control exactly what's visible." },
   { q: "Is it secure enough for legal and financial documents?", a: "Yes. Documents are encrypted in transit and at rest, access is controlled per client, and every action is logged in an audit trail, far safer than emailing sensitive records, which most firms still do." },
   { q: "Can I brand it as my own firm?", a: "Yes. Client Space is white-labeled with your logo, colors, and domain. To your clients, it looks and feels like your firm's own portal." },
-  { q: "What is Workspace, and do I need it?", a: "Workspace is a separate product, your firm's internal back office for projects, finances, and billable time. You don't need it to use Client Space. Firms that want both can bundle Workspace and Client Space together for $24.99/month." },
+  { q: "What is Workspace, and do I need it?", a: `Workspace is a separate product, your firm's internal back office for projects, finances, and billable time. You don't need it to use Client Space. Firms that want both can bundle Workspace and Client Space together for ${CANON.bundle}/month.` },
 ];
 
 function Check() {
@@ -151,7 +164,9 @@ function Check() {
   );
 }
 
-export default function ClientspacePage() {
+export default async function ClientspacePage() {
+  const { market } = await detectCountry({ headers: await headers() });
+  const price = priceCopy(market);
   return (
     <>
       <JsonLd
@@ -160,7 +175,7 @@ export default function ClientspacePage() {
             url: "/clientspace",
             name: "Client Space | PYNGYN, the standalone branded client portal for professional-services firms",
             description:
-              "Give every client a branded portal where they see status, documents, and approvals 24/7 instead of emailing you. $19 per client / month, standalone.",
+              `Give every client a branded portal where they see status, documents, and approvals 24/7 instead of emailing you. ${CANON.clientspace} per seat / month, standalone.`,
             breadcrumbId: "/clientspace#breadcrumb",
           }),
           breadcrumbSchema(
@@ -198,22 +213,18 @@ export default function ClientspacePage() {
             <a href={SIGNUP_URL} className="btn btn-primary">Start free trial</a>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            From <strong className="text-ink">$19 per client / month</strong> · standalone, no Workspace required · clients join with one click
+            From <strong className="text-ink">{price.clientspace} per seat / month</strong> · unlimited free client access · standalone, no Workspace required
           </p>
         </section>
 
         {/* ===== Portal screenshot ========================================= */}
         <section className="wrap pb-[72px]">
-          <div className="mx-auto max-w-[900px] overflow-hidden rounded-[22px] border border-line bg-white shadow-art">
-            <Image
-              src="/screens/clientspace-space.webp"
-              alt="Client Space portal showing needs-your-attention items, active engagements, engagement value, and upcoming sessions for a client logging in"
-              width={1909}
-              height={940}
-              priority
-              sizes="(max-width: 768px) 100vw, 900px"
-              className="h-auto w-full"
-            />
+          {/* Live, interactive Clientspace dashboard (was a static
+              /screens/clientspace-space.webp shot). Full container width, so the
+              shell renders its desktop layout — sidebar labels and right rail
+              included — scaled to fit rather than reflowed. */}
+          <div className="overflow-hidden rounded-[22px] border border-line bg-white shadow-art">
+            <ClientSpaceShowcase dataset="portfolio" loop />
           </div>
           <p className="mt-3 text-center text-[13px] text-muted">
             What your client sees when they log in, branded as your firm, updated automatically.
@@ -287,15 +298,12 @@ export default function ClientspacePage() {
                   across every client at once.
                 </p>
               </div>
+              {/* Smaller, on the right. `variant="screenshot"` keeps the desktop
+                  layout (sidebar labels, rail) and just scales it down instead of
+                  reflowing, and `loop` walks the active nav item so it reads as
+                  live software. The hero above stays static. */}
               <div className="overflow-hidden rounded-[18px] border border-line bg-white shadow-art">
-                <Image
-                  src="/screens/clientspace-director.webp"
-                  alt="Client Space director dashboard showing portfolio-wide revenue, realisation percentage, active engagements, CSAT, and engagement health across all clients"
-                  width={1906}
-                  height={949}
-                  sizes="(max-width: 768px) 100vw, 640px"
-                  className="h-auto w-full"
-                />
+                <ClientSpaceShowcase variant="screenshot" dataset="collections" />
               </div>
             </div>
           </div>
@@ -349,7 +357,7 @@ export default function ClientspacePage() {
                     <div className="rounded-xl border border-accent/40 bg-white p-4">
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-accent">Client Space</span>
-                        <span className="text-[13px] text-muted">$19 / client · standalone</span>
+                        <span className="text-[13px] text-muted">{price.clientspace} / seat · standalone</span>
                       </div>
                       <p className="mt-1 text-[12.5px] text-muted">The branded portal your clients log into. Works on its own.</p>
                     </div>
@@ -361,9 +369,9 @@ export default function ClientspacePage() {
                     <div className="rounded-xl border border-line bg-white p-4">
                       <div className="flex items-center justify-between">
                         <span className="font-bold">Workspace</span>
-                        <span className="text-[13px] text-muted">$9 / seat · optional</span>
+                        <span className="text-[13px] text-muted">{price.workspace} / seat · optional</span>
                       </div>
-                      <p className="mt-1 text-[12.5px] text-muted">Your firm's optional back office. Bundle both for $24.99/mo.</p>
+                      <p className="mt-1 text-[12.5px] text-muted">Your firm&apos;s optional back office. Bundle both for {price.bundle}/mo.</p>
                     </div>
                   </div>
                 </div>
@@ -428,11 +436,12 @@ export default function ClientspacePage() {
             <div className="rounded-[24px] border border-accent bg-accent/[0.04] p-8 text-center shadow-soft sm:p-12">
               <span className="eyebrow">Pricing</span>
               <h2 className="mt-3 font-display text-[clamp(26px,3.4vw,40px)] font-semibold tracking-[-0.02em]">
-                $19 per client, standalone. That&apos;s it.
+                {price.clientspace} per seat, standalone. That&apos;s it.
               </h2>
               <p className="lead mx-auto mt-4 max-w-[560px]">
-                No Workspace purchase required. Add Client Space for each client you bring in.
-                Want Workspace too? Bundle both for $24.99/mo and save.
+                No Workspace purchase required, and client and guest seats are free. Want
+                Workspace too? Bundle both for {price.bundle}/mo and save ~{price.annualSavingPct}%
+                more by paying annually.
               </p>
               <ul className="mx-auto mt-7 grid max-w-[640px] gap-2.5 text-left sm:grid-cols-2">
                 {["Branded, white-labeled portal", "Unlimited client guests per space", "Secure documents & e-signature", "Approvals with full audit trail", "One-click magic-link access", "Invoices & online payments"].map((f) => (

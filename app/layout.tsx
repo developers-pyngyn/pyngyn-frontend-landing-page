@@ -5,7 +5,9 @@
  */
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { FaviconScheme } from "@/components/FaviconScheme";
 import { PromoPopupLazy } from "@/components/PromoPopupLazy";
+import { ScrollbarActivity } from "@/components/ScrollbarActivity";
 import { ConsentScripts } from "@/components/ConsentScripts";
 import { CookieConsent } from "@/components/CookieConsent";
 
@@ -53,6 +55,17 @@ const mono = localFont({
   display: "swap",
 });
 
+/*
+ * Favicon variants, named by the role they play rather than by filename —
+ * the mapping was checked against the actual artwork, not the names:
+ *   /icon.png       48×48   dark navy tile, white mark  → for LIGHT chrome
+ *   /icon-dark.png  195×193 light grey tile, dark mark  → for DARK chrome
+ * ("icon-dark" means "the icon to use in dark mode", and it is indeed the
+ * light-coloured one, so no inversion is needed.)
+ */
+const faviconForLightMode = "/icon.png";
+const faviconForDarkMode = "/icon-dark.png";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   authors: [{ name: "Nikunj Chugh" }],
@@ -62,8 +75,30 @@ export const metadata: Metadata = {
     "PYNGYN gives every client a branded Clientspace (a standalone portal for status, documents, and approvals), with Workspace, your firm's back office, available on its own or bundled together. Built for professional-services firms. Book a demo.",
   // Reference static files in /public (not the app/icon route convention,
   // which next-on-pages rejects because it can't be an edge route).
+  //
+  // Order matters: Chrome resolves to the LAST icon link it accepts, and a
+  // media-less link matches every condition — so the fallback goes first and
+  // the dark variant goes last. Safari/Firefox (and JS-disabled visitors) get
+  // the right icon on first paint from these links alone; components/
+  // FaviconScheme.tsx carries Chrome, whose `media` handling is unreliable.
+  // apple-touch-icon ignores `media` entirely, so it stays a single variant
+  // (and keeps its solid background, since iOS draws it on the wallpaper).
   icons: {
-    icon: "/icon.png",
+    icon: [
+      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      {
+        url: faviconForLightMode,
+        type: "image/png",
+        sizes: "48x48",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: faviconForDarkMode,
+        type: "image/png",
+        sizes: "195x193",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
     apple: "/apple-icon.png",
   },
   // Google Search Console's "HTML tag" verification method: paste the
@@ -124,6 +159,11 @@ export default function RootLayout({
             would silently defeat the consent gate below for that slice of
             visitors, so both trackers are JS-gated only. */}
         <ConsentScripts />
+        {/* Repaints the tab icon when the OS scheme flips; the static links
+            above already handle first load with no JS. */}
+        <FaviconScheme />
+        {/* Shows the overlay scrollbar thumb only while scrolling */}
+        <ScrollbarActivity />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-white"

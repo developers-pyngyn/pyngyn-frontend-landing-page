@@ -5,15 +5,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Reveal } from "./Reveal";
+import { GetInTouch } from "./footer/GetInTouch";
 import { openCookiePreferences } from "./consent";
+import { canonicalPriceCopy } from "@/lib/pricing/copy";
 import { SIGNUP_URL, DEMO_URL, BENEFITS_URL, CUSTOMERS_URL, PRICING_URL, BLOG_URL, ABOUT_URL, CAREERS_URL, PRIVACY_URL, TERMS_URL, REFUND_URL, COOKIE_POLICY_URL, DPA_URL, SUBPROCESSORS_URL, SOCIAL_X, SOCIAL_LINKEDIN, SOCIAL_REDDIT, SOCIAL_FACEBOOK, SOCIAL_YOUTUBE, SOCIAL_INSTAGRAM, INTEGRATIONS_URL, CHANGELOG_URL, DOCS_URL, GUIDES_URL, BRAND_URL, PARTNERS_URL, STATUS_URL, SUPPORT_URL, KB_URL, ANNOUNCEMENTS_URL, ROADMAP_URL, REFER_URL, COMPARE_URL, COMPETITORS, PLAYSTORE_URL, INVESTORS_URL, TOOLS_URL, PLAN_GEN_URL, ROI_URL, STATUS_REPORT_URL, UTILIZATION_URL, COST_ESTIMATOR_URL } from "./config";
+
+// USD, from lib/pricing/config.ts — this FAQ renders on many pages, including
+// statically cached ones, so it quotes the canonical figures rather than a
+// per-visitor currency.
+const CANON = canonicalPriceCopy();
 
 const faqs: [string, string][] = [
   ["What happens in the demo?", "A 30-minute guided walkthrough where we run PYNGYN on a project like yours, with no generic slideshow."],
   ["Do I have to trust the AI's plan?", "No. Every plan is fully editable. PYNGYN drafts; you decide."],
   ["Can I import from my current tool?", "Yes. One-click import from common trackers, with mapping handled for you."],
   ["Is my data used to train AI?", "Not without your explicit consent. Your data stays yours."],
-  ["Can I just try it instead of booking a demo?", "Absolutely. Start a free trial with no credit card required, Client Space is $19 per client/month standalone, Workspace is $9 per seat/month, or bundle both for $24.99/month."],
+  ["Can I just try it instead of booking a demo?", `Absolutely. Start a free trial with no credit card required. Clientspace is ${CANON.clientspace} per seat/month standalone with unlimited free client access, Workspace is ${CANON.workspace} per seat/month, or bundle both for ${CANON.bundle}/month.`],
 ];
 
 export function FAQ() {
@@ -158,6 +165,17 @@ export function Footer() {
           { label: "Architects", href: "/solutions/architects" },
         ],
       },
+      {
+        heading: "Free tools",
+        links: [
+          { label: "AI plan generator", href: PLAN_GEN_URL },
+          { label: "Status report generator", href: STATUS_REPORT_URL },
+          { label: "ROI calculator", href: ROI_URL },
+          { label: "Team utilization calculator", href: UTILIZATION_URL },
+          { label: "Cost & margin estimator", href: COST_ESTIMATOR_URL },
+          { label: "All tools", href: TOOLS_URL },
+        ],
+      },
     ],
     [
       {
@@ -185,17 +203,6 @@ export function Footer() {
           { label: "Docs", href: DOCS_URL },
           { label: "Guides", href: GUIDES_URL },
           { label: "Changelog", href: CHANGELOG_URL },
-        ],
-      },
-      {
-        heading: "Free tools",
-        links: [
-          { label: "AI plan generator", href: PLAN_GEN_URL },
-          { label: "Status report generator", href: STATUS_REPORT_URL },
-          { label: "ROI calculator", href: ROI_URL },
-          { label: "Team utilization calculator", href: UTILIZATION_URL },
-          { label: "Cost & margin estimator", href: COST_ESTIMATOR_URL },
-          { label: "All tools", href: TOOLS_URL },
         ],
       },
       {
@@ -245,8 +252,13 @@ export function Footer() {
   return (
     <footer className="border-t border-line bg-white pt-16 pb-10 text-sm text-muted">
       <div className="wrap">
-        {/* Logo + columns */}
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_repeat(5,1fr)]">
+        {/* Logo + columns. Columns stay top-aligned, so Get in touch lines up
+            with the link columns rather than hanging off the bottom. */}
+        {/* Top line: logo, the link columns, and Get in touch as its own column.
+            minmax(0,…) on every track because a bare `fr` floors at min-content,
+            and a long unbreakable label would otherwise push the grid past the
+            container and scroll the page sideways. */}
+        <div className="grid items-start gap-10 lg:gap-8 lg:grid-cols-[minmax(0,1fr)_repeat(5,minmax(0,1fr))_minmax(0,2fr)]">
           <div>
             <Link href="/" className="mb-4 inline-block" aria-label="pyngyn home">
               <Image src="/logo.webp" alt="pyngyn" width={150} height={40} className="h-8 w-auto" />
@@ -255,6 +267,8 @@ export function Footer() {
               The operating system for professional-services firms.
             </p>
 
+            {/* Google Play button parked until the app listing is live —
+                uncomment this block to bring it back.
             <a
               href={PLAYSTORE_URL}
               target="_blank"
@@ -273,6 +287,7 @@ export function Footer() {
                 <span className="text-[14px] font-bold text-ink">Google Play</span>
               </span>
             </a>
+            */}
           </div>
 
           {columns.map((groups, i) => (
@@ -285,6 +300,9 @@ export function Footer() {
               ))}
             </div>
           ))}
+
+          {/* Last column of the same row, so every heading starts at the top */}
+          <GetInTouch />
         </div>
 
         {/* Social + compliance row */}

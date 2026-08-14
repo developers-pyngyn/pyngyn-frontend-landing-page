@@ -5,7 +5,8 @@ import { Pricing, Compare, Security } from "@/components/Sections";
 import { FAQ, FinalCTA, Footer } from "@/components/Footer";
 import { ExitIntentModal } from "@/components/ExitIntentModal";
 import { DEMO_URL } from "@/components/config";
-import { resolveRegion } from "@/components/regionPricing";
+import { detectCountry } from "@/lib/pricing/detect-country";
+import { ACTIVE_STAGE, PRICING, getPricing } from "@/lib/pricing/config";
 import {
   JsonLd,
   breadcrumbSchema,
@@ -26,13 +27,24 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Pricing | PYNGYN",
   description:
-    "Client Space, Workspace, Combined Bundle, and Enterprise plans. Client Space is $19 per client / month, standalone. Workspace is $9 per seat / month. Bundle both for $24.99/mo. Book a demo when you're evaluating for your firm.",
+    "Clientspace, Workspace, Full Bundle, and Enterprise plans, priced per seat in your local currency with unlimited free client access. Book a demo when you're evaluating for your firm.",
   alternates: { canonical: "/pricing" },
 };
 
 export default async function PricingPage() {
+  // Resolved on the server, on first render, so the correct currency is in the
+  // initial HTML — never a client effect that swaps the price after paint. The
+  // chain is: pyngyn_market cookie (manual override) -> edge headers -> local
+  // MaxMind -> ipwhois -> ipapi, with a parallel last-resort round and a hard
+  // 1200ms budget that falls back to USD rather than blocking the render.
   const headersList = await headers();
-  const region = resolveRegion(headersList.get("cf-ipcountry"));
+  const detected = await detectCountry({ headers: headersList });
+  const market = detected.market;
+
+  // Structured data stays in USD on purpose — that's the canonical price search
+  // engines index, not what a given visitor sees. The figures still come from
+  // the config so they can never drift from the on-page tables.
+  const usd = getPricing("US", ACTIVE_STAGE);
   return (
     <>
       <JsonLd
@@ -41,7 +53,7 @@ export default async function PricingPage() {
             url: "/pricing",
             name: "Pricing | PYNGYN",
             description:
-              "Client Space is $19 per client/month, standalone. Workspace is $9 per seat/month. Bundle both for $24.99/mo.",
+              "Clientspace and Workspace are sold per seat, on their own or bundled, priced in your local currency.",
             breadcrumbId: "/pricing#breadcrumb",
           }),
           breadcrumbSchema(
@@ -55,36 +67,36 @@ export default async function PricingPage() {
             url: "/pricing",
             name: "PYNGYN",
             description:
-              "The operating system for professional-services firms: a standalone Client Space plan, a standalone Workspace plan, a Combined Bundle, and Enterprise.",
+              "The operating system for professional-services firms: a standalone Clientspace plan, a standalone Workspace plan, a Full Bundle, and Enterprise.",
             offers: [
               {
-                name: "Client Space",
-                priceMonthly: 19,
-                priceCurrency: "USD",
+                name: "Clientspace",
+                priceMonthly: usd.clientspace.monthly,
+                priceCurrency: PRICING.US.currency,
                 description:
-                  "A branded client portal, sold standalone per client: client-visible tasks, deliverables, status, approvals, and the client role. No Workspace required.",
+                  "A branded client portal, sold per seat with unlimited free client access: client-visible tasks, deliverables, status, approvals, and the client role. No Workspace required.",
                 url: "/pricing",
               },
               {
                 name: "Workspace",
-                priceMonthly: 9,
-                priceCurrency: "USD",
+                priceMonthly: usd.workspace.monthly,
+                priceCurrency: PRICING.US.currency,
                 description:
-                  "The firm's operating system, per internal seat: projects, finances, billable timesheets, Business Brain AI, automations, team skills, and 240+ templates.",
+                  "The firm's operating system, per internal seat: projects, finances, billable timesheets, team skills, and 240+ workflow templates.",
                 url: "/pricing",
               },
               {
-                name: "Combined Bundle",
-                priceMonthly: 24.99,
-                priceCurrency: "USD",
+                name: "Full Bundle",
+                priceMonthly: usd.bundle.monthly,
+                priceCurrency: PRICING.US.currency,
                 description:
-                  "Workspace and Client Space together at a bundled rate, lower than buying each separately.",
+                  "Workspace and Clientspace together at a bundled rate, lower than buying each separately.",
                 url: "/pricing",
               },
               {
                 name: "Enterprise",
                 isCustom: true,
-                priceCurrency: "USD",
+                priceCurrency: PRICING.US.currency,
                 description:
                   "Unlimited seats, SSO/SAML, RBAC, audit log, data residency, custom fields, API and webhooks, and dedicated onboarding and support.",
                 url: "/pricing",
@@ -101,11 +113,11 @@ export default async function PricingPage() {
             Pricing that scales with your firm.
           </h1>
           <p className="lead mx-auto mt-4">
-            Buy Client Space on its own, Workspace on its own, or bundle both for less. Book
+            Buy Clientspace on its own, Workspace on its own, or bundle both for less. Book
             a demo when you&apos;re evaluating for your firm.
           </p>
         </section>
-        <Pricing showHeader={false} region={region} />
+        <Pricing showHeader={false} market={market} />
         <Compare />
         <Security />
         <FAQ />
