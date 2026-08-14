@@ -26,7 +26,15 @@ const DEFAULT_BRAIN: FeatureRow = {
   mockup: <BusinessBrainShowcase />,
 };
 
-export function ProductShowcase({ brain = DEFAULT_BRAIN }: { brain?: FeatureRow } = {}) {
+const DEFAULT_LEAD: ReactNode = <ClientSpaceShowcase variant="screenshot" />;
+const DEFAULT_LEAD_CAPTION =
+  "Your client's Clientspace: engagements, approvals, and status in one branded portal.";
+
+export function ProductShowcase({
+  brain = DEFAULT_BRAIN,
+  lead = DEFAULT_LEAD,
+  leadCaption = DEFAULT_LEAD_CAPTION,
+}: { brain?: FeatureRow; lead?: ReactNode; leadCaption?: string } = {}) {
   return (
     <section className="section">
       <div className="wrap">
@@ -48,12 +56,10 @@ export function ProductShowcase({ brain = DEFAULT_BRAIN }: { brain?: FeatureRow 
             instead of reflowing, so visitors always see the real desktop product. */}
         <Reveal i={1}>
           <figure className="mx-auto mt-[46px] max-w-[1000px]">
-            <div className="overflow-hidden rounded-[16px] border border-line bg-white shadow-art">
-              <ClientSpaceShowcase variant="screenshot" />
+            <div className="overflow-hidden rounded-[16px] border border-line bg-white shadow-art transition-shadow duration-300 hover:shadow-soft">
+              {lead}
             </div>
-            <figcaption className="mt-3 text-center text-[13px] text-muted">
-              Your client&apos;s Clientspace: engagements, approvals, and status in one branded portal.
-            </figcaption>
+            <figcaption className="mt-3 text-center text-[13px] text-muted">{leadCaption}</figcaption>
           </figure>
         </Reveal>
 

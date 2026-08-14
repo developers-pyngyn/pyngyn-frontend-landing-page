@@ -21,13 +21,17 @@ const W = 1600;
 const H = 950;
 
 function scaleCss(p: string): string {
+  // Fine steps keep the scaled shell within a pixel of the stage; the stage
+  // background matches the mockup's light canvas so any residual sub-pixel gap
+  // on the right/bottom edge blends in instead of showing a dark line. (The
+  // left/top edges are flush — the shell is anchored there.)
   let ladder = "";
-  for (let cw = 220; cw <= W; cw += 12) {
+  for (let cw = 200; cw <= W; cw += 4) {
     ladder += `@container ${p} (min-width:${cw}px){.${p}-shell{--s:${Math.min(cw / W, 1).toFixed(5)}}}`;
   }
   return `
 .${p}-fit{container-type:inline-size;container-name:${p}}
-.${p}-stage{position:relative;overflow:hidden;aspect-ratio:${W}/${H};background:#0f1729}
+.${p}-stage{position:relative;overflow:hidden;aspect-ratio:${W}/${H};background:#f6f7f9}
 .${p}-shell{--s:1;position:absolute;top:0;left:0;width:${W}px;height:${H}px;transform:scale(var(--s));transform-origin:top left;display:flex;font-family:var(--font-jakarta),system-ui,sans-serif}
 ${ladder}
 @container ${p} (min-width:${W}px){.${p}-shell{--s:1}}`;
@@ -138,8 +142,10 @@ function NavRow({ item, active }: { item: Nav; active: boolean }) {
   return (
     <button
       type="button"
-      className="relative flex w-full items-center gap-3 rounded-lg px-3 py-[9px] text-left transition-colors"
-      style={{ background: active ? "#1c2740" : "transparent", color: active ? "#fff" : "#c3ccdb" }}
+      className={`relative flex w-full items-center gap-3 rounded-lg px-3 py-[9px] text-left transition-colors ${
+        active ? "bg-[#1c2740]" : "hover:bg-[#18213a]"
+      }`}
+      style={{ color: active ? "#fff" : "#c3ccdb" }}
     >
       {active ? (
         <span className="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-r" style={{ background: ORANGE }} />
@@ -341,7 +347,10 @@ function DashboardMain() {
       {/* KPI cards */}
       <div className="mt-6 grid grid-cols-6 gap-3.5">
         {KPIS.map((k) => (
-          <div key={k.label} className="rounded-2xl border border-[#ecedf0] bg-white p-4">
+          <div
+            key={k.label}
+            className="rounded-2xl border border-[#ecedf0] bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#dfe1e5] hover:shadow-[0_10px_24px_-16px_rgba(15,23,42,.35)]"
+          >
             <div className="flex items-start justify-between">
               <span className="grid h-11 w-11 place-items-center rounded-[13px] text-white" style={{ background: k.tint }}>
                 <k.Icon size={20} style={{ color: "#fff" }} />
@@ -373,7 +382,10 @@ function DashboardMain() {
           </div>
           <div className="mt-4 grid grid-cols-2 gap-4">
             {PROJECTS.map((p) => (
-              <div key={p.code} className="rounded-xl border border-[#eef0f3] bg-white p-4">
+              <div
+                key={p.code}
+                className="cursor-pointer rounded-xl border border-[#eef0f3] bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#dfe1e5] hover:shadow-[0_10px_24px_-16px_rgba(15,23,42,.35)]"
+              >
                 <div className="flex items-center gap-3">
                   <span className="grid h-9 w-9 place-items-center rounded-lg text-[12px] font-bold text-white" style={{ background: ORANGE }}>
                     {p.code}

@@ -441,9 +441,12 @@ export default function WorkspacePage() {
         </section>
 
         {/* ===== Product showcase ======================================== */}
-        {/* Business Brain row shows the live Smart Inbox mockup here (the
-            homepage keeps the Business Brain assistant). */}
+        {/* Workspace page: the lead "actual product" screen is the Global
+            Dashboard, and the feature row shows the Smart Inbox (the homepage
+            keeps the Clientspace lead + Business Brain assistant). */}
         <ProductShowcase
+          lead={<WorkspaceDashboardShowcase />}
+          leadCaption="Your Workspace Global Dashboard: projects, tasks, team, and finances in one view."
           brain={{
             eyebrow: "Business Brain · Smart Inbox",
             title: "Every message triaged, so you only ever open what actually needs you",
