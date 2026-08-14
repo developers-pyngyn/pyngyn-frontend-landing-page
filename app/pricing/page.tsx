@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import { Navbar } from "@/components/Navbar";
 import { Pricing, Compare, Security } from "@/components/Sections";
 import { FAQ, FinalCTA, Footer } from "@/components/Footer";
 import { ExitIntentModal } from "@/components/ExitIntentModal";
 import { DEMO_URL } from "@/components/config";
-import { detectCountry } from "@/lib/pricing/detect-country";
 import { ACTIVE_STAGE, PRICING, getPricing } from "@/lib/pricing/config";
 import {
   JsonLd,
@@ -14,16 +12,13 @@ import {
   webPageSchema,
 } from "@/components/schema";
 
-// Cloudflare stamps `CF-IPCountry` on every request that hits its edge —
-// reading it via headers() is what makes this page IP-aware, and it's also
-// what forces this route out of static prerendering (it must be resolved
-// per-request, not once at build time). `runtime = "edge"` is required for
-// any dynamic route under @cloudflare/next-on-pages. Structured data (JSON-LD
-// below) intentionally stays in USD regardless of visitor region — that's
-// the canonical price search engines index, not what a given visitor sees.
-export const runtime = "edge";
-export const dynamic = "force-dynamic";
-
+// Statically prerendered. This page used to detect the visitor's currency
+// server-side (runtime="edge" + force-dynamic), but under the OpenNext
+// Cloudflare adapter that runs the whole app in one Worker, per-request page
+// rendering pushes the Worker past its CPU/memory limit ("Worker exceeded the
+// resource limit"). Keeping every page static serves them as assets instead;
+// the pricing tables localise currency client-side (see PricingTiers). JSON-LD
+// stays in USD on purpose — the canonical price search engines index.
 export const metadata: Metadata = {
   title: "Pricing | PYNGYN",
   description:
@@ -31,16 +26,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/pricing" },
 };
 
-export default async function PricingPage() {
-  // Resolved on the server, on first render, so the correct currency is in the
-  // initial HTML — never a client effect that swaps the price after paint. The
-  // chain is: pyngyn_market cookie (manual override) -> edge headers -> local
-  // MaxMind -> ipwhois -> ipapi, with a parallel last-resort round and a hard
-  // 1200ms budget that falls back to USD rather than blocking the render.
-  const headersList = await headers();
-  const detected = await detectCountry({ headers: headersList });
-  const market = detected.market;
-
+export default function PricingPage() {
   // Structured data stays in USD on purpose — that's the canonical price search
   // engines index, not what a given visitor sees. The figures still come from
   // the config so they can never drift from the on-page tables.
@@ -117,7 +103,7 @@ export default async function PricingPage() {
             a demo when you&apos;re evaluating for your firm.
           </p>
         </section>
-        <Pricing showHeader={false} market={market} />
+        <Pricing showHeader={false} />
         <Compare />
         <Security />
         <FAQ />
