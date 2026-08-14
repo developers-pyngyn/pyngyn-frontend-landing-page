@@ -1,20 +1,20 @@
-// POST /api/subscribe: the footer "Get in touch" newsletter form. Sends the
-// subscriber's details to sales@pyngyn.com over Gmail SMTP, with replyTo set to
-// the subscriber so hitting reply goes straight back to them.
+// POST /api/subscribe: the footer "Get in touch" form. Emails the enquiry to
+// sales@pyngyn.com over Gmail / Google Workspace SMTP, with replyTo set to the
+// sender so hitting reply goes straight back to them.
 //
 // Runtime: nodejs, not edge. SMTP needs a raw TCP socket, which the edge runtime
-// (and Cloudflare Workers) cannot open — see the note in .env.example.
+// and Cloudflare Workers CANNOT open. So this route must run on a Node host
+// (Vercel / Render / a VPS), and the site's form points at it via
+// NEXT_PUBLIC_SUBSCRIBE_URL. CORS is enabled below so the Cloudflare-hosted
+// front end can POST here cross-origin.
 //
-// Configure in your hosting dashboard (see .env.example):
-//   SMTP_USER  — the Gmail address that sends, e.g. sales@pyngyn.com
-//   SMTP_PASS  — a Google **App Password** (16 chars, 2FA required). A normal
-//                account password will be rejected by Gmail.
+// Configure in the Node host's env (see .env.example):
+//   SMTP_USER  — the Google Workspace address that sends, e.g. sales@pyngyn.com
+//   SMTP_PASS  — a Google **App Password** (16 chars, 2-Step Verification on)
 //   SMTP_HOST  — defaults to smtp.gmail.com
 //   SMTP_PORT  — defaults to 587 (STARTTLS); 465 switches to implicit TLS
-//   SUBSCRIBE_TO / SUBSCRIBE_FROM — default to SMTP_USER
-//
-// Any method other than POST gets a 405 from the App Router, since only POST
-// is exported here.
+//   SUBSCRIBE_TO / SUBSCRIBE_FROM — default to SMTP_USER / sales@pyngyn.com
+//   ALLOWED_ORIGINS — comma-separated origins allowed to POST (CORS)
 
 import nodemailer from "nodemailer";
 
@@ -22,7 +22,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const DEFAULT_RECIPIENT = "sales@pyngyn.com";
-const SUBJECT = "New growth-tips subscriber";
+const SUBJECT = "New enquiry from pyngyn.com";
 
 /** Max submissions per IP per window. Best effort: module state is per server
  *  instance, so this trims abuse rather than guaranteeing a global cap. */
@@ -38,12 +38,48 @@ type Payload = {
   company?: string;
 };
 
-function json(data: unknown, status = 200): Response {
+/* ── CORS ─────────────────────────────────────────────────────────── */
+
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+function isAllowedOrigin(origin: string): boolean {
+  if (!origin) return false;
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+  try {
+    const host = new URL(origin).hostname;
+    // pyngyn.com + subdomains, the Cloudflare preview, and localhost dev.
+    return host === "pyngyn.com" || host.endsWith(".pyngyn.com") || host.endsWith(".workers.dev") || host === "localhost";
+  } catch {
+    return false;
+  }
+}
+
+function corsHeaders(request: Request): Record<string, string> {
+  const origin = request.headers.get("origin") || "";
+  const allow = isAllowedOrigin(origin) ? origin : "https://pyngyn.com";
+  return {
+    "Access-Control-Allow-Origin": allow,
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    Vary: "Origin",
+  };
+}
+
+function json(data: unknown, status = 200, extra: Record<string, string> = {}): Response {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...extra },
   });
 }
+
+export async function OPTIONS(request: Request): Promise<Response> {
+  return new Response(null, { status: 204, headers: corsHeaders(request) });
+}
+
+/* ── helpers ──────────────────────────────────────────────────────── */
 
 function isEmail(v: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
@@ -104,52 +140,70 @@ type Details = {
 
 const INK = "#0f1115";
 const MUTED = "#6b7280";
+const FAINT = "#9aa1ad";
 const LINE = "#e9eaf0";
 const ACCENT = "#4f46e5";
+const ACCENT_DK = "#3730a3";
+const CANVAS = "#f1f2f5";
 
 /**
  * Table-based, inline-styled HTML — the only markup that survives Gmail,
- * Outlook and Apple Mail intact. Kept deliberately plain: one card, the
- * subscriber's address as the headline, their details underneath, and a reply
- * button that opens a new mail to them.
+ * Outlook and Apple Mail intact. A branded card: accent gradient header, the
+ * sender's address as the headline with an avatar, their details underneath,
+ * and a big reply button that opens a new mail straight back to them.
  */
 function buildHtml(d: Details): string {
+  const initial = escapeHtml((d.email[0] || "?").toUpperCase());
+  const mailto = `mailto:${escapeHtml(d.email)}?subject=${encodeURIComponent("Re: your enquiry to PYNGYN")}`;
+
   const row = (label: string, value: string) => `
         <tr>
-          <td style="padding:10px 0;border-bottom:1px solid ${LINE};font:500 12px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:${MUTED};text-transform:uppercase;letter-spacing:.06em;width:132px;vertical-align:top;">${escapeHtml(label)}</td>
-          <td style="padding:10px 0;border-bottom:1px solid ${LINE};font:400 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:${INK};word-break:break-word;">${escapeHtml(value)}</td>
+          <td style="padding:11px 0;border-bottom:1px solid ${LINE};font:600 11px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:${FAINT};text-transform:uppercase;letter-spacing:.07em;width:120px;vertical-align:top;">${escapeHtml(label)}</td>
+          <td style="padding:11px 0;border-bottom:1px solid ${LINE};font:400 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:${INK};word-break:break-word;">${escapeHtml(value)}</td>
         </tr>`;
 
   return `<!doctype html>
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${SUBJECT}</title></head>
-<body style="margin:0;padding:24px 12px;background:#f1f2f5;">
+<body style="margin:0;padding:24px 12px;background:${CANVAS};">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
     <tr><td align="center">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;border-collapse:collapse;background:#ffffff;border:1px solid ${LINE};border-radius:16px;overflow:hidden;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:580px;border-collapse:collapse;background:#ffffff;border:1px solid ${LINE};border-radius:18px;overflow:hidden;box-shadow:0 12px 40px -22px rgba(15,17,21,.35);">
 
-        <tr><td style="height:4px;background:${ACCENT};"></td></tr>
-
-        <tr><td style="padding:28px 28px 8px;">
-          <div style="font:600 11px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:${MUTED};text-transform:uppercase;letter-spacing:.12em;">PYNGYN &middot; Growth tips</div>
-          <h1 style="margin:12px 0 4px;font:700 22px/1.25 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:${INK};">New subscriber</h1>
-          <p style="margin:0;font:400 14px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:${MUTED};">
-            Someone signed up from the site footer. Reply to this email to reach them directly.
-          </p>
+        <!-- gradient header -->
+        <tr><td style="background:linear-gradient(120deg,${ACCENT},${ACCENT_DK});padding:22px 28px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td style="font:800 15px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#ffffff;letter-spacing:.02em;">PYNGYN</td>
+            <td align="right" style="font:600 11px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:rgba(255,255,255,.82);text-transform:uppercase;letter-spacing:.12em;">New enquiry</td>
+          </tr></table>
         </td></tr>
 
-        <tr><td style="padding:16px 28px 0;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:#f7f7fb;border:1px solid ${LINE};border-radius:12px;">
-            <tr><td style="padding:16px 18px;">
-              <div style="font:600 11px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:${MUTED};text-transform:uppercase;letter-spacing:.08em;">Email address</div>
-              <div style="margin-top:6px;font:600 18px/1.35 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;word-break:break-all;">
-                <a href="mailto:${encodeURIComponent(d.email).replace(/%40/g, "@")}" style="color:${ACCENT};text-decoration:none;">${escapeHtml(d.email)}</a>
+        <!-- sender -->
+        <tr><td style="padding:26px 28px 6px;">
+          <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+            <td style="vertical-align:middle;">
+              <table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="width:48px;height:48px;background:#eef0ff;border-radius:50%;text-align:center;vertical-align:middle;font:700 20px/48px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:${ACCENT};">${initial}</td></tr></table>
+            </td>
+            <td style="padding-left:14px;vertical-align:middle;">
+              <div style="font:600 11px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:${FAINT};text-transform:uppercase;letter-spacing:.08em;">Wants to get in touch</div>
+              <div style="margin-top:5px;font:700 19px/1.3 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;word-break:break-all;">
+                <a href="mailto:${escapeHtml(d.email)}" style="color:${INK};text-decoration:none;">${escapeHtml(d.email)}</a>
               </div>
-            </td></tr>
-          </table>
+            </td>
+          </tr></table>
         </td></tr>
 
-        <tr><td style="padding:8px 28px 4px;">
+        <!-- reply CTA -->
+        <tr><td style="padding:18px 28px 4px;">
+          <a href="${mailto}"
+             style="display:block;text-align:center;background:${ACCENT};color:#ffffff;font:700 15px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;text-decoration:none;padding:15px 22px;border-radius:12px;">
+            Reply to ${escapeHtml(d.email.split("@")[0])} &rarr;
+          </a>
+          <div style="margin-top:8px;text-align:center;font:400 12px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:${FAINT};">Or just hit reply — this email's reply-to is set to them.</div>
+        </td></tr>
+
+        <!-- details -->
+        <tr><td style="padding:14px 28px 6px;">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
             ${row("Submitted", d.submittedAt)}
             ${row("Page", d.page)}
@@ -159,16 +213,9 @@ function buildHtml(d: Details): string {
           </table>
         </td></tr>
 
-        <tr><td style="padding:22px 28px 28px;">
-          <a href="mailto:${escapeHtml(d.email)}?subject=${encodeURIComponent("Thanks for subscribing to PYNGYN growth tips")}"
-             style="display:inline-block;background:${ACCENT};color:#ffffff;font:600 14px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;text-decoration:none;padding:13px 22px;border-radius:999px;">
-            Reply to ${escapeHtml(d.email.split("@")[0])}
-          </a>
-        </td></tr>
-
-        <tr><td style="padding:0 28px 24px;">
-          <div style="border-top:1px solid ${LINE};padding-top:14px;font:400 12px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:${MUTED};">
-            Sent automatically by the pyngyn.com footer form.
+        <tr><td style="padding:16px 28px 26px;">
+          <div style="font:400 12px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:${FAINT};">
+            Sent automatically by the pyngyn.com “Get in touch” form.
           </div>
         </td></tr>
 
@@ -181,7 +228,7 @@ function buildHtml(d: Details): string {
 
 function buildText(d: Details): string {
   return [
-    "New growth-tips subscriber",
+    "New enquiry from pyngyn.com",
     "",
     `Email:     ${d.email}`,
     `Submitted: ${d.submittedAt}`,
@@ -190,7 +237,7 @@ function buildText(d: Details): string {
     `Country:   ${d.country}`,
     `Device:    ${d.userAgent}`,
     "",
-    "Reply to this email to reach the subscriber directly.",
+    "Reply to this email to reach them directly.",
   ].join("\n");
 }
 
@@ -220,11 +267,13 @@ function getTransport() {
 }
 
 export async function POST(request: Request): Promise<Response> {
+  const cors = corsHeaders(request);
+
   let body: Payload;
   try {
     body = (await request.json()) as Payload;
   } catch {
-    return json({ ok: false, message: "Invalid request." }, 400);
+    return json({ ok: false, message: "Invalid request." }, 400, cors);
   }
 
   const email = clean(body.email);
@@ -233,24 +282,24 @@ export async function POST(request: Request): Promise<Response> {
   const honeypot = clean(body.company);
 
   // Bots fill the hidden field. Look successful, send nothing.
-  if (honeypot) return json({ ok: true });
+  if (honeypot) return json({ ok: true }, 200, cors);
 
   if (!isEmail(email)) {
-    return json({ ok: false, message: "Enter a valid email address." }, 400);
+    return json({ ok: false, message: "Enter a valid email address." }, 400, cors);
   }
 
   if (rateLimited(clientIp(request))) {
-    return json({ ok: false, message: "Too many requests. Try again later." }, 429);
+    return json({ ok: false, message: "Too many requests. Try again later." }, 429, cors);
   }
 
   const transport = getTransport();
   if (!transport) {
-    // Loud, because a silent success here is how subscribers get lost.
+    // Loud, because a silent success here is how enquiries get lost.
     console.error(
-      "[subscribe] SMTP_USER / SMTP_PASS are not set — cannot send. Subscriber:",
+      "[subscribe] SMTP_USER / SMTP_PASS are not set — cannot send. Enquiry:",
       email,
     );
-    return json({ ok: false, message: "Email is not configured on the server." }, 503);
+    return json({ ok: false, message: "Email is not configured on the server." }, 503, cors);
   }
 
   const details: Details = {
@@ -277,8 +326,8 @@ export async function POST(request: Request): Promise<Response> {
   } catch (err) {
     // Log the provider's reason server-side; the visitor sees a generic message.
     console.error("[subscribe] SMTP send failed", err);
-    return json({ ok: false, message: "Could not sign you up right now." }, 502);
+    return json({ ok: false, message: "Could not send right now." }, 502, cors);
   }
 
-  return json({ ok: true });
+  return json({ ok: true }, 200, cors);
 }
