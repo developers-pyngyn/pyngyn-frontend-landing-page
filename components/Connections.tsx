@@ -70,13 +70,13 @@ function ConnectionDiagram() {
             <g key={i}>
               <path d={d} fill="none" stroke={highlighted ? "#4f46e5" : "#e9eaf0"} strokeWidth={highlighted ? 2.5 : 2} />
               {!reduce && (
-                <motion.circle
+                // Pure-CSS comet (see .conn-comet in globals.css). offsetPath
+                // and the per-connector stagger are the only per-instance bits.
+                <circle
+                  className="conn-comet"
                   r={highlighted ? 3.5 : 2.5}
                   fill={highlighted ? "#4f46e5" : "#c7c9d4"}
-                  initial={{ offsetDistance: "0%", opacity: 0 }}
-                  animate={{ offsetDistance: "100%", opacity: [0, 1, 1, 0] }}
-                  transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.35, ease: "easeInOut" }}
-                  style={{ offsetPath: `path("${d}")` } as React.CSSProperties}
+                  style={{ offsetPath: `path("${d}")`, animationDelay: `${i * 0.35}s` } as React.CSSProperties}
                 />
               )}
             </g>

@@ -177,6 +177,22 @@ html.scrollbars-active .dark-panel *::-webkit-scrollbar-thumb {
   50%      { transform: translateX(5px); }
 }
 
+/* Connections diagram — a comet travelling along each connector path. Driven
+   in pure CSS (offset-path / offset-distance are native CSS properties) rather
+   than framer-motion, whose SVG renderer forwards `offsetDistance` as a DOM
+   attribute on <circle> and trips React's "unrecognized prop" warning. */
+.conn-comet {
+  offset-distance: 0%;
+  opacity: 0;
+  animation: conn-comet 2.2s ease-in-out infinite;
+}
+@keyframes conn-comet {
+  0%   { offset-distance: 0%; opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
