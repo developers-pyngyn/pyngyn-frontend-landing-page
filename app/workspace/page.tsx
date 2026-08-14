@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { canonicalPriceCopy } from "@/lib/pricing/copy";
 import Link from "next/link";
-import { SmartInboxShowcase } from "@/components/showcase/SmartInboxShowcase";
+import { WorkspaceDashboardShowcase, SmartInboxShowcase } from "@/components/showcase/WorkspaceMock";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
@@ -296,11 +296,12 @@ export default function WorkspacePage() {
             </Reveal>
 
             <Reveal i={1}>
-              {/* Live, component-built Smart Inbox (Business Brain) mockup for
-                  Star Finance — replaces the old static workspace-dashboard.webp.
-                  Scales the full desktop layout down on mobile via AppShell. */}
+              {/* Live, component-built Global Dashboard mockup for Star Finance —
+                  replaces the old static workspace-dashboard.webp. Scales the full
+                  desktop layout down on mobile via AppShell. The Smart Inbox
+                  mockup lives further down, in the Business Brain section. */}
               <div className="overflow-hidden rounded-[18px] border border-line bg-white shadow-art">
-                <SmartInboxShowcase />
+                <WorkspaceDashboardShowcase />
               </div>
             </Reveal>
           </div>
@@ -439,8 +440,18 @@ export default function WorkspacePage() {
           </div>
         </section>
 
-        {/* ===== Product showcase (real screenshots) ===================== */}
-        <ProductShowcase />
+        {/* ===== Product showcase ======================================== */}
+        {/* Business Brain row shows the live Smart Inbox mockup here (the
+            homepage keeps the Business Brain assistant). */}
+        <ProductShowcase
+          brain={{
+            eyebrow: "Business Brain · Smart Inbox",
+            title: "Every message triaged, so you only ever open what actually needs you",
+            body: "Business Brain reads the inbox and sorts each message into Needs response, FYI only, or Low priority — with a one-line reason on every one, and a draft reply ready when you do need to act.",
+            bullets: ["Needs response", "FYI only", "Low priority", "AI reasons", "Draft replies"],
+            mockup: <SmartInboxShowcase />,
+          }}
+        />
 
         {/* ===== Change request spotlight ================================ */}
         <section className="section-tight">
