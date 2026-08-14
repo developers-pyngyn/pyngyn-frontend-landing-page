@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { canonicalPriceCopy } from "@/lib/pricing/copy";
-import Image from "next/image";
 import Link from "next/link";
+import { SmartInboxShowcase } from "@/components/showcase/SmartInboxShowcase";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
@@ -296,16 +296,11 @@ export default function WorkspacePage() {
             </Reveal>
 
             <Reveal i={1}>
+              {/* Live, component-built Smart Inbox (Business Brain) mockup for
+                  Star Finance — replaces the old static workspace-dashboard.webp.
+                  Scales the full desktop layout down on mobile via AppShell. */}
               <div className="overflow-hidden rounded-[18px] border border-line bg-white shadow-art">
-                <Image
-                  src="/screens/workspace-dashboard.webp"
-                  alt="Workspace dashboard showing today's schedule, priority action items, engagements awaiting review, and billable hours for a consultant"
-                  width={1918}
-                  height={943}
-                  priority
-                  sizes="(max-width: 768px) 100vw, 620px"
-                  className="h-auto w-full"
-                />
+                <SmartInboxShowcase />
               </div>
             </Reveal>
           </div>
