@@ -16,15 +16,6 @@ import { useEffect, useState } from "react";
 /** The site's accent/CTA token (tailwind.config.ts `accent`). Change here only. */
 const ACCENT = "#4f46e5";
 
-/*
- * Where the form POSTs. SMTP can't run on Cloudflare Workers, so the
- * /api/subscribe route is hosted on a Node platform (Vercel/Render). Set
- * NEXT_PUBLIC_SUBSCRIBE_URL to that endpoint (e.g.
- * https://pyngyn-mailer.vercel.app/api/subscribe/) in the Cloudflare project's
- * env. Falls back to the same-origin route for local dev / a Node deployment.
- */
-const SUBSCRIBE_URL = process.env.NEXT_PUBLIC_SUBSCRIBE_URL || "/api/subscribe/";
-
 export const contactData = {
   heading: "Get in touch",
   email: "sales@pyngyn.com",
@@ -134,7 +125,7 @@ export function GetInTouch() {
     setInvalid(false);
     setStatus("loading");
     try {
-      const res = await fetch(SUBSCRIBE_URL, {
+      const res = await fetch("/api/subscribe/", {  // trailing slash: next.config has trailingSlash: true
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

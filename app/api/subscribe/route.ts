@@ -1,28 +1,23 @@
 // POST /api/subscribe: the footer "Get in touch" form. Emails the enquiry to
-// sales@pyngyn.com over Gmail / Google Workspace SMTP, with replyTo set to the
-// sender so hitting reply goes straight back to them.
+// sales@pyngyn.com and sets reply-to to the sender, so hitting reply goes
+// straight back to them.
 //
-// Runtime: nodejs, not edge. SMTP needs a raw TCP socket, which the edge runtime
-// and Cloudflare Workers CANNOT open. So this route must run on a Node host
-// (Vercel / Render / a VPS), and the site's form points at it via
-// NEXT_PUBLIC_SUBSCRIBE_URL. CORS is enabled below so the Cloudflare-hosted
-// front end can POST here cross-origin.
+// Sending is done over Resend's HTTPS API (a plain fetch), NOT SMTP — so this
+// runs fine on Cloudflare Workers, same-origin as the form, with no separate
+// server. (Cloudflare can't open the raw TCP socket that Gmail/SMTP needs.)
 //
-// Configure in the Node host's env (see .env.example):
-//   SMTP_USER  — the Google Workspace address that sends, e.g. sales@pyngyn.com
-//   SMTP_PASS  — a Google **App Password** (16 chars, 2-Step Verification on)
-//   SMTP_HOST  — defaults to smtp.gmail.com
-//   SMTP_PORT  — defaults to 587 (STARTTLS); 465 switches to implicit TLS
-//   SUBSCRIBE_TO / SUBSCRIBE_FROM — default to SMTP_USER / sales@pyngyn.com
-//   ALLOWED_ORIGINS — comma-separated origins allowed to POST (CORS)
+// Configure in the Cloudflare project's env (see .env.example):
+//   RESEND_API_KEY  — from resend.com (Dashboard -> API Keys)
+//   SUBSCRIBE_FROM   — the from address; MUST be on a domain verified in Resend,
+//                      e.g. "sales@pyngyn.com" (default)
+//   SUBSCRIBE_TO     — where enquiries land (default sales@pyngyn.com)
 
-import nodemailer from "nodemailer";
-
-export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+const DEFAULT_FROM = "sales@pyngyn.com";
 const DEFAULT_RECIPIENT = "sales@pyngyn.com";
 const SUBJECT = "New enquiry from pyngyn.com";
+const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
 /** Max submissions per IP per window. Best effort: module state is per server
  *  instance, so this trims abuse rather than guaranteeing a global cap. */
@@ -38,48 +33,12 @@ type Payload = {
   company?: string;
 };
 
-/* ── CORS ─────────────────────────────────────────────────────────── */
-
-const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || "")
-  .split(",")
-  .map((s) => s.trim())
-  .filter(Boolean);
-
-function isAllowedOrigin(origin: string): boolean {
-  if (!origin) return false;
-  if (ALLOWED_ORIGINS.includes(origin)) return true;
-  try {
-    const host = new URL(origin).hostname;
-    // pyngyn.com + subdomains, the Cloudflare preview, and localhost dev.
-    return host === "pyngyn.com" || host.endsWith(".pyngyn.com") || host.endsWith(".workers.dev") || host === "localhost";
-  } catch {
-    return false;
-  }
-}
-
-function corsHeaders(request: Request): Record<string, string> {
-  const origin = request.headers.get("origin") || "";
-  const allow = isAllowedOrigin(origin) ? origin : "https://pyngyn.com";
-  return {
-    "Access-Control-Allow-Origin": allow,
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-    Vary: "Origin",
-  };
-}
-
-function json(data: unknown, status = 200, extra: Record<string, string> = {}): Response {
+function json(data: unknown, status = 200): Response {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { "Content-Type": "application/json", ...extra },
+    headers: { "Content-Type": "application/json" },
   });
 }
-
-export async function OPTIONS(request: Request): Promise<Response> {
-  return new Response(null, { status: 204, headers: corsHeaders(request) });
-}
-
-/* ── helpers ──────────────────────────────────────────────────────── */
 
 function isEmail(v: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
@@ -139,7 +98,6 @@ type Details = {
 };
 
 const INK = "#0f1115";
-const MUTED = "#6b7280";
 const FAINT = "#9aa1ad";
 const LINE = "#e9eaf0";
 const ACCENT = "#4f46e5";
@@ -241,39 +199,56 @@ function buildText(d: Details): string {
   ].join("\n");
 }
 
-/* ── transport ────────────────────────────────────────────────────── */
+/* ── transport (Resend HTTPS API) ─────────────────────────────────── */
 
-/** Created once per server instance and reused; nodemailer pools connections. */
-let transporter: nodemailer.Transporter | null = null;
+type SendResult = { ok: true } | { ok: false; reason: string };
 
-function getTransport() {
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
-  if (!user || !pass) return null;
+async function sendEmail(opts: {
+  from: string;
+  to: string;
+  replyTo: string;
+  html: string;
+  text: string;
+}): Promise<SendResult> {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return { ok: false, reason: "no-key" };
 
-  if (!transporter) {
-    const port = Number(process.env.SMTP_PORT || 587);
-    transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || "smtp.gmail.com",
-      port,
-      // 465 is implicit TLS; 587 upgrades with STARTTLS
-      secure: port === 465,
-      auth: { user, pass },
-      pool: true,
-      maxConnections: 2,
+  let res: Response;
+  try {
+    res = await fetch(RESEND_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${key}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: `PYNGYN <${opts.from}>`,
+        to: [opts.to],
+        reply_to: opts.replyTo,
+        subject: SUBJECT,
+        html: opts.html,
+        text: opts.text,
+      }),
     });
+  } catch (err) {
+    return { ok: false, reason: `network: ${String(err).slice(0, 200)}` };
   }
-  return transporter;
+
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    return { ok: false, reason: `resend ${res.status}: ${body.slice(0, 300)}` };
+  }
+  return { ok: true };
 }
 
-export async function POST(request: Request): Promise<Response> {
-  const cors = corsHeaders(request);
+/* ── handler ──────────────────────────────────────────────────────── */
 
+export async function POST(request: Request): Promise<Response> {
   let body: Payload;
   try {
     body = (await request.json()) as Payload;
   } catch {
-    return json({ ok: false, message: "Invalid request." }, 400, cors);
+    return json({ ok: false, message: "Invalid request." }, 400);
   }
 
   const email = clean(body.email);
@@ -282,24 +257,14 @@ export async function POST(request: Request): Promise<Response> {
   const honeypot = clean(body.company);
 
   // Bots fill the hidden field. Look successful, send nothing.
-  if (honeypot) return json({ ok: true }, 200, cors);
+  if (honeypot) return json({ ok: true });
 
   if (!isEmail(email)) {
-    return json({ ok: false, message: "Enter a valid email address." }, 400, cors);
+    return json({ ok: false, message: "Enter a valid email address." }, 400);
   }
 
   if (rateLimited(clientIp(request))) {
-    return json({ ok: false, message: "Too many requests. Try again later." }, 429, cors);
-  }
-
-  const transport = getTransport();
-  if (!transport) {
-    // Loud, because a silent success here is how enquiries get lost.
-    console.error(
-      "[subscribe] SMTP_USER / SMTP_PASS are not set — cannot send. Enquiry:",
-      email,
-    );
-    return json({ ok: false, message: "Email is not configured on the server." }, 503, cors);
+    return json({ ok: false, message: "Too many requests. Try again later." }, 429);
   }
 
   const details: Details = {
@@ -311,23 +276,26 @@ export async function POST(request: Request): Promise<Response> {
     userAgent: clean(request.headers.get("user-agent"), 240) || "(unknown)",
   };
 
-  const from = process.env.SUBSCRIBE_FROM || process.env.SMTP_USER!;
+  const from = process.env.SUBSCRIBE_FROM || DEFAULT_FROM;
   const to = process.env.SUBSCRIBE_TO || DEFAULT_RECIPIENT;
 
-  try {
-    await transport.sendMail({
-      from: `PYNGYN <${from}>`,
-      to,
-      replyTo: email,
-      subject: SUBJECT,
-      text: buildText(details),
-      html: buildHtml(details),
-    });
-  } catch (err) {
-    // Log the provider's reason server-side; the visitor sees a generic message.
-    console.error("[subscribe] SMTP send failed", err);
-    return json({ ok: false, message: "Could not send right now." }, 502, cors);
+  const result = await sendEmail({
+    from,
+    to,
+    replyTo: email,
+    html: buildHtml(details),
+    text: buildText(details),
+  });
+
+  if (!result.ok) {
+    // Loud server-side; the visitor sees a generic message.
+    if (result.reason === "no-key") {
+      console.error("[subscribe] RESEND_API_KEY is not set — cannot send. Enquiry:", email);
+      return json({ ok: false, message: "Email is not configured on the server." }, 503);
+    }
+    console.error("[subscribe] send failed:", result.reason);
+    return json({ ok: false, message: "Could not send right now." }, 502);
   }
 
-  return json({ ok: true }, 200, cors);
+  return json({ ok: true });
 }
