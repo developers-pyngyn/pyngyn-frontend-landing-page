@@ -11,7 +11,7 @@
  * are gone, so what a visitor reads is a real local price point.
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SIGNUP_URL, DEMO_URL } from "./config";
 import {
   ACTIVE_STAGE,
@@ -23,6 +23,25 @@ import {
   type MarketCode,
   type ProductKey,
 } from "@/lib/pricing/config";
+import { MARKET_COOKIE, SELECTABLE_MARKETS } from "@/lib/pricing/detect-country";
+
+/**
+ * Read the first-party `pyngyn_market` cookie (set by the edge middleware from
+ * CF-IPCountry, or by a manual override). Client-only: lets a *static* page —
+ * the homepage, which can't detect the visitor server-side without becoming a
+ * per-request edge route — still show local currency, resolved after hydration.
+ */
+function readMarketCookie(): MarketCode | null {
+  if (typeof document === "undefined") return null;
+  const entry = document.cookie
+    .split("; ")
+    .find((c) => c.startsWith(`${MARKET_COOKIE}=`));
+  if (!entry) return null;
+  const value = decodeURIComponent(entry.slice(MARKET_COOKIE.length + 1)).toUpperCase();
+  return (SELECTABLE_MARKETS as readonly string[]).includes(value)
+    ? (value as MarketCode)
+    : null;
+}
 
 type Group = { heading?: string; items: string[]; /** hidden until Stage 1 */ aiStage?: boolean };
 
@@ -173,8 +192,19 @@ export function PricingTiers({
   market?: MarketCode;
 }) {
   const [annual, setAnnual] = useState(false);
-  const marketConfig = PRICING[market];
-  const stage = getPricing(market, ACTIVE_STAGE);
+
+  // Start from the server-resolved prop so the first client render matches the
+  // SSR HTML (no hydration mismatch), then adopt the cookie's market once
+  // mounted. On a dynamic page (e.g. /pricing) the prop already equals the
+  // cookie, so nothing changes; on the static homepage the prop is USD and this
+  // is what makes the currency localise.
+  const [activeMarket, setActiveMarket] = useState<MarketCode>(market);
+  useEffect(() => {
+    setActiveMarket(readMarketCookie() ?? market);
+  }, [market]);
+
+  const marketConfig = PRICING[activeMarket];
+  const stage = getPricing(activeMarket, ACTIVE_STAGE);
 
   /* Derived, never typed: the headline saving comes from the config's own
      annual figures, so it can't drift away from the prices beside it. */
