@@ -23,42 +23,16 @@ import {
   type MarketCode,
   type ProductKey,
 } from "@/lib/pricing/config";
-import {
-  MARKET_COOKIE,
-  MARKET_COOKIE_MAX_AGE,
-  SELECTABLE_MARKETS,
-  marketFromCountry,
-} from "@/lib/pricing/detect-country";
-
-/**
- * Read the first-party `pyngyn_market` cookie (cached by the browser-side
- * geolocation below on a previous visit). Client-only: lets a *static* page —
- * the homepage, which can't detect the visitor server-side without becoming a
- * per-request edge route — still show local currency, resolved after hydration.
- */
-function readMarketCookie(): MarketCode | null {
-  if (typeof document === "undefined") return null;
-  const entry = document.cookie
-    .split("; ")
-    .find((c) => c.startsWith(`${MARKET_COOKIE}=`));
-  if (!entry) return null;
-  const value = decodeURIComponent(entry.slice(MARKET_COOKIE.length + 1)).toUpperCase();
-  return (SELECTABLE_MARKETS as readonly string[]).includes(value)
-    ? (value as MarketCode)
-    : null;
-}
-
-function writeMarketCookie(market: MarketCode): void {
-  if (typeof document === "undefined") return;
-  document.cookie = `${MARKET_COOKIE}=${market}; Path=/; Max-Age=${MARKET_COOKIE_MAX_AGE}; SameSite=Lax`;
-}
+import { marketFromCountry } from "@/lib/pricing/detect-country";
 
 /**
  * Resolve the visitor's market from the browser itself, via a free, no-key,
- * CORS-enabled IP-geolocation service. This is what makes detection work when
- * the server can't see a real client IP — notably on localhost, but also any
- * host that doesn't stamp a geo header — because the request goes out with the
- * visitor's own public IP. Tries two providers, then gives up (stays on USD).
+ * CORS-enabled IP-geolocation service. Runs on every page load and is never
+ * cached, so the currency always reflects the visitor's *current* location
+ * (a VPN or travel is picked up immediately). The request goes out with the
+ * visitor's own public IP, so it works on localhost and any host, regardless
+ * of whether the server can see a real client IP. Tries two providers, then
+ * gives up (stays on USD).
  */
 async function geolocateMarket(signal: AbortSignal): Promise<MarketCode | null> {
   const providers: { url: string; pick: (data: unknown) => string | null }[] = [
@@ -249,34 +223,22 @@ export function PricingTiers({
   // is what makes the currency localise.
   const [activeMarket, setActiveMarket] = useState<MarketCode>(market);
   useEffect(() => {
-    // 1) A cookie cached by a previous browser geolocation wins.
-    const cookie = readMarketCookie();
-    if (cookie) {
-      setActiveMarket(cookie);
-      return;
-    }
-    // 2) The server already resolved a specific market (e.g. /pricing) — trust it.
-    if (market !== "DEFAULT") {
-      setActiveMarket(market);
-      return;
-    }
-    // 3) No cookie and the server fell back to USD (e.g. the static homepage, or
-    //    localhost where it can't see a real IP): geolocate from the browser.
+    // Geolocate fresh on every load — never persisted — so the currency always
+    // matches the visitor's current location (VPN / travel included). Initial
+    // render uses the server prop (USD on these static pages), matching the SSR
+    // HTML, then swaps once the lookup returns.
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 3500);
     geolocateMarket(controller.signal)
       .then((detected) => {
-        if (detected) {
-          setActiveMarket(detected);
-          writeMarketCookie(detected);
-        }
+        if (detected) setActiveMarket(detected);
       })
       .finally(() => clearTimeout(timer));
     return () => {
       controller.abort();
       clearTimeout(timer);
     };
-  }, [market]);
+  }, []);
 
   const marketConfig = PRICING[activeMarket];
   const stage = getPricing(activeMarket, ACTIVE_STAGE);
