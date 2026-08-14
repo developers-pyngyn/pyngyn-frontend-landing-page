@@ -21,9 +21,9 @@ export const contactData = {
   email: "sales@pyngyn.com",
   phones: [
     { label: "+1 6282286124", href: "tel:+16282286124" },
-    /* Second line is parked until it goes live — uncomment to show it again.
+    // Second line is parked until it goes live — uncomment to show it again.
     { label: "+91 91200 05593", href: "tel:+919120005593" },
-    */
+    
   ],
   newsletter: "",
   placeholder: "you@company.com",
