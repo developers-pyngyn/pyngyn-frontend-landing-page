@@ -37,11 +37,14 @@ export function ProductShowcase() {
 
         {/* Lead screen: the live, interactive Clientspace mockup (was a
             static /screens/clientspace-space.webp shot). Same frame as the
-            <Screenshot> below it so the section is visually unchanged. */}
+            <Screenshot> below it so the section is visually unchanged.
+            variant="screenshot" keeps the full desktop layout at every width —
+            on mobile it scales down instead of reflowing into a tall column, so
+            visitors always see the real desktop product. */}
         <Reveal i={1}>
           <figure className="mx-auto mt-[46px] max-w-[1000px]">
             <div className="overflow-hidden rounded-[16px] border border-line bg-white shadow-art">
-              <ClientSpaceShowcase />
+              <ClientSpaceShowcase variant="screenshot" />
             </div>
             <figcaption className="mt-3 text-center text-[13px] text-muted">
               Your client&apos;s Clientspace: engagements, approvals, and status in one branded portal.

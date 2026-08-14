@@ -303,17 +303,18 @@ const mockData = {
 const PREFIX = "bbs";
 
 /*
- * Authored once at 1600×950 (16:9.5) and only ever *scaled* — never reflowed —
- * so it reads as a genuine screenshot at any width. Below a 560px column the
- * stage shows a window onto the main column instead, sliding the sidebar (and
- * the rail beyond it) out of frame.
+ * Authored once at 1600×950 (16:9.5) and only ever *scaled* — never reflowed
+ * and never cropped — so the FULL desktop layout (sidebar, conversation and the
+ * right rail) always stays in frame and simply shrinks to fit. On a phone it
+ * reads as a small desktop screenshot, exactly like the ClientSpace showcase.
+ * wideFrom is dropped to 200 so the scaled desktop layout applies at every
+ * width the mockup is ever placed in (down to a ~200px column).
  */
 const DESIGN: ShellDesign = {
   wide: { w: 1600, h: 950 },
   mid: { w: 1600, h: 950 },
-  midFrom: 560,
-  wideFrom: 560,
-  crop: { w: 1054, h: 950, offsetX: 264 },
+  midFrom: 200,
+  wideFrom: 200,
 };
 
 /* Both rail cards are full-width children of one stretching column, so their
@@ -328,12 +329,6 @@ const BODY_CSS = `
 .bbs-rail>*{flex:none;width:100%}
 .bbs-actions{display:flex;flex-direction:column;align-items:stretch;gap:10px}
 .bbs-grounded{display:flex;flex-direction:column;gap:6px}
-
-/* Anchored to the right edge of its column so it shrinks toward the section's
-   right edge as it scales. (Below 560px the crop window needs the left edge.) */
-@container bbs (min-width:560px){
-  .bbs-shell{left:auto;right:0;transform-origin:top right}
-}
 
 @keyframes bbs-flash{
   0%,100%{box-shadow:0 0 0 0 rgba(139,92,246,0)}

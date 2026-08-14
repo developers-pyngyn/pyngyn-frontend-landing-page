@@ -15,7 +15,8 @@ import {
 import { FAQ, FinalCTA, Footer } from "@/components/Footer";
 import { IndustrySolutions } from "@/components/IndustrySolutions";
 import { Connections } from "@/components/Connections";
-import { VideoTestimonials } from "@/components/VideoTestimonials";
+// Hidden for now — "Customer stories" video section temporarily disabled.
+// import { VideoTestimonials } from "@/components/VideoTestimonials";
 import { ProductShowcase } from "@/components/ProductShowcase";
 import { SpacesExplainer } from "@/components/SpacesExplainer";
 import { OldWayNewWay } from "@/components/OldWayNewWay";
@@ -84,7 +85,8 @@ export default function Home() {
         <IndustrySolutions />
         <ProductShowcase />
         <OldWayNewWay />
-        <VideoTestimonials />
+        {/* Hidden for now — "Customer stories" video section temporarily disabled. */}
+        {/* <VideoTestimonials /> */}
         <Testimonials />
         <Metrics />
         <Compare />

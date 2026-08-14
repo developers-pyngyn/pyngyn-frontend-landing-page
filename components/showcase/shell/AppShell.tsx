@@ -155,7 +155,7 @@ ${base}
 @keyframes ${p}-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.72)}}
 .${p}-pulse{animation:${p}-pulse 2.4s ease-in-out infinite}
 
-${crop ? scaleLadder(p, 320, midFrom - 4, 8, crop.w) : ""}
+${crop ? scaleLadder(p, 200, midFrom - 4, 8, crop.w) : ""}
 ${scaleLadder(p, midFrom, wideFrom - 4, 16, design.mid.w)}
 ${scaleLadder(p, wideFrom, design.wide.w - 4, 12, design.wide.w)}
 @container ${p} (min-width:${design.wide.w}px){.${p}-shell{--${p}-s:1}}

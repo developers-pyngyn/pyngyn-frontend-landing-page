@@ -1125,7 +1125,7 @@ const W = { w: 1600, h: 1000 };
 function screenshotCss(p: string) {
   const at = `.${p}-fit[data-variant="screenshot"]`;
   let ladder = "";
-  for (let cw = 300; cw <= W.w; cw += 12) {
+  for (let cw = 200; cw <= W.w; cw += 12) {
     ladder += `@container ${p} (min-width:${cw}px){${at} .${p}-shell{--${p}-s:${Math.min(cw / W.w, 1).toFixed(5)}}}`;
   }
   return `

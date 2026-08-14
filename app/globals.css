@@ -110,6 +110,73 @@ html.scrollbars-active .dark-panel *::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
+/* ---------------------------------------------------------------------------
+   OldWayNewWay — "Option G V1" bouncy ledger animations.
+   Rows are visible by default (opacity:1), so under prefers-reduced-motion
+   (which forces iteration-count:1 + ~0ms duration below) they simply render in
+   place. The spring loop only *enhances* — it can never leave a row blank.
+--------------------------------------------------------------------------- */
+.ow-anim .ow-row {
+  animation: ow-pop 6.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite both;
+}
+@keyframes ow-pop {
+  0%   { opacity: 0; transform: scale(0.72) translateY(14px); }
+  6%   { opacity: 1; transform: scale(1.04); }
+  11%  { transform: scale(1); }
+  90%  { opacity: 1; transform: none; }
+  97%  { opacity: 0; transform: scale(0.92) translateY(6px); }
+  100% { opacity: 0; transform: scale(0.72) translateY(14px); }
+}
+.ow-ic-new { animation: ow-bounce 2.2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+.ow-ic-old { animation: ow-shake 2.6s ease-in-out infinite; }
+@keyframes ow-bounce {
+  0%, 100% { transform: translateY(0); }
+  40%      { transform: translateY(-5px); }
+  60%      { transform: translateY(1px); }
+}
+@keyframes ow-shake {
+  0%, 100% { transform: rotate(0); }
+  25%      { transform: rotate(-8deg); }
+  75%      { transform: rotate(8deg); }
+}
+.ow-badge { animation: ow-badge 2.4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+@keyframes ow-badge {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.12); }
+}
+.ow-head-new { animation: ow-headpop 2.6s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+.ow-head-old { animation: ow-tilt 3s ease-in-out infinite; }
+@keyframes ow-headpop {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.13); }
+}
+@keyframes ow-tilt {
+  0%, 100% { transform: rotate(-6deg); }
+  50%      { transform: rotate(6deg); }
+}
+
+/* Split-scene "Old way" chaos chips drift, and the centre flow arrow nudges. */
+.ow-chip-1 { animation: ow-drift1 6s ease-in-out infinite; }
+.ow-chip-2 { animation: ow-drift2 7s ease-in-out infinite; }
+.ow-chip-3 { animation: ow-drift3 5.5s ease-in-out infinite; }
+@keyframes ow-drift1 {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%      { transform: translateY(-9px) rotate(-1deg); }
+}
+@keyframes ow-drift2 {
+  0%, 100% { transform: translateY(0) rotate(2deg); }
+  50%      { transform: translateY(8px) rotate(4deg); }
+}
+@keyframes ow-drift3 {
+  0%, 100% { transform: translateY(0) rotate(1deg); }
+  50%      { transform: translateY(-6px) rotate(-2deg); }
+}
+.ow-flow { animation: ow-flow 1.6s ease-in-out infinite; }
+@keyframes ow-flow {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(5px); }
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
