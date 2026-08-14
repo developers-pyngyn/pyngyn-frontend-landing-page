@@ -83,22 +83,11 @@ export const metadata: Metadata = {
   // FaviconScheme.tsx carries Chrome, whose `media` handling is unreliable.
   // apple-touch-icon ignores `media` entirely, so it stays a single variant
   // (and keeps its solid background, since iOS draws it on the wallpaper).
+  // Only apple-touch-icon is declared via Next metadata. The `rel="icon"`
+  // links are rendered as raw <link>s in <head> below instead — see the note
+  // there — so client-side navigation never re-reconciles them and collides
+  // with FaviconScheme.
   icons: {
-    icon: [
-      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
-      {
-        url: faviconForLightMode,
-        type: "image/png",
-        sizes: "48x48",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: faviconForDarkMode,
-        type: "image/png",
-        sizes: "195x193",
-        media: "(prefers-color-scheme: dark)",
-      },
-    ],
     apple: "/apple-icon.png",
   },
   // Google Search Console's "HTML tag" verification method: paste the
@@ -143,6 +132,32 @@ export default function RootLayout({
             consent"), both now load only after the visitor grants consent
             via the cookie banner — see components/ConsentScripts.tsx and
             components/CookieConsent.tsx, rendered in <body> below. */}
+
+        {/* Favicon `rel="icon"` links live here as raw, persistent <head>
+            elements — NOT via Next metadata — on purpose. Next resolves
+            metadata per route, so metadata icon links get re-reconciled on
+            every client-side navigation; FaviconScheme removes those links to
+            take over the favicon in Chrome, and the two collide, crashing
+            navigation with "Cannot read properties of null (reading
+            'removeChild')". As layout-level <head> children they render once
+            and persist across navigation, so nothing re-adds them mid-route
+            and FaviconScheme can own them safely. (media-less fallback first,
+            dark variant last — same ordering the old metadata used.) */}
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="48x48"
+          media="(prefers-color-scheme: light)"
+          href={faviconForLightMode}
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="195x193"
+          media="(prefers-color-scheme: dark)"
+          href={faviconForDarkMode}
+        />
 
         {/* Sitewide JSON-LD: Organization + WebSite. Per-page schema is added
             inside individual page components. */}
