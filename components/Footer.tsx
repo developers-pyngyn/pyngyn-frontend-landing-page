@@ -243,7 +243,10 @@ export function Footer() {
         {label}
       </a>
     ) : (
-      <Link key={label} href={href} className="block py-1.5 hover:text-accent">
+      // prefetch disabled: the footer lists ~40 pages, and eager RSC prefetch
+      // fires a burst of /?_rsc= requests that overloads the Cloudflare Worker
+      // (503/500s, incl. on the contact-form POST). Navigating still works.
+      <Link key={label} href={href} prefetch={false} className="block py-1.5 hover:text-accent">
         {label}
       </Link>
     );
@@ -351,7 +354,7 @@ export function Footer() {
           <span className="flex-shrink-0 xl:whitespace-nowrap">© 2026 PYNGYN, a product of VIMOVI GlobalTech Private Limited. All rights reserved.</span>
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 xl:flex-nowrap xl:whitespace-nowrap">
             {legal.map(([label, href]) => (
-              <Link key={label} href={href} className="hover:text-accent">
+              <Link key={label} href={href} prefetch={false} className="hover:text-accent">
                 {label}
               </Link>
             ))}

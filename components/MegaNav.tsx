@@ -28,6 +28,7 @@ function FullPanel({ menu, onNavigate }: { menu: MegaMenu; onNavigate: () => voi
                 <li key={it.label + it.href}>
                   <Link
                     href={it.href}
+                    prefetch={false}
                     onClick={onNavigate}
                     className="-mx-2 flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-canvas"
                   >
@@ -43,7 +44,7 @@ function FullPanel({ menu, onNavigate }: { menu: MegaMenu; onNavigate: () => voi
               ))}
             </ul>
             {col.seeAll && (
-              <Link href={col.seeAll.href} onClick={onNavigate} className="mt-3 inline-block text-[13px] font-semibold text-accent hover:underline">
+              <Link href={col.seeAll.href} prefetch={false} onClick={onNavigate} className="mt-3 inline-block text-[13px] font-semibold text-accent hover:underline">
                 {col.seeAll.label} →
               </Link>
             )}
@@ -58,6 +59,7 @@ function FullPanel({ menu, onNavigate }: { menu: MegaMenu; onNavigate: () => voi
               <Link
                 key={f.title}
                 href={f.href}
+                prefetch={false}
                 onClick={onNavigate}
                 className="flex items-start gap-3 rounded-xl border border-line p-3 transition-colors hover:border-accent"
               >
@@ -98,6 +100,7 @@ export function MegaNav({ dark }: { dark: boolean }) {
       <nav className={`flex items-center gap-7 text-[15px] ${dark ? "text-white/75" : "text-[#3a3a42]"}`}>
         <Link
           href="/clientspace"
+          prefetch={false}
           className={`py-2 transition-colors ${dark ? "hover:text-white" : "hover:text-accent"}`}
         >
           Clientspace
