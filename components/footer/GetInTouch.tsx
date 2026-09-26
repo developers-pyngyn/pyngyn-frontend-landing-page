@@ -177,12 +177,14 @@ export function GetInTouch() {
         ))}
       </ul>
 
-      {/* contact rows → 24px → newsletter line → 14px → form */}
-      <p className="mt-6 leading-relaxed text-ink">{contactData.newsletter}</p>
+      {/* newsletter line (if present) -> form */}
+      {contactData.newsletter ? (
+        <p className="mt-3 leading-relaxed text-ink">{contactData.newsletter}</p>
+      ) : null}
 
       {/* reserved so the footer doesn't jump when the form swaps for the
           success line */}
-      <div className="mt-3.5 min-h-[74px]">
+      <div className="mt-4 min-h-[52px]">
         {status === "success" ? (
           <p
             className={`flex items-center gap-2 text-[15px] text-ink transition-opacity duration-300 ${

@@ -118,8 +118,9 @@ type FooterLink = { label: string; href?: string }; // no href = "Soon" (muted, 
 type FooterGroup = { heading: string; links: FooterLink[] };
 
 export function Footer() {
-  // Each column can hold one or more stacked groups (like the reference's AI / Download).
+  // Each column holds stacked groups balanced to 7-11 links each so no column shoots down or leaves empty space.
   const columns: FooterGroup[][] = [
+    // Column 1: Product & Get started (7 links)
     [
       {
         heading: "Product",
@@ -139,15 +140,7 @@ export function Footer() {
         ],
       },
     ],
-    [
-      {
-        heading: "Compare",
-        links: [
-          ...COMPETITORS.map((c) => ({ label: `vs ${c.name}`, href: `${COMPARE_URL}/${c.slug}` })),
-          { label: "All comparisons", href: COMPARE_URL },
-        ],
-      },
-    ],
+    // Column 2: Solutions & Free tools (11 links)
     [
       {
         heading: "Solutions",
@@ -159,21 +152,29 @@ export function Footer() {
           { label: "Architects", href: "/solutions/architects" },
         ],
       },
-    ],
-    [
       {
-        heading: "Company",
+        heading: "Free tools",
         links: [
-          { label: "About", href: ABOUT_URL },
-          { label: "Customers", href: CUSTOMERS_URL },
-          { label: "Careers", href: CAREERS_URL },
-          { label: "Contact", href: DEMO_URL },
-          { label: "Brand", href: BRAND_URL },
-          { label: "Partners", href: PARTNERS_URL },
-          { label: "Investors", href: INVESTORS_URL },
+          { label: "AI plan generator", href: PLAN_GEN_URL },
+          { label: "Status report generator", href: STATUS_REPORT_URL },
+          { label: "ROI calculator", href: ROI_URL },
+          { label: "Team utilization calculator", href: UTILIZATION_URL },
+          { label: "Cost & margin estimator", href: COST_ESTIMATOR_URL },
+          { label: "All tools", href: TOOLS_URL },
         ],
       },
     ],
+    // Column 3: Compare (10 links)
+    [
+      {
+        heading: "Compare",
+        links: [
+          ...COMPETITORS.map((c) => ({ label: `vs ${c.name}`, href: `${COMPARE_URL}/${c.slug}` })),
+          { label: "All comparisons", href: COMPARE_URL },
+        ],
+      },
+    ],
+    // Column 4: Resources & Help (11 links)
     [
       {
         heading: "Resources",
@@ -189,22 +190,26 @@ export function Footer() {
         ],
       },
       {
-        heading: "Free tools",
-        links: [
-          { label: "AI plan generator", href: PLAN_GEN_URL },
-          { label: "Status report generator", href: STATUS_REPORT_URL },
-          { label: "ROI calculator", href: ROI_URL },
-          { label: "Team utilization calculator", href: UTILIZATION_URL },
-          { label: "Cost & margin estimator", href: COST_ESTIMATOR_URL },
-          { label: "All tools", href: TOOLS_URL },
-        ],
-      },
-      {
         heading: "Help",
         links: [
           { label: "Knowledge base", href: KB_URL },
           { label: "Support", href: SUPPORT_URL },
           { label: "Status", href: STATUS_URL },
+        ],
+      },
+    ],
+    // Column 5: Company (7 links)
+    [
+      {
+        heading: "Company",
+        links: [
+          { label: "About", href: ABOUT_URL },
+          { label: "Customers", href: CUSTOMERS_URL },
+          { label: "Careers", href: CAREERS_URL },
+          { label: "Contact", href: DEMO_URL },
+          { label: "Brand", href: BRAND_URL },
+          { label: "Partners", href: PARTNERS_URL },
+          { label: "Investors", href: INVESTORS_URL },
         ],
       },
     ],
@@ -247,7 +252,7 @@ export function Footer() {
     <footer className="border-t border-line bg-white pt-16 pb-10 text-sm text-muted">
       <div className="wrap">
         {/* Logo + columns + Get in touch */}
-        <div className="grid items-start gap-10 lg:gap-8 lg:grid-cols-[minmax(0,1.2fr)_repeat(5,minmax(0,1fr))_minmax(0,2fr)]">
+        <div className="grid items-start gap-10 sm:grid-cols-2 md:grid-cols-3 lg:gap-6 xl:gap-8 lg:grid-cols-[minmax(0,1.2fr)_repeat(5,minmax(0,1fr))_minmax(0,1.9fr)]">
           <div>
             <Link href="/" className="mb-4 inline-block" aria-label="pyngyn home">
               <Image src="/logo.webp" alt="pyngyn" width={150} height={40} className="h-8 w-auto" />
@@ -281,10 +286,10 @@ export function Footer() {
           </div>
 
           {columns.map((groups, i) => (
-            <div key={i} className="flex flex-col gap-8">
+            <div key={i} className="flex flex-col gap-7">
               {groups.map((g) => (
                 <div key={g.heading}>
-                  <h4 className="mb-3 text-[14px] font-bold text-ink">{g.heading}</h4>
+                  <h4 className="mb-2.5 text-[14px] font-bold text-ink">{g.heading}</h4>
                   <div className="flex flex-col">{g.links.map(renderLink)}</div>
                 </div>
               ))}
@@ -296,7 +301,7 @@ export function Footer() {
         </div>
 
         {/* Social + compliance row */}
-        <div className="mt-14 flex flex-wrap items-center justify-between gap-6 border-t border-line pt-8">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-line pt-7 sm:flex-row">
           <div className="flex items-center gap-3">
             {[
               ["X (formerly Twitter)", SOCIAL_X, "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"],
@@ -321,7 +326,7 @@ export function Footer() {
             ))}
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5">
+          <div className="flex flex-wrap items-center gap-2">
             {compliance.map((c) => (
               <span
                 key={c}
@@ -337,9 +342,9 @@ export function Footer() {
         </div>
 
         {/* Bottom legal bar */}
-        <div className="mt-8 flex flex-col flex-wrap items-center justify-between gap-2 border-t border-line pt-6 text-[12.5px] xl:flex-row xl:flex-nowrap">
-          <span className="flex-shrink-0 xl:whitespace-nowrap">© 2026 PYNGYN, a product of VIMOVI GlobalTech Private Limited. All rights reserved.</span>
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 xl:flex-nowrap xl:whitespace-nowrap">
+        <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-line pt-5 text-[12.5px] md:flex-row">
+          <span className="text-center md:text-left">© 2026 PYNGYN, a product of VIMOVI GlobalTech Private Limited. All rights reserved.</span>
+          <div className="flex flex-wrap items-center justify-center gap-x-3.5 gap-y-1.5">
             {legal.map(([label, href]) => (
               <Link key={label} href={href} prefetch={false} className="hover:text-accent">
                 {label}
@@ -358,4 +363,5 @@ export function Footer() {
     </footer>
   );
 }
+
 
