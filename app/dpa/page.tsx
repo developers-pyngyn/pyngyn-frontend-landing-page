@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
-  title: "Data Processing Agreement | PYNGYN",
-  description: "The Data Processing Agreement between Pyngyn (Data Processor) and Customer (Data Controller).",
+  title: "Data Processing Agreement (DPA) | PYNGYN",
+  description:
+    "Data Processing Agreement between Customer (Data Fiduciary / Controller) and VIMOVI GlobalTech Private Limited (Data Processor).",
   alternates: { canonical: "/dpa" },
 };
 
@@ -12,9 +13,9 @@ export default function DPAPage() {
     <LegalPage
       url="/dpa"
       title="Data Processing Agreement"
-      updated="June 24, 2026"
-      readAlongside="For an executable copy, please reach out to **[vivek.pandey@pyngyn.com](mailto:vivek.pandey@pyngyn.com)**."
-      intro="This Data Processing Agreement (“DPA”) is entered into by and between Pyngyn (“Data Processor” or “Pyngyn”) and the entity agreeing to these terms (“Data Controller” or “Customer”). This DPA forms part of the underlying agreement between the parties and reflects the parties' agreement with regard to the processing of Personal Data."
+      updated="September 26, 2026"
+      readAlongside="For an executed countersigned copy of this DPA for your firm's compliance files, please contact **[vivek.pandey@pyngyn.com](mailto:vivek.pandey@pyngyn.com)**."
+      intro="This Data Processing Agreement (“DPA”) is entered into by and between VIMOVI GlobalTech Private Limited, operating under the brand “Pyngyn” (a DPIIT-recognized startup certified under ISO 9001:2015 for Quality Management Systems; “Data Processor” or “Pyngyn”) and the customer organization agreeing to the Pyngyn Terms of Service (“Customer,” “Data Fiduciary” under India's DPDP Act, or “Data Controller” under the GDPR). This DPA supplements and forms part of the underlying agreement between the parties for access to the Pyngyn Service. It governs the processing of Personal Data in compliance with applicable data protection legislation, including India's Digital Personal Data Protection Act, 2023 (“DPDP Act”), the Information Technology Act, 2000 and CERT-In directions, and the General Data Protection Regulation (“GDPR”)."
       sections={[
         {
           heading: "Definitions",
@@ -22,102 +23,183 @@ export default function DPAPage() {
             {
               type: "list",
               items: [
-                "**“Personal Data”**: Any information relating to an identified or identifiable natural person as defined by applicable data protection laws, including the General Data Protection Regulation (GDPR).",
-                "**“Data Controller”**: The entity that determines the purposes and means of the processing of Personal Data.",
-                "**“Data Processor”**: The entity that processes Personal Data on behalf of the Data Controller (Pyngyn).",
-                "**“Subprocessor”**: Any third party appointed by Pyngyn to process Personal Data on its behalf.",
-                "**“Services”**: The Pyngyn marketing website, free AI tools, demo booking functionality, and the Pyngyn SaaS application located at app.pyngyn.ai.",
+                "**“Personal Data”**: Any data about an individual who is identifiable by or in relation to such data, as defined under the DPDP Act, 2023, or any information relating to an identified or identifiable natural person under the GDPR.",
+                "**“Data Fiduciary” / “Data Controller”**: The entity that determines the purpose and means of processing Personal Data (the Customer).",
+                "**“Data Processor”**: The entity that processes Personal Data on behalf of the Data Fiduciary (Pyngyn).",
+                "**“Data Principal” / “Data Subject”**: The natural person to whom the Personal Data relates (including Customer's clients, partners, employees, and contractors).",
+                "**“Services”**: The Pyngyn ClientSpace and Workspace software application located at `app.pyngyn.ai`, the marketing website at `pyngyn.ai`, free AI interactive tools, demo booking functionality, and associated APIs.",
+                "**“Subprocessor”**: Any third-party data processor engaged by Pyngyn to assist in fulfilling its obligations with respect to providing the Services.",
+                "**“Customer Personal Data”**: Personal Data contained within Customer Content uploaded to or processed within Customer's workspace or client portals.",
               ],
             },
           ],
         },
         {
-          heading: "Duration",
+          heading: "Scope, Roles & Documented Instructions",
           blocks: [
             {
               type: "p",
-              text: "This DPA shall remain in effect for the duration of the Services agreement between the parties and shall survive termination until all Personal Data has been deleted or returned in accordance with Section 4 (Data Deletion).",
+              text: "The parties acknowledge and agree that with respect to the processing of Customer Personal Data within the Services, Customer is the Data Fiduciary (or Data Controller) and Pyngyn is the Data Processor. Pyngyn agrees to process Customer Personal Data strictly on behalf of and in accordance with Customer's documented instructions, including with respect to transfers of personal data outside India or the EEA, unless required to do so by applicable law.",
+            },
+            {
+              type: "p",
+              text: "The Customer's initial documented instructions are set forth in the Terms of Service, this DPA, and Customer's active configuration and utilization of the Service's administrative features.",
             },
           ],
         },
         {
-          heading: "Processing of Data",
+          heading: "Duration of Processing",
           blocks: [
             {
               type: "p",
-              text: "Pyngyn will process Personal Data only on behalf of, and in accordance with, the Customer's documented instructions. The nature, purpose, and scope of processing are detailed in Annex A. Pyngyn processes the following categories of data:",
+              text: "This DPA takes effect on the date Customer creates an account or subscribes to the Services and remains in full force and effect until the termination of the underlying Services agreement and the complete return or deletion of all Customer Personal Data in accordance with Section 5.",
+            },
+          ],
+        },
+        {
+          heading: "Categories of Data Processed",
+          blocks: [
+            {
+              type: "p",
+              text: "Pyngyn processes the following categories of data in connection with delivering the Services (detailed further in Annex A):",
             },
             {
               type: "list",
               items: [
-                "**Passive Website Data:** IP addresses, browser/device info (User-Agent), pages visited, timestamps, referrers, and cookie/tracking IDs (via Google Tag Manager and Meta Pixel).",
-                "**Browser-Local Data:** Promo popup timers, workspace offer countdowns, roadmap upvotes, and calculator inputs (ROI, cost margin, team utilization). Note: this data is stored locally in the user's browser memory or localStorage and is not transmitted to or stored on Pyngyn's servers.",
-                "**AI Feature Inputs:** Information submitted to AI-powered features, including project data, task data, workspace content, user prompts, support requests, and other information processed to generate AI-assisted outputs. This data is transmitted to Anthropic for output generation and is not saved in Pyngyn's database.",
-                "**Demo Booking Data:** Name, email, phone, and meeting preferences collected via Calendly. This goes directly to Calendly and is not stored in the Pyngyn app database.",
-                "**SaaS Application Data (app.pyngyn.ai):** Account data (Name, Email, Company, auth details via Clerk) and user-generated content (Project & task content) created within the product.",
+                "**SaaS Application & Workspace Data (app.pyngyn.ai):** Customer account records (name, email, company, role, auth tokens via Clerk), client portal details, project workspaces, tasks, assignments, deadlines, comments, approval audit records, and documents/working papers uploaded by Authorized Users.",
+                "**AI Processing Payloads:** Information submitted to generative AI features (including status report notes, project planning scopes, and prompt inputs). Transmitted transiently to Anthropic or Groq solely to generate requested outputs; never used for base model training.",
+                "**Interactive Demo & Scheduling Data:** Prospect contact details (name, business email, meeting notes) processed via Calendly or native booking endpoints.",
+                "**Passive Security & Edge Telemetry:** IP addresses, browser user-agent headers, edge HTTP traffic logs, and error telemetry processed via Cloudflare and GCP.",
+                "**Browser-Local Storage:** Promo timers, calculator states, and roadmap upvotes held exclusively in browser memory or localStorage without server transmission.",
               ],
             },
           ],
         },
         {
-          heading: "Data Deletion",
+          heading: "Data Deletion & Post-Termination Handling",
           blocks: [
             {
               type: "p",
-              text: "Upon termination of the Services, or upon the Customer's written request, Pyngyn shall delete all Personal Data processed on behalf of the Customer within thirty (30) days. This includes permanently deleting SaaS application data and account details.",
+              text: "Following the termination or expiry of the customer relationship or Services agreement, Pyngyn will, subject to applicable law and the customer agreement:",
             },
             {
-              type: "p",
-              text: "Note: Browser-local data (e.g., localStorage items) cannot be deleted remotely by Pyngyn and must be cleared by the end-user via their browser settings.",
+              type: "list",
+              items: [
+                "**Return or Deletion:** Return customer data where applicable, or securely delete Customer Personal Data processed on behalf of Customer, in accordance with the customer's documented instructions.",
+                "**Documented Instructions:** Follow the customer's documented instructions regarding the return or secure deletion of Customer Personal Data.",
+                "**Applicable Retention Exceptions:** Apply applicable retention exceptions where Pyngyn is required or permitted by applicable law to retain customer information, or where retention is necessary for legitimate legal, security, fraud-prevention, or statutory accounting requirements.",
+                "**Backup Lifecycle:** Handle and retain backup copies containing Customer Personal Data according to the applicable backup lifecycle before they are overwritten or securely removed.",
+              ],
             },
           ],
         },
         {
-          heading: "Data Export",
+          heading: "Data Export Assistance",
           blocks: [
             {
               type: "p",
-              text: "Upon termination or upon request, Customer may export their Customer Data through the export functionality available within the Service. If the export functionality is unavailable, Pyngyn will provide a copy of Customer Data in a commonly used machine-readable format before deletion.",
+              text: "Throughout the active subscription term and during any agreed post-termination transition period, Customer may export Customer Content directly using self-service export features available within the product interface. If Customer requires assistance, Pyngyn will provide a machine-readable export (JSON/CSV) of Customer Personal Data prior to final deletion.",
             },
           ],
         },
         {
-          heading: "Security Measures",
+          heading: "Technical & Organizational Security Measures",
           blocks: [
             {
               type: "p",
-              text: "Pyngyn shall implement and maintain appropriate technical and organizational security measures designed to protect Personal Data against unauthorized access, disclosure, alteration, or loss. These measures are detailed in Annex B.",
+              text: "Pyngyn implements and maintains appropriate technical, administrative, and organizational safeguards designed to protect Customer Personal Data against accidental, unauthorized, or unlawful destruction, loss, alteration, disclosure, or access. These high-level security measures cover:",
+            },
+            {
+              type: "list",
+              items: [
+                "**Confidentiality:** Enforceable confidentiality obligations and security awareness training for all personnel authorized to process Customer Personal Data.",
+                "**Access Controls:** Logical tenant isolation, server-side authorization, and role-based permissions designed to restrict access solely to authorized personnel and accounts.",
+                "**Encryption:** Strong encryption of customer data during transmission (TLS 1.3 / HTTPS) and, where applicable, while stored (industry-standard encryption at rest for databases and file storage).",
+                "**Security Monitoring & Incident Response:** Continuous system logging, monitoring, and documented incident response procedures for detecting and responding to security events.",
+                "**Vulnerability Management:** Periodic security assessments, dependency vulnerability scanning, and testing appropriate to the service.",
+                "**Backup & Recovery:** Appropriate backup and recovery measures maintained to support service continuity and data protection.",
+                "**Subprocessor Controls:** Diligent security vetting and binding data processing agreements with all authorized subprocessors.",
+              ],
+            },
+            {
+              type: "p",
+              text: "Our controls are designed with reference to SOC 2 Trust Services Criteria and ISO/IEC 27001 principles. Our operating entity holds ISO 9001:2015 certification for Quality Management Systems and is recognized by DPIIT, Government of India. Additional technical domains are summarized in Annex B.",
             },
           ],
         },
         {
-          heading: "Confidentiality of Personnel",
+          heading: "Personnel Confidentiality & Security Training",
           blocks: [
             {
               type: "p",
-              text: "Pyngyn shall ensure that all personnel authorized to process Personal Data are subject to appropriate confidentiality obligations, whether contractual or statutory, and shall access Personal Data only to the extent necessary to provide the Services. Pyngyn shall ensure such personnel receive appropriate training regarding the protection of Personal Data.",
+              text: "Pyngyn ensures that all employees, contractors, and personnel who have access to Customer Personal Data are bound by enforceable confidentiality obligations and receive regular training regarding cybersecurity and personal data protection.",
             },
           ],
         },
         {
-          heading: "Breach Notification",
+          heading: "Security Incident & Personal Data Breach Notification",
           blocks: [
             {
               type: "p",
-              text: "In the event of a Personal Data breach, Pyngyn shall notify the Customer without undue delay, and in any case within seventy-two (72) hours, after becoming aware of the breach. Pyngyn will provide all reasonable information necessary for the Customer to fulfill its own breach notification obligations to relevant supervisory authorities and data subjects.",
+              text: "In the event of an applicable personal data or security incident affecting Customer Personal Data:",
+            },
+            {
+              type: "list",
+              items: [
+                "**Customer Notification:** Pyngyn will notify Customer of applicable personal-data or security incidents according to this DPA and applicable law without undue delay upon becoming aware of the incident.",
+                "**Information Provided:** Pyngyn will provide relevant information reasonably necessary for Customer to understand the nature of the incident and meet its own statutory reporting obligations (such as to Data Principals or supervisory authorities).",
+                "**Cooperation:** Pyngyn will cooperate reasonably in the investigation, containment, and response to the incident, and take reasonable steps to remediate identified security impacts.",
+              ],
             },
           ],
         },
         {
-          heading: "Data Subject Rights Assistance",
+          heading: "Subprocessors & Third-Party Engagement",
           blocks: [
             {
               type: "p",
-              text: "Taking into account the nature of the processing, Pyngyn shall assist the Customer in fulfilling its obligations to respond to data subjects' requests regarding their rights (e.g., access, rectification, erasure, portability) as required under the GDPR.",
+              text: "Customer grants Pyngyn general written authorization to engage third-party Subprocessors to support the delivery of the Services. Pyngyn's current authorized Subprocessors are:",
+            },
+            {
+              type: "list",
+              items: [
+                "**Google Cloud Platform (GCP):** Primary cloud hosting, PostgreSQL databases, compute, and encrypted storage (India, asia-south1 Mumbai region).",
+                "**Cloudflare, Inc.:** Edge CDN, DNS routing, DDoS mitigation, and edge runtime compute (USA & Global Edge Network).",
+                "**Clerk, Inc.:** User authentication, Single Sign-On (SSO), session tokens, and identity management (USA).",
+                "**Razorpay Software Pvt. Ltd.:** Payment processing, subscription billing, and tax invoicing (India).",
+                "**Anthropic, PBC:** Generative AI capabilities for ClientSpace and Workspace SaaS workflows (USA).",
+                "**Groq Inc.:** Fast AI inference engine for free interactive website tools (USA).",
+                "**Calendly LLC:** Demo booking and schedule coordination (USA).",
+                "**Google LLC:** Google Tag Manager, GA4 analytics, and Google Fonts (USA, gated behind consent).",
+                "**Meta Platforms, Inc.:** Meta Pixel conversion measurement (USA, gated behind consent).",
+                "**Microsoft Corporation:** Microsoft Entra ID enterprise SSO and team account management (USA & EU).",
+              ],
             },
             {
               type: "p",
-              text: "If Pyngyn receives a request directly from a data subject, Pyngyn will forward the request to the Customer and direct the data subject to contact the Customer directly.",
+              text: "Pyngyn imposes data protection obligations on every Subprocessor that are no less protective than those set forth in this DPA. Pyngyn remains fully liable to Customer for the performance of its Subprocessors' obligations. Pyngyn will maintain an up-to-date list at **[Subprocessors](/subprocessors)** and provide advance notice of new Subprocessors.",
+            },
+          ],
+        },
+        {
+          heading: "Assistance with Data Principal & Data Subject Rights",
+          blocks: [
+            {
+              type: "p",
+              text: "Taking into account the nature of the processing, Pyngyn will provide reasonable technical and organizational assistance to Customer, to the extent commercially possible, to enable Customer to respond to requests from Data Principals exercising their rights (such as access, correction, erasure, grievance redressal, and nomination under the DPDP Act, or access, rectification, erasure, and portability under the GDPR).",
+            },
+            {
+              type: "p",
+              text: "If a Data Principal submits a request directly to Pyngyn concerning Customer Personal Data, Pyngyn will promptly forward the request to Customer and advise the individual to contact Customer directly.",
+            },
+          ],
+        },
+        {
+          heading: "Cross-Border Data Transfers",
+          blocks: [
+            {
+              type: "p",
+              text: "Pyngyn stores primary customer workspace databases locally in India (GCP Mumbai). To the extent personal data is transferred across international borders, Pyngyn ensures compliance with Section 16 of India's DPDP Act, 2023. For transfers of personal data originating from the EEA, UK, or Switzerland to countries lacking an adequacy decision, the parties agree to be bound by the Standard Contractual Clauses (SCCs) as set forth in Annex C.",
             },
           ],
         },
@@ -126,129 +208,70 @@ export default function DPAPage() {
           blocks: [
             {
               type: "p",
-              text: "Upon reasonable written notice and no more than once annually, Pyngyn shall make available to Customer all information reasonably necessary to demonstrate compliance with this Data Processing Agreement, including relevant security documentation, policies, and information regarding its technical and organizational security measures.",
-            },
-            {
-              type: "p",
-              text: "Where such information is insufficient to demonstrate compliance with applicable data protection laws, Customer may conduct an audit or inspection, either directly or through an independent third-party auditor, subject to reasonable confidentiality obligations, advance notice, and measures designed to avoid disruption to Pyngyn's operations and the confidentiality of other customers' information.",
-            },
-            {
-              type: "p",
-              text: "Any audit shall be conducted during normal business hours and in a manner that does not unreasonably interfere with Pyngyn's business operations. Customer shall bear its own audit costs unless otherwise required by applicable law.",
+              text: "Upon reasonable written notice (at least 30 days in advance) and no more than once in any twelve-month period, Pyngyn shall make available to Customer information reasonably necessary to demonstrate compliance with this DPA. Customer may conduct an audit of Pyngyn's compliance documentation during normal business hours, subject to strict confidentiality and security safeguards to avoid compromising the security or confidentiality of other Pyngyn customers.",
             },
           ],
         },
         {
-          heading: "International Transfers",
-          blocks: [
-            {
-              type: "p",
-              text: "If Personal Data is transferred outside of the European Economic Area (EEA) or the UK to a country that has not been deemed to provide an adequate level of protection, such transfers shall be subject to appropriate safeguards, such as the European Commission's Standard Contractual Clauses (SCCs) or the UK International Data Transfer Agreement (IDTA), as detailed in Annex C.",
-            },
-          ],
-        },
-        {
-          heading: "Subprocessors",
-          blocks: [
-            {
-              type: "p",
-              text: "Pyngyn is authorized to engage third-party Subprocessors to process Personal Data. Pyngyn shall remain liable for the acts and omissions of its Subprocessors. Current Subprocessors include:",
-            },
-            {
-              type: "list",
-              items: [
-                "**Google Cloud Platform (GCP):** Infrastructure and cloud hosting (asia-south1 region), including database and compute services.",
-                "**Google Tag Manager / GA4 / Google Fonts:** Analytics, tag management, and font delivery.",
-                "**Meta / Facebook Pixel:** Tracking page views and configured events.",
-                "**Calendly:** Demo booking and scheduling.",
-                "**Anthropic:** Processing data submitted to AI-powered features within the Pyngyn platform, including task generation, support assistance, organizational reporting, workload recommendations, project insights, workflow optimization, and other AI-assisted functionality.",
-                "**Clerk:** Single Sign-On (SSO), email service, and authentication.",
-                "**Razorpay:** Payment processing for paid subscriptions and invoicing.",
-                "**Microsoft Entra ID:** Identity and access management for internal Pyngyn team accounts and organization-level SSO.",
-              ],
-            },
-            {
-              type: "p",
-              text: "Pyngyn will provide the Customer with prior notice of any intended addition or replacement of a Subprocessor. See our full **[Subprocessors](/subprocessors)** list for current details.",
-            },
-          ],
-        },
-        {
-          heading: "Liability",
-          blocks: [
-            {
-              type: "p",
-              text: "Pyngyn's liability arising out of or related to this DPA, whether in contract, tort, or under any other theory of liability, shall be subject to the limitations and exclusions of liability set forth in the underlying agreement between the parties. Pyngyn shall not be liable for any indirect, incidental, or consequential damages arising from the processing of Personal Data.",
-            },
-          ],
-        },
-        {
-          heading: "Annex A, Subject Matter and Details of the Data Processing",
+          heading: "Annex A, Subject Matter & Scope of Processing",
           noNumber: true,
           blocks: [
             {
               type: "table",
-              headers: ["Field", "Detail"],
+              headers: ["Field", "Specification"],
               rows: [
-                ["Subject Matter", "Provision of the Pyngyn marketing website tools, demo scheduling, and SaaS application services."],
-                ["Duration of Processing", "For the term of the Customer's use of the Services, plus the period necessary for data deletion post-termination."],
+                ["Subject Matter", "Provision of the Pyngyn ClientSpace and Workspace software platform, interactive tools, and customer support."],
+                ["Duration of Processing", "For the duration of the customer agreement plus any period necessary for post-termination data return, deletion, or statutory retention compliance."],
                 [
-                  "Nature and Purpose of Processing",
-                  "Website analytics and performance monitoring. AI-powered task generation. AI-powered customer support assistance. AI-generated organizational and project summaries. AI-generated workload and task assignment recommendations. AI-powered project management insights and recommendations. AI-assisted productivity and workflow optimization. AI-powered analysis of workspace content to generate outputs requested by users. Scheduling product demonstrations. Providing project and task management SaaS functionality.",
+                  "Nature and Purpose",
+                  "Client portal delivery, file sharing, approval workflows, task assignment, progress tracking, time and capacity estimation, AI-assisted project planning and status report generation, and subscription billing.",
+                ],
+                [
+                  "Categories of Data Principals",
+                  "Customer's partners, employees, contractors, external clients, and prospects booking product demonstrations.",
                 ],
                 [
                   "Types of Personal Data",
-                  "Identification data (Name, Email, Company). Authentication data (managed via Clerk). Network/Device data (IP address, User-Agent). User-generated content (Project details, task content, AI tool inputs). Scheduling data (Phone, meeting time). Workspace content. Task data. Project data. User activity information. Workspace collaboration data. Project participation data. User prompts submitted to AI features. AI-generated outputs.",
-                ],
-                [
-                  "Categories of Data Subjects",
-                  "Visitors to the Pyngyn marketing site. Users of the free AI tools. Prospects booking a demo. Authorized users of the Pyngyn SaaS application (app.pyngyn.ai).",
+                  "Contact data (name, email, phone), authentication tokens, workspace deliverables, task notes, client communications, billing identifiers, and system access logs.",
                 ],
               ],
             },
           ],
         },
         {
-          heading: "Annex B, Technical and Organizational Security Measures",
+          heading: "Annex B, Technical & Organizational Security Measures",
           noNumber: true,
           blocks: [
             {
               type: "p",
-              text: "Pyngyn implements the following technical and organizational measures to protect Personal Data. These measures reflect the current state of Pyngyn's security practices and compliance posture. Pyngyn holds GDPR compliance as its primary regulatory framework.",
+              text: "Pyngyn maintains the following technical and organizational security controls designed with reference to SOC 2 Trust Services Criteria and ISO/IEC 27001 principles:",
             },
             {
               type: "table",
-              headers: ["Measure", "Detail"],
+              headers: ["Security Domain", "Implemented Technical Measure"],
               rows: [
-                [
-                  "Access Control",
-                  "Role-based access control (RBAC) to internal systems. Authentication data is secured and managed by Clerk (SSO). Unique user IDs and password requirements are enforced.",
-                ],
-                ["Data Transmission", "All data in transit is encrypted using TLS/SSL (HTTPS)."],
-                [
-                  "Data Minimization",
-                  "Pyngyn explicitly avoids storing sensitive AI tool inputs or Calendly booking data in its own databases. Browser-local data is kept strictly on the user's device.",
-                ],
-                [
-                  "Subprocessor Management",
-                  "Pyngyn engages only with reputable third parties (Google Cloud Platform, Anthropic, Razorpay, Calendly, Clerk, Microsoft Entra ID) that maintain industry-standard security and privacy practices.",
-                ],
-                ["Incident Response", "Pyngyn maintains internal procedures for identifying, managing, and responding to security incidents."],
+                ["Cryptographic Controls", "TLS 1.3 / HTTPS encryption for data in transit; industry-standard encryption at rest for databases and file storage where applicable."],
+                ["Tenant Logical Isolation", "Logical tenant isolation and server-side authorization designed to restrict customer and workspace information to authorized users."],
+                ["Identity & Access Control", "Role-Based Access Control (RBAC), Single Sign-On (SSO/SAML via Clerk and Entra ID), multi-factor authentication (MFA) capabilities."],
+                ["Edge & Network Defense", "Cloudflare WAF, automated DDoS mitigation, rate-limiting, and ingress security filtering."],
+                ["AI Feature Safeguards", "Enterprise API processing via Anthropic and Groq; zero public foundation model training on customer workspace data."],
+                ["Security & Compliance Logging", "Security and technical logs maintained for monitoring, fraud prevention, service reliability, and Indian cybersecurity (CERT-In) compliance."],
+                ["Business Continuity", "Appropriate encrypted backup and recovery measures maintained to support service continuity and data protection."],
               ],
             },
           ],
         },
         {
-          heading: "Annex C, Cross-Border Data Transfer Terms",
+          heading: "Annex C, Cross-Border Transfer Terms (EU Standard Contractual Clauses)",
           noNumber: true,
           blocks: [
             {
               type: "list",
               items: [
-                "**Applicability:** This Annex applies if Personal Data is processed in a country outside the EEA, UK, or Switzerland that lacks an adequacy decision.",
-                "**Standard Contractual Clauses:** The parties agree to be bound by the Standard Contractual Clauses (SCCs) set out in the European Commission's Implementing Decision (EU) 2021/914 of 4 June 2021.",
-                "**Module Selection:** Module Two (Controller to Processor) or Module Three (Processor to Processor) shall apply, depending on the respective roles of the parties.",
-                "**Subprocessor Transfers:** Pyngyn shall ensure that any transfers to Subprocessors (e.g., Google Cloud Platform, Anthropic, Google, Meta, Calendly, Clerk, Razorpay, Microsoft Entra ID) outside the EEA/UK are subject to appropriate safeguards, including the SCCs or equivalent legal mechanisms.",
+                "**Applicability:** Applies solely to transfers of Personal Data originating from the European Economic Area, UK, or Switzerland to countries outside those areas that do not possess an adequacy decision.",
+                "**Standard Contractual Clauses:** The parties incorporate by reference the Standard Contractual Clauses (SCCs) approved under European Commission Implementing Decision (EU) 2021/914.",
+                "**Module Selection:** Module Two (Controller to Processor) shall apply where Customer is a Controller, and Module Three (Processor to Processor) shall apply where Customer is an intermediary processor.",
+                "**Governing Law for SCCs:** The laws of the Republic of Ireland shall govern the SCCs, without prejudice to the substantive governing law of the underlying agreement.",
               ],
             },
           ],

@@ -93,6 +93,9 @@ const STATIC: Entry[] = [
   // Legal
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
   { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
+  { path: "/cookie-policy", priority: 0.3, changeFrequency: "yearly" },
+  { path: "/dpa", priority: 0.3, changeFrequency: "yearly" },
+  { path: "/subprocessors", priority: 0.3, changeFrequency: "yearly" },
   { path: "/refund", priority: 0.3, changeFrequency: "yearly" },
 ];
 

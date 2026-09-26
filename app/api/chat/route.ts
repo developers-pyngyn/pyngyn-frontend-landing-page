@@ -90,8 +90,8 @@ export async function POST(request: Request): Promise<Response> {
     });
 
     if (!groqRes.ok) {
-      const detail = await groqRes.text();
-      return json({ error: "Groq request failed.", detail }, groqRes.status);
+      console.error("[chat] Groq request failed", groqRes.status);
+      return json({ error: "Unable to process message at this time." }, groqRes.status);
     }
 
     const data = (await groqRes.json()) as {
@@ -100,6 +100,7 @@ export async function POST(request: Request): Promise<Response> {
     const reply = data.choices?.[0]?.message?.content ?? "Sorry, I didn't catch that.";
     return json({ reply });
   } catch (err) {
-    return json({ error: "Upstream error.", detail: String(err) }, 502);
+    console.error("[chat] Upstream error", err);
+    return json({ error: "Unable to complete request." }, 502);
   }
 }

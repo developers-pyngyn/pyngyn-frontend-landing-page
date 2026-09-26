@@ -324,8 +324,9 @@ export async function POST(request: Request): Promise<Response> {
     const report: StatusReport = { ...parsed, source: "ai" };
     return json({ report, source: "ai" });
   } catch (err) {
+    console.error("[status-report] Upstream exception", err);
     return json(
-      { report: templateReport(cleaned), source: "template", warning: "exception", detail: String(err) },
+      { report: templateReport(cleaned), source: "template", warning: "exception" },
       200
     );
   }

@@ -28,19 +28,34 @@ const SCROLL_TRIGGER_PCT = 0.5;
 // /lp, /pricing, and /demo) or are ad landing pages — showing a second,
 // competing popup on the same page doesn't add conversions, it just adds
 // noise right where a visitor is already deep in the decision.
-const EXCLUDED_PREFIXES = ["/lp", "/pricing", "/demo"];
+const EXCLUDED_PREFIXES = ["/lp", "/pricing", "/demo", "/product-showcase"];
 
 export function PromoPopup() {
   const pathname = usePathname();
   const excluded = EXCLUDED_PREFIXES.some((p) => pathname?.startsWith(p)) ?? false;
   const [open, setOpen] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
+  const [dismissed, setDismissed] = useState(() => {
+    if (typeof window === "undefined") return false;
+    try {
+      return Boolean(
+        sessionStorage.getItem(DISMISSED_KEY) ||
+        (window as any).__DISABLE_POPUP__ ||
+        window.location.search.includes("no_popup=1")
+      );
+    } catch {
+      return false;
+    }
+  });
   const firedRef = useRef(false);
 
-  // On mount, check whether this session already dismissed it.
+  // On mount, check whether this session already dismissed it or if testing
   useEffect(() => {
     try {
-      if (sessionStorage.getItem(DISMISSED_KEY)) {
+      if (
+        sessionStorage.getItem(DISMISSED_KEY) ||
+        (window as any).__DISABLE_POPUP__ ||
+        window.location.search.includes("no_popup=1")
+      ) {
         setDismissed(true);
       }
     } catch {
@@ -105,6 +120,14 @@ export function PromoPopup() {
   }
 
   if (excluded) return null;
+  if (
+    typeof window !== "undefined" &&
+    ((window as any).__DISABLE_POPUP__ ||
+      window.location.search.includes("no_popup=1") ||
+      sessionStorage.getItem(DISMISSED_KEY))
+  ) {
+    return null;
+  }
 
   return (
     <AnimatePresence>

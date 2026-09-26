@@ -36,7 +36,7 @@ const FAQS: { q: string; a: string }[] = [
   { q: "Is this secure enough for legal and financial documents?", a: "Yes. Documents are encrypted in transit and at rest, access is controlled per client, and every action is logged in an audit trail, far safer than emailing sensitive records, which most firms still do today." },
   { q: "Do I need a separate e-signature tool?", a: "No. E-signature is built into Client Space. You can send a document for signature without a separate subscription to DocuSign or similar." },
   { q: "Can clients upload documents too, not just receive them?", a: "Yes. Clients can upload requested documents directly into their space, so you're not chasing attachments across email threads." },
-  { q: "What happens to documents if we cancel?", a: "You can export your firm's documents at any time. Ask your onboarding contact for the specifics of your plan's export and retention terms." },
+  { q: "What happens to documents if we cancel?", a: "You can export your firm's documents at any time. Per our Data Processing Agreement (DPA) and Privacy Policy, documents remain available for export for 30 days following cancellation, after which they are permanently and securely deleted from production storage." },
 ];
 
 export default function SecureDocumentsPage() {

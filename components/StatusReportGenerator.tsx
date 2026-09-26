@@ -76,7 +76,7 @@ Next week:
 // ---- Formatters: report -> output text in each format -------------------
 
 function statusEmoji(s: Status): string {
-  return s === "green" ? "🟢" : s === "yellow" ? "🟡" : "🔴";
+  return s === "green" ? "[ON TRACK]" : s === "yellow" ? "[AT RISK]" : "[BLOCKED]";
 }
 function statusLabel(s: Status): string {
   return s === "green" ? "Green" : s === "yellow" ? "Yellow" : "Red";

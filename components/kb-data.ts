@@ -199,7 +199,7 @@ const RAW_KB_ARTICLES: KbArticle[] = [
       { paragraphs: ["This is a practical summary of how your firm's and your clients' data is handled. For the full legal terms, see our Privacy Policy and DPA."] },
       { heading: "Encryption", paragraphs: ["Data is encrypted both in transit and at rest. This applies to everything in your workspace and every Client Space, not just documents specifically marked sensitive."] },
       { heading: "Data isolation", paragraphs: ["Each Client Space is fully isolated. A client can only ever access their own engagement, never another client's data, and never your firm's internal Workspace unless you explicitly choose to share something specific."] },
-      { heading: "Security posture", paragraphs: ["Our security program is SOC 2 aligned, and we maintain GDPR alignment for data handling. Key actions are logged in an audit trail."] },
+      { heading: "Security posture", paragraphs: ["Our security program is SOC 2 aligned, built on ISO 27001-certified data center infrastructure, and we maintain full alignment with India's DPDP Act, 2023 and the GDPR for data handling. Our operating entity holds ISO 9001:2015 certification for Quality Management Systems and DPIIT recognition. Key actions are logged in a secure audit trail."] },
       { heading: "AI and your data", paragraphs: ["Customer data is not used to train AI models without your explicit consent. AI-powered features process what's needed to generate a response and nothing more."] },
       { heading: "Questions for a security review", paragraphs: ["If you're running a vendor security review and need documentation beyond this summary, ask on a demo call or contact support, we're used to this and can move quickly."] },
     ],

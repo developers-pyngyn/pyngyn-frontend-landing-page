@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pyngyn ClientSpace — Plans &amp; Pricing</title>
+  <meta name="description" content="Simple, transparent pricing for Pyngyn ClientSpace. Built specifically for CA and accounting firms." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --border-focus: #14223d;
+      --navy: #14223d;
+      --navy-hover: #0a1220;
+      --navy-light: #f0f4fa;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --success: #059669;
+      --success-bg: #ecfdf5;
+      --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding: 48px 20px 80px 20px;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    /* Brand Header */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 800;
+      font-size: 20px;
+      margin-bottom: 24px;
+    }
+
+    .brand-lockup img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: var(--navy-light);
+      border: 1px solid #cbd5e1;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--navy);
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* Billing Switcher */
+    .toggle-container {
+      display: flex;
+      justify-content: center;
+      margin: 32px 0 44px 0;
+    }
+
+    .toggle-box {
+      display: inline-flex;
+      align-items: center;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 4px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .toggle-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-muted);
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .toggle-btn.active {
+      background: var(--navy);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(20, 34, 61, 0.2);
+    }
+
+    .save-tag {
+      font-size: 10.5px;
+      background: var(--success-bg);
+      color: var(--success);
+      padding: 2px 6px;
+      border-radius: 9999px;
+      border: 1px solid #a7f3d0;
+      font-weight: 800;
+    }
+
+    /* Pricing Grid */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 960px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+    }
+
+    /* Cards */
+    .plan-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .plan-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.08);
+    }
+
+    .plan-card.featured {
+      border: 2px solid var(--navy);
+      box-shadow: 0 8px 30px -4px rgba(20, 34, 61, 0.12);
+    }
+
+    .popular-ribbon {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 9999px;
+      box-shadow: 0 2px 6px rgba(20, 34, 61, 0.25);
+    }
+
+    .plan-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .plan-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      min-height: 38px;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    /* Price Lockup */
+    .price-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .currency {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .amount {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      font-family: var(--font);
+    }
+
+    .period {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Feature List */
+    .feature-title {
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .features-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+      flex: 1;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: #334155;
+      line-height: 1.4;
+    }
+
+    .feature-item strong {
+      color: var(--text-main);
+    }
+
+    .check-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: var(--navy);
+    }
+
+    /* CTA Button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 13px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: #ffffff;
+      border: 1px solid var(--navy);
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-hover);
+      box-shadow: 0 4px 12px rgba(20, 34, 61, 0.25);
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--navy);
+      border: 1.5px solid #cbd5e1;
+    }
+
+    .btn-outline:hover {
+      background: var(--navy-light);
+      border-color: var(--navy);
+    }
+
+    /* Footer Trust */
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <a href="/" class="brand-lockup">
+        <img src="/logo.webp" alt="Pyngyn" />
+        <span>pyngyn</span>
+      </a>
+      <br />
+      <div class="badge">
+        <span class="badge-dot"></span>
+        <span>PYNGYN CLIENTSPACE • PRICING</span>
+      </div>
+      <h1>Simple plans built for modern CA practices.</h1>
+      <p class="subtitle">
+        Everything you need to manage clients, statutory filings, documents, and team workload without complex add-ons.
+      </p>
+
+      <!-- Billing Cycle Switcher -->
+      <div class="toggle-container">
+        <div class="toggle-box">
+          <button id="monthlyBtn" class="toggle-btn" onclick="setBilling('monthly')">
+            Monthly Billing
+          </button>
+          <button id="annualBtn" class="toggle-btn active" onclick="setBilling('annual')">
+            Annual Billing
+            <span class="save-tag">SAVE 20%</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Pricing Cards Grid -->
+    <div class="pricing-grid">
+      <!-- 1. Pro Plan -->
+      <div class="plan-card">
+        <div>
+          <div class="plan-name">Pro</div>
+          <p class="plan-desc">For solo CAs, independent practitioners &amp; boutique tax consultancies.</p>
+
+          <div class="price-wrap">
+            <span class="currency">₹</span>
+            <span id="pricePro" class="amount">399</span>
+            <span class="period">/ user / mo</span>
+          </div>
+
+          <div class="feature-title">What&apos;s Included:</div>
+          <ul class="features-list">
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span><strong>Up to 25</strong> active client portfolios</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span><strong>5 GB</strong> secure document storage</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span><strong>Unlimited</strong> client guest logins (clients never pay)</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Statutory deadline calendar (GST, TDS, ROC)</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Standard client task &amp; document pipeline</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Email &amp; magic-link document intake</span>
+            </li>
+          </ul>
+        </div>
+        <a href="https://app.pyngyn.ai/signup" class="btn btn-outline">Start Free Trial</a>
+      </div>
+
+      <!-- 2. Business Plan (Popular) -->
+      <div class="plan-card featured">
+        <div class="popular-ribbon">Most Popular for CA Firms</div>
+        <div>
+          <div class="plan-name">Business</div>
+          <p class="plan-desc">For multi-partner CA firms, audit practices &amp; compliance teams.</p>
+
+          <div class="price-wrap">
+            <span class="currency">₹</span>
+            <span id="priceBusiness" class="amount">649</span>
+            <span class="period">/ user / mo</span>
+          </div>
+
+          <div class="feature-title">Everything in Pro, Plus:</div>
+          <ul class="features-list">
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span><strong>Unlimited</strong> client portfolios &amp; corporate entities</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span><strong>50 GB</strong> secure vault storage</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span><strong>Workload Cockpit</strong> &amp; team capacity tracking</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span><strong>4-Eye Review Gates</strong> (Article &rarr; Manager &rarr; Partner)</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Automated WhatsApp reminders &amp; document chase</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Tally Prime, Computax &amp; Zoho Books integrations</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Priority WhatsApp &amp; phone practice support</span>
+            </li>
+          </ul>
+        </div>
+        <a href="https://app.pyngyn.ai/signup" class="btn btn-primary">Start Business Trial</a>
+      </div>
+
+      <!-- 3. Enterprise Plan -->
+      <div class="plan-card">
+        <div>
+          <div class="plan-name">Enterprise</div>
+          <p class="plan-desc">For large partnerships, 50+ staff firms &amp; multi-branch operations.</p>
+
+          <div class="price-wrap">
+            <span class="amount" style="font-size: 36px;">Custom</span>
+            <span class="period" style="margin-left: 6px;">tailored volume</span>
+          </div>
+
+          <div class="feature-title">Everything in Business, Plus:</div>
+          <ul class="features-list">
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span><strong>Unlimited</strong> portfolios, branches &amp; user seats</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span><strong>1 TB+</strong> bank-grade encrypted document storage</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Custom ERP connectors (SAP, Oracle &amp; custom APIs)</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Enterprise SSO (SAML 2.0, Okta, Azure AD)</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>7-Year tamper-evident statutory audit trails</span>
+            </li>
+            <li class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span>Dedicated Partner Manager &amp; 99.9% uptime SLA</span>
+            </li>
+          </ul>
+        </div>
+        <a href="https://app.pyngyn.ai/demo" class="btn btn-outline">Contact Sales</a>
+      </div>
+    </div>
+
+    <!-- Simple Footer -->
+    <footer>
+      <p>
+        Questions about our plans? <a href="https://app.pyngyn.ai/demo">Book a 20-minute practice walkthrough</a> or explore the main website at <a href="/">pyngyn.ai</a>.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    function setBilling(cycle) {
+      const monthlyBtn = document.getElementById('monthlyBtn');
+      const annualBtn = document.getElementById('annualBtn');
+      const pricePro = document.getElementById('pricePro');
+      const priceBusiness = document.getElementById('priceBusiness');
+
+      if (cycle === 'annual') {
+        annualBtn.classList.add('active');
+        monthlyBtn.classList.remove('active');
+        pricePro.textContent = '399';
+        priceBusiness.textContent = '649';
+      } else {
+        monthlyBtn.classList.add('active');
+        annualBtn.classList.remove('active');
+        pricePro.textContent = '499';
+        priceBusiness.textContent = '799';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -8,8 +8,21 @@ const config: Config = {
         ink: "#0f1115",
         muted: "#6b7280",
         line: "#e9eaf0",
-        // Indigo accent (brand)
-        accent: { DEFAULT: "#4f46e5", dk: "#3730a3", lt: "#eef0ff" },
+        // Pyngyn Navy Blue brand theme
+        accent: { 
+          DEFAULT: "#14223d", 
+          dk: "#0a1220", 
+          lt: "#f0f4fa",
+          hover: "#1c2e4f"
+        },
+        navy: {
+          900: "#0a1220",
+          800: "#14223d",
+          700: "#1c2e4f",
+          600: "#273d66",
+          100: "#e8eff8",
+          50: "#f0f4fa",
+        },
         positive: "#0b7a4b",
         // grey page canvas with white floating cards
         canvas: "#f1f2f5",

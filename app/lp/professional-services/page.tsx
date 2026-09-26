@@ -312,7 +312,7 @@ function Hero() {
 
           <h1 className="mt-6 font-display text-[clamp(38px,6.8vw,72px)] font-semibold leading-[0.98] tracking-[-0.035em] text-white">
             Your team isn&apos;t unproductive.{" "}
-            <span className="text-indigo-300">
+            <span className="text-slate-200">
               Your operations are broken.
             </span>
           </h1>
@@ -552,7 +552,7 @@ function AIDifferentiator() {
         <SectionEyebrow>The PYNGYN difference</SectionEyebrow>
         <h2 className="mx-auto mt-4 max-w-[820px] font-display text-[clamp(30px,4.4vw,46px)] font-semibold leading-[1.05] tracking-[-0.03em] text-white">
           Not another project tool.{" "}
-          <span className="text-indigo-300">
+          <span className="text-slate-200">
             An AI Operations Manager.
           </span>
         </h2>

@@ -209,7 +209,7 @@ export function Footer() {
     ],
   ];
 
-  const compliance = ["SOC 2 aligned", "GDPR", "Encrypted", "SSO / SAML"];
+  const compliance = ["SOC 2 aligned", "DPDP (India)", "GDPR", "Encrypted", "SSO / SAML"];
   const legal: [string, string][] = [
     ["Privacy", PRIVACY_URL],
     ["Terms", TERMS_URL],
@@ -253,6 +253,10 @@ export function Footer() {
             </Link>
             <p className="max-w-[230px] leading-relaxed">
               The operating system for professional-services firms.
+            </p>
+            <p className="mt-2 text-[11.5px] leading-relaxed text-muted/80">
+              DPIIT Recognized Startup<br />
+              ISO 9001:2015 Certified (QMS)
             </p>
 
             <a

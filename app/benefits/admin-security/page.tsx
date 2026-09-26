@@ -34,7 +34,7 @@ const DETAILS: { title: string; body: string }[] = [
 
 const FAQS: { q: string; a: string }[] = [
   { q: "Do you support SSO?", a: "Yes, SSO/SAML is available so your team signs in through your firm's existing identity provider." },
-  { q: "Are you SOC 2 certified?", a: "Our security program is SOC 2 aligned. If you need details for a vendor security review, ask on a demo call and we'll walk through our current posture and documentation." },
+  { q: "Are you SOC 2 certified?", a: "Our security controls are SOC 2 aligned and deployed on ISO 27001-certified data center infrastructure. We do not claim standalone SOC 2 or ISO 27001 certificates for Pyngyn directly until third-party audits are completed. Our operating entity holds ISO 9001:2015 certification for Quality Management Systems and DPIIT recognition." },
   { q: "How is client data isolated?", a: "Every Client Space is fully isolated at the data level. A client can only ever access their own engagement, never another client's, and never your firm's internal Workspace data unless you choose to share something specific." },
   { q: "Is my data used to train AI models?", a: "No. Customer data is not used to train AI models without explicit consent." },
 ];
@@ -85,7 +85,7 @@ export default function AdminSecurityPage() {
             <a href={SIGNUP_URL} className="btn btn-primary">Start free trial</a>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Encrypted in transit and at rest · GDPR compliant · SOC 2 aligned
+            Encrypted in transit and at rest · DPDP & GDPR aligned · SOC 2 aligned
           </p>
         </section>
 

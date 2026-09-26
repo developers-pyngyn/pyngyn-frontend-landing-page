@@ -355,8 +355,9 @@ export async function POST(request: Request): Promise<Response> {
     const plan: GeneratedPlan = { ...parsed, source: "ai" };
     return json({ plan, source: "ai" });
   } catch (err) {
+    console.error("[plan] Upstream exception", err);
     return json(
-      { plan: templatePlan(cleaned), source: "template", warning: "exception", detail: String(err) },
+      { plan: templatePlan(cleaned), source: "template", warning: "exception" },
       200
     );
   }

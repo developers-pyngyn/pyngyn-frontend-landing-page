@@ -8,6 +8,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
@@ -17,6 +19,12 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  max-width: 100vw;
+}
+
+main {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* Visible keyboard focus for all interactive elements */
@@ -26,7 +34,7 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid #4f46e5;
+  outline: 2px solid #14223d;
   outline-offset: 2px;
   border-radius: 6px;
 }
@@ -57,7 +65,7 @@ textarea:focus-visible,
     background-position: right 12px center;
   }
   .wrap {
-    @apply mx-auto w-full px-7;
+    @apply mx-auto w-full px-4 sm:px-6 lg:px-7;
     max-width: var(--content);
   }
   /* Composio-style all-caps mono micro-label */

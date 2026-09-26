@@ -1,252 +1,640 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Building2,
+  Users,
+  CheckSquare,
+  Briefcase,
+  Layout,
+  ShieldCheck,
+  Zap,
+  Plug,
+  Scale,
+  BarChart3,
+  FileSpreadsheet,
+  Search,
+  Shield,
+  Compass,
+  BookOpen,
+  HelpCircle,
+  PenTool,
+  FileCheck,
+  Phone,
+  Menu,
+  X,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
 import { SIGNIN_URL, SIGNUP_URL, DEMO_URL, PRICING_URL } from "./config";
-import { MegaNav } from "./MegaNav";
-import { MEGA_MENUS } from "./mega-menu-data";
+
+interface DropdownItem {
+  name: string;
+  desc?: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  badge?: string;
+}
+
+const PRODUCT_MENU: DropdownItem[] = [
+  {
+    name: "ClientSpace",
+    desc: "The unified client workspace for modern accounting & CA firms",
+    href: "/#clientspace",
+    icon: Building2,
+    badge: "Core",
+  },
+  {
+    name: "Client Management",
+    desc: "Entity hierarchy, tax profiles, and compliance health status",
+    href: "/#client-management",
+    icon: Users,
+  },
+  {
+    name: "Task Management",
+    desc: "Statutory deadlines, effort meters, and 4-eye review gates",
+    href: "/#task-management",
+    icon: CheckSquare,
+  },
+  {
+    name: "Engagements",
+    desc: "Fixed-fee retainers, corporate audit milestones & deliverables",
+    href: "/#engagements",
+    icon: Briefcase,
+  },
+  {
+    name: "Client Portal",
+    desc: "White-labeled, password-less client collaboration portal",
+    href: "/#client-portal",
+    icon: Layout,
+  },
+  {
+    name: "Documents",
+    desc: "Bank-encrypted file collection, versioning & e-signatures",
+    href: "/#documents",
+    icon: ShieldCheck,
+  },
+  {
+    name: "Automations",
+    desc: "Automated document chase, WhatsApp reminders & alerts",
+    href: "/#automations",
+    icon: Zap,
+  },
+  {
+    name: "Integrations",
+    desc: "Tally, Computax, Zoho Books, QuickBooks, Slack & Calendars",
+    href: "/integrations",
+    icon: Plug,
+  },
+];
+
+const SOLUTIONS_MENU: DropdownItem[] = [
+  {
+    name: "For CA Firms",
+    desc: "Built for audit, tax filing, and statutory compliance practices",
+    href: "/solutions/accountants",
+    icon: Scale,
+    badge: "Specialized",
+  },
+  {
+    name: "For Accounting Firms",
+    desc: "Streamline monthly retainers, bookkeeping, and year-end closes",
+    href: "/solutions/accountants",
+    icon: BarChart3,
+  },
+  {
+    name: "For Tax Teams",
+    desc: "Corporate tax returns, advance tax estimates, and notice tracking",
+    href: "/solutions/professional-services",
+    icon: FileSpreadsheet,
+  },
+  {
+    name: "For Audit Teams",
+    desc: "Structured working papers, 4-eye review queues, and sign-offs",
+    href: "/solutions/accountants",
+    icon: Search,
+  },
+  {
+    name: "For Compliance Teams",
+    desc: "Never miss a statutory deadline across GST, ROC, and TDS",
+    href: "/solutions/professional-services",
+    icon: Shield,
+  },
+];
+
+const RESOURCES_MENU: DropdownItem[] = [
+  {
+    name: "Product Tour",
+    desc: "Explore live interactive walkthroughs of every workflow",
+    href: "/#tour",
+    icon: Compass,
+  },
+  {
+    name: "Guides",
+    desc: "Practice management playbooks for modern accounting firms",
+    href: "/guides",
+    icon: BookOpen,
+  },
+  {
+    name: "Help Center",
+    desc: "Search knowledge base articles, tutorials, and setup steps",
+    href: "/knowledge-base",
+    icon: HelpCircle,
+  },
+  {
+    name: "Blog",
+    desc: "Articles on scaling CA firms, technology, and firm operations",
+    href: "/blog",
+    icon: PenTool,
+  },
+  {
+    name: "Templates",
+    desc: "Free accounting checklists, engagement letters, and audit trackers",
+    href: "/tools/ai-project-plan",
+    icon: FileCheck,
+  },
+  {
+    name: "Contact",
+    desc: "Talk to our practice solutions team for a personalized demo",
+    href: "/demo",
+    icon: Phone,
+  },
+];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [mobileSection, setMobileSection] = useState<string | null>(null);
-  const pathname = usePathname();
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileExpandedSection, setMobileExpandedSection] = useState<string | null>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // The home page has a dark hero, so at the very top the navbar sits on dark
-  // and needs light text + the white logo. Once scrolled (white bg) it flips back.
-  // Pages whose hero is dark — the navbar uses light text/logo over them.
-  // Normalize the trailing slash so this works regardless of `trailingSlash`
-  // in next.config.js (otherwise "/knowledge-base/" wouldn't match
-  // "/knowledge-base" and the navbar would render in light mode on a dark hero).
-  const normalizedPath = pathname !== "/" ? pathname.replace(/\/$/, "") : pathname;
-  const darkHeroPages = ["/", "/knowledge-base"];
-  const onDarkHero = darkHeroPages.includes(normalizedPath) && !scrolled && !menuOpen;
-
-  // A nav link is active when the current path starts with its route
-  // (so /blog/some-post still highlights "Blog"). Ignore hash-only links.
-  const isActive = (href: string) => {
-    if (!href.startsWith("/") || href.startsWith("/#")) return false;
-    return normalizedPath === href || normalizedPath.startsWith(href + "/");
-  };
-
+  // Scroll detection
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 15);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Click outside listener
   useEffect(() => {
-    if (!menuOpen) {
-      setMobileSection(null);
-      return;
+    function handleClickOutside(e: MouseEvent) {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setActiveDropdown(null);
+      }
     }
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false);
-    };
-    document.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
-    };
-  }, [menuOpen]);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Escape key handler
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setActiveDropdown(null);
+        setMobileMenuOpen(false);
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  const handleMouseEnter = (name: string) => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    setActiveDropdown(name);
+  };
+
+  const handleMouseLeave = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 180);
+  };
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-[100] border-b transition-all duration-300 ${
-        scrolled || menuOpen
-          ? "border-line bg-white/85 backdrop-blur-md backdrop-saturate-150"
-          : "border-transparent bg-transparent"
+      ref={navRef}
+      className={`fixed inset-x-0 top-0 z-[100] transition-all duration-200 ${
+        scrolled || mobileMenuOpen || activeDropdown
+          ? "border-b border-slate-200/80 bg-white/95 backdrop-blur-md shadow-xs"
+          : "border-b border-transparent bg-white/80 backdrop-blur-sm"
       }`}
     >
-      <div className="wrap flex h-[68px] items-center justify-between">
-        <Link href="/" className="flex items-center" aria-label="pyngyn home">
-          <Image
-            src={onDarkHero ? "/logo-dark.webp" : "/logo.webp"}
-            alt="pyngyn"
-            width={150}
-            height={40}
-            priority
-            className="h-8 w-auto"
-          />
-        </Link>
+      <div className="wrap flex h-[70px] items-center justify-between">
+        {/* Brand Logo: Pyngyn is the brand name */}
+        <div className="flex items-center gap-8">
+          <Link href="/" className="flex items-center" aria-label="Pyngyn Home">
+            <Image
+              src="/logo.webp"
+              alt="Pyngyn"
+              width={140}
+              height={36}
+              priority
+              className="h-8 w-auto"
+            />
+          </Link>
 
-        <MegaNav dark={onDarkHero} />
+          {/* Desktop Navigation Links with Dropdowns */}
+          <nav className="hidden lg:flex items-center gap-1 font-medium text-[14px]">
+            {/* Product Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => handleMouseEnter("product")}
+              onMouseLeave={handleMouseLeave}
+            >
+              <button
+                onClick={() =>
+                  setActiveDropdown(activeDropdown === "product" ? null : "product")
+                }
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-colors ${
+                  activeDropdown === "product"
+                    ? "text-[#14223d] bg-slate-100 font-semibold"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+                }`}
+                aria-expanded={activeDropdown === "product"}
+              >
+                <span>Product</span>
+                <ChevronDown className="h-3 w-3 opacity-60" />
+              </button>
 
-        <div className="flex items-center gap-3">
+              <AnimatePresence>
+                {activeDropdown === "product" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
+                    className="absolute left-0 top-full mt-1.5 w-[520px] rounded-2xl border border-slate-200 bg-white p-3 shadow-art grid grid-cols-2 gap-1"
+                  >
+                    {PRODUCT_MENU.map((item) => {
+                      const IconComp = item.icon;
+                      return (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          onClick={() => setActiveDropdown(null)}
+                          className="group flex items-start gap-3 rounded-xl p-2.5 hover:bg-slate-50 transition-colors"
+                        >
+                          <div className="flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-slate-100 text-[#14223d] group-hover:bg-[#14223d] group-hover:text-white transition-colors">
+                            <IconComp className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-1.5 font-semibold text-[13px] text-slate-900 group-hover:text-[#14223d]">
+                              <span>{item.name}</span>
+                              {item.badge && (
+                                <span className="rounded bg-slate-100 text-[#14223d] px-1.5 py-0.2 text-[9.5px] font-bold border border-slate-200">
+                                  {item.badge}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[11.5px] text-slate-500 leading-snug line-clamp-2 mt-0.5">
+                              {item.desc}
+                            </p>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Solutions Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => handleMouseEnter("solutions")}
+              onMouseLeave={handleMouseLeave}
+            >
+              <button
+                onClick={() =>
+                  setActiveDropdown(activeDropdown === "solutions" ? null : "solutions")
+                }
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-colors ${
+                  activeDropdown === "solutions"
+                    ? "text-[#14223d] bg-slate-100 font-semibold"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+                }`}
+                aria-expanded={activeDropdown === "solutions"}
+              >
+                <span>Solutions</span>
+                <ChevronDown className="h-3 w-3 opacity-60" />
+              </button>
+
+              <AnimatePresence>
+                {activeDropdown === "solutions" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
+                    className="absolute left-0 top-full mt-1.5 w-[380px] rounded-2xl border border-slate-200 bg-white p-3 shadow-art flex flex-col gap-1"
+                  >
+                    {SOLUTIONS_MENU.map((item) => {
+                      const IconComp = item.icon;
+                      return (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          onClick={() => setActiveDropdown(null)}
+                          className="group flex items-start gap-3 rounded-xl p-2.5 hover:bg-slate-50 transition-colors"
+                        >
+                          <div className="flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-slate-100 text-[#14223d] group-hover:bg-[#14223d] group-hover:text-white transition-colors">
+                            <IconComp className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-1.5 font-semibold text-[13px] text-slate-900 group-hover:text-[#14223d]">
+                              <span>{item.name}</span>
+                              {item.badge && (
+                                <span className="rounded bg-emerald-100 text-emerald-800 px-1.5 py-0.2 text-[9.5px] font-bold">
+                                  {item.badge}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[11.5px] text-slate-500 leading-snug line-clamp-1 mt-0.5">
+                              {item.desc}
+                            </p>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Features Link */}
+            <Link
+              href="/#features"
+              className="px-3 py-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition-colors"
+            >
+              Features
+            </Link>
+
+            {/* Resources Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => handleMouseEnter("resources")}
+              onMouseLeave={handleMouseLeave}
+            >
+              <button
+                onClick={() =>
+                  setActiveDropdown(activeDropdown === "resources" ? null : "resources")
+                }
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-colors ${
+                  activeDropdown === "resources"
+                    ? "text-[#14223d] bg-slate-100 font-semibold"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+                }`}
+                aria-expanded={activeDropdown === "resources"}
+              >
+                <span>Resources</span>
+                <ChevronDown className="h-3 w-3 opacity-60" />
+              </button>
+
+              <AnimatePresence>
+                {activeDropdown === "resources" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
+                    className="absolute left-0 top-full mt-1.5 w-[380px] rounded-2xl border border-slate-200 bg-white p-3 shadow-art flex flex-col gap-1"
+                  >
+                    {RESOURCES_MENU.map((item) => {
+                      const IconComp = item.icon;
+                      return (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          onClick={() => setActiveDropdown(null)}
+                          className="group flex items-start gap-3 rounded-xl p-2.5 hover:bg-slate-50 transition-colors"
+                        >
+                          <div className="flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-slate-100 text-[#14223d] group-hover:bg-[#14223d] group-hover:text-white transition-colors">
+                            <IconComp className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="font-semibold text-[13px] text-slate-900 group-hover:text-[#14223d]">
+                              {item.name}
+                            </div>
+                            <p className="text-[11.5px] text-slate-500 leading-snug line-clamp-1 mt-0.5">
+                              {item.desc}
+                            </p>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Pricing */}
+            <Link
+              href="/pricing"
+              className="px-3 py-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition-colors"
+            >
+              Pricing
+            </Link>
+          </nav>
+        </div>
+
+        {/* Right CTA Actions */}
+        <div className="hidden lg:flex items-center gap-3">
           <a
             href={SIGNIN_URL}
-            className={`hidden text-[15px] font-semibold lg:inline ${onDarkHero ? "text-white/80 hover:text-white" : ""}`}
+            className="text-[14px] font-semibold text-slate-700 hover:text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-100/70 transition-colors"
           >
-            Sign in
-          </a>
-          <a
-            href={SIGNUP_URL}
-            className={`hidden px-4 py-2.5 lg:inline-flex ${
-              onDarkHero
-                ? "btn border border-white/15 bg-white/5 text-white hover:bg-white/10"
-                : "btn btn-ghost"
-            }`}
-          >
-            Start free
+            Login
           </a>
           <a
             href={DEMO_URL}
-            className={`hidden px-[18px] py-2.5 lg:inline-flex ${
-              onDarkHero ? "btn bg-white text-ink hover:bg-white/90" : "btn btn-primary"
-            }`}
+            className="btn btn-ghost text-[13.5px] px-3.5 py-2 border-slate-300"
           >
-            Book a demo
+            Book a Demo
           </a>
-
-          <button
-            type="button"
-            className={`grid h-10 w-10 place-items-center rounded-lg border lg:hidden ${
-              onDarkHero ? "border-white bg-white text-ink shadow-cta" : "border-line bg-white text-ink"
-            }`}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-            onClick={() => setMenuOpen((v) => !v)}
+          <a
+            href={SIGNUP_URL}
+            className="btn btn-accent text-[13.5px] px-4 py-2"
           >
-            {menuOpen ? (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            ) : (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            )}
-          </button>
+            Get Started
+          </a>
         </div>
+
+        {/* Mobile Hamburger Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="flex lg:hidden h-10 w-10 items-center justify-center rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100"
+          aria-label="Toggle navigation menu"
+        >
+          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
 
+      {/* Mobile Menu Drawer */}
       <AnimatePresence>
-        {menuOpen && (
+        {mobileMenuOpen && (
           <motion.div
-            id="mobile-menu"
-            className="absolute inset-x-0 top-[68px] z-[100] border-t border-line bg-white shadow-card lg:hidden"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2, ease: [0.21, 0.6, 0.35, 1] }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden border-b border-slate-200 bg-white px-4 py-5 shadow-lg max-h-[85vh] overflow-y-auto"
           >
-            <nav className="wrap max-h-[calc(100vh-68px)] overflow-y-auto py-4">
-              <div className="flex flex-col">
-                {/* Clientspace is a flat link (no mega panel), placed first to match
-                    the desktop nav's hierarchy, where Clientspace precedes Product. */}
-                <Link
-                  href="/clientspace"
-                  onClick={() => setMenuOpen(false)}
-                  aria-current={isActive("/clientspace") ? "page" : undefined}
-                  className={`border-b border-line px-3 py-3.5 text-[16px] font-semibold ${
-                    isActive("/clientspace") ? "text-accent" : "text-ink"
-                  }`}
+            <div className="space-y-4">
+              {/* Product Section */}
+              <div>
+                <button
+                  onClick={() =>
+                    setMobileExpandedSection(
+                      mobileExpandedSection === "product" ? null : "product"
+                    )
+                  }
+                  className="flex w-full items-center justify-between py-2 text-[15px] font-bold text-slate-900"
                 >
-                  Clientspace
-                </Link>
-
-                {MEGA_MENUS.map((menu) => {
-                  const expanded = mobileSection === menu.key;
-                  return (
-                    <div key={menu.key} className="border-b border-line">
-                      <button
-                        type="button"
-                        onClick={() => setMobileSection(expanded ? null : menu.key)}
-                        aria-expanded={expanded}
-                        className="flex w-full items-center justify-between px-3 py-3.5 text-[16px] font-semibold text-ink"
-                      >
-                        {menu.label}
-                        <svg
-                          width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"
-                          className={`text-muted transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+                  <span>Product</span>
+                  {mobileExpandedSection === "product" ? (
+                    <ChevronUp className="h-4 w-4 opacity-60" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4 opacity-60" />
+                  )}
+                </button>
+                {mobileExpandedSection === "product" && (
+                  <div className="pl-3 pt-1 space-y-2 border-l-2 border-slate-200 mt-1">
+                    {PRODUCT_MENU.map((item) => {
+                      const IconComp = item.icon;
+                      return (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center gap-2 text-[13.5px] font-medium text-slate-600 hover:text-[#14223d] py-1"
                         >
-                          <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </button>
+                          <IconComp className="h-4 w-4 text-[#14223d] flex-none" />
+                          <span>{item.name}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
 
-                      <AnimatePresence initial={false}>
-                        {expanded && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.22, ease: [0.21, 0.6, 0.35, 1] }}
-                            className="overflow-hidden"
-                          >
-                            <div className="pb-3">
-                              {menu.columns.map((col) => (
-                                <div key={col.heading} className="mb-1">
-                                  <div className="px-3 pb-1 pt-2 font-mono text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">
-                                    {col.heading}
-                                  </div>
-                                  {col.items.map((it) => (
-                                    <Link
-                                      key={it.label + it.href}
-                                      href={it.href}
-                                      onClick={() => setMenuOpen(false)}
-                                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[15px] text-ink hover:bg-canvas"
-                                    >
-                                      <span
-                                        className="grid h-8 w-8 flex-none place-items-center rounded-lg"
-                                        style={{ backgroundColor: `${it.color}1a`, color: it.color }}
-                                      >
-                                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                          <path d={it.icon} stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                      </span>
-                                      {it.label}
-                                    </Link>
-                                  ))}
-                                  {col.seeAll && (
-                                    <Link
-                                      href={col.seeAll.href}
-                                      onClick={() => setMenuOpen(false)}
-                                      className="block px-3 py-2 text-[14px] font-semibold text-accent"
-                                    >
-                                      {col.seeAll.label} →
-                                    </Link>
-                                  )}
-                                </div>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                })}
-
-                {/* Pricing is a flat link (no mega panel) */}
-                <Link
-                  href={PRICING_URL}
-                  onClick={() => setMenuOpen(false)}
-                  aria-current={isActive(PRICING_URL) ? "page" : undefined}
-                  className={`border-b border-line px-3 py-3.5 text-[16px] font-semibold ${
-                    isActive(PRICING_URL) ? "text-accent" : "text-ink"
-                  }`}
+              {/* Solutions Section */}
+              <div>
+                <button
+                  onClick={() =>
+                    setMobileExpandedSection(
+                      mobileExpandedSection === "solutions" ? null : "solutions"
+                    )
+                  }
+                  className="flex w-full items-center justify-between py-2 text-[15px] font-bold text-slate-900"
                 >
-                  Pricing
-                </Link>
+                  <span>Solutions</span>
+                  {mobileExpandedSection === "solutions" ? (
+                    <ChevronUp className="h-4 w-4 opacity-60" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4 opacity-60" />
+                  )}
+                </button>
+                {mobileExpandedSection === "solutions" && (
+                  <div className="pl-3 pt-1 space-y-2 border-l-2 border-slate-300 mt-1">
+                    {SOLUTIONS_MENU.map((item) => {
+                      const IconComp = item.icon;
+                      return (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center gap-2 text-[13.5px] font-medium text-slate-600 hover:text-[#14223d] py-1"
+                        >
+                          <IconComp className="h-4 w-4 text-[#14223d] flex-none" />
+                          <span>{item.name}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
 
-              <div className="mt-4 flex flex-col gap-2.5 px-1">
-                <a href={SIGNIN_URL} onClick={() => setMenuOpen(false)} className="px-2 text-[15px] font-semibold">
-                  Sign in
+              {/* Features Link */}
+              <Link
+                href="/#features"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 text-[15px] font-bold text-slate-900"
+              >
+                Features
+              </Link>
+
+              {/* Resources Section */}
+              <div>
+                <button
+                  onClick={() =>
+                    setMobileExpandedSection(
+                      mobileExpandedSection === "resources" ? null : "resources"
+                    )
+                  }
+                  className="flex w-full items-center justify-between py-2 text-[15px] font-bold text-slate-900"
+                >
+                  <span>Resources</span>
+                  {mobileExpandedSection === "resources" ? (
+                    <ChevronUp className="h-4 w-4 opacity-60" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4 opacity-60" />
+                  )}
+                </button>
+                {mobileExpandedSection === "resources" && (
+                  <div className="pl-3 pt-1 space-y-2 border-l-2 border-slate-300 mt-1">
+                    {RESOURCES_MENU.map((item) => {
+                      const IconComp = item.icon;
+                      return (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center gap-2 text-[13.5px] font-medium text-slate-600 hover:text-[#14223d] py-1"
+                        >
+                          <IconComp className="h-4 w-4 text-[#14223d] flex-none" />
+                          <span>{item.name}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Pricing */}
+              <Link
+                href="/pricing"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 text-[15px] font-bold text-slate-900"
+              >
+                Pricing
+              </Link>
+
+              {/* Mobile CTAs */}
+              <div className="pt-4 border-t border-slate-200 space-y-2.5">
+                <a
+                  href={SIGNIN_URL}
+                  className="btn btn-ghost w-full text-center py-2.5"
+                >
+                  Login
                 </a>
-                <a href={SIGNUP_URL} onClick={() => setMenuOpen(false)} className="btn btn-ghost justify-center">
-                  Start free
+                <a
+                  href={DEMO_URL}
+                  className="btn btn-primary w-full text-center py-2.5"
+                >
+                  Book a Demo
                 </a>
-                <a href={DEMO_URL} onClick={() => setMenuOpen(false)} className="btn btn-primary justify-center">
-                  Book a demo
+                <a
+                  href={SIGNUP_URL}
+                  className="btn btn-accent w-full text-center py-2.5"
+                >
+                  Get Started Free
                 </a>
               </div>
-            </nav>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

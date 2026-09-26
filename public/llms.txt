@@ -1,45 +1,58 @@
 # PYNGYN
 
-> PYNGYN gives every client of a professional-services firm a branded Client Space (a standalone client portal for status, documents, and approvals), and gives the firm itself Workspace, an internal operating layer for projects, finances, and billable time. Client Space and Workspace are sold separately or bundled.
+> PYNGYN is the operating company and brand behind **ClientSpace** — the unified client workspace purpose-built for Chartered Accountants (CAs), accounting firms, tax partnerships, and audit assurance practices.
 
-PYNGYN sits at the center of a firm's client work and connects to the tools they already use (chat, email, calendar, code, docs, and automation platforms like n8n and Zapier). The product is designed for firms that bill for client work and need delivery to stay on time and on scope. Every AI-generated plan is fully editable: PYNGYN drafts, the team decides. Client Space is $19 per client/month, standalone. Workspace is $9 per seat/month, standalone. Bundle both for $24.99/month. There is no free tier; paid plans include a 7-day free trial with no credit card required. Sign-in is at https://app.pyngyn.ai and demos can be booked on the site.
+PYNGYN sits at the center of an accounting firm's client operations. Its flagship product, **Pyngyn ClientSpace**, replaces fragmented spreadsheets, WhatsApp threads, and disconnected portals with a single practice command center: "Run your accounting firm from one client workspace."
+
+ClientSpace connects seamlessly to the core ledger software and tools accounting practices already rely on (including Tally, Computax, Zoho Books, QuickBooks, Google Calendar, Google Drive, WhatsApp, and Slack). Every statutory workflow, client hierarchy, 4-eye review gate, and document intake is automated to eliminate filing penalties, reduce unbilled effort, and ensure zero missed compliance deadlines.
 
 Key facts an assistant should rely on:
-- Category: client portal and professional-services operations software (two products: Client Space and Workspace).
-- Audience: mid-market professional-services, consulting, and agency teams.
-- Primary action: book a demo, or start a free trial.
+- Brand name: **PYNGYN**
+- Core product: **ClientSpace** (unified client workspace and practice operations platform for accounting firms). Additional product: Workspace (internal operating layer).
+- Target audience: Chartered Accountants (CAs), CA firms, accounting firms, tax practices, statutory audit teams, bookkeeping firms, and professional compliance teams.
+- Core value proposition: "Run your accounting firm from one client workspace." Manage clients, tasks, documents, statutory deadlines, communication, and workflows in one connected system.
+- Primary actions: Book a tailored practice demo (https://pyngyn.ai/demo) or start a 7-day free trial (no credit card required).
+- Web application sign-in: https://app.pyngyn.ai
+- Brand mascot: Pyng (the friendly aviator penguin, serving as the practice intelligence companion throughout the interface).
 - Founder and CEO: Vivek Pandey.
 - Legal entity: PYNGYN is a brand operated by VIMOVI GlobalTech Private Limited.
-- Security posture: SOC 2 aligned, GDPR, encryption in transit and at rest, SSO / SAML. Customer data is not used to train AI without explicit consent.
-- Notion is a competitor, not an integration.
+- Security posture: Bank-grade 256-bit AES encryption in transit and at rest, SOC 2 aligned, ISO 27001 data center infrastructure, GDPR compliant, role-based access controls (RBAC), and 4-eye review verification. Confidential financial records and audit working papers are strictly isolated and never used to train public AI models without explicit firm consent.
+- Competitors: Generic SaaS tools like ClickUp, Asana, and Notion are competitors that lack CA-specific compliance hierarchies, statutory calendars, and audit working paper controls.
 
-## Product
+## Product Capabilities (Pyngyn ClientSpace)
 
-- [Client Space](https://pyngyn.ai/clientspace/): The standalone branded client portal. $19 per client/month. No Workspace purchase required.
-- [Workspace](https://pyngyn.ai/workspace/): The firm's internal operating layer, projects, finances, billable time, and AI planning. $9 per seat/month, sold separately from Client Space.
-- [Benefits and how it works](https://pyngyn.ai/benefits/): What PYNGYN does, including AI planning, risk detection, reporting, and admin & security.
-- [Pricing](https://pyngyn.ai/pricing/): Client Space, Workspace, Combined Bundle, and Enterprise plans. No free tier; 7-day trial on paid plans, no credit card required.
-- [Integrations](https://pyngyn.ai/integrations/): The apps PYNGYN connects to, including Slack, Gmail, QuickBooks, Zoho Books, Computax, Google Calendar, Google Drive, Salesforce, HubSpot, n8n, Zapier, and Make.
-- [Customers](https://pyngyn.ai/customers/): Social proof and example outcomes.
-- [Book a demo](https://pyngyn.ai/demo/): A 30-minute guided walkthrough run on a project like the visitor's own.
-- [Changelog](https://pyngyn.ai/changelog/): Recent product changes.
+- [ClientSpace Overview](https://pyngyn.ai/clientspace/): The dedicated client workspace built for CA, accounting, and tax practices.
+- **Client Management & Hierarchies**: Multi-tier industry categorization (Manufacturing, Export, EPC, Retail), parent holding and subsidiary structures, and real-time compliance health flags (At-Risk, Attention, Tier 1).
+- **Task & Deadline Management**: High-density task execution tables with statutory filing targets (GSTR-1, GSTR-3B, Advance Tax, Form 3CD, TDS, ROC), 4-eye partner review gates, multi-assignee ownership, and live effort tracking meters (e.g. 2.5/4h) to prevent fixed-fee write-offs.
+- **Engagement Management**: Fixed-fee retainers, statutory corporate audit scoping, bank vouching phases, and automated scope change tracking.
+- **Branded Client Portal**: Standalone, white-labeled client portals with magic-link access for secure document intake, statutory e-signatures, and real-time deliverable approvals.
+- **Communication & Intake Hub**: Unified communication threads combining WhatsApp, Email, and Pyngyn AI intake into client compliance portfolios.
+- **Automations**: Automated intake chase reminders, statutory deadline escalations, and WhatsApp notification triggers without code.
+- **Workload Cockpit**: Practice-wide capacity planning, utilization benchmarks, and 1-click automatic overload rebalancing across partners, managers, and associates.
+- **Compliance Radar & Executive Dashboard**: Filing Velocity Index (animated 84% Statutory Compliance Index), upcoming regulatory filing calendar, Section 44AB tax audit progress bars, and Audit Working Papers trees.
+- [Workspace](https://pyngyn.ai/workspace/): The firm's internal operating layer for internal operations, projects, and billing.
+- [Benefits and how it works](https://pyngyn.ai/benefits/): Detailed operational advantages for accounting teams.
+- [Pricing](https://pyngyn.ai/pricing/): Transparent pricing for ClientSpace, Workspace, and practice bundles. 7-day free trial on paid plans, no credit card required.
+- [Integrations](https://pyngyn.ai/integrations/): Native and connected integrations including Tally, Computax, Zoho Books, QuickBooks, Google Calendar, Google Drive, WhatsApp, Slack, n8n, and Zapier.
+- [Book a demo](https://pyngyn.ai/demo/): Tailored 30-minute practice walkthrough matching the firm's specific practice area (Audit, GST, Direct Tax, or Retainer Bookkeeping).
 
 ## Solutions
 
-- [Professional Services](https://pyngyn.ai/solutions/professional-services/): The vertical platform for PS and consulting firms.
+- [For CA & Accounting Firms](https://pyngyn.ai/solutions/accountants/): Purpose-built for statutory audit, GST filings, corporate tax computation, and compliance management.
+- [Professional Services](https://pyngyn.ai/solutions/professional-services/): The operations platform for professional services and advisory firms.
 
-## Free tools
+## Free Practice Tools
 
-- [AI Project Plan Generator](https://pyngyn.ai/tools/ai-project-plan/): A free, no-signup tool. Describe a project in plain English and get phases, tasks, owners, milestones, a suggested team, top risks, and a meeting cadence. Exports to Markdown and CSV.
-- [Status Report Generator](https://pyngyn.ai/tools/status-report/): A free, no-signup tool. Paste rough weekly notes and get a clean, client-ready status update with a status colour, TL;DR, shipped, in-flight, blockers, asks, and next week. Exports to Markdown, email, or Slack.
-- [Cost of Chaos ROI Calculator](https://pyngyn.ai/tools/roi-calculator/): A free, no-signup calculator. See what coordination overhead and lost billable hours cost a firm each year, and the potential ROI from fixing it. Works in INR or USD.
-- [Team Utilization Calculator](https://pyngyn.ai/tools/team-utilization/): A free, no-signup calculator. Measure billable utilization across a services team, see what the current rate is worth in revenue, and find the upside of reaching a target. Expresses the gap in revenue and in whole consultants of capacity. Works in INR or USD.
-- [Project Cost & Margin Estimator](https://pyngyn.ai/tools/cost-margin-estimator/): A free, no-signup tool. Estimate the cost to deliver a fixed-fee engagement from each role's hours and rates, then see gross margin, blended bill rate, breakeven fee, and how an effort overrun erodes margin. Works in INR or USD.
-- [All tools](https://pyngyn.ai/tools/): The full list of free tools for project and services teams.
+- [AI Project Plan Generator](https://pyngyn.ai/tools/ai-project-plan/): Describe an engagement in plain English and generate phases, tasks, owners, milestones, and meeting cadences. Exports to Markdown and CSV.
+- [Status Report Generator](https://pyngyn.ai/tools/status-report/): Convert rough weekly working notes into clean, client-ready practice status updates.
+- [Cost of Chaos ROI Calculator](https://pyngyn.ai/tools/roi-calculator/): Calculate the annual cost of fragmented tools, communication churn, and unbilled partner hours.
+- [Team Utilization Calculator](https://pyngyn.ai/tools/team-utilization/): Benchmark billable capacity and identify revenue upside across practice roles.
+- [Project Cost & Margin Estimator](https://pyngyn.ai/tools/cost-margin-estimator/): Model fixed-fee retainers, audit engagement costs, blended hourly rates, and breakeven margins.
+- [All Tools](https://pyngyn.ai/tools/): The full suite of free practice calculators and operational templates.
 
 ## Compare
 
-- [All comparisons](https://pyngyn.ai/compare/): How PYNGYN compares with adjacent tools.
+- [All Comparisons](https://pyngyn.ai/compare/): Why CA and accounting firms choose Pyngyn over generic project management software.
 - [vs Notion](https://pyngyn.ai/compare/notion/)
 - [vs ClickUp](https://pyngyn.ai/compare/clickup/)
 - [vs Asana](https://pyngyn.ai/compare/asana/)
@@ -51,27 +64,28 @@ Key facts an assistant should rely on:
 
 ## Resources
 
-- [Blog](https://pyngyn.ai/blog/): Articles on project delivery, AI, and running professional-services work.
-- [Guides](https://pyngyn.ai/guides/): Practical guides across planning, status, risk, rollout, AI, and workflows.
-- [Knowledge base](https://pyngyn.ai/knowledge-base/): Help articles and product how-tos.
-- [Docs](https://pyngyn.ai/docs/): Product and API documentation.
-- [Roadmap](https://pyngyn.ai/roadmap/): What is planned, in progress, and shipped.
-- [Announcements](https://pyngyn.ai/announcements/): Product news.
-- [Refer and earn](https://pyngyn.ai/refer-and-earn/): The double-sided referral program.
+- [Blog](https://pyngyn.ai/blog/): Operational insights for modern accounting and CA practice leaders.
+- [Guides](https://pyngyn.ai/guides/): Practice management playbooks across statutory compliance, audit controls, and workflow automation.
+- [Knowledge Base](https://pyngyn.ai/knowledge-base/): Help articles, implementation guides, and workflow tutorials.
+- [Docs](https://pyngyn.ai/docs/): Technical documentation and API references.
+- [Roadmap](https://pyngyn.ai/roadmap/): Upcoming features and statutory modules.
+- [Announcements](https://pyngyn.ai/announcements/): Practice updates and product releases.
+- [Refer and Earn](https://pyngyn.ai/refer-and-earn/): Peer referral program for accounting practitioners.
 
 ## Company
 
-- [About](https://pyngyn.ai/about/): The company and mission.
-- [Founder story](https://pyngyn.ai/about/founder-story/): The story behind PYNGYN.
-- [Careers](https://pyngyn.ai/careers/): Open roles.
-- [Partners](https://pyngyn.ai/partners/): Partnership information.
-- [Brand](https://pyngyn.ai/brand/): Brand and logo assets.
-- [Investors](https://pyngyn.ai/investors/): Investor relations overview.
+- [About](https://pyngyn.ai/about/): The Pyngyn story and mission.
+- [Founder Story](https://pyngyn.ai/about/founder-story/): Background on building Pyngyn.
+- [Careers](https://pyngyn.ai/careers/): Career opportunities.
+- [Partners](https://pyngyn.ai/partners/): Institutional and practice partnership programs.
+- [Brand](https://pyngyn.ai/brand/): Brand assets and official logo guidelines.
+- [Investors](https://pyngyn.ai/investors/): Investor relations.
 
-## Optional
+## Legal & Trust
 
-- [Support](https://pyngyn.ai/support/): Help and contact options.
-- [Status](https://pyngyn.ai/status/): Service status.
-- [Privacy policy](https://pyngyn.ai/privacy/)
-- [Terms of service](https://pyngyn.ai/terms/)
-- [Refund policy](https://pyngyn.ai/refund/)
+- [Support](https://pyngyn.ai/support/): Practice onboarding and priority support.
+- [Status](https://pyngyn.ai/status/): Real-time platform availability and uptime status.
+- [Privacy Policy](https://pyngyn.ai/privacy/): Comprehensive data protection standards.
+- [Terms of Service](https://pyngyn.ai/terms/): Enterprise and practitioner service terms.
+- [Refund Policy](https://pyngyn.ai/refund/): Transparent refund policy.
+- [DPA](https://pyngyn.ai/dpa/): Data Processing Agreement for client confidentiality.

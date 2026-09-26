@@ -12,5 +12,11 @@ const PromoPopup = dynamic(
 );
 
 export function PromoPopupLazy() {
+  if (
+    typeof window !== "undefined" &&
+    (window.location.search.includes("no_popup") || (window as any).__DISABLE_POPUP__)
+  ) {
+    return null;
+  }
   return <PromoPopup />;
 }

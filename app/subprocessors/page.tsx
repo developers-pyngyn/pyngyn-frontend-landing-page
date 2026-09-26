@@ -3,7 +3,8 @@ import { LegalPage } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
   title: "Subprocessors | PYNGYN",
-  description: "The subprocessors Pyngyn uses to provide the marketing site, free tools, and app.pyngyn.ai.",
+  description:
+    "The verified third-party subprocessors used by VIMOVI GlobalTech Private Limited to provide the Pyngyn website, tools, and ClientSpace application.",
   alternates: { canonical: "/subprocessors" },
 };
 
@@ -11,119 +12,90 @@ export default function SubprocessorsPage() {
   return (
     <LegalPage
       url="/subprocessors"
-      title="Subprocessors"
-      updated="June 24, 2026"
+      title="Pyngyn Subprocessors"
+      updated="September 26, 2026"
       readAlongside="Read alongside our [Privacy Policy](/privacy) and [Data Processing Agreement](/dpa)."
-      intro="This page lists the subprocessors we use to provide the Pyngyn marketing site, free tools, and the app.pyngyn.ai product. We review this list periodically and update it when our processing partners change."
+      intro="This page provides a transparent and verified list of third-party subprocessors engaged by VIMOVI GlobalTech Private Limited (“Pyngyn”) to provide cloud hosting, authentication, payment processing, AI capabilities, and edge security across our marketing website at pyngyn.ai and the ClientSpace / Workspace SaaS application at app.pyngyn.ai. Every subprocessor is bound by rigorous data protection, security, and confidentiality agreements consistent with India's DPDP Act, 2023 and the GDPR."
       sections={[
         {
-          heading: "Infrastructure Subprocessors",
+          heading: "Cloud Infrastructure & Edge Hosting",
           blocks: [
             {
               type: "table",
-              headers: ["Sub-processor", "Purpose of processing", "Location(s)", "More information"],
+              headers: ["Subprocessor", "Service & Purpose", "Processing Location", "Compliance & Privacy"],
               rows: [
                 [
-                  "Google Cloud Platform",
-                  "Infrastructure & cloud hosting (asia-south1 region) for app.pyngyn.ai, including database and compute services.",
-                  "India",
+                  "Google Cloud Platform (GCP)",
+                  "Primary cloud infrastructure, multi-tenant PostgreSQL database hosting, object storage, and encrypted snapshot backups for app.pyngyn.ai.",
+                  "India (asia-south1, Mumbai region)",
                   "[cloud.google.com/security/compliance](https://cloud.google.com/security/compliance)",
+                ],
+                [
+                  "Cloudflare, Inc.",
+                  "Edge DNS routing, global Content Delivery Network (CDN), Web Application Firewall (WAF), automated DDoS mitigation, and edge runtime compute for pyngyn.ai.",
+                  "USA & Global Edge Network",
+                  "[cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/)",
                 ],
               ],
             },
           ],
         },
         {
-          heading: "Platform Subprocessors",
+          heading: "Identity, Authentication & Team Access",
           blocks: [
             {
               type: "table",
-              headers: ["Sub-processor", "Purpose of processing", "Location(s)", "More information"],
+              headers: ["Subprocessor", "Service & Purpose", "Processing Location", "Compliance & Privacy"],
               rows: [
                 [
-                  "Google Tag Manager",
-                  "Tag and script management on the marketing site (loads other analytics/marketing tags below).",
-                  "USA",
-                  "[policies.google.com/privacy](https://policies.google.com/privacy)",
-                ],
-                [
-                  "Google Analytics (GA4)",
-                  "Marketing site analytics, page views, timestamps, referrer paths, and session behavior.",
-                  "USA",
-                  "[policies.google.com/privacy](https://policies.google.com/privacy)",
-                ],
-                [
-                  "Meta Platforms (Meta Pixel)",
-                  "Marketing campaign measurement and conversion tracking on the marketing site.",
-                  "USA",
-                  "[facebook.com/privacy/policy](https://www.facebook.com/privacy/policy/)",
-                ],
-                [
-                  "Google Fonts",
-                  "Web font delivery for site typography; loading a font shares the visitor's IP address with Google.",
-                  "USA",
-                  "[policies.google.com/privacy](https://policies.google.com/privacy)",
-                ],
-                [
-                  "Microsoft Entra ID",
-                  "Identity and access management for internal team accounts and Organization-level SSO.",
-                  "USA, EU",
-                  "[microsoft.com/trust-center/privacy](https://www.microsoft.com/en-us/trust-center/privacy)",
-                ],
-                [
-                  "Clerk",
-                  "User authentication, account creation, session management, SSO, and passwordless login for app.pyngyn.ai.",
+                  "Clerk, Inc.",
+                  "User identity management, self-serve registration, Single Sign-On (SSO), multi-factor authentication (MFA), session tokens, and passwordless authentication for app.pyngyn.ai.",
                   "USA",
                   "[clerk.com/legal/privacy](https://clerk.com/legal/privacy)",
                 ],
+                [
+                  "Microsoft Corporation",
+                  "Microsoft Entra ID identity and access management for internal Pyngyn administration and enterprise SAML SSO federation.",
+                  "USA & EU",
+                  "[microsoft.com/trust-center/privacy](https://www.microsoft.com/en-us/trust-center/privacy)",
+                ],
               ],
             },
           ],
         },
         {
-          heading: "LLM / Gen AI Capabilities Subprocessors",
+          heading: "Artificial Intelligence (AI) Engines",
           blocks: [
             {
               type: "table",
-              headers: ["Sub-processor", "Purpose of processing", "Location(s)", "More information"],
+              headers: ["Subprocessor", "Service & Purpose", "Processing Location", "Compliance & Privacy"],
               rows: [
                 [
-                  "Anthropic",
-                  "Provides AI functionality across the Pyngyn platform, including automatic task generation, customer support assistance, organizational health summaries, task assignment recommendations, project insights, workflow recommendations, and other AI-powered features available within app.pyngyn.ai.",
+                  "Anthropic, PBC",
+                  "Generative AI model provider powering ClientSpace and Workspace features within app.pyngyn.ai (automatic project breakdown, weekly client status summaries, and deliverable recommendations). Processes inputs transiently; no customer data used for base model training.",
                   "USA",
                   "[anthropic.com/legal/privacy](https://www.anthropic.com/legal/privacy)",
                 ],
-              ],
-            },
-          ],
-        },
-        {
-          heading: "Customer Support & Scheduling Subprocessors",
-          blocks: [
-            {
-              type: "table",
-              headers: ["Sub-processor", "Purpose of processing", "Location(s)", "More information"],
-              rows: [
                 [
-                  "Calendly",
-                  "Demo scheduling via the /demo page, collects name, email, and meeting details directly into the Calendly account.",
+                  "Groq Inc.",
+                  "High-speed LPU inference engine powering the free public interactive tools on pyngyn.ai (/tools/ai-project-plan, /tools/status-report, and /api/chat). Ephemeral prompt processing; no model training.",
                   "USA",
-                  "[calendly.com/privacy](https://calendly.com/privacy)",
+                  "[groq.com/privacy-policy](https://groq.com/privacy-policy/)",
                 ],
               ],
             },
           ],
         },
         {
-          heading: "Payments Subprocessors",
+          heading: "Payment Processing & Billing",
           blocks: [
             {
               type: "table",
-              headers: ["Sub-processor", "Purpose of processing", "Location(s)", "More information"],
+              headers: ["Subprocessor", "Service & Purpose", "Processing Location", "Compliance & Privacy"],
               rows: [
                 [
-                  "Razorpay",
-                  "Payment processing for paid subscriptions and invoicing.",
+                  "Razorpay Software Pvt. Ltd.",
+                  "PCI-DSS Level 1 compliant payment gateway handling subscription recurring billing, credit/debit card tokenization, UPI transactions, net banking, and automated GST tax invoicing.",
                   "India",
                   "[razorpay.com/privacy](https://razorpay.com/privacy/)",
                 ],
@@ -132,18 +104,67 @@ export default function SubprocessorsPage() {
           ],
         },
         {
-          heading: "What we don't send anywhere",
+          heading: "Sales Scheduling & Communications",
+          blocks: [
+            {
+              type: "table",
+              headers: ["Subprocessor", "Service & Purpose", "Processing Location", "Compliance & Privacy"],
+              rows: [
+                [
+                  "Calendly LLC",
+                  "Demo scheduling widget on /demo allowing prospective firms to select consultation time slots. Collects name, work email, phone (optional), and meeting topics directly into Calendly.",
+                  "USA",
+                  "[calendly.com/privacy](https://calendly.com/privacy)",
+                ],
+              ],
+            },
+          ],
+        },
+        {
+          heading: "Analytics & Campaign Attribution (Consent-Gated)",
+          blocks: [
+            {
+              type: "table",
+              headers: ["Subprocessor", "Service & Purpose", "Processing Location", "Compliance & Privacy"],
+              rows: [
+                [
+                  "Google LLC",
+                  "Google Tag Manager and Google Analytics 4 (GA4) deployed on the marketing website to measure traffic volume and page performance. Strictly blocked until visitor consents. Also delivers Google Fonts.",
+                  "USA",
+                  "[policies.google.com/privacy](https://policies.google.com/privacy)",
+                ],
+                [
+                  "Meta Platforms, Inc.",
+                  "Meta/Facebook Pixel deployed on the public marketing site to measure advertising conversion attribution. Strictly blocked until visitor consents. Never active inside app.pyngyn.ai.",
+                  "USA",
+                  "[facebook.com/privacy/policy](https://www.facebook.com/privacy/policy/)",
+                ],
+              ],
+            },
+          ],
+        },
+        {
+          heading: "Local Browser Storage (Data Not Sent to Servers)",
           blocks: [
             {
               type: "p",
-              text: "Several interactions on our marketing site never reach a subprocessor or our own servers at all:",
+              text: "Several interactive features across our marketing site operate entirely client-side without transmitting inputs to our servers or to any subprocessor:",
             },
             {
               type: "list",
               items: [
-                "**Browser-only storage.** The promo popup timer, workspace offer countdown, and roadmap upvotes are stored using your browser's in-memory state or **localStorage** only. None of this is transmitted to Pyngyn or to any subprocessor.",
-                "**Calculator tools.** Inputs to our ROI, cost-margin, and team-utilization calculators stay in your browser unless you choose to copy or share the results, there is no backend collection for these tools in our current implementation.",
+                "**Browser LocalStorage:** Cookie consent choices (`pyngyn_cookie_consent_v1`), promotional banner dismissals, and roadmap feature upvotes are stored locally in your browser and never leave your device.",
+                "**Financial & Margin Calculators:** Inputs to our ROI Calculator, Cost Margin Estimator, Team Utilization Calculator, and Any Update Cost Calculator are evaluated locally using JavaScript in your browser memory and are not logged or stored on our servers.",
               ],
+            },
+          ],
+        },
+        {
+          heading: "Subprocessor Change Notification Process",
+          blocks: [
+            {
+              type: "p",
+              text: "Pyngyn reviews its subprocessor network regularly to maintain high standards of security, availability, and privacy. Before engaging any new subprocessor that will process Customer Personal Data, Pyngyn will update this page and provide notice to subscribed account administrators in accordance with our [Data Processing Agreement](/dpa).",
             },
           ],
         },

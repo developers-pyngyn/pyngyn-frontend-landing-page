@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import { Navbar } from "@/components/Navbar";
-import { Pricing, Compare, Security } from "@/components/Sections";
-import { FAQ, FinalCTA, Footer } from "@/components/Footer";
+import { Security } from "@/components/Sections";
+import { FinalCTA, Footer } from "@/components/Footer";
 import { ExitIntentModal } from "@/components/ExitIntentModal";
 import { DEMO_URL } from "@/components/config";
-import { resolveRegion } from "@/components/regionPricing";
+import { ClientSpacePricing } from "@/components/clientspace/ClientSpacePricing";
 import {
   JsonLd,
   breadcrumbSchema,
@@ -13,34 +12,23 @@ import {
   webPageSchema,
 } from "@/components/schema";
 
-// Cloudflare stamps `CF-IPCountry` on every request that hits its edge —
-// reading it via headers() is what makes this page IP-aware, and it's also
-// what forces this route out of static prerendering (it must be resolved
-// per-request, not once at build time). `runtime = "edge"` is required for
-// any dynamic route under @cloudflare/next-on-pages. Structured data (JSON-LD
-// below) intentionally stays in USD regardless of visitor region — that's
-// the canonical price search engines index, not what a given visitor sees.
-export const runtime = "edge";
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
-  title: "Pricing | PYNGYN",
+  title: "ClientSpace Pricing for CA & Accounting Firms | Pyngyn",
   description:
-    "Client Space, Workspace, Combined Bundle, and Enterprise plans. Client Space is $19 per client / month, standalone. Workspace is $9 per seat / month. Bundle both for $24.99/mo. Book a demo when you're evaluating for your firm.",
+    "Transparent pricing for Chartered Accountants, tax practitioners, and audit firms. Pro plan at ₹499/mo, Business plan at ₹799/mo with workload cockpit & automations, and custom Enterprise tier.",
   alternates: { canonical: "/pricing" },
 };
 
 export default function PricingPage() {
-  const region = resolveRegion(headers().get("cf-ipcountry"));
   return (
     <>
       <JsonLd
         data={[
           webPageSchema({
             url: "/pricing",
-            name: "Pricing | PYNGYN",
+            name: "ClientSpace Pricing | Pyngyn",
             description:
-              "Client Space is $19 per client/month, standalone. Workspace is $9 per seat/month. Bundle both for $24.99/mo.",
+              "ClientSpace pricing purpose-built for Chartered Accountants and accounting firms: Pro plan at ₹499/mo, Business plan at ₹799/mo, and custom Enterprise tier.",
             breadcrumbId: "/pricing#breadcrumb",
           }),
           breadcrumbSchema(
@@ -52,40 +40,32 @@ export default function PricingPage() {
           ),
           productSchema({
             url: "/pricing",
-            name: "PYNGYN",
+            name: "Pyngyn ClientSpace",
             description:
-              "The operating system for professional-services firms: a standalone Client Space plan, a standalone Workspace plan, a Combined Bundle, and Enterprise.",
+              "The practice operating system for Chartered Accountants, tax practitioners, and audit firms: Pro plan at ₹499/user/month, Business plan at ₹799/user/month, and Enterprise.",
             offers: [
               {
-                name: "Client Space",
-                priceMonthly: 19,
-                priceCurrency: "USD",
+                name: "ClientSpace Pro",
+                priceMonthly: 499,
+                priceCurrency: "INR",
                 description:
-                  "A branded client portal, sold standalone per client: client-visible tasks, deliverables, status, approvals, and the client role. No Workspace required.",
+                  "Essential client workspace, regulatory task tracking, and white-labeled client portal for boutique CA & tax firms.",
                 url: "/pricing",
               },
               {
-                name: "Workspace",
-                priceMonthly: 9,
-                priceCurrency: "USD",
+                name: "ClientSpace Business",
+                priceMonthly: 799,
+                priceCurrency: "INR",
                 description:
-                  "The firm's operating system, per internal seat: projects, finances, billable timesheets, Business Brain AI, automations, team skills, and 240+ templates.",
+                  "Complete practice operating system with Workload Cockpit, WhatsApp automations, Tally/Computax integrations, and 4-eye partner review gates.",
                 url: "/pricing",
               },
               {
-                name: "Combined Bundle",
-                priceMonthly: 24.99,
-                priceCurrency: "USD",
-                description:
-                  "Workspace and Client Space together at a bundled rate, lower than buying each separately.",
-                url: "/pricing",
-              },
-              {
-                name: "Enterprise",
+                name: "ClientSpace Enterprise",
                 isCustom: true,
-                priceCurrency: "USD",
+                priceCurrency: "INR",
                 description:
-                  "Unlimited seats, SSO/SAML, RBAC, audit log, data residency, custom fields, API and webhooks, and dedicated onboarding and support.",
+                  "Dedicated practice migration, custom ERP integrations, enterprise SSO, and 99.9% uptime SLA for large CA partnerships.",
                 url: "/pricing",
               },
             ],
@@ -94,30 +74,39 @@ export default function PricingPage() {
       />
       <Navbar />
       <main id="main">
-        <section className="wrap pb-[10px] pt-[150px] text-center">
-          <span className="eyebrow">Pricing</span>
-          <h1 className="mx-auto mt-3 max-w-[760px] font-display text-[clamp(34px,4.8vw,56px)] font-semibold leading-[1.05] tracking-[-0.025em]">
-            Pricing that scales with your firm.
+        {/* Page Hero Header */}
+        <section className="wrap pb-[30px] pt-[130px] sm:pt-[150px] text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#14223d]/20 bg-[#f0f4fa] px-3.5 py-1 text-[12px] font-semibold text-[#14223d] shadow-2xs mb-4">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#14223d] animate-pulse" />
+            <span>Pyngyn ClientSpace &bull; Practice-Friendly Pricing</span>
+          </div>
+          <h1 className="mx-auto mt-2 max-w-[840px] font-display text-[clamp(30px,4.5vw,52px)] font-bold leading-[1.12] tracking-[-0.025em] text-slate-950">
+            Predictable pricing designed for CA &amp; accounting practices.
           </h1>
-          <p className="lead mx-auto mt-4">
-            Buy Client Space on its own, Workspace on its own, or bundle both for less. Book
-            a demo when you&apos;re evaluating for your firm.
+          <p className="lead mx-auto mt-4 max-w-[680px] text-sm sm:text-base text-slate-600">
+            No per-client penalty fees. No hidden setup costs. Start on Pro for essential statutory workflows, or unlock the full Business Cockpit with automations and partner review sign-offs.
           </p>
         </section>
-        <Pricing showHeader={false} region={region} />
-        <Compare />
+
+        {/* Pricing Matrix & Features */}
+        <section className="wrap pb-20">
+          <ClientSpacePricing />
+        </section>
+
+        {/* Security & Compliance Certifications */}
         <Security />
-        <FAQ />
+
+        {/* Final Call to Action */}
         <FinalCTA />
       </main>
       <Footer />
       <ExitIntentModal
         ctaHref={DEMO_URL}
-        ctaLabel="Book a 30-min walkthrough"
-        eyebrow="Questions before you go?"
-        title="Not sure which plan fits your firm?"
-        body="A quick 30-minute walkthrough, we'll map Client Space and Workspace pricing to your actual seat and client count, no obligation."
-        dismissLabel="No thanks, I'll keep browsing"
+        ctaLabel="Book a 30-min CA practice walkthrough"
+        eyebrow="Questions before you choose?"
+        title="Need guidance choosing the right plan for your firm?"
+        body="Join a 30-minute practice consultation with our team. We'll review your active client roster, team size, and compliance workflows to suggest the right tier."
+        dismissLabel="No thanks, I'll explore plans on my own"
       />
     </>
   );

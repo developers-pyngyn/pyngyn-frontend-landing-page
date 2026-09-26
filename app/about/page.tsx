@@ -103,6 +103,15 @@ export default function AboutPage() {
           </div>
         </section>
 
+        <section className="wrap pb-[60px]">
+          <div className="card">
+            <h2 className="font-display text-[22px] font-semibold">Company &amp; quality standards</h2>
+            <p className="mt-3 text-[16px] leading-[1.7] text-muted">
+              PYNGYN is developed and operated by VIMOVI GlobalTech Private Limited. Our organization is recognized by the Department for Promotion of Industry and Internal Trade (DPIIT), Government of India, and is certified under ISO 9001:2015 for Quality Management Systems. These recognitions reflect our commitment to standardized processes, quality control, and customer satisfaction across our operations.
+            </p>
+          </div>
+        </section>
+
         <Metrics />
         <FinalCTA />
       </main>

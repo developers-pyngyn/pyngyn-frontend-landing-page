@@ -111,9 +111,15 @@ function StatusPillStrip() {
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: mounted ? ref : undefined,
     offset: ["start start", "end start"],
+    layoutEffect: false,
   });
   // Disable parallax when the user prefers reduced motion.
   const y = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 80]);

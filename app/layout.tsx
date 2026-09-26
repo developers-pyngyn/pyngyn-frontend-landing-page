@@ -3,7 +3,7 @@
  * Designed and built by Nikunj Chugh.
  * (This credit is intentionally not rendered anywhere on the page.)
  */
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { PromoPopupLazy } from "@/components/PromoPopupLazy";
 import { ConsentScripts } from "@/components/ConsentScripts";
@@ -53,13 +53,19 @@ const mono = localFont({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  authors: [{ name: "Nikunj Chugh" }],
-  creator: "Nikunj Chugh",
-  title: "PYNGYN: The operating system for professional-services firms",
+  authors: [{ name: "Pyngyn" }],
+  creator: "Pyngyn",
+  title: "Pyngyn ClientSpace | Client Management for CA & Accounting Firms",
   description:
-    "PYNGYN gives every client a branded Clientspace (a standalone portal for status, documents, and approvals), with Workspace, your firm's back office, available on its own or bundled together. Built for professional-services firms. Book a demo.",
+    "Manage clients, tasks, documents, deadlines and workflows in one connected workspace purpose-built for CA, accounting and tax practices.",
   // Reference static files in /public (not the app/icon route convention,
   // which next-on-pages rejects because it can't be an edge route).
   icons: {

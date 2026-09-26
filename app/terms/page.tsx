@@ -3,7 +3,8 @@ import { LegalPage } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
   title: "Terms of Service | PYNGYN",
-  description: "The terms governing your access to and use of Pyngyn's websites, AI tools, and applications.",
+  description:
+    "Terms of Service governing your access to and use of Pyngyn ClientSpace and Workspace software applications and services.",
   alternates: { canonical: "/terms" },
 };
 
@@ -12,137 +13,173 @@ export default function TermsPage() {
     <LegalPage
       url="/terms"
       title="Terms of Service"
-      updated="June 24, 2026"
-      intro="These Terms of Service (“Terms”) and all policies referenced in them govern your access to and use of the websites, marketing pages, AI-powered tools, and applications provided by Vimovi Global Tech, operating under the brand “Pyngyn” (“Pyngyn,” “we,” “us,” or “our”), including the marketing website at [pyngyn.ai](https://pyngyn.ai), the product application at [app.pyngyn.ai](https://app.pyngyn.ai), and any related tools, calculators, AI features, content, or services (together, the “Service(s)”). If you're using our Service on behalf of an organization or entity (“Organization”), then you are agreeing to these Terms on behalf of that Organization, and you represent and warrant that you have the authority to bind the Organization to these Terms. In that case, “you” and “your” refers to that Organization. Our Terms and our [Privacy Policy](/privacy) affect your legal rights and obligations. If you do not agree to be bound by all of these, please do not access or use our Service."
+      updated="September 26, 2026"
+      readAlongside="Read alongside our [Privacy Policy](/privacy), [Data Processing Agreement](/dpa), and [Refund Policy](/refund)."
+      intro="These Terms of Service (“Terms”) constitute a binding legal agreement between you (“Customer,” “User,” or “you”) and VIMOVI GlobalTech Private Limited, operating under the brand “Pyngyn” (a DPIIT-recognized startup certified under ISO 9001:2015 for Quality Management Systems; “Pyngyn,” “we,” “us,” or “our”). These Terms govern your access to and use of our public websites at [pyngyn.ai](https://pyngyn.ai), our ClientSpace and Workspace software applications at [app.pyngyn.ai](https://app.pyngyn.ai), and all associated tools, APIs, calculators, and AI capabilities (together, the “Service(s)”). If you register for an account or access the Service on behalf of a company, partnership, accounting or CA firm, legal practice, consultancy, or other legal entity (“Organization”), you represent and warrant that you have full legal authority to bind that Organization to these Terms. In that case, “you” and “your” refers to that Organization. If you do not agree to these Terms, you must not access or use the Services."
       sections={[
         {
-          heading: "Your Account",
+          heading: "Description of the Services",
           blocks: [
+            {
+              type: "p",
+              text: "Pyngyn provides a cloud-based operating system purpose-built for professional services firms, chartered accountants, legal advisors, consultancies, agencies, and architecture practices. The Services comprise two core product components:",
+            },
             {
               type: "list",
               items: [
-                "**1.1 Accurate Information.** You are responsible for providing accurate, current, and complete information when you sign up for app.pyngyn.ai or otherwise create an account to use the Service.",
-                "**1.2 Safeguarding Your Account.** You are responsible for safeguarding any passwords or credentials used to access your account, and for all activities that occur under it.",
-                "**1.3 Security Notification.** You agree to notify us immediately upon becoming aware of any breach of security or unauthorized use of your account by contacting **[vivek.pandey@pyngyn.com](mailto:vivek.pandey@pyngyn.com)**.",
-                "**1.4 Appropriate Permissions.** You may not disassemble, decompile, or reverse engineer the Service, or assist anyone else to do so, unless such restriction is prohibited by law.",
-                "**1.5 Human Intervention.** Your account must be registered and operated by a human being. Accounts registered by bots or other automated methods are not permitted.",
-                "**1.6 Age Restrictions.** By registering for a Pyngyn account, you represent and warrant that you are at least 16 years of age, or the age of majority in your jurisdiction, whichever is greater.",
-                "**1.7 Unauthorized Use.** You may not use the Service for any illegal or unauthorized purpose. You agree to comply with all laws, rules, and regulations applicable to your use of the Service and your Content, including but not limited to data protection and intellectual property laws.",
-                "**1.8 Fees Payable.** In the event you have a paid plan, in exchange for and as consideration for the Services, you will pay all applicable fees as they become due. You are responsible for providing complete and accurate billing information and authorize us to charge such fees using your selected payment method. We may suspend or terminate your use of the Service if fees become past due, except as required by law or as set forth in our then-current Refund Policy.",
-                "**1.9 Taxes.** You are responsible for all taxes (excluding taxes on our net income) associated with your purchase and use of the Service, and we will charge tax if required to do so by law.",
-                "**1.10 Automatic Renewal.** By default, customer accounts on a paid subscription plan are set to automatically renew. We may provide you with notice of any upcoming charges associated with your renewal as required by applicable law. You may cancel auto-renewal at any time from your account settings or by contacting **[vivek.pandey@pyngyn.com](mailto:vivek.pandey@pyngyn.com)**.",
-                "**1.11 Revised Fees.** We may revise the fees for the Service from time to time. We will provide you with reasonable advance notice of any changes in fees before they take effect.",
+                "**ClientSpace:** A dedicated, branded client portal environment enabling professional practices to share deliverables, exchange sensitive files, manage multi-stakeholder approval workflows, track project milestones, and communicate with external clients without fragmented email threads.",
+                "**Workspace:** An internal operations platform providing project planning, team workload scheduling, statutory compliance tracking, billing coordination, and automated progress reporting.",
+                "**AI Productivity Capabilities:** Integrated generative AI tools that assist practitioners with drafting project plans, structuring weekly client status reports, detecting delivery bottlenecks, and summarizing operational workflows.",
               ],
             },
           ],
         },
         {
-          heading: "Your Use of Our Service",
+          heading: "Account Registration, Authorized Users & Security Responsibilities",
           blocks: [
             {
               type: "list",
               items: [
-                "**2.1** You must not change, modify, adapt, or alter the Service, or change or modify another website so as to falsely imply that it is associated with the Service or with us.",
-                "**2.2** You must not access our private API by means other than those expressly permitted by us.",
-                "**2.3** You must not interfere with or disrupt the Service or servers or networks connected to the Service, including by transmitting any worms, viruses, spyware, malware, or any other code of a destructive or disruptive nature. You may not inject content or code or otherwise alter or interfere with the way our pages are rendered or displayed in a user's browser or device.",
-                "**2.4** You must not attempt to restrict another user from using or enjoying the Service, and you must not encourage or facilitate violations of these Terms or any of our other policies.",
-                "**2.5** You agree that you will not copy, reproduce, republish, frame, download, transmit, modify, display, reverse engineer, sell, rent, lease, loan, assign, distribute, license, sublicense, or exploit in any way, in whole or in part, our Content, the Services, the Software, or any related software, except as expressly stated in these Terms.",
-                "**2.6** Violation of these Terms may, in our sole discretion, result in termination of your account. We reserve the right to investigate and prosecute violations of any of these Terms to the fullest extent of the law, and we may involve and cooperate with law enforcement authorities in prosecuting users who violate these Terms.",
-                "**2.7** If you elect to utilize any third-party application in connection with your use of the Service, by doing so you are consenting to your Content being shared with such third-party application. To understand how such third-party providers utilize your Content and other information, you should review their privacy policies.",
+                "**1.1 Accurate Credentials.** You agree to provide true, accurate, current, and complete information during registration on app.pyngyn.ai and to keep your organization and billing details updated at all times.",
+                "**1.2 Managing Authorized Users.** Customer is responsible for managing and provisioning authorized users (including partners, staff, contractors, and invited external clients) and for ensuring that all authorized users comply with these Terms.",
+                "**1.3 Keeping Credentials Secure.** Customer and its authorized users are responsible for keeping account credentials, passwords, and authentication tokens secure and confidential. Customer must immediately notify Pyngyn at **[vivek.pandey@pyngyn.com](mailto:vivek.pandey@pyngyn.com)** upon discovering any unauthorized access or security incident.",
+                "**1.4 Lawful Use & Upload Authority.** Customer is responsible for using ClientSpace lawfully and warrants that it has all necessary rights, licenses, client consents, and legal authority to upload and process customer, client, and financial information within the platform.",
+                "**1.5 Security Integrity & Tenant Boundaries.** Customer and its users shall not attempt to bypass security controls, probe platform vulnerabilities, access another customer's data or workspaces, or upload any viruses, worms, malware, or malicious code intended to compromise the service.",
+                "**1.6 Age of Majority & Human Accounts.** The Service is a B2B platform available only to individuals who are at least eighteen (18) years of age. Accounts must be registered by human beings; programmatic bot registration without prior consent is prohibited.",
               ],
             },
           ],
         },
         {
-          heading: "General Conditions",
+          heading: "Customer Content, Intellectual Property & Ownership",
           blocks: [
+            {
+              type: "p",
+              text: "We believe your firm's data should remain entirely yours. We clearly distinguish between what belongs to you and what belongs to Pyngyn:",
+            },
             {
               type: "list",
               items: [
-                "**3.1** We may suspend or terminate your account(s) or cease providing you with all or part of the Service at any time without liability to you for any reason, including, but not limited to, if we reasonably believe: (i) you have violated these Terms; (ii) you create risk or possible legal exposure for us; (iii) your account has had no activity (replies or logins) for sixty (60) days; (iv) your provision of our Services to you is no longer commercially viable; or (v) our provision of the Services to you is, in our sole discretion, no longer commercially viable.",
-                "**3.2** Upon termination, all access rights, licenses, and/or other rights granted to you in these Terms will immediately cease. If we terminate your access to the Service, your Content and all other data will no longer be accessible through your account.",
-                "**3.3** We reserve the right, in our sole discretion, to change these Terms and/or our Services offered from time to time (“Updated Terms”). Unless we make a change for legal or administrative reasons, we will provide reasonable advance notice before the Updated Terms become effective. We agree that changes cannot be made retroactive. Your continued use of the Service after the effective date of the Updated Terms constitutes your agreement to the Updated Terms.",
-                "**3.4** We reserve the right to refuse access to the Service to anyone for any reason at any time.",
-                "**3.5** You hereby authorize us, directly or through third parties, to make any inquiries we consider necessary to validate your identity or account information, which may include asking you for further information, requiring you to provide a form of government identification, or verifying your information against third-party databases.",
-                "**3.6** We may, but have no obligation to, remove, edit, block, and/or monitor Content or accounts containing Content that we determine in our sole discretion violates these Terms.",
-                "**3.7** You agree that you are responsible for all data charges you incur through your use of the Service.",
-                "**3.8** By creating an Account, you agree that we may send you informational and promotional emails or messages as part of the normal business operation of your use of the Services. You may manage your communication preferences or opt out of non-essential messages at any time through your account settings or the unsubscribe link included in such communications.",
-                "**3.9** We prohibit crawling, scraping, caching, or otherwise accessing any content on the Service via automated means, including bots, except as may result from standard search engine indexing.",
-                "**3.10** In some cases, it is necessary for our employees, contractors, or agents to access your account and Content in order to diagnose a problem, respond to a support request, or maintain the security and integrity of the Service.",
-                "**3.11** In connection with providing you the Service, we may transfer, store, and process your Content in India or in any other country in which we or our agents maintain facilities. By using the Service, you consent to this transfer, processing, and storage of your Content.",
+                "**Customer Content Ownership:** Customer retains 100% of all right, title, interest, and intellectual property in and to all data, documents, files, client records, project scopes, task data, financial computations, comments, and communications uploaded or submitted to the Service by Customer or its Authorized Users (“Customer Content”). Pyngyn claims zero ownership over Customer Content.",
+                "**Limited Service License to Pyngyn:** Customer grants Pyngyn a worldwide, non-exclusive, royalty-free, limited license to host, copy, transmit, display, and process Customer Content solely to the extent necessary to provide, maintain, support, and secure the Services in accordance with these Terms and our [Data Processing Agreement](/dpa).",
+                "**Pyngyn Intellectual Property:** Pyngyn and its licensors retain all right, title, and interest in and to the Services, including all software, source code, user interface designs, logos, trademarks, documentation, algorithms, and product architecture (“Pyngyn Property”). Nothing in these Terms grants Customer any right or license to Pyngyn Property except the limited right to access and use the Service during the subscription term.",
+                "**Feedback:** If you submit suggestions, recommendations, or ideas regarding the Services (“Feedback”), Pyngyn may freely use, incorporate, and exploit such Feedback without any compensation, attribution, or accounting to you.",
               ],
             },
           ],
         },
         {
-          heading: "Rights",
+          heading: "Customer Responsibility for Client Data & Lawful Processing",
           blocks: [
+            {
+              type: "p",
+              text: "Professional practices frequently upload confidential client documents, tax filings, audit papers, and business records into ClientSpace. Customer represents, warrants, and covenants that:",
+            },
             {
               type: "list",
               items: [
-                "**4.1 Definitions.** For purposes of these Terms: (i) “Content” means any data, text, files, information, usernames, images, graphics, photos, audio and video clips, and other content or material, whether submitted to, generated by, or available through the Service; and (ii) “User Content” means any Content that account holders provide to be made available through the Services. Content includes without limitation User Content.",
-                "**4.2 Pyngyn Content.** Unless otherwise stated, all materials contained on or within the Services, including text, graphics, images, code, illustrations, designs, icons, photographs, video clips, and written and other materials (collectively, “Pyngyn Content”), as well as their selection and arrangement, are owned, controlled, or licensed by Pyngyn or our licensors and are protected by copyright, trademark, trade dress, and/or other intellectual property laws. Except as expressly provided in these Terms, we do not grant any express or implied rights to use Pyngyn Content.",
-                "**4.3 Restriction to Use of Pyngyn Content and Intellectual Property.** You agree that you will not copy, reproduce, republish, frame, download, transmit, modify, display, reverse engineer, sell, or participate in any sale of, rent, lease, loan, assign, distribute, license, sublicense, or exploit in any way, in whole or in part, Pyngyn Content, the Services, or any related software, except as expressly stated in these Terms.",
-                "**4.4 Rights in Customer Content.** We claim no ownership rights over the Content that you submit, upload, or create using the Service (“Customer Content”). As between you and Pyngyn, any Customer Content that is your intellectual property shall remain yours. These Terms of Service do not grant us any licenses or rights to your Customer Content except for the limited rights needed for us to provide the Service to you.",
-                "**4.5 Limited Use of Customer Content.** Notwithstanding the foregoing, we may access Content to determine how we can improve our Service, and to determine customer satisfaction. We may also use aggregated, de-identified data derived from your use of the Service (including data submitted to AI-assisted tools) to provide, maintain, and improve the Service, develop new features, and produce benchmarking or analytics, provided such data does not identify you or your Organization.",
-                "**4.6 AI-Assisted Features.** Certain features of the Service use generative AI to provide functionality such as task generation, support assistance, organizational reporting, task assignment recommendations, project insights, workflow recommendations, and other AI-powered capabilities. Where these features rely on a third-party AI model provider, your inputs are transmitted to that provider solely to generate the requested output. You should avoid submitting sensitive personal data, confidential third-party information, or special categories of personal data into AI-assisted features unless you have an appropriate lawful basis and have informed any relevant data subjects. Generated output may be inaccurate, incomplete, or unsuitable for your purposes, and you are responsible for reviewing and verifying any AI-generated output before relying on it.",
-                "**4.7 Alerts and Notifications.** As part of the Services we provide, you may (if enabled) receive push notifications, text messages, alerts, emails, or other types of messages directly sent to you or available inside the Services (“Notifications”). You have control over the Notifications settings, and can opt in or out of these Notifications through the Services (with the possible exception of infrequent, important service announcements and administrative messages).",
-                "**4.8 Your Representations and Warranties.** You represent and warrant that: (i) you own the Content you post on or through the Services, or otherwise have the right to grant the rights and licenses set forth in these Terms; (ii) the posting and use of your Content on or through the Service does not violate, misappropriate, or infringe on the rights of any third party, including privacy rights, publicity rights, copyrights, trademark, and/or other intellectual property rights; (iii) you agree to pay for all royalties, fees, and any other monies owed by reason of Content you post on or through the Service; and (iv) you have the legal right and capacity to enter into these Terms in your jurisdiction.",
-                "**4.9 Trademarks.** The Pyngyn and Vimovi Global Tech name, logo, and trademarks may not be copied, imitated, or used, in whole or in part, without our prior written permission.",
-                "**4.10 Service Availability and Backups.** Although it is our intention for the Service to be available as much as possible, there will be occasions when the Service may be interrupted, including without limitation, for scheduled maintenance or upgrades, for emergency repairs, or due to failure of telecommunications links or equipment. Consequently, we encourage you to maintain your own backup of your Content. You also agree that we will not be liable to you for any modification, suspension, or discontinuation of the Service.",
-                "**4.11 Content Responsibility.** You agree that we are not responsible for, and do not endorse, Content posted within the Service. We do not have any obligation to prescreen, monitor, edit, or remove any Content. If your Content violates these Terms, you may bear legal responsibility for that Content.",
+                "**Authority and Lawful Grounds:** Customer has obtained all necessary rights, licenses, client consents, authorizations, or established valid legal grounds under applicable law (including India's DPDP Act, 2023 and professional conduct regulations) to upload, process, and transfer Customer Content into ClientSpace.",
+                "**Client Privacy Notices:** Where required by law, Customer has provided appropriate privacy disclosures to its end-clients regarding the use of cloud-based portal software for engagement delivery.",
+                "**Professional Review of Deliverables:** Customer exercises independent professional judgment and due diligence before relying on, acting upon, or transmitting any deliverables, calculations, or reports produced through the Service to its clients.",
+                "**Confidentiality Compliance:** Customer's use of ClientSpace complies with all applicable professional secrecy and confidentiality rules governing Chartered Accountants, Advocates, Company Secretaries, or management consultants in their respective jurisdictions.",
               ],
             },
           ],
         },
         {
-          heading: "Software",
+          heading: "Acceptable Use Policy & Restrictions",
           blocks: [
             {
               type: "p",
-              text: "As part of the Service, we may provide downloadable client software (the “Software”) for your use in connection with the Service. Contingent upon your compliance with these Terms, we grant you a limited, nonexclusive, nontransferable, revocable license to use the Software solely to access the Service.",
-            },
-          ],
-        },
-        {
-          heading: "Feedback",
-          blocks: [
-            {
-              type: "p",
-              text: "It is our policy to accept or consider content, information, ideas, suggestions, or other materials other than those we have specifically requested and to which certain specific terms, conditions, and requirements may apply (“User Submissions”). You further agree that we will be entitled to use, reproduce, disclose, modify, adapt, create derivative works from, publish, display, and distribute any User Submissions you submit for any purpose whatsoever, without restriction and without compensating you in any way, and we shall be under no obligation to keep any User Submissions confidential.",
-            },
-          ],
-        },
-        {
-          heading: "Publicity",
-          blocks: [
-            {
-              type: "p",
-              text: "You agree that by using the Services, you are providing your consent for Pyngyn to use your Organization's name and logo to identify you as a customer on our website and/or other promotional, sales, or marketing materials. You may request that we cease such use at any time by emailing **[vivek.pandey@pyngyn.com](mailto:vivek.pandey@pyngyn.com)**.",
-            },
-          ],
-        },
-        {
-          heading: "Reporting Intellectual Property Violations",
-          blocks: [
-            {
-              type: "p",
-              text: "If you believe your work has been copied in a way that constitutes infringement, please provide a notice containing the following information to our designated agent:",
+              text: "You agree that you will not, and will not permit any Authorized User or third party to:",
             },
             {
               type: "list",
               items: [
-                "A description of the copyrighted work or other intellectual property that you claim has been infringed;",
-                "A description of where the material that you claim is infringing is located;",
-                "Your address, telephone number, and email address;",
-                "A statement that you have a good-faith belief that the disputed use is not authorized;",
-                "A statement, made under penalty of perjury, that the above information is accurate; and",
-                "Your physical or electronic signature.",
+                "Disassemble, decompile, reverse-engineer, or attempt to derive the source code or underlying architecture of the Service;",
+                "Access or query the Service through unauthorized automated means (such as scrapers, crawlers, or bots), except standard search engines indexing public marketing pages;",
+                "Interfere with, disrupt, or compromise the integrity, security, or performance of the Service, servers, networks, or cloud hosting infrastructure;",
+                "Upload or transmit any viruses, malware, worms, trojan horses, ransomware, or other malicious computer code;",
+                "Bypass, disable, or circumvent any rate-limiting, authentication controls, encryption, or security measures implemented on the platform;",
+                "Use the Service to transmit unsolicited commercial communications (spam) or violate any applicable telemarketing or electronic communication laws;",
+                "Upload or process any content that infringes upon the intellectual property, privacy, publicity, or trade secret rights of any third party;",
+                "Resell, sublicense, lease, rent, or distribute access to the Service to unauthorized third parties without Pyngyn's express written agreement.",
               ],
             },
+          ],
+        },
+        {
+          heading: "Confidentiality Obligations",
+          blocks: [
+            {
+              type: "list",
+              items: [
+                "**5.1 Definition of Confidential Information.** “Confidential Information” means all non-public information disclosed by one party (“Disclosing Party”) to the other party (“Receiving Party”) that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information and circumstances of disclosure. Customer Confidential Information includes all Customer Content. Pyngyn Confidential Information includes the non-public aspects of the Service, pricing proposals, and security audit documentation.",
+                "**5.2 Protection Standards.** The Receiving Party agrees to: (i) protect the Disclosing Party's Confidential Information with the same degree of care it uses for its own confidential information of like kind (and not less than a reasonable degree of care); (ii) use Confidential Information solely to perform obligations or exercise rights under these Terms; and (iii) disclose Confidential Information only to employees, contractors, and subprocessors who have a need to know and are bound by confidentiality obligations no less restrictive than those herein.",
+                "**5.3 Exclusions.** Confidential Information does not include information that: (i) is or becomes publicly known without breach of these Terms; (ii) was known to Receiving Party prior to disclosure without confidentiality breach; (iii) is independently developed without reference to Disclosing Party's Confidential Information; or (iv) is received from a third party without breach of any confidentiality obligation.",
+                "**5.4 Compelled Disclosure.** If required by applicable court order or government subpoena to disclose Confidential Information, the Receiving Party will provide prompt advance written notice (where legally permissible) so the Disclosing Party may seek a protective order.",
+              ],
+            },
+          ],
+        },
+        {
+          heading: "Artificial Intelligence (AI) Features",
+          blocks: [
+            {
+              type: "list",
+              items: [
+                "**6.1 Purpose of AI Features.** Pyngyn provides generative AI tools (such as project plan generation, status reporting, and workload summaries) to assist users with administrative operations. These features rely on enterprise model APIs provided by our AI partners (including Anthropic and Groq).",
+                "**6.2 No Model Training on Customer Content.** Pyngyn does not use Customer Content, client files, or workspace project data to train base generative AI models without your explicit written consent. Our agreements with AI API providers strictly prohibit the use of customer inputs for model training.",
+                "**6.3 No Transfer of Ownership.** You retain full ownership of all prompts and inputs submitted to AI features. Pyngyn assigns to Customer all its right, title, and interest (if any) in the specific outputs generated for Customer by the AI features.",
+                "**6.4 Verification Responsibility.** Generative AI outputs are probabilistic and may occasionally contain inaccuracies, omissions, or outdated references. All AI-generated suggestions, project plans, and status reports are provided “as is” as working drafts, and Customer is solely responsible for reviewing, verifying, and approving all outputs before presenting them to clients or relying on them for business decisions.",
+              ],
+            },
+          ],
+        },
+        {
+          heading: "Data Protection, DPA & Regulatory Compliance",
+          blocks: [
             {
               type: "p",
-              text: "We reserve the right to remove Content alleged to be infringing without prior notice and at our sole discretion. In appropriate circumstances, we will also terminate a user's account if the user is determined to be a repeat infringer. Notices can be sent to **[vivek.pandey@pyngyn.com](mailto:vivek.pandey@pyngyn.com)**.",
+              text: "Both parties agree to comply with applicable data protection laws, including India's Digital Personal Data Protection Act, 2023 (DPDP Act) and the GDPR where applicable. With respect to Customer Content and personal data processed within ClientSpace, Customer is the Data Fiduciary (or Data Controller) and Pyngyn is the Data Processor. Personal data handling is governed by our **[Privacy Policy](/privacy)** and binding **[Data Processing Agreement](/dpa)**, which is incorporated into these Terms by reference. Customer is responsible for ensuring that all data uploaded or processed complies with applicable data protection requirements. Pyngyn may process and retain security information and technical logs as required for service security, fraud prevention, troubleshooting, and legal and regulatory compliance (including applicable Indian cybersecurity requirements). Customer authorizes Pyngyn to engage third-party Subprocessors as documented on our **[Subprocessors](/subprocessors)** directory, subject to the safeguards set forth in the DPA.",
+            },
+          ],
+        },
+        {
+          heading: "Subscription Fees, Invoicing & Payment Terms",
+          blocks: [
+            {
+              type: "list",
+              items: [
+                "**8.1 Pricing & Plans.** Customer agrees to pay all applicable subscription fees in accordance with the pricing schedule displayed on our website or set forth in an executed order form. Fees are billed in advance on a recurring monthly or annual basis.",
+                "**8.2 Payment Processing via Razorpay.** Payments are processed securely via our PCI-DSS Level 1 compliant payment gateway partner, **Razorpay**. By subscribing, you authorize Razorpay and Pyngyn to charge your selected payment method (Credit/Debit Card, Net Banking, or UPI) for all recurring subscription charges until cancelled.",
+                "**8.3 Taxes.** All subscription fees are exclusive of applicable taxes. In India, Goods and Services Tax (GST) will be charged at the statutory rate and itemized on tax invoices containing Customer's GSTIN where provided.",
+                "**8.4 Automatic Renewal & Cancellation.** Subscriptions automatically renew at the end of each billing cycle unless cancelled prior to the renewal date. You may cancel your subscription renewal at any time directly through your account settings or by emailing **[vivek.pandey@pyngyn.com](mailto:vivek.pandey@pyngyn.com)**. Cancellations, prorated billing for upgrades, and refunds are governed by our **[Refund & Subscription Cancellation Policy](/refund)**.",
+                "**8.5 Fee Adjustments.** Pyngyn reserves the right to modify subscription pricing upon at least thirty (30) days advance notice. Price changes will take effect only upon your next billing renewal.",
+              ],
+            },
+          ],
+        },
+        {
+          heading: "Service Availability & Maintenance",
+          blocks: [
+            {
+              type: "p",
+              text: "Pyngyn uses commercially reasonable efforts to ensure the Service is available 24 hours a day, 7 days a week, excluding scheduled maintenance windows and emergency repairs. Scheduled maintenance is conducted during off-peak hours with advance notice where feasible. Pyngyn does not provide an absolute uptime SLA unless explicitly agreed in a separate Enterprise Service Level Agreement. We maintain automated multi-region encrypted database snapshots to prevent data loss.",
+            },
+          ],
+        },
+        {
+          heading: "Suspension, Termination & Post-Termination Data Handling",
+          blocks: [
+            {
+              type: "list",
+              items: [
+                "**10.1 Suspension.** Pyngyn may suspend access to the Service immediately if: (i) subscription fees are past due; (ii) Customer breaches Section 4 (Lawful Processing) or Section 5 (Acceptable Use); (iii) Pyngyn reasonably suspects unauthorized account access; or (iv) required by law enforcement or regulatory authorities.",
+                "**10.2 Termination for Convenience.** Customer may terminate its subscription at any time via account settings. Termination takes effect at the conclusion of the currently paid billing period.",
+                "**10.3 Termination for Cause.** Either party may terminate these Terms immediately upon written notice if the other party materially breaches these Terms and fails to cure such breach within thirty (30) days of receiving written notice.",
+                "**10.4 Data Handling, Retention & Deletion.** Data handling, retention, and deletion are governed by our [Privacy Policy](/privacy). Customer workspace data is additionally governed by the applicable [Data Processing Agreement](/dpa) and customer agreement. Following termination or expiration of your account, Pyngyn will return or delete Customer Content in accordance with the DPA and Privacy Policy, provided that Pyngyn may retain information where required or permitted by applicable law or necessary for legitimate legal, security, fraud-prevention, or statutory accounting requirements.",
+              ],
             },
           ],
         },
@@ -151,140 +188,82 @@ export default function TermsPage() {
           blocks: [
             {
               type: "p",
-              text: "THE SERVICE, INCLUDING, WITHOUT LIMITATION, OUR CONTENT, IS PROVIDED ON AN \"AS IS\" AND \"WITH ALL FAULTS\" BASIS. TO THE FULLEST EXTENT PERMISSIBLE BY LAW, NEITHER WE NOR ANY OF OUR EMPLOYEES, MANAGERS, OFFICERS, CONTRACTORS, SUPPLIERS, LICENSORS, OR AGENTS (COLLECTIVELY, THE \"PYNGYN PARTIES\") MAKE ANY REPRESENTATIONS OR WARRANTIES OR ENDORSEMENTS OF ANY KIND WHATSOEVER, EXPRESS OR IMPLIED, AS TO: (A) THE SERVICE; (B) OUR CONTENT; (C) USER CONTENT; OR (D) SECURITY ASSOCIATED WITH THE TRANSMISSION OF INFORMATION TO US OR VIA THE SERVICE. IN ADDITION, THE PYNGYN PARTIES HEREBY DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, TITLE, CUSTOM, TRADE, QUIET ENJOYMENT, SYSTEM INTEGRATION, AND FREEDOM FROM COMPUTER VIRUS.",
-            },
-            {
-              type: "p",
-              text: "THE PYNGYN PARTIES DO NOT REPRESENT OR WARRANT THAT THE SERVICE WILL BE ERROR-FREE OR UNINTERRUPTED; THAT DEFECTS WILL BE CORRECTED; OR THAT THE SERVICE OR THE SERVER THAT MAKES THE SERVICE AVAILABLE IS FREE FROM ANY HARMFUL COMPONENTS, INCLUDING, WITHOUT LIMITATION, VIRUSES AND SECURITY BREACHES OF ANY KIND. THE PYNGYN PARTIES DO NOT MAKE ANY REPRESENTATIONS OR WARRANTIES THAT THE INFORMATION (INCLUDING ANY INSTRUCTIONS) ON THE SERVICE IS ACCURATE, COMPLETE, OR USEFUL. YOU ACKNOWLEDGE THAT YOUR USE OF THE SERVICE IS AT YOUR SOLE RISK. THE PYNGYN PARTIES DO NOT WARRANT THAT YOUR USE OF THE SERVICE IS LAWFUL IN ANY PARTICULAR JURISDICTION, AND THE PYNGYN PARTIES SPECIFICALLY DISCLAIM SUCH WARRANTIES. SOME JURISDICTIONS LIMIT OR DO NOT ALLOW THE DISCLAIMER OF IMPLIED OR OTHER WARRANTIES SO THE ABOVE DISCLAIMER MAY NOT APPLY TO YOU TO THE EXTENT SUCH JURISDICTION'S LAW IS APPLICABLE TO YOU AND THESE TERMS OF SERVICE.",
-            },
-            {
-              type: "p",
-              text: "BY ACCESSING OR USING THE SERVICE YOU REPRESENT AND WARRANT THAT YOUR ACTIVITIES ARE LAWFUL IN EVERY JURISDICTION WHERE YOU ACCESS OR USE THE SERVICE.",
-            },
-            {
-              type: "p",
-              text: "THE PYNGYN PARTIES DO NOT ENDORSE CONTENT AND SPECIFICALLY DISCLAIM ANY RESPONSIBILITY OR LIABILITY TO ANY PERSON OR ENTITY FOR ANY LOSS, DAMAGE (WHETHER ACTUAL, CONSEQUENTIAL, PUNITIVE, OR OTHERWISE), INJURY, CLAIM, LIABILITY, OR OTHER CAUSE OF ANY KIND OR CHARACTER BASED UPON OR RESULTING FROM ANY CONTENT.",
+              text: "EXCEPT AS EXPRESSLY PROVIDED HEREIN, THE SERVICES, PLATFORM, AND ALL CONTENT ARE PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, PYNGYN AND ITS DIRECTORS, OFFICERS, EMPLOYEES, AFFILIATES, AND LICENSORS EXPRESSLY DISCLAIM ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING WITHOUT LIMITATION THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. PYNGYN DOES NOT WARRANT THAT THE SERVICES WILL BE COMPLETELY UNINTERRUPTED, ERROR-FREE, OR FREE OF VULNERABILITIES, OR THAT DELIVERABLES GENERATED BY AI WILL MEET ALL REGULATORY OR PROFESSIONAL CRITERIA WITHOUT HUMAN VERIFICATION.",
             },
           ],
         },
         {
-          heading: "Access Right Limitations",
-          blocks: [
-            {
-              type: "p",
-              text: "Any attempt by you to disrupt or interfere with the Service, including undermining or manipulating the legitimate operation of any of our sites or Services, is a violation of our policy and may be a violation of criminal and civil laws.",
-            },
-            {
-              type: "p",
-              text: "Without limiting any other remedies, we may limit, suspend, terminate, modify, or delete accounts or access to the Service or portions thereof if you are, or we suspect that you are, failing to comply with any Terms of Service or for any actual or suspected illegal or improper use of the Service, with or without notice to you. You can lose your account and any User Content associated with it as a result of account termination or limitation, as well as any benefits, privileges, earned items, and purchased items associated with your use of the Service, and we are under no obligation to compensate you for any such losses or results.",
-            },
-          ],
-        },
-        {
-          heading: "Limitation of Liability; Waiver",
-          blocks: [
-            {
-              type: "p",
-              text: "UNDER NO CIRCUMSTANCES WILL THE PYNGYN PARTIES BE LIABLE TO YOU FOR ANY LOSS OR DAMAGES OF ANY KIND (INCLUDING, WITHOUT LIMITATION, FOR ANY DIRECT, INDIRECT, ECONOMIC, EXEMPLARY, SPECIAL, PUNITIVE, OR CONSEQUENTIAL LOSSES OR DAMAGES) THAT ARE DIRECTLY OR INDIRECTLY RELATED TO: (A) THE SERVICE; (B) OUR CONTENT; (C) USER CONTENT; (D) YOUR USE OF, INABILITY TO USE, OR THE PERFORMANCE OF THE SERVICE; (E) ANY ACTION TAKEN IN CONNECTION WITH AN INVESTIGATION BY THE PYNGYN PARTIES OR LAW ENFORCEMENT AUTHORITIES; (F) ANY ACTION TAKEN IN CONNECTION WITH COPYRIGHT OR OTHER INTELLECTUAL PROPERTY OWNERS; (G) ANY ERRORS OR OMISSIONS IN THE SERVICE'S OPERATION; OR (H) ANY DAMAGE TO ANY USER'S COMPUTER, MOBILE DEVICE, OR OTHER EQUIPMENT OR TECHNOLOGY, INCLUDING DAMAGE FROM ANY SECURITY BREACH.",
-            },
-            {
-              type: "p",
-              text: "IN NO EVENT WILL THE PYNGYN PARTIES BE LIABLE TO YOU OR ANYONE ELSE FOR LOSS, DAMAGE OR INJURY, INCLUDING, WITHOUT LIMITATION, DEATH OR PERSONAL INJURY. SOME STATES OR COUNTRIES DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATION OR EXCLUSION MAY NOT APPLY TO YOU. IN NO EVENT WILL THE PYNGYN PARTIES' TOTAL LIABILITY TO YOU FOR ALL DAMAGES EXCEED THE GREATER OF (I) THE AMOUNT YOU PAID US, IF ANY, IN THE PRECEDING TWELVE (12) MONTHS FOR THE SERVICE GIVING RISE TO THE CLAIM, OR (II) ONE HUNDRED U.S. DOLLARS (USD $100), OR THE EQUIVALENT IN LOCAL CURRENCY.",
-            },
-            {
-              type: "p",
-              text: "We are not responsible for the actions, content, information, or data of third parties, and you release the Pyngyn Parties from any claims and damages, known and unknown, arising out of or in any way connected with any claim you have against any such third parties.",
-            },
-          ],
-        },
-        {
-          heading: "Indemnification",
-          blocks: [
-            {
-              type: "p",
-              text: "You (and any third party for whom you operate an account or activity on the Service) agree to defend (at our request), indemnify, and hold the Pyngyn Parties harmless from and against any claims, liabilities, damages, losses, and expenses, including without limitation, reasonable attorney's fees and costs, arising out of or in any way connected with any of the following:",
-            },
-            {
-              type: "list",
-              items: [
-                "your Content or your access to or use of the Service;",
-                "your breach or alleged breach of these Terms;",
-                "your violation of any third-party right, including without limitation, any intellectual property right, publicity, confidentiality, property, or privacy right;",
-                "your violation of any laws, rules, regulations, codes, statutes, ordinances, or orders of any governmental and quasi-governmental authorities; or",
-                "any misrepresentation made by you.",
-              ],
-            },
-            {
-              type: "p",
-              text: "You will cooperate as fully required by us in the defense of any claim. We reserve the right to assume the exclusive defense and control of any matter subject to indemnification by you, and you will not in any event settle any claim without our prior written consent.",
-            },
-          ],
-        },
-        {
-          heading: "Governing Law; Dispute Resolution",
+          heading: "Limitation of Liability",
           blocks: [
             {
               type: "list",
               items: [
-                "**13.1** These Terms are governed by and construed in accordance with the laws of **India**, without regard to its conflict of law principles. Subject to Section 13.2, the courts located in **Bengaluru, Karnataka** shall have exclusive jurisdiction over any dispute, claim, or controversy arising out of or relating to these Terms or the Service, and you consent to the personal jurisdiction of such courts.",
-                "**13.2** Either party may elect to resolve any dispute, claim, or controversy arising out of or relating to these Terms through binding arbitration conducted by a sole arbitrator in accordance with the **Arbitration and Conciliation Act, 1996**, as amended. The seat and venue of arbitration shall be Bengaluru, Karnataka, and the language of arbitration shall be English. Judgment on the award rendered by the arbitrator may be entered in any court having competent jurisdiction.",
-                "**13.3** Nothing in this Section prevents either party from seeking interim or injunctive relief from a court of competent jurisdiction to prevent actual or threatened infringement, misappropriation, or violation of a party's intellectual property or confidentiality obligations.",
+                "**12.1 Consequential Damages Waiver.** TO THE FULLEST EXTENT PERMITTED BY LAW, IN NO EVENT SHALL EITHER PARTY BE LIABLE TO THE OTHER FOR ANY INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES, INCLUDING LOSS OF PROFITS, REVENUE, DATA, GOODWILL, OR BUSINESS INTERRUPTION, ARISING OUT OF OR IN CONNECTION WITH THE SERVICES OR THESE TERMS, REGARDLESS OF THE THEORY OF LIABILITY (CONTRACT, TORT, NEGLIGENCE, STRICT LIABILITY, OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.",
+                "**12.2 Aggregate Liability Cap.** TO THE FULLEST EXTENT PERMITTED BY LAW, PYNGYN'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATING TO THESE TERMS OR THE SERVICE SHALL NOT EXCEED THE TOTAL FEES ACTUALLY PAID BY CUSTOMER TO PYNGYN IN THE TWELVE (12) MONTHS PRECEDING THE INCIDENT GIVING RISE TO LIABILITY, OR ONE HUNDRED U.S. DOLLARS (USD $100 / INR EQUIVALENT), WHICHEVER IS GREATER.",
+                "**12.3 Exceptions.** The limitations in Sections 12.1 and 12.2 shall not apply to: (i) Customer's breach of Section 5 (Acceptable Use Policy); (ii) Customer's payment obligations under Section 9; or (iii) liability which cannot be limited or excluded by applicable law.",
               ],
             },
           ],
         },
         {
-          heading: "Time Limitation on Claims",
-          blocks: [
-            {
-              type: "p",
-              text: "Except as may be required by law, you agree that any claim you may have arising out of or related to these Terms or your relationship with us must be filed within one year after such claim arose; otherwise, your claim is permanently barred.",
-            },
-          ],
-        },
-        {
-          heading: "Severability and No Waiver",
-          blocks: [
-            {
-              type: "p",
-              text: "If any provision of these Terms is held to be unlawful, void, or for any reason unenforceable, then that provision will be deemed severed from these Terms and will not affect the validity and enforceability of any remaining provisions. Our failure to insist upon or enforce strict performance of any provision of these Terms will not be construed as a waiver of any provision or right.",
-            },
-          ],
-        },
-        {
-          heading: "Entire Agreement",
+          heading: "Mutual Indemnification",
           blocks: [
             {
               type: "list",
               items: [
-                "**16.1** These Terms are the complete and exclusive statement of the mutual understanding of the parties and supersede and cancel all previous written and oral agreements, communications, and other understandings relating to the subject matter of these Terms.",
-                "**16.2** You may not assign these Terms or assign any rights or delegate any obligations hereunder, in whole or in part, whether voluntarily or by operation of law, without our prior written consent. Any purported assignment or delegation by you without such consent will be null and void. We may assign these Terms or any rights hereunder without your consent, and the Terms will inure to the benefit of and be enforceable by our successors.",
-                "**16.3** These Terms do not confer any third-party beneficiary rights.",
+                "**13.1 Customer Indemnification.** Customer agrees to defend, indemnify, and hold harmless Pyngyn, its officers, directors, employees, and agents from and against any third-party claims, damages, liabilities, costs, and reasonable attorney's fees arising out of or related to: (i) Customer Content uploaded without appropriate rights or consents; (ii) Customer's violation of professional conduct rules or client confidentiality obligations; or (iii) Customer's material breach of the Acceptable Use Policy.",
+                "**13.2 Pyngyn Indemnification.** Pyngyn agrees to defend Customer against any third-party claim alleging that the core Pyngyn software infringes a valid patent, copyright, or trademark, and will indemnify Customer against damages finally awarded by a court of competent jurisdiction, provided Customer: (i) promptly gives Pyngyn written notice; (ii) grants Pyngyn sole control of the defense and settlement; and (iii) provides reasonable cooperation.",
               ],
             },
           ],
         },
         {
-          heading: "Territorial Restrictions",
+          heading: "Governing Law & Dispute Resolution",
           blocks: [
             {
-              type: "p",
-              text: "The Services and information provided within the Services are not intended for distribution to or use by any person or entity in any jurisdiction or country where such distribution or use would be contrary to law or regulation, or which would subject Pyngyn to any registration requirement within such jurisdiction or country. We reserve the right to limit the availability of the Service or any portion of the Service to any person, geographic area, or jurisdiction, at any time and in our sole discretion, and to limit the quantities of any content, program, product, service, or other feature that we provide.",
-            },
-            {
-              type: "p",
-              text: "These Terms of Service were written in English. To the extent any translated version of these Terms of Service conflicts with the English version, the English version controls.",
+              type: "list",
+              items: [
+                "**14.1 Governing Law.** These Terms and any dispute, controversy, or claim arising out of or relating to them or the Services shall be governed by, interpreted, and construed in accordance with the substantive laws of **India**, without regard to conflict of law principles.",
+                "**14.2 Exclusive Court Jurisdiction.** Subject to Section 14.3, the civil courts located in **Bengaluru, Karnataka, India** shall have exclusive jurisdiction over any legal proceedings arising under these Terms.",
+                "**14.3 Arbitration.** Any dispute, controversy, or claim arising out of or relating to these Terms or the breach, termination, or invalidity thereof, shall be referred to and finally resolved by binding arbitration conducted in accordance with the **Arbitration and Conciliation Act, 1996** (as amended). The arbitration shall be conducted by a sole arbitrator mutually appointed by the parties (or appointed in accordance with the Act). The seat and legal venue of arbitration shall be **Bengaluru, Karnataka, India**, and the proceedings shall be conducted in the **English language**.",
+                "**14.4 Injunctive Relief.** Nothing in this Section prevents either party from seeking interim injunctive or equitable relief from a court of competent jurisdiction to prevent irreparable harm or protect intellectual property or confidentiality rights.",
+              ],
             },
           ],
         },
         {
-          heading: "Contact Us",
+          heading: "General Provisions",
           blocks: [
-            { type: "p", text: "If you have any questions about these Terms, please contact us at:" },
+            {
+              type: "list",
+              items: [
+                "**15.1 Entire Agreement.** These Terms, together with the Privacy Policy, Data Processing Agreement, and Refund Policy, constitute the complete and exclusive understanding between the parties and supersede all prior agreements, proposals, and communications.",
+                "**15.2 Modifications.** We may revise these Terms from time to time. When material changes are made, we will provide at least thirty (30) days advance notice via email or a prominent banner on the Service. Your continued use after the effective date constitutes acceptance of the revised Terms.",
+                "**15.3 Severability.** If any provision of these Terms is found to be unlawful, void, or unenforceable, that provision will be severed without affecting the validity and enforceability of the remaining provisions.",
+                "**15.4 Assignment.** You may not assign or transfer your rights or obligations under these Terms without Pyngyn's prior written consent. Pyngyn may assign these Terms in connection with a merger, acquisition, corporate reorganization, or sale of assets.",
+                "**15.5 Force Majeure.** Neither party shall be liable for delay or failure in performance resulting from causes beyond reasonable control, including acts of God, natural disasters, telecommunications outages, war, terrorism, or widespread internet disruptions.",
+              ],
+            },
+          ],
+        },
+        {
+          heading: "Legal Inquiries & Contact",
+          blocks: [
+            {
+              type: "p",
+              text: "If you have any questions regarding these Terms of Service or wish to deliver formal legal notices, please contact us at:",
+            },
             {
               type: "contact",
-              heading: "Vimovi Global Tech, Legal / Privacy",
-              lines: ["Email: **[vivek.pandey@pyngyn.com](mailto:vivek.pandey@pyngyn.com)**", "Website: **[pyngyn.ai](https://pyngyn.ai)**"],
+              heading: "Legal Department — VIMOVI GlobalTech Private Limited",
+              lines: [
+                "Entity: VIMOVI GlobalTech Private Limited (Pyngyn)",
+                "Attention: Legal / Vivek Pandey",
+                "Email: **[vivek.pandey@pyngyn.com](mailto:vivek.pandey@pyngyn.com)**",
+                "Support: **[support@pyngyn.com](mailto:support@pyngyn.com)**",
+                "Website: **[pyngyn.ai](https://pyngyn.ai)**",
+                "Location: Bengaluru, Karnataka, India",
+              ],
             },
           ],
         },
