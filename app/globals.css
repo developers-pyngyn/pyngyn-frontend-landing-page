@@ -34,12 +34,153 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid #14223d;
+  outline: 2px solid #4f46e5;
   outline-offset: 2px;
   border-radius: 6px;
 }
 
+/* Modern overlay scrollbars: 6px wide, invisible track, no stepper arrows, and
+   a pill thumb that only paints while the user is actually scrolling (or while
+   the pointer is on the bar). ScrollbarActivity toggles `.scrollbars-active`
+   on <html>; with JS off the thumb still appears on hover and drag. */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(15, 17, 21, 0.28) transparent;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece,
+::-webkit-scrollbar-corner {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 1px solid transparent;
+  background-clip: content-box;
+  background-color: transparent;
+  border-radius: 999px;
+}
+
+html.scrollbars-active::-webkit-scrollbar-thumb,
+html.scrollbars-active *::-webkit-scrollbar-thumb {
+  background-color: rgba(15, 17, 21, 0.28);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(15, 17, 21, 0.42);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #4f46e5;
+}
+
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment,
+::-webkit-scrollbar-button:vertical:start:decrement,
+::-webkit-scrollbar-button:vertical:end:increment,
+::-webkit-scrollbar-button:horizontal:start:decrement,
+::-webkit-scrollbar-button:horizontal:end:increment {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent;
+}
+
+html.scrollbars-active .hero-dark *::-webkit-scrollbar-thumb,
+html.scrollbars-active .dark-panel *::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.32);
+}
+.hero-dark *::-webkit-scrollbar-thumb:hover,
+.dark-panel *::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Animations */
+.ow-anim .ow-row {
+  animation: ow-pop 6.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite both;
+}
+@keyframes ow-pop {
+  0%   { opacity: 0; transform: scale(0.72) translateY(14px); }
+  6%   { opacity: 1; transform: scale(1.04); }
+  11%  { transform: scale(1); }
+  90%  { opacity: 1; transform: none; }
+  97%  { opacity: 0; transform: scale(0.92) translateY(6px); }
+  100% { opacity: 0; transform: scale(0.72) translateY(14px); }
+}
+.ow-ic-new { animation: ow-bounce 2.2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+.ow-ic-old { animation: ow-shake 2.6s ease-in-out infinite; }
+@keyframes ow-bounce {
+  0%, 100% { transform: translateY(0); }
+  40%      { transform: translateY(-5px); }
+  60%      { transform: translateY(1px); }
+}
+@keyframes ow-shake {
+  0%, 100% { transform: rotate(0); }
+  25%      { transform: rotate(-8deg); }
+  75%      { transform: rotate(8deg); }
+}
+.ow-badge { animation: ow-badge 2.4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+@keyframes ow-badge {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.12); }
+}
+.ow-head-new { animation: ow-headpop 2.6s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+.ow-head-old { animation: ow-tilt 3s ease-in-out infinite; }
+@keyframes ow-headpop {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.13); }
+}
+@keyframes ow-tilt {
+  0%, 100% { transform: rotate(-6deg); }
+  50%      { transform: rotate(6deg); }
+}
+
+.ow-chip-1 { animation: ow-drift1 6s ease-in-out infinite; }
+.ow-chip-2 { animation: ow-drift2 7s ease-in-out infinite; }
+.ow-chip-3 { animation: ow-drift3 5.5s ease-in-out infinite; }
+@keyframes ow-drift1 {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%      { transform: translateY(-9px) rotate(-1deg); }
+}
+@keyframes ow-drift2 {
+  0%, 100% { transform: translateY(0) rotate(2deg); }
+  50%      { transform: translateY(8px) rotate(4deg); }
+}
+@keyframes ow-drift3 {
+  0%, 100% { transform: translateY(0) rotate(1deg); }
+  50%      { transform: translateY(-6px) rotate(-2deg); }
+}
+.ow-flow { animation: ow-flow 1.6s ease-in-out infinite; }
+@keyframes ow-flow {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(5px); }
+}
+
+.conn-comet {
+  offset-distance: 0%;
+  opacity: 0;
+  animation: conn-comet 2.2s ease-in-out infinite;
+}
+@keyframes conn-comet {
+  0%   { offset-distance: 0%; opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
 /* Respect reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -6,6 +6,8 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { PromoPopupLazy } from "@/components/PromoPopupLazy";
+import { FaviconScheme } from "@/components/FaviconScheme";
+import { ScrollbarActivity } from "@/components/ScrollbarActivity";
 import { ConsentScripts } from "@/components/ConsentScripts";
 import { CookieConsent } from "@/components/CookieConsent";
 
@@ -59,6 +61,14 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+/*
+ * Favicon variants, named by the role they play rather than by filename:
+ *   /icon.png       48x48   dark navy tile, white mark  -> for LIGHT chrome
+ *   /icon-dark.png  195x193 light grey tile, dark mark  -> for DARK chrome
+ */
+const faviconForLightMode = "/icon.png";
+const faviconForDarkMode = "/icon-dark.png";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   authors: [{ name: "Pyngyn" }],
@@ -66,17 +76,9 @@ export const metadata: Metadata = {
   title: "Pyngyn ClientSpace | Client Management for CA & Accounting Firms",
   description:
     "Manage clients, tasks, documents, deadlines and workflows in one connected workspace purpose-built for CA, accounting and tax practices.",
-  // Reference static files in /public (not the app/icon route convention,
-  // which next-on-pages rejects because it can't be an edge route).
   icons: {
-    icon: "/icon.png",
     apple: "/apple-icon.png",
   },
-  // Google Search Console's "HTML tag" verification method: paste the
-  // content value (just the code, not the whole <meta> tag) into
-  // GOOGLE_SITE_VERIFICATION as a build-time env var in the Cloudflare
-  // Pages project settings. Renders nothing if unset, so this is safe to
-  // ship before you have a value.
   verification: process.env.GOOGLE_SITE_VERIFICATION
     ? { google: process.env.GOOGLE_SITE_VERIFICATION }
     : undefined,
@@ -108,12 +110,23 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${display.variable} ${jakarta.variable} ${mono.variable}`}>
       <head>
-        {/* Google Tag Manager and the Meta Pixel are no longer loaded here
-            unconditionally. Per /cookie-policy ("Analytics & Performance"
-            and "Marketing & Targeting" are "blocked/disabled until you
-            consent"), both now load only after the visitor grants consent
-            via the cookie banner — see components/ConsentScripts.tsx and
-            components/CookieConsent.tsx, rendered in <body> below. */}
+        {/* Favicon links rendered as raw <head> elements to prevent React
+            removeChild crashes during client-side navigation. */}
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="48x48"
+          media="(prefers-color-scheme: light)"
+          href={faviconForLightMode}
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="195x193"
+          media="(prefers-color-scheme: dark)"
+          href={faviconForDarkMode}
+        />
 
         {/* Sitewide JSON-LD: Organization + WebSite. Per-page schema is added
             inside individual page components. */}
@@ -124,12 +137,9 @@ export default function RootLayout({
         <JsonLd id="ld-website" data={websiteSchema()} />
       </head>
       <body className="font-sans">
-        {/* No noscript fallbacks for GTM/Meta Pixel here on purpose: a
-            noscript <iframe>/<img> fires unconditionally for visitors with
-            JS disabled, with no way to check consent first. Keeping them
-            would silently defeat the consent gate below for that slice of
-            visitors, so both trackers are JS-gated only. */}
         <ConsentScripts />
+        <FaviconScheme />
+        <ScrollbarActivity />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-white"
@@ -143,3 +153,4 @@ export default function RootLayout({
     </html>
   );
 }
+

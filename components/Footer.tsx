@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Reveal } from "./Reveal";
 import { openCookiePreferences } from "./consent";
+import { GetInTouch } from "./footer/GetInTouch";
 import { SIGNUP_URL, DEMO_URL, BENEFITS_URL, CUSTOMERS_URL, PRICING_URL, BLOG_URL, ABOUT_URL, CAREERS_URL, PRIVACY_URL, TERMS_URL, REFUND_URL, COOKIE_POLICY_URL, DPA_URL, SUBPROCESSORS_URL, SOCIAL_X, SOCIAL_LINKEDIN, SOCIAL_REDDIT, SOCIAL_FACEBOOK, SOCIAL_YOUTUBE, SOCIAL_INSTAGRAM, INTEGRATIONS_URL, CHANGELOG_URL, DOCS_URL, GUIDES_URL, BRAND_URL, PARTNERS_URL, STATUS_URL, SUPPORT_URL, KB_URL, ANNOUNCEMENTS_URL, ROADMAP_URL, REFER_URL, COMPARE_URL, COMPETITORS, PLAYSTORE_URL, INVESTORS_URL, TOOLS_URL, PLAN_GEN_URL, ROI_URL, STATUS_REPORT_URL, UTILIZATION_URL, COST_ESTIMATOR_URL } from "./config";
 
 const faqs: [string, string][] = [
@@ -236,7 +237,7 @@ export function Footer() {
         {label}
       </a>
     ) : (
-      <Link key={label} href={href} className="block py-1.5 hover:text-accent">
+      <Link key={label} href={href} prefetch={false} className="block py-1.5 hover:text-accent">
         {label}
       </Link>
     );
@@ -245,8 +246,8 @@ export function Footer() {
   return (
     <footer className="border-t border-line bg-white pt-16 pb-10 text-sm text-muted">
       <div className="wrap">
-        {/* Logo + columns */}
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_repeat(5,1fr)]">
+        {/* Logo + columns + Get in touch */}
+        <div className="grid items-start gap-10 lg:gap-8 lg:grid-cols-[minmax(0,1.2fr)_repeat(5,minmax(0,1fr))_minmax(0,2fr)]">
           <div>
             <Link href="/" className="mb-4 inline-block" aria-label="pyngyn home">
               <Image src="/logo.webp" alt="pyngyn" width={150} height={40} className="h-8 w-auto" />
@@ -289,6 +290,9 @@ export function Footer() {
               ))}
             </div>
           ))}
+
+          {/* Get in touch column */}
+          <GetInTouch />
         </div>
 
         {/* Social + compliance row */}
@@ -337,7 +341,7 @@ export function Footer() {
           <span className="flex-shrink-0 xl:whitespace-nowrap">© 2026 PYNGYN, a product of VIMOVI GlobalTech Private Limited. All rights reserved.</span>
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 xl:flex-nowrap xl:whitespace-nowrap">
             {legal.map(([label, href]) => (
-              <Link key={label} href={href} className="hover:text-accent">
+              <Link key={label} href={href} prefetch={false} className="hover:text-accent">
                 {label}
               </Link>
             ))}
@@ -354,3 +358,4 @@ export function Footer() {
     </footer>
   );
 }
+

@@ -1,6 +1,8 @@
 import React from "react";
 import { PyngynWebsiteProduct, ProductScreenType } from "@/components/product/website/PyngynWebsiteProduct";
 
+export const runtime = "edge";
+
 interface PageProps {
   searchParams?: {
     screen?: ProductScreenType;
