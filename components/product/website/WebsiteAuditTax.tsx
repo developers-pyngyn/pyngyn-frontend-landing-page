@@ -58,7 +58,7 @@ export const WebsiteAuditTax: React.FC = () => {
       </div>
 
       {/* 2x2 Grid of Product Widgets */}
-      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3 min-h-0 overflow-y-auto">
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3 min-h-0 overflow-hidden">
         {/* WIDGET 1: Statutory Filing Deadlines */}
         <div className="bg-white border border-slate-200/90 rounded-[10px] p-3 shadow-2xs flex flex-col justify-between">
           <div>

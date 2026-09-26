@@ -38,6 +38,7 @@ import { StatutoryCalendarMockup } from "../mockups/StatutoryCalendarMockup";
 import { MyWorkMockup } from "../mockups/MyWorkMockup";
 import { SplitAgentWorkShowcase } from "../mockups/SplitAgentWorkShowcase";
 import { PyngynCelebrationOverlay } from "../product-demo/PyngynCelebrationOverlay";
+import { DesktopMockupFrame } from "./DesktopMockupFrame";
 
 // ============================================================================
 // 1. CLIENT MANAGEMENT SECTION
@@ -606,18 +607,37 @@ export function DashboardSection() {
           </div>
         </div>
 
-        {/* Dynamic Mockup View */}
-        <div className="mt-6 mx-auto max-w-[980px] relative">
-          {viewMode === "radar" ? (
-            <ExecutiveDashboardMockup />
-          ) : (
-            <StatutoryCalendarMockup />
-          )}
+        {/* Dynamic Mockup View - Desktop Viewport / Laptop Screen Frame */}
+        <div className="mt-8 mx-auto max-w-[1040px] relative">
+          <DesktopMockupFrame
+            url={
+              viewMode === "radar"
+                ? "app.pyngyn.com/compliance-radar"
+                : "app.pyngyn.com/statutory-calendar"
+            }
+            baseWidth={1200}
+            imageHeight={720}
+            maxWidthClass="max-w-[1040px]"
+            className="shadow-2xl"
+          >
+            <div className="w-full h-full overflow-hidden bg-white">
+              {viewMode === "radar" ? (
+                <ExecutiveDashboardMockup />
+              ) : (
+                <StatutoryCalendarMockup />
+              )}
+            </div>
+          </DesktopMockupFrame>
+
           {/* Floating Celebration Overlay on top */}
           <div className="absolute -top-3 sm:-top-5 right-4 sm:right-10 z-50 pointer-events-none drop-shadow-2xl">
             <PyngynCelebrationOverlay
-              title="100% Statutory Compliance"
-              subtitle="All 142 Filings Verified · 0 Penalties"
+              title={viewMode === "radar" ? "100% Statutory Compliance" : "20th Sep: GSTR-3B Filing"}
+              subtitle={
+                viewMode === "radar"
+                  ? "All 142 Filings Verified · 0 Penalties"
+                  : "18 Portfolios Filed · 0 Penalties"
+              }
               statusText="100% On-Time"
               avatarSrc="/team/vivek-pandey.png"
               mascotSrc="/mascot/pyng-audit-megaphone.png"

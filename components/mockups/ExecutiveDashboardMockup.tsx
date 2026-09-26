@@ -2,15 +2,14 @@
 
 import React from "react";
 import { PyngynWebsiteProduct } from "../product/website/PyngynWebsiteProduct";
-import { WebsiteProductAnimator } from "../product/website/WebsiteProductAnimator";
 
 export function ExecutiveDashboardMockup({ className = "" }: { className?: string }) {
   return (
-    <WebsiteProductAnimator>
+    <div className={`w-full h-full overflow-hidden bg-white select-none ${className}`}>
       <PyngynWebsiteProduct
         screen="audit"
-        className={className}
+        className="w-full h-full border-0 rounded-none shadow-none"
       />
-    </WebsiteProductAnimator>
+    </div>
   );
 }

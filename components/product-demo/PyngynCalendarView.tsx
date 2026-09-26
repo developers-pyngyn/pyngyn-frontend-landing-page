@@ -81,7 +81,7 @@ export const PyngynCalendarView: React.FC<PyngynCalendarViewProps> = ({
         {/* Left Sidebar */}
         <aside
           data-product-target="calendar-sidebar"
-          className="w-[230px] shrink-0 bg-[#F8FAFC] border-r border-[#E5EAF2] flex flex-col text-[12px] text-[#113353] select-none overflow-y-auto"
+          className="w-[230px] shrink-0 bg-[#F8FAFC] border-r border-[#E5EAF2] flex flex-col text-[12px] text-[#113353] select-none overflow-hidden scrollbar-none"
         >
           {showInsideCockpit ? (
             <>

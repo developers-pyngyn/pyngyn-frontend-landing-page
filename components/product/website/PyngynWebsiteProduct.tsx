@@ -57,11 +57,19 @@ export const PyngynWebsiteProduct: React.FC<PyngynWebsiteProductProps> = ({
   const [activeTab, setActiveTab] = useState("tasks");
 
   const isOswal = currentClient === "oswal";
+  const isFullHeight = className.includes("h-full");
 
   return (
     <div
-      className={`flex flex-col bg-white text-slate-800 rounded-[14px] border border-slate-300 shadow-2xl overflow-hidden select-none font-sans text-[12px] antialiased ${className}`}
-      style={{ minHeight: "490px" }}
+      className={`flex flex-col bg-white text-slate-800 select-none font-sans text-[12px] antialiased ${
+        isFullHeight
+          ? "w-full h-full overflow-hidden"
+          : "rounded-[14px] border border-slate-300 shadow-2xl overflow-hidden"
+      } ${className}`}
+      style={{
+        minHeight: isFullHeight ? "100%" : "490px",
+        height: isFullHeight ? "100%" : undefined,
+      }}
     >
       {/* 1. TOP STATUTORY ESCALATION ALERT STRIP */}
       <div className="bg-amber-500/10 border-b border-amber-300/60 px-3 sm:px-4 py-1.5 flex items-center justify-between gap-2 text-[11px] text-amber-900 font-semibold shrink-0">
@@ -397,8 +405,9 @@ export const PyngynWebsiteProduct: React.FC<PyngynWebsiteProductProps> = ({
 
         {/* CENTER CONTENT COLUMN */}
         <main className="flex-1 flex flex-col min-w-0 bg-white overflow-hidden">
-          {/* MIDDLE PANEL HEADER (Matching media_1790225790785 & 791) */}
-          <div className="border-b border-slate-200 bg-white shrink-0">
+          {/* MIDDLE PANEL HEADER (Shown for Client Tasks/Board, hidden for Audit Dashboard) */}
+          {currentScreen !== "audit" && (
+            <div className="border-b border-slate-200 bg-white shrink-0">
             {/* Top row: Client Title + Badges + Actions */}
             <div className="px-3 sm:px-4 pt-2.5 pb-2 flex items-center justify-between gap-2 flex-wrap">
               <div className="flex items-center gap-2 flex-wrap">
@@ -576,7 +585,8 @@ export const PyngynWebsiteProduct: React.FC<PyngynWebsiteProductProps> = ({
                 </div>
               </div>
             </div>
-          </div>
+            </div>
+          )}
 
           {/* DYNAMIC SCREEN VIEW BODY */}
           <div className="flex-1 flex flex-col min-h-0 overflow-hidden relative">
