@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "pages:build": "npx @cloudflare/next-on-pages@1"
+    "pages:build": "npx @cloudflare/next-on-pages@1",
+    "postinstall": "node scripts/setup-build-shim.js"
   },
   "dependencies": {
     "framer-motion": "^11.3.8",
