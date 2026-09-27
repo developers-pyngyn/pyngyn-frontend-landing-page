@@ -272,24 +272,13 @@ export const PyngynCelebrationOverlay: React.FC<PyngynCelebrationOverlayProps> =
                       : 'ml-2.5 sm:ml-3 w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl ring-[2.5px] ring-white shadow-sm'
                   } overflow-hidden bg-slate-100 shrink-0 z-10 border border-slate-200 flex items-center justify-center`}
                 >
-                  {avatarInitials ? (
-                    <div
-                      style={{ backgroundColor: avatarBg || '#7E22CE' }}
-                      className={`w-full h-full flex items-center justify-center font-bold text-white ${
-                        compact ? 'text-[11px]' : 'text-[14px] sm:text-[16px]'
-                      }`}
-                    >
-                      {avatarInitials}
-                    </div>
-                  ) : (
-                    <Image
-                      src={avatarSrc}
-                      alt="Team Collaborator"
-                      fill
-                      className="object-cover"
-                      priority
-                    />
-                  )}
+                  <Image
+                    src={avatarSrc || '/team/vivek-pandey.png'}
+                    alt="Vivek Pandey"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
                 </motion.div>
               </div>
             </motion.div>

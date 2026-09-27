@@ -196,8 +196,7 @@ export function FeatureGridSection() {
                   title="20th Sep: GSTR-3B Filing"
                   subtitle="9 Portfolios Due · Reconciled"
                   statusText="On Track"
-                  avatarInitials="AS"
-                  avatarBg="bg-[#7E22CE]"
+                  avatarSrc="/team/vivek-pandey.png"
                   mascotSrc="/mascot/pyngyn-insights.png"
                   compact={true}
                   showCursor={false}
@@ -246,8 +245,7 @@ export function FeatureGridSection() {
                   title="Team Capacity Balanced"
                   subtitle="Practice Bandwidth 87% · Optimal"
                   statusText="Balanced"
-                  avatarInitials="NJ"
-                  avatarBg="bg-[#004AAD]"
+                  avatarSrc="/team/vivek-pandey.png"
                   mascotSrc="/mascot/pyngyn-ai-avatar.png"
                   compact={true}
                   showCursor={false}
@@ -298,8 +296,7 @@ export function FeatureGridSection() {
                   title="Moved to Internal Review"
                   subtitle="GSTR-1 Ledger Matching · Oswal"
                   statusText="In Review"
-                  avatarInitials="PA"
-                  avatarBg="bg-[#EC4899]"
+                  avatarSrc="/team/vivek-pandey.png"
                   mascotSrc="/mascot/pyngyn-insights.png"
                   compact={true}
                   showCursor={false}
