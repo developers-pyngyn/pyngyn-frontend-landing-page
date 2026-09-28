@@ -3,100 +3,16 @@ import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, KB_URL, BLOG_URL } from "@/components/config";
+import { GUIDES, type Guide, CATEGORY_COLOR, type GuideCategory } from "@/components/guides-data";
 
 export const metadata: Metadata = {
-  title: "Guides | PYNGYN",
+  title: "CA Practice Playbooks & Operational Guides | Pyngyn",
   description:
-    "Practical, opinionated playbooks for planning work, keeping status honest, catching risk early, and rolling PYNGYN out across your team.",
+    "Practical playbooks for Chartered Accountants and accounting firms: statutory audit workflows, PBC checklists, 4-eye partner review gates, and firm scaling.",
   alternates: { canonical: "/guides" },
 };
 
-type Guide = {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: "Planning" | "Status" | "Risk" | "Rollout" | "AI" | "Workflows";
-  readingTime: string;
-  featured?: boolean;
-};
-
-const GUIDES: Guide[] = [
-  // Featured
-  { slug: "plan-launch-in-an-afternoon", category: "Planning", readingTime: "8 min", featured: true,
-    title: "Plan an engagement in an afternoon",
-    excerpt: "Go from a one-line goal to a full plan with tasks, owners, and a realistic timeline. The framework we use to compress days of scoping into a single working session." },
-  { slug: "kill-the-status-meeting", category: "Status", readingTime: "6 min", featured: true,
-    title: "Kill the status meeting",
-    excerpt: "How to let AI draft status from the actual work so your team reclaims the thirty minutes they spend reporting on it every week." },
-  { slug: "spot-risk-before-it-bites", category: "Risk", readingTime: "7 min", featured: true,
-    title: "Spot risk before it bites",
-    excerpt: "Read the early signals (workload, deadlines, dependency shape), and act while there's still time to change the outcome instead of just announcing the slip." },
-
-  // Planning
-  { slug: "write-goals-ai-understands", category: "Planning", readingTime: "5 min",
-    title: "Write a goal the AI actually understands",
-    excerpt: "Small changes in how you phrase a goal produce dramatically better plans. A short reference with before-and-after examples." },
-  { slug: "scope-without-padding", category: "Planning", readingTime: "6 min",
-    title: "Scope without padding",
-    excerpt: "Padding is what we add when we don't trust our estimates. Use signals from past engagements to plan tighter without burning the team." },
-  { slug: "dependency-first-plans", category: "Planning", readingTime: "7 min",
-    title: "Dependency-first planning",
-    excerpt: "Map dependencies before tasks. It feels backwards, but it's the single biggest unlock for plans that don't unravel in week two." },
-
-  // Status
-  { slug: "make-status-self-update", category: "Status", readingTime: "5 min",
-    title: "Make status self-update",
-    excerpt: "Wire your work board to the work itself (email, calendar, deal stages), so the picture is always real without anyone touching it." },
-  { slug: "the-2-line-update", category: "Status", readingTime: "4 min",
-    title: "The 2-line update",
-    excerpt: "A simple template for written updates that replace meetings, with examples from teams running real engagements." },
-
-  // Risk
-  { slug: "read-velocity-honestly", category: "Risk", readingTime: "6 min",
-    title: "Read your throughput honestly",
-    excerpt: "Throughput is a lagging indicator until you know what to compare it to. How to use it as an early warning rather than a vanity metric." },
-  { slug: "the-friday-risk-review", category: "Risk", readingTime: "5 min",
-    title: "The Friday risk review",
-    excerpt: "A 15-minute weekly ritual that catches 80% of avoidable misses. What to look at, in what order, and how to act on it." },
-
-  // Rollout
-  { slug: "onboard-a-new-team", category: "Rollout", readingTime: "8 min",
-    title: "Onboard a new team in week one",
-    excerpt: "A simple sequence for moving an existing project into PYNGYN and getting everyone productive in the first week, not the first quarter." },
-  { slug: "migrate-from-spreadsheets", category: "Rollout", readingTime: "7 min",
-    title: "Migrate from spreadsheets without losing context",
-    excerpt: "What to bring over, what to leave behind, and how to keep the institutional knowledge that was hiding in column J." },
-  { slug: "rollout-across-multiple-pods", category: "Rollout", readingTime: "9 min",
-    title: "Roll out across multiple teams or offices",
-    excerpt: "A staged plan for going from one pilot team to firm-wide adoption without re-engineering everyone's workflow at once." },
-
-  // AI
-  { slug: "prompt-pyngyn-better", category: "AI", readingTime: "5 min",
-    title: "Prompt PYNGYN better",
-    excerpt: "The handful of phrasings that get sharper plans, better status drafts, and more useful risk callouts from the AI." },
-  { slug: "when-to-override-the-ai", category: "AI", readingTime: "4 min",
-    title: "When to override the AI",
-    excerpt: "The AI is a great first draft, not a manager. Where it tends to be wrong, how to spot it, and how to correct it once." },
-
-  // Workflows
-  { slug: "client-engagement-workflow", category: "Workflows", readingTime: "8 min",
-    title: "The client engagement workflow",
-    excerpt: "End-to-end: intake → plan → execution → wrap-up → retro. The reference workflow we recommend for services firms." },
-  { slug: "internal-initiative-workflow", category: "Workflows", readingTime: "6 min",
-    title: "The internal initiative workflow",
-    excerpt: "Internal projects fail differently from client work. A lighter workflow tuned for ambiguity, shifting priorities, and no external deadline pressure." },
-];
-
 const CATEGORIES = ["All", "Planning", "Status", "Risk", "Rollout", "AI", "Workflows"] as const;
-
-const CATEGORY_COLOR: Record<string, string> = {
-  Planning: "#4f46e5",
-  Status: "#0d9488",
-  Risk: "#dc2626",
-  Rollout: "#9333ea",
-  AI: "#f97316",
-  Workflows: "#0ea5e9",
-};
 
 const featured = GUIDES.filter((g) => g.featured);
 const byCategory = (cat: string) =>
@@ -106,7 +22,7 @@ function GuideCard({ g, size = "default" }: { g: Guide; size?: "default" | "larg
   const big = size === "large";
   return (
     <Link
-      href={KB_URL}
+      href={`/guides/${g.slug}`}
       className="group flex h-full flex-col overflow-hidden rounded-[16px] border border-line bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft"
     >
       <div
@@ -135,7 +51,7 @@ function GuideCard({ g, size = "default" }: { g: Guide; size?: "default" | "larg
         <p className={`mt-2.5 flex-1 leading-relaxed text-muted ${big ? "text-[16px]" : "text-[15px]"}`}>
           {g.excerpt}
         </p>
-        <span className="mt-4 text-[13.5px] font-semibold text-accent">Read guide →</span>
+        <span className="mt-4 text-[13.5px] font-semibold text-accent">Read playbook →</span>
       </div>
     </Link>
   );
@@ -152,15 +68,14 @@ export default function GuidesPage() {
             <div>
               <span className="eyebrow">
                 <span className="eyebrow-dot" aria-hidden="true" />
-                Guides
+                CA &amp; Accounting Practice Playbooks
               </span>
               <h1 className="mt-4 max-w-[720px] font-display text-[clamp(34px,5vw,54px)] font-semibold leading-[1.04] tracking-[-0.025em]">
-                Playbooks for professional-services firms.
+                Playbooks for modern CA &amp; accounting practices.
               </h1>
               <p className="lead mt-5 max-w-[600px]">
-                Practical, opinionated guides on planning work, keeping status honest, and
-                catching risk early. Drawn from how high-performing teams actually run
-                projects, not how the textbooks say they should.
+                Practical, opinionated guides on managing client PBC checklists, statutory compliance deadlines,
+                4-eye partner review gates, and scaling your practice operations.
               </p>
             </div>
             <div className="hidden rounded-2xl border border-line bg-white p-6 shadow-card lg:block">

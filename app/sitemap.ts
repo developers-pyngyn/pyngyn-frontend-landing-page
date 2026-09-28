@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/components/schema";
 import { posts } from "@/components/posts";
 import { KB_ARTICLES } from "@/components/kb-data";
+import { GUIDES } from "@/components/guides-data";
 import { COMPETITORS } from "@/components/config";
 
 // Pre-render to a static /sitemap.xml at build time (no edge function).
@@ -131,9 +132,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // Practice guide playbooks
+  const guideEntries: MetadataRoute.Sitemap = GUIDES.map((g) => ({
+    url: url(`/guides/${g.slug}`),
+    lastModified: SITE_UPDATED,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
   // Keep `now` referenced so the build records generation time in the
   // default lastModified path if SITE_UPDATED is ever removed.
   void now;
 
-  return [...staticEntries, ...blogEntries, ...kbEntries, ...compareEntries];
+  return [...staticEntries, ...blogEntries, ...kbEntries, ...compareEntries, ...guideEntries];
 }
