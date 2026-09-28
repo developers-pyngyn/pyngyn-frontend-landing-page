@@ -65,7 +65,7 @@ export default function PricingPage() {
                 isCustom: true,
                 priceCurrency: "INR",
                 description:
-                  "Dedicated practice migration, custom ERP integrations, enterprise SSO, and 99.9% uptime SLA for large CA partnerships.",
+                  "Dedicated practice migration, multi-branch practice partitions, enterprise SSO, and 99.9% uptime SLA for large CA partnerships.",
                 url: "/pricing",
               },
             ],

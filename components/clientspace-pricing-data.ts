@@ -126,13 +126,12 @@ export const CLIENTSPACE_PLANS: PricingPlan[] = [
     summaryLimits: [
       "Unlimited Portfolios & Multi-Branch Entities",
       "1 TB+ Dedicated Cloud Storage Vault",
-      "Unlimited Automations & Custom Connectors",
+      "Unlimited Automations & Integrations",
       "Unlimited Staff & Article Assistants",
       "Unlimited Client Portal Guests",
     ],
     keyHighlights: [
       "Everything in Business, plus:",
-      "Custom ERP Integrations (SAP, Oracle, Bespoke REST APIs)",
       "Enterprise SSO (SAML 2.0, Okta, Azure AD, Google Workspace)",
       "Multi-Branch & Multi-Office Practice Partitions",
       "Dedicated White-Glove Client & Document Migration Specialist",
@@ -368,7 +367,7 @@ export const FEATURE_CATEGORIES: FeatureCategory[] = [
         enterprise: true,
       },
       {
-        name: "Cloud Storage Sync (Google Drive & OneDrive)",
+        name: "Cloud Storage Sync",
         detail: "Bi-directional synchronization of audit working papers and client documentation folders",
         pro: true,
         business: true,
@@ -379,13 +378,6 @@ export const FEATURE_CATEGORIES: FeatureCategory[] = [
         detail: "Sync statutory due dates, filing deadlines, and client review meetings directly to practice calendars",
         pro: true,
         business: true,
-        enterprise: true,
-      },
-      {
-        name: "Custom REST APIs & Enterprise ERP (SAP / Oracle)",
-        detail: "Tailored connectors and database webhooks for large institutional accounting practices",
-        pro: false,
-        business: false,
         enterprise: true,
       },
     ],
