@@ -131,7 +131,7 @@ export function ProblemBeforeAfter() {
                 &ldquo;Did you get my voucher? Any update on our filing?&rdquo;
               </h3>
               <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600">
-                When accounting work is scattered across WhatsApp, Outlook, and
+                When accounting work is scattered across WhatsApp, unorganized email inboxes, and
                 Excel, partners become the bottleneck between clients and their
                 own information. ClientSpace replaces the chaos with an
                 integrated operating cockpit.

@@ -220,7 +220,7 @@ export const CAPABILITY_ROWS: CapabilityRow[] = [
     label: "Integrations",
     category: "Integrations",
     detail:
-      "Tally Prime & Tally.ERP 9 local XML bridge, Zoho Books ledger matching, WhatsApp Business API, Google Drive, OneDrive, and Google Calendar.",
+      "Tally Prime & Tally.ERP 9 local XML bridge, Zoho Books ledger matching, WhatsApp Business API, Cloud Storage, and Calendar Integration.",
     pyngyn: true,
     competitor: {
       karbon: true,

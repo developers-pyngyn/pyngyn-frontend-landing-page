@@ -375,8 +375,8 @@ export const FEATURE_CATEGORIES: FeatureCategory[] = [
         enterprise: true,
       },
       {
-        name: "Calendar Sync (Google & Microsoft Outlook)",
-        detail: "Sync statutory due dates and review deadlines directly onto practitioners' work calendars",
+        name: "Calendar Integration",
+        detail: "Sync statutory due dates, filing deadlines, and client review meetings directly to practice calendars",
         pro: true,
         business: true,
         enterprise: true,

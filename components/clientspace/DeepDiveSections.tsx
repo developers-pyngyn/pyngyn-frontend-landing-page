@@ -664,9 +664,9 @@ export function IntegrationsSection() {
     { name: "Computax", category: "Direct Tax & Form 3CD", icon: FileSpreadsheet },
     { name: "Zoho Books", category: "Invoicing & Books", icon: Briefcase },
     { name: "QuickBooks Online", category: "Cloud Accounting", icon: Zap },
-    { name: "Google Calendar", category: "Deadlines & Meetings", icon: Calendar },
+    { name: "Calendar Integration", category: "Deadlines & Practice Meetings", icon: Calendar },
     { name: "Slack", category: "Internal Comms", icon: MessageSquare },
-    { name: "Microsoft 365", category: "Document Export & Outlook", icon: Folder },
+    { name: "Cloud Storage", category: "Working Papers & Document Sync", icon: Folder },
     { name: "WhatsApp Business", category: "Client Messaging", icon: Smartphone },
   ];
 
