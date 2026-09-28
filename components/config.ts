@@ -59,20 +59,16 @@ export const ADMIN_SECURITY_URL = "/benefits/admin-security";
 export const PLAYSTORE_URL = "https://play.google.com/store/apps/details?id=com.pyngyn.io&hl=en_IN";
 
 // Compare competitors -> /compare/<slug>
-// Positioning: PYNGYN is the PS-native, SMB, operationally deep platform
-// that unifies knowledge + tasks. These are the closest adjacent tools that
-// professional-services and consulting firms currently stitch together.
+// Positioning: PYNGYN ClientSpace is the dedicated practice management operating system
+// for CA firms, tax practitioners, and accounting practices.
 export const COMPETITORS: { slug: string; name: string }[] = [
-  { slug: "notion", name: "Notion" },
-  { slug: "sana-labs", name: "Sana Labs" },
-  { slug: "guru", name: "Guru" },
-  { slug: "atlas", name: "Atlas" },
-  { slug: "clickup", name: "ClickUp" },
-  { slug: "asana", name: "Asana" },
-  { slug: "jira", name: "Jira" },
-  { slug: "twenty", name: "Twenty" },
-  { slug: "wrike", name: "Wrike" },
+  { slug: "karbon", name: "Karbon" },
+  { slug: "taxdome", name: "TaxDome" },
+  { slug: "canopy", name: "Canopy" },
+  { slug: "zoho-practice", name: "Zoho Practice" },
+  { slug: "spreadsheets", name: "Spreadsheets & Email" },
 ];
+
 
 // Social profiles (update to your real handles)
 // Social profiles

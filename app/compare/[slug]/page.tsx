@@ -28,62 +28,53 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   const content = getCompareContent(params.slug);
   if (!content) return { title: "Compare | PYNGYN" };
   return {
-    title: `PYNGYN vs ${content.name} | PYNGYN`,
-    description: `${content.intro} See a side-by-side comparison, key differences, migration steps, and FAQs.`,
+    title: `PYNGYN vs ${content.name} | Practice Management for CA Firms | PYNGYN`,
+    description: `${content.intro} Factual side-by-side comparison, key differences, migration steps, and FAQs.`,
     alternates: { canonical: `/compare/${content.slug}` },
   };
 }
 
 function CellMark({ v }: { v: Cell }) {
-  if (v === true)
+  if (v === true) {
     return (
       <span
-        className="mx-auto grid h-6 w-6 place-items-center rounded-full bg-accent-lt text-accent"
-        aria-label="Native"
-        title="Native"
+        className="inline-flex items-center justify-center rounded-full bg-emerald-50 px-2.5 py-0.5 text-[12px] font-bold text-emerald-700 border border-emerald-200 shadow-sm"
+        aria-label="Supported"
+        title="Full native support"
       >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M5 12l5 5L20 6"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        ✓
       </span>
     );
-  if (v === "partial")
+  }
+  if (v === "limited" || v === "partial") {
     return (
       <span
-        className="mx-auto grid h-6 w-6 place-items-center rounded-full border border-line text-[#c8862a]"
-        aria-label="Partial"
-        title="Partial"
+        className="inline-flex items-center justify-center rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-semibold text-amber-800 border border-amber-200"
+        aria-label="Limited"
+        title="Partial or limited capability"
       >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M5 12h14"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-        </svg>
+        Limited
       </span>
     );
+  }
+  if (v === "integration") {
+    return (
+      <span
+        className="inline-flex items-center justify-center rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-700 border border-blue-200"
+        aria-label="Integration"
+        title="Requires third-party integration"
+      >
+        Integration
+      </span>
+    );
+  }
   return (
     <span
-      className="mx-auto grid h-6 w-6 place-items-center rounded-full bg-[#f3f4f7] text-muted"
+      className="inline-flex items-center justify-center text-[15px] font-medium text-slate-400"
       aria-label="Not available"
       title="Not available"
     >
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M6 6l12 12M18 6L6 18"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-      </svg>
+      —
     </span>
   );
 }
@@ -101,7 +92,7 @@ export default function ComparePage({ params }: { params: Params }) {
         data={[
           webPageSchema({
             url: slugUrl,
-            name: `PYNGYN vs ${content.name}`,
+            name: `PYNGYN vs ${content.name} | Practice Management Comparison`,
             description: content.intro,
             breadcrumbId: `${slugUrl}#breadcrumb`,
           }),
@@ -127,21 +118,21 @@ export default function ComparePage({ params }: { params: Params }) {
             <span aria-hidden>›</span>
             <span className="text-ink">PYNGYN vs {content.name}</span>
           </div>
-          <span className="eyebrow mt-6">PYNGYN vs {content.name}</span>
+          <span className="eyebrow mt-6">Client Management for CA & Accounting Firms</span>
           <h1 className="mt-3 max-w-[860px] font-display text-[clamp(34px,4.8vw,56px)] font-semibold leading-[1.05] tracking-[-0.025em]">
-            The PS-native alternative to {content.name}.
+            The CA &amp; accounting practice alternative to {content.name}.
           </h1>
           <p className="lead mt-5 max-w-[760px]">{content.intro}</p>
           <p className="mt-2 max-w-[760px] text-[14px] text-muted">
-            <span className="font-medium text-ink">{content.name}:</span>{" "}
+            <span className="font-semibold text-ink">{content.name}:</span>{" "}
             {content.tagline}
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <a href={DEMO_URL} className="btn btn-primary">
-              Book a demo →
+              Book a practice demo →
             </a>
             <a href={SIGNUP_URL} className="btn btn-ghost">
-              Start free
+              Start 7-day free trial
             </a>
           </div>
         </section>
@@ -151,13 +142,13 @@ export default function ComparePage({ params }: { params: Params }) {
           <div className="grid gap-[18px] md:grid-cols-2">
             <div className="card border-accent/30 bg-accent-lt/40">
               <span className="eyebrow">Pick PYNGYN if</span>
-              <p className="mt-3 text-[16px] leading-relaxed text-ink">
+              <p className="mt-3 text-[15.5px] leading-relaxed text-ink font-medium">
                 {content.verdict.pickPyngyn}
               </p>
             </div>
             <div className="card">
               <span className="eyebrow">Pick {content.name} if</span>
-              <p className="mt-3 text-[16px] leading-relaxed text-ink">
+              <p className="mt-3 text-[15.5px] leading-relaxed text-ink">
                 {content.verdict.pickThem}
               </p>
             </div>
@@ -168,23 +159,22 @@ export default function ComparePage({ params }: { params: Params }) {
         <section className="wrap pb-[60px]">
           <span className="eyebrow">Capabilities side by side</span>
           <h2 className="title mt-3">
-            What each tool does, and doesn&apos;t.
+            What each platform delivers, transparently evaluated.
           </h2>
           <p className="lead mt-3">
-            The same eight capabilities every PS firm asks about, scored
-            honestly for PYNGYN and {content.name}.
+            Core practice management capabilities evaluated objectively for PYNGYN ClientSpace and {content.name}.
           </p>
           <div className="mt-7 overflow-hidden rounded-2xl border border-line bg-white shadow-card">
             <table className="w-full border-collapse text-left">
               <thead>
                 <tr className="border-b border-line bg-[#fbfbfd]">
-                  <th className="px-5 py-4 text-[14px] font-semibold text-muted">
-                    Capability
+                  <th className="px-5 py-4 text-[13px] font-semibold text-muted uppercase tracking-wider w-[50%]">
+                    Practice Capability
                   </th>
-                  <th className="px-5 py-4 text-center text-[15px] font-bold text-accent">
-                    PYNGYN
+                  <th className="px-5 py-4 text-center text-[14px] font-bold text-accent w-[25%] bg-accent-lt/20">
+                    PYNGYN ClientSpace
                   </th>
-                  <th className="px-5 py-4 text-center text-[15px] font-bold text-ink">
+                  <th className="px-5 py-4 text-center text-[14px] font-bold text-ink w-[25%]">
                     {content.name}
                   </th>
                 </tr>
@@ -195,24 +185,24 @@ export default function ComparePage({ params }: { params: Params }) {
                     key={r.label}
                     className={
                       i < CAPABILITY_ROWS.length - 1
-                        ? "border-b border-line"
-                        : ""
+                        ? "border-b border-line hover:bg-slate-50/50 transition-colors"
+                        : "hover:bg-slate-50/50 transition-colors"
                     }
                   >
                     <td className="px-5 py-4 align-top">
-                      <div className="text-[15px] font-medium text-ink">
+                      <div className="text-[14.5px] font-semibold text-ink">
                         {r.label}
                       </div>
                       {r.detail && (
-                        <div className="mt-1 text-[13px] leading-relaxed text-muted">
+                        <div className="mt-1 text-[12.5px] leading-relaxed text-muted">
                           {r.detail}
                         </div>
                       )}
                     </td>
-                    <td className="px-5 py-4 text-center align-top">
+                    <td className="px-5 py-4 text-center align-middle bg-accent-lt/10">
                       <CellMark v={r.pyngyn} />
                     </td>
-                    <td className="px-5 py-4 text-center align-top">
+                    <td className="px-5 py-4 text-center align-middle">
                       <CellMark v={r.competitor[content.slug] ?? false} />
                     </td>
                   </tr>
@@ -221,14 +211,12 @@ export default function ComparePage({ params }: { params: Params }) {
             </table>
           </div>
           <p className="mt-4 text-[13px] leading-relaxed text-muted">
-            {COMPARE_LEGEND} · {COMPARE_FOOTNOTE} Reflects PYNGYN&apos;s
-            positioning and typical {content.name} capabilities; specific
-            features may vary by plan. Last reviewed May 2026.
+            {COMPARE_LEGEND} · {COMPARE_FOOTNOTE}
           </p>
           <p className="mt-3 text-[13px] text-muted">
-            Want to see every tool at once?{" "}
-            <Link href="/compare" className="text-accent hover:underline">
-              View the full competitive landscape →
+            Want to see all platforms at once?{" "}
+            <Link href="/compare" className="text-accent hover:underline font-semibold">
+              View the complete practice landscape table →
             </Link>
           </p>
         </section>
@@ -246,26 +234,24 @@ export default function ComparePage({ params }: { params: Params }) {
                   <span className="index-num">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="font-display text-[22px] font-semibold tracking-[-0.01em]">
+                  <h3 className="font-display text-[20px] font-semibold tracking-[-0.01em] text-ink">
                     {d.title}
                   </h3>
                 </div>
                 <div className="mt-5 grid gap-4 md:grid-cols-2">
-                  <div className="rounded-xl border border-accent/30 bg-accent-lt/40 p-5">
-                    <div className="flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.08em] text-accent">
-                      <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent" />
-                      PYNGYN
-                    </div>
-                    <p className="mt-2 text-[15px] leading-relaxed text-ink">
+                  <div className="rounded-xl border border-accent/20 bg-accent-lt/30 p-4">
+                    <span className="text-[11.5px] font-bold uppercase tracking-[0.08em] text-accent-dk">
+                      PYNGYN ClientSpace
+                    </span>
+                    <p className="mt-2 text-[14px] leading-relaxed text-ink">
                       {d.pyngyn}
                     </p>
                   </div>
-                  <div className="rounded-xl border border-line bg-[#fbfbfd] p-5">
-                    <div className="flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.08em] text-muted">
-                      <span className="inline-block h-1.5 w-1.5 rounded-full bg-muted" />
+                  <div className="rounded-xl border border-line bg-slate-50 p-4">
+                    <span className="text-[11.5px] font-bold uppercase tracking-[0.08em] text-muted">
                       {content.name}
-                    </div>
-                    <p className="mt-2 text-[15px] leading-relaxed text-ink">
+                    </span>
+                    <p className="mt-2 text-[14px] leading-relaxed text-ink">
                       {d.them}
                     </p>
                   </div>
@@ -275,143 +261,113 @@ export default function ComparePage({ params }: { params: Params }) {
           </div>
         </section>
 
-        {/* When competitor is the better choice + Pricing */}
+        {/* Where they shine */}
         <section className="wrap pb-[60px]">
-          <div className="grid gap-[18px] md:grid-cols-2">
-            <div className="card">
-              <span className="eyebrow">When {content.name} is the right call</span>
-              <p className="mt-3 text-[14px] text-muted">
-                We&apos;re not trying to be everything for everyone. {content.name}{" "}
-                is a great fit for:
-              </p>
-              <ul className="mt-4 space-y-3">
-                {content.bestFor.map((b) => (
-                  <li key={b} className="flex items-start gap-3 text-[15px]">
-                    <span className="mt-1.5 inline-block h-1.5 w-1.5 flex-none rounded-full bg-ink" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="card">
-              <span className="eyebrow">Pricing at a glance</span>
-              <p className="mt-3 text-[15px] leading-relaxed text-ink">
-                {content.pricingNote}
-              </p>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <Link href="/pricing" className="btn btn-ghost">
-                  See PYNGYN pricing
-                </Link>
-                <a href={DEMO_URL} className="btn btn-primary">
-                  Talk to sales →
-                </a>
-              </div>
-            </div>
+          <div className="card">
+            <span className="eyebrow">Honest perspective</span>
+            <h2 className="title mt-3 text-[clamp(24px,2.6vw,32px)]">
+              Where {content.name} is the better choice.
+            </h2>
+            <p className="lead mt-3">
+              We believe in matching firms with the software that fits their exact workflow.
+              Here is where {content.name} stands out:
+            </p>
+            <ul className="mt-6 space-y-3">
+              {content.bestFor.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-[14.5px] text-ink">
+                  <span className="mt-1 flex h-4 w-4 flex-none items-center justify-center rounded-full bg-slate-200 text-[10px] font-bold text-slate-700">
+                    •
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 border-t border-line pt-4 text-[13px] text-muted">
+              <span className="font-semibold text-ink">Pricing context:</span>{" "}
+              {content.pricingNote}
+            </p>
           </div>
         </section>
 
-        {/* Switcher quote (optional) */}
+        {/* Migration steps */}
+        <section className="wrap pb-[60px]">
+          <span className="eyebrow">Migration Path</span>
+          <h2 className="title mt-3">
+            Moving from {content.name} to PYNGYN.
+          </h2>
+          <p className="lead mt-3">
+            A structured 4-step transition plan designed to avoid practice disruptions during busy season.
+          </p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {content.migrationSteps.map((s, i) => (
+              <div key={s.title} className="card flex flex-col">
+                <span className="index-num">
+                  Step {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-3 font-display text-[16px] font-semibold text-ink">
+                  {s.title}
+                </h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-muted flex-1">
+                  {s.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Switcher quote if present */}
         {content.switcherQuote && (
           <section className="wrap pb-[60px]">
-            <div className="card relative overflow-hidden">
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -right-12 -top-12 h-48 w-48 rounded-full bg-accent-lt opacity-70 blur-3xl"
-              />
-              <span className="eyebrow relative">From a team that switched</span>
-              <blockquote className="relative mt-4 font-display text-[clamp(22px,2.4vw,30px)] font-semibold leading-[1.25] tracking-[-0.015em] text-ink">
+            <div className="card border-accent/30 bg-accent-lt/20 text-center py-10 px-6 sm:px-12">
+              <blockquote className="font-display text-[19px] sm:text-[22px] font-medium leading-relaxed text-ink italic">
                 &ldquo;{content.switcherQuote.quote}&rdquo;
               </blockquote>
-              <p className="relative mt-4 text-[14px] text-muted">
-               , {content.switcherQuote.attribution}
-              </p>
+              <cite className="mt-4 block text-[13px] font-bold uppercase tracking-wider text-accent-dk not-italic">
+                — {content.switcherQuote.attribution}
+              </cite>
             </div>
           </section>
         )}
 
-        {/* Migration steps */}
-        <section className="wrap pb-[60px]">
-          <span className="eyebrow">Migration plan</span>
-          <h2 className="title mt-3">
-            Switching from {content.name} to PYNGYN.
-          </h2>
-          <p className="lead mt-3">
-            Most teams move in a few short steps. No big-bang cutover required.
-          </p>
-          <ol className="mt-8 grid gap-[18px] md:grid-cols-2">
-            {content.migrationSteps.map((s, i) => (
-              <li key={s.title} className="card">
-                <div className="flex items-baseline gap-3">
-                  <span className="index-num">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="font-display text-[20px] font-semibold tracking-[-0.01em]">
-                    {s.title}
-                  </h3>
-                </div>
-                <p className="mt-3 text-[15px] leading-relaxed text-muted">
-                  {s.body}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
         {/* FAQs */}
         <section className="wrap pb-[60px]">
-          <span className="eyebrow">FAQ</span>
+          <span className="eyebrow">Common Questions</span>
           <h2 className="title mt-3">
-            Common questions when comparing to {content.name}.
+            PYNGYN vs {content.name} FAQs.
           </h2>
-          <div className="mt-8 overflow-hidden rounded-2xl border border-line bg-white shadow-card">
-            {content.faqs.map((f, i) => (
-              <details
-                key={f.q}
-                className={`group ${
-                  i < content.faqs.length - 1 ? "border-b border-line" : ""
-                }`}
-              >
-                <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-6 py-5 text-[16px] font-semibold text-ink transition-colors hover:bg-[#fbfbfd]">
-                  <span>{f.q}</span>
-                  <span
-                    aria-hidden
-                    className="mt-1 inline-grid h-6 w-6 flex-none place-items-center rounded-full bg-accent-lt text-accent transition-transform group-open:rotate-45"
-                  >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M12 5v14M5 12h14"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>
-                </summary>
-                <div className="px-6 pb-6 text-[15px] leading-relaxed text-muted">
+          <div className="mt-8 space-y-4">
+            {content.faqs.map((f) => (
+              <div key={f.q} className="card">
+                <h3 className="font-display text-[16px] font-semibold text-ink">
+                  {f.q}
+                </h3>
+                <p className="mt-2 text-[14px] leading-relaxed text-muted">
                   {f.a}
-                </div>
-              </details>
+                </p>
+              </div>
             ))}
           </div>
         </section>
 
         {/* Other comparisons */}
         <section className="wrap pb-[60px]">
-          <span className="eyebrow">Compare more tools</span>
-          <h2 className="title mt-3">PYNGYN vs the other tools you know.</h2>
-          <div className="mt-7 grid gap-[14px] sm:grid-cols-2 lg:grid-cols-3">
+          <span className="eyebrow">Other Comparisons</span>
+          <h2 className="title mt-3">
+            Compare PYNGYN with other practice software.
+          </h2>
+          <div className="mt-6 flex flex-wrap gap-2.5">
             {otherCompetitors.map((c) => (
               <Link
                 key={c.slug}
                 href={`/compare/${c.slug}`}
-                className="card flex items-center justify-between"
+                className="btn btn-ghost text-[13px]"
               >
-                <span className="text-[16px] font-bold">
-                  PYNGYN vs {c.name}
-                </span>
-                <span className="text-accent">→</span>
+                vs {c.name} →
               </Link>
             ))}
+            <Link href="/compare" className="btn btn-ghost text-[13px]">
+              All comparisons →
+            </Link>
           </div>
         </section>
 

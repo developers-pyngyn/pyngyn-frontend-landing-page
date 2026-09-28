@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import Link from "next/link";
 import {
   Check,
@@ -249,7 +249,7 @@ export function ClientSpacePricing() {
             </thead>
             <tbody>
               {FEATURE_CATEGORIES.map((category, catIdx) => (
-                <div key={catIdx} className="contents">
+                <Fragment key={catIdx}>
                   {/* Category Header Row */}
                   <tr className="bg-slate-100/70 border-t border-b border-slate-200">
                     <td
@@ -285,7 +285,7 @@ export function ClientSpacePricing() {
                       </td>
                     </tr>
                   ))}
-                </div>
+                </Fragment>
               ))}
             </tbody>
           </table>

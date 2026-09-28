@@ -18,65 +18,53 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Competitive Landscape | PYNGYN",
+  title: "Client Management for CA & Accounting Firms | Compare | PYNGYN",
   description:
-    "No one has built this for PS. The PYNGYN competitive landscape vs Notion, Sana Labs, Guru, Atlas, and ClickUp, capability matrix, key differences, migration plans, and FAQs.",
+    "Factual, transparent comparison of PYNGYN ClientSpace against Karbon, TaxDome, Canopy, Zoho Practice, and Spreadsheets. Built specifically for CA firms, tax practitioners, and accounting practices.",
   alternates: { canonical: "/compare" },
 };
 
 function CellMark({ v }: { v: Cell }) {
-  const base = "grid h-6 w-6 flex-none place-items-center rounded-full";
   if (v === true) {
     return (
       <span
-        className={`${base} bg-accent-lt text-accent`}
-        aria-label="Native"
-        title="Native"
+        className="inline-flex items-center justify-center rounded-full bg-emerald-50 px-2.5 py-0.5 text-[12px] font-bold text-emerald-700 border border-emerald-200 shadow-sm"
+        aria-label="Supported"
+        title="Full native support"
       >
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M5 12l5 5L20 6"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        ✓
       </span>
     );
   }
-  if (v === "partial") {
+  if (v === "limited" || v === "partial") {
     return (
       <span
-        className={`${base} border border-line text-[#c8862a]`}
-        aria-label="Partial"
-        title="Partial"
+        className="inline-flex items-center justify-center rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-semibold text-amber-800 border border-amber-200"
+        aria-label="Limited"
+        title="Partial or limited capability"
       >
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M5 12h14"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-        </svg>
+        Limited
+      </span>
+    );
+  }
+  if (v === "integration") {
+    return (
+      <span
+        className="inline-flex items-center justify-center rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-700 border border-blue-200"
+        aria-label="Integration"
+        title="Requires third-party integration"
+      >
+        Integration
       </span>
     );
   }
   return (
     <span
-      className={`${base} bg-[#f3f4f7] text-muted`}
+      className="inline-flex items-center justify-center text-[15px] font-medium text-slate-400"
       aria-label="Not available"
       title="Not available"
     >
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M6 6l12 12M18 6L6 18"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-      </svg>
+      —
     </span>
   );
 }
@@ -88,9 +76,9 @@ export default function CompareIndexPage() {
         data={[
           webPageSchema({
             url: "/compare",
-            name: "Competitive Landscape | PYNGYN",
+            name: "Client Management for CA & Accounting Firms | PYNGYN",
             description:
-              "PYNGYN vs Notion, Sana Labs, Guru, Atlas, and ClickUp, the PS-native, SMB, operationally deep platform.",
+              "PYNGYN ClientSpace vs Karbon, TaxDome, Canopy, Zoho Practice, and Spreadsheets. Practice management, client portals, statutory compliance radars, and Tally sync for CA firms.",
             breadcrumbId: "/compare#breadcrumb",
           }),
           breadcrumbSchema(
@@ -102,7 +90,7 @@ export default function CompareIndexPage() {
           ),
           itemListSchema({
             url: "/compare",
-            name: "PYNGYN comparison pages",
+            name: "PYNGYN practice management comparisons",
             items: COMPETITORS.map((c) => ({
               name: `PYNGYN vs ${c.name}`,
               url: `/compare/${c.slug}`,
@@ -115,38 +103,37 @@ export default function CompareIndexPage() {
       <main id="main">
         {/* Hero */}
         <section className="wrap pb-[40px] pt-[150px]">
-          <span className="eyebrow">Competitive Landscape</span>
+          <span className="eyebrow">Client Management for CA & Accounting Firms</span>
           <h1 className="mt-3 max-w-[940px] font-display text-[clamp(34px,4.8vw,56px)] font-semibold leading-[1.05] tracking-[-0.025em]">
-            No one has built this for PS.{" "}
-            <span className="text-accent">That&apos;s the opportunity.</span>
+            Practice management built for CA firms.{" "}
+            <span className="text-accent">Transparently compared.</span>
           </h1>
           <p className="lead mt-5 max-w-[820px]">
-            Professional-services and consulting firms stitch together a wiki,
-            a tracker, an LMS, a chat bot, and an AI assistant, and still
-            don&apos;t have an operating system for the firm. PYNGYN is
-            PS-native, SMB, and operationally deep.
+            CA firms and tax practices typically stitch together spreadsheets, generic task tools,
+            personal WhatsApp chats, and disconnected desktop software. Compare PYNGYN ClientSpace
+            against global accounting platforms, localized tools, and traditional spreadsheets across
+            14 core practice capabilities.
           </p>
         </section>
 
         {/* Competitive landscape matrix */}
         <section className="wrap pb-[40px]">
-          {/* Desktop / tablet: full capability table. Hidden on phones so a
-              760px-wide grid doesn't spill off-screen. */}
+          {/* Desktop / tablet: full capability table */}
           <div className="hidden overflow-hidden rounded-2xl border border-line bg-white shadow-card md:block">
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[760px] border-collapse text-left">
+              <table className="w-full min-w-[860px] border-collapse text-left">
                 <thead>
                   <tr className="border-b border-line bg-[#0c2a2a] text-white">
-                    <th className="px-5 py-4 text-[14px] font-semibold uppercase tracking-[0.06em]">
-                      Capability
+                    <th className="px-5 py-4 text-[13px] font-semibold uppercase tracking-[0.06em] w-[28%]">
+                      Practice Capability
                     </th>
-                    <th className="bg-accent px-5 py-4 text-center text-[15px] font-bold text-white">
-                      PYNGYN
+                    <th className="bg-accent px-4 py-4 text-center text-[14px] font-bold text-white w-[14%]">
+                      PYNGYN ClientSpace
                     </th>
                     {COMPETITORS.map((c) => (
                       <th
                         key={c.slug}
-                        className="px-5 py-4 text-center text-[14px] font-semibold text-white/90"
+                        className="px-4 py-4 text-center text-[13px] font-semibold text-white/90"
                       >
                         {c.name}
                       </th>
@@ -159,27 +146,27 @@ export default function CompareIndexPage() {
                       key={r.label}
                       className={
                         i < CAPABILITY_ROWS.length - 1
-                          ? "border-b border-line"
-                          : ""
+                          ? "border-b border-line hover:bg-slate-50/50 transition-colors"
+                          : "hover:bg-slate-50/50 transition-colors"
                       }
                     >
                       <td className="px-5 py-4 align-top">
-                        <div className="text-[14.5px] font-medium text-ink">
+                        <div className="text-[14px] font-semibold text-ink">
                           {r.label}
                         </div>
                         {r.detail && (
-                          <div className="mt-1 text-[12.5px] leading-relaxed text-muted">
+                          <div className="mt-1 text-[12px] leading-relaxed text-muted">
                             {r.detail}
                           </div>
                         )}
                       </td>
-                      <td className="bg-accent-lt/40 px-5 py-4 text-center align-middle">
+                      <td className="bg-accent-lt/40 px-4 py-4 text-center align-middle">
                         <CellMark v={r.pyngyn} />
                       </td>
                       {COMPETITORS.map((c) => (
                         <td
                           key={c.slug}
-                          className="px-5 py-4 text-center align-middle"
+                          className="px-4 py-4 text-center align-middle"
                         >
                           <CellMark v={r.competitor[c.slug] ?? false} />
                         </td>
@@ -191,8 +178,7 @@ export default function CompareIndexPage() {
             </div>
           </div>
 
-          {/* Mobile: one card per capability, each tool listed as a row.
-              Renders the same data without forcing horizontal scroll. */}
+          {/* Mobile: one card per capability */}
           <div className="flex flex-col gap-3 md:hidden">
             {CAPABILITY_ROWS.map((r) => (
               <div
@@ -210,7 +196,7 @@ export default function CompareIndexPage() {
                 <ul className="divide-y divide-line">
                   <li className="flex items-center justify-between gap-3 bg-accent-lt/40 px-4 py-3">
                     <span className="text-[13px] font-bold text-accent-dk">
-                      PYNGYN
+                      PYNGYN ClientSpace
                     </span>
                     <CellMark v={r.pyngyn} />
                   </li>
@@ -231,19 +217,19 @@ export default function CompareIndexPage() {
           </div>
 
           <p className="mt-4 text-[13px] leading-relaxed text-muted">
-            {COMPARE_LEGEND} · {COMPARE_FOOTNOTE} Last reviewed May 2026.
+            {COMPARE_LEGEND} · {COMPARE_FOOTNOTE}
           </p>
         </section>
 
         {/* Per-competitor deep-dive entry points */}
         <section className="wrap pb-[60px]">
-          <span className="eyebrow">Deep dives</span>
+          <span className="eyebrow">Practice Deep Dives</span>
           <h2 className="title mt-3">
-            See PYNGYN against each tool in your stack.
+            See PYNGYN against each tool in your firm&apos;s stack.
           </h2>
           <p className="lead mt-3 max-w-[760px]">
-            Every comparison covers the same eight capabilities, the
-            differences that matter, a migration plan, and FAQs.
+            Every comparison covers the 14 core accounting practice capabilities, key operational
+            differences, migration roadmaps, and honest guidance on when each tool is the right fit.
           </p>
           <div className="mt-7 grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
             {COMPETITORS.map((c) => {
@@ -252,33 +238,33 @@ export default function CompareIndexPage() {
                 <Link
                   key={c.slug}
                   href={`/compare/${c.slug}`}
-                  className="card group flex h-full flex-col"
+                  className="card group flex h-full flex-col hover:border-accent transition-colors"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[18px] font-bold">
+                    <span className="text-[18px] font-bold text-ink">
                       PYNGYN vs {c.name}
                     </span>
-                    <span className="text-accent transition-transform group-hover:translate-x-0.5">
+                    <span className="text-accent transition-transform group-hover:translate-x-0.5 font-bold">
                       →
                     </span>
                   </div>
                   {content && (
                     <>
-                      <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-muted">
+                      <p className="mt-2 text-[12px] uppercase tracking-[0.08em] text-muted font-medium">
                         {content.tagline}
                       </p>
-                      <p className="mt-4 text-[14px] leading-relaxed text-muted">
+                      <p className="mt-4 text-[13.5px] leading-relaxed text-muted flex-1">
                         {content.verdict.pickPyngyn}
                       </p>
-                      <div className="mt-5 flex flex-wrap gap-2 text-[12px] text-muted">
-                        <span className="rounded-full border border-line px-2.5 py-1">
-                          Capability matrix
+                      <div className="mt-5 flex flex-wrap gap-2 text-[11px] text-muted">
+                        <span className="rounded-full border border-line px-2.5 py-1 bg-slate-50">
+                          14 Capabilities
                         </span>
-                        <span className="rounded-full border border-line px-2.5 py-1">
-                          Migration plan
+                        <span className="rounded-full border border-line px-2.5 py-1 bg-slate-50">
+                          Migration Steps
                         </span>
-                        <span className="rounded-full border border-line px-2.5 py-1">
-                          FAQs
+                        <span className="rounded-full border border-line px-2.5 py-1 bg-slate-50">
+                          Practice FAQs
                         </span>
                       </div>
                     </>
@@ -292,38 +278,36 @@ export default function CompareIndexPage() {
         {/* How we compare */}
         <section className="wrap pb-[60px]">
           <div className="card">
-            <span className="eyebrow">How we compare</span>
+            <span className="eyebrow">Practice Philosophy</span>
             <h2 className="title mt-3 text-[clamp(26px,3vw,36px)]">
-              PS-native. SMB. Operationally deep.
+              Client Management for CA &amp; Accounting Firms.
             </h2>
             <div className="mt-6 grid gap-6 md:grid-cols-3">
               <div>
-                <h3 className="font-display text-[18px] font-semibold">
-                  Built for professional services
+                <h3 className="font-display text-[17px] font-semibold text-ink">
+                  Built for CA firm realities
                 </h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-muted">
-                  Engagements, utilization, SOWs, deliverables, and
-                  methodologies are first-class, not adapted from a generic
-                  doc or task tool.
+                <p className="mt-2 text-[13.5px] leading-relaxed text-muted">
+                  Statutory calendars (GSTR-1, GSTR-3B, Advance Tax, Form 3CD), Tally Prime sync,
+                  and 4-eye partner review gates reflect how audit and tax practices operate every day.
                 </p>
               </div>
               <div>
-                <h3 className="font-display text-[18px] font-semibold">
-                  Knowledge that drives action
+                <h3 className="font-display text-[17px] font-semibold text-ink">
+                  Zero client friction
                 </h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-muted">
-                  SOPs execute inside the workflow with checklists, gates, and
-                  AI assists. The playbook isn&apos;t a doc, it&apos;s how the
-                  firm runs.
+                <p className="mt-2 text-[13.5px] leading-relaxed text-muted">
+                  Clients receive branded portals with passwordless magic links and automated
+                  WhatsApp document reminders. Unlimited client accounts at zero additional cost.
                 </p>
               </div>
               <div>
-                <h3 className="font-display text-[18px] font-semibold">
-                  Honest about the fit
+                <h3 className="font-display text-[17px] font-semibold text-ink">
+                  Honest, transparent fit
                 </h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-muted">
-                  Every comparison page calls out where the other tool is the
-                  better choice. PYNGYN isn&apos;t for every team.
+                <p className="mt-2 text-[13.5px] leading-relaxed text-muted">
+                  Every comparison page highlights where the alternative platform excels. We believe
+                  in helping firms choose the right operating system for their specific client base.
                 </p>
               </div>
             </div>
