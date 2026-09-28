@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Reveal } from "./Reveal";
 import { PricingTiers } from "./PricingTiers";
 import type { RegionCode } from "./regionPricing";
-import { INTEGRATIONS_URL, ROI_URL } from "./config";
+import { INTEGRATIONS_URL, PRICING_URL } from "./config";
 
 // Section label pill with an accent dot (Apptics style).
 export function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -250,13 +250,12 @@ export function Metrics() {
           </div>
           <Reveal i={3}>
             <p className="mx-auto mt-10 max-w-[700px] text-center text-[13px] leading-relaxed text-white/70">
-              Illustrative figures from our free ROI calculator using default assumptions, not
-              customer averages.{" "}
+              Illustrative figures based on industry operational benchmarks for professional-services firms.{" "}
               <a
-                href={ROI_URL}
+                href={PRICING_URL}
                 className="font-semibold text-white underline underline-offset-2"
               >
-                Model your own firm
+                Explore pricing and value
               </a>
               .
             </p>

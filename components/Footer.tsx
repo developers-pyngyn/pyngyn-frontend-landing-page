@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Reveal } from "./Reveal";
 import { openCookiePreferences } from "./consent";
 import { GetInTouch } from "./footer/GetInTouch";
-import { SIGNUP_URL, DEMO_URL, BENEFITS_URL, CUSTOMERS_URL, PRICING_URL, BLOG_URL, ABOUT_URL, CAREERS_URL, PRIVACY_URL, TERMS_URL, REFUND_URL, COOKIE_POLICY_URL, DPA_URL, SUBPROCESSORS_URL, SOCIAL_X, SOCIAL_LINKEDIN, SOCIAL_REDDIT, SOCIAL_FACEBOOK, SOCIAL_YOUTUBE, SOCIAL_INSTAGRAM, INTEGRATIONS_URL, CHANGELOG_URL, DOCS_URL, GUIDES_URL, BRAND_URL, PARTNERS_URL, STATUS_URL, SUPPORT_URL, KB_URL, ANNOUNCEMENTS_URL, ROADMAP_URL, REFER_URL, COMPARE_URL, COMPETITORS, PLAYSTORE_URL, INVESTORS_URL, TOOLS_URL, PLAN_GEN_URL, ROI_URL, STATUS_REPORT_URL, UTILIZATION_URL, COST_ESTIMATOR_URL } from "./config";
+import { SIGNUP_URL, DEMO_URL, BENEFITS_URL, CUSTOMERS_URL, PRICING_URL, BLOG_URL, ABOUT_URL, CAREERS_URL, PRIVACY_URL, TERMS_URL, REFUND_URL, COOKIE_POLICY_URL, DPA_URL, SUBPROCESSORS_URL, SOCIAL_X, SOCIAL_LINKEDIN, SOCIAL_REDDIT, SOCIAL_FACEBOOK, SOCIAL_YOUTUBE, SOCIAL_INSTAGRAM, INTEGRATIONS_URL, CHANGELOG_URL, DOCS_URL, GUIDES_URL, BRAND_URL, PARTNERS_URL, STATUS_URL, SUPPORT_URL, KB_URL, ANNOUNCEMENTS_URL, ROADMAP_URL, REFER_URL, COMPARE_URL, COMPETITORS, PLAYSTORE_URL, INVESTORS_URL } from "./config";
 
 const faqs: [string, string][] = [
   ["What happens in the demo?", "A 30-minute guided walkthrough where we run PYNGYN on a project like yours, with no generic slideshow."],
@@ -140,7 +140,7 @@ export function Footer() {
         ],
       },
     ],
-    // Column 2: Solutions & Free tools (11 links)
+    // Column 2: Solutions & Client Portals (11 links)
     [
       {
         heading: "Solutions",
@@ -153,14 +153,14 @@ export function Footer() {
         ],
       },
       {
-        heading: "Free tools",
+        heading: "Client Portals",
         links: [
-          { label: "AI plan generator", href: PLAN_GEN_URL },
-          { label: "Status report generator", href: STATUS_REPORT_URL },
-          { label: "ROI calculator", href: ROI_URL },
-          { label: "Team utilization calculator", href: UTILIZATION_URL },
-          { label: "Cost & margin estimator", href: COST_ESTIMATOR_URL },
-          { label: "All tools", href: TOOLS_URL },
+          { label: "Client portal software", href: "/client-portal-software" },
+          { label: "Secure client portal", href: "/secure-client-portal" },
+          { label: "Portal for accountants", href: "/client-portal-for-accounting-firms" },
+          { label: "Branded client portal", href: "/clientspace/branded-portal" },
+          { label: "Secure documents", href: "/clientspace/secure-documents" },
+          { label: "Client approvals", href: "/clientspace/approvals" },
         ],
       },
     ],
@@ -265,24 +265,27 @@ export function Footer() {
               ISO 9001:2015 Certified (QMS)
             </p>
 
-            <a
-              href={PLAYSTORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-5 inline-flex items-center gap-2.5 rounded-xl border border-line bg-white px-4 py-2.5 transition-colors hover:border-accent"
-              aria-label="Get PYNGYN on Google Play"
-            >
-              <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M3.6 2.3 13 12 3.6 21.7a1.4 1.4 0 0 1-.6-1.2V3.5c0-.5.2-.9.6-1.2z" fill="#34a853" />
-                <path d="M16.8 8.6 13 12 3.6 2.3c.4-.3.9-.3 1.4 0l8.8 5z" fill="#ea4335" />
-                <path d="M16.8 15.4 5 22c-.5.3-1 .3-1.4 0L13 12z" fill="#fbbc04" />
-                <path d="m16.8 8.6 4 2.3c.7.4.7 1.4 0 1.8l-4 2.7L13 12z" fill="#4285f4" />
-              </svg>
-              <span className="flex flex-col leading-tight">
-                <span className="text-[10px] uppercase tracking-wide text-muted">Get it on</span>
-                <span className="text-[14px] font-bold text-ink">Google Play</span>
-              </span>
-            </a>
+            {/* Google Play / Pay button hidden per design update */}
+            {false && (
+              <a
+                href={PLAYSTORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center gap-2.5 rounded-xl border border-line bg-white px-4 py-2.5 transition-colors hover:border-accent"
+                aria-label="Get PYNGYN on Google Play"
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3.6 2.3 13 12 3.6 21.7a1.4 1.4 0 0 1-.6-1.2V3.5c0-.5.2-.9.6-1.2z" fill="#34a853" />
+                  <path d="M16.8 8.6 13 12 3.6 2.3c.4-.3.9-.3 1.4 0l8.8 5z" fill="#ea4335" />
+                  <path d="M16.8 15.4 5 22c-.5.3-1 .3-1.4 0L13 12z" fill="#fbbc04" />
+                  <path d="m16.8 8.6 4 2.3c.7.4.7 1.4 0 1.8l-4 2.7L13 12z" fill="#4285f4" />
+                </svg>
+                <span className="flex flex-col leading-tight">
+                  <span className="text-[10px] uppercase tracking-wide text-muted">Get it on</span>
+                  <span className="text-[14px] font-bold text-ink">Google Play</span>
+                </span>
+              </a>
+            )}
           </div>
 
           {columns.map((groups, i) => (

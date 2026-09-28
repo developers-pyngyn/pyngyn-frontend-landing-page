@@ -49,14 +49,12 @@ const STATIC: Entry[] = [
   { path: "/benefits/reporting", priority: 0.7, changeFrequency: "monthly" },
   { path: "/benefits/admin-security", priority: 0.7, changeFrequency: "monthly" },
   { path: "/integrations", priority: 0.9, changeFrequency: "weekly" },
-  { path: "/tools/ai-project-plan", priority: 0.9, changeFrequency: "monthly" },
-  { path: "/tools/any-update-cost", priority: 0.9, changeFrequency: "monthly" },
-  { path: "/tools/status-report", priority: 0.9, changeFrequency: "monthly" },
-  { path: "/tools/roi-calculator", priority: 0.9, changeFrequency: "monthly" },
-  { path: "/tools/team-utilization", priority: 0.9, changeFrequency: "monthly" },
-  { path: "/tools/cost-margin-estimator", priority: 0.9, changeFrequency: "monthly" },
+  // High-intent SEO & product pages
+  { path: "/client-portal-software", priority: 0.95, changeFrequency: "weekly" },
+  { path: "/secure-client-portal", priority: 0.95, changeFrequency: "weekly" },
+  { path: "/client-portal-for-accounting-firms", priority: 0.95, changeFrequency: "weekly" },
 
-  // Solutions / social proof / tools hub
+  // Solutions / social proof
   { path: "/solutions/professional-services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/solutions/lawyers", priority: 0.8, changeFrequency: "monthly" },
   { path: "/solutions/accountants", priority: 0.8, changeFrequency: "monthly" },
@@ -65,7 +63,6 @@ const STATIC: Entry[] = [
   { path: "/solutions/architects", priority: 0.8, changeFrequency: "monthly" },
   { path: "/customers", priority: 0.8, changeFrequency: "monthly" },
   { path: "/compare", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/tools", priority: 0.8, changeFrequency: "monthly" },
 
   // Content hubs
   { path: "/blog", priority: 0.7, changeFrequency: "weekly" },

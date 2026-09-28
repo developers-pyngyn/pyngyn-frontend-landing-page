@@ -18,6 +18,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           "/api/", // server endpoints, not pages
           "/lp/", // paid-traffic landing pages (noindex)
+          "/tools/", // unlisted tools
         ],
       },
     ],

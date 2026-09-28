@@ -99,10 +99,10 @@ const BY_CATEGORY: Record<string, Variant> = {
   },
   Planning: {
     eyebrow: "Plan it in seconds",
-    title: "Turn a plan like this into tasks, owners, and deadlines.",
-    body: "The AI Project Plan Generator turns a plain-English brief into a structured plan, free, no signup.",
-    label: "Try the free plan generator",
-    href: "/tools/ai-project-plan",
+    title: "Turn client briefs into structured engagements.",
+    body: "Pyngyn converts client deliverables and requirements into tasks, milestones, and deadlines with full audit trails.",
+    label: "Explore Workspace",
+    href: "/workspace",
   },
   Product: {
     eyebrow: "See it for yourself",

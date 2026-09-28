@@ -151,9 +151,9 @@ const RESOURCES_MENU: DropdownItem[] = [
     icon: PenTool,
   },
   {
-    name: "Templates",
-    desc: "Free accounting checklists, engagement letters, and audit trackers",
-    href: "/tools/ai-project-plan",
+    name: "Compare Alternatives",
+    desc: "Side-by-side breakdowns vs Notion, Asana, ClickUp, and more",
+    href: "/compare",
     icon: FileCheck,
   },
   {

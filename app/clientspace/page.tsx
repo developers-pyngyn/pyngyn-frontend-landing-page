@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
-import { DEMO_URL, SIGNUP_URL, ANY_UPDATE_URL } from "@/components/config";
+import { DEMO_URL, SIGNUP_URL, PRICING_URL } from "@/components/config";
 import {
   OG_IMAGE,
   JsonLd,
@@ -13,15 +13,15 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Client Space | PYNGYN, the standalone branded client portal for professional-services firms",
+  title: "Client Portal Software | Secure Client Portal for Modern Firms | Pyngyn ClientSpace",
   description:
-    "Give every client a branded portal where they see status, documents, and approvals 24/7, instead of emailing you for updates. Client Space is $19 per client / month, standalone. No Workspace purchase required.",
+    "Pyngyn ClientSpace is secure client portal software purpose-built for accounting firms, CAs, and professional services. Give clients a branded portal with live status, bank-grade documents, approvals, and passwordless access.",
   alternates: { canonical: "/clientspace" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Client Space | The standalone branded client portal for professional-services firms",
+    title: "Client Portal Software | Secure Client Portal for Modern Firms | Pyngyn ClientSpace",
     description:
-      "Stop being the bottleneck between your clients and their own information. Give every client a branded, secure portal, status, documents, approvals, and payments in one place.",
+      "Stop being the bottleneck between clients and their information. Pyngyn is the secure client portal software providing branded workspaces, encrypted documents, live milestones, and approvals.",
     url: "/clientspace",
     type: "website",
   },
@@ -134,13 +134,14 @@ const VERTICALS: { label: string; href: string; line: string }[] = [
 ];
 
 const FAQS: { q: string; a: string }[] = [
-  { q: "What is Client Space?", a: "Client Space is a branded client portal for your firm, sold on its own. Each client gets their own secure, isolated space showing the status of their engagement, their documents, approvals, and invoices, so they stop emailing you for updates and start self-serving 24/7." },
-  { q: "How much does Client Space cost?", a: "Client Space is $19 per client per month, standalone, you don't need to buy Workspace to use it. If your firm also wants Workspace (your internal back office, $9 per seat/month), you can bundle both for $24.99/month." },
+  { q: "What is client portal software, and why does my firm need it?", a: "Client portal software gives your clients a dedicated, branded workspace to view real-time project milestones, exchange confidential documents, review invoices, and approve deliverables. Instead of chasing email threads, clients can self-serve status updates 24/7." },
+  { q: "What is Pyngyn ClientSpace?", a: "Pyngyn ClientSpace is secure client portal software purpose-built for professional services, CA practices, and accounting firms. Each client receives their own private, white-labeled portal with bank-grade encryption and passwordless magic links." },
+  { q: "How much does ClientSpace cost?", a: "ClientSpace is $19 per client per month standalone, with transparent practice tiers starting at ₹499/mo. You don't need Workspace to use it. If your firm also wants internal project and resource management, you can bundle both for $24.99/month." },
+  { q: "Is Pyngyn a secure client portal software solution?", a: "Yes. All client data and documents are protected with AES-256 encryption at rest and TLS 1.3 in transit. ClientSpace includes role-based access control, comprehensive audit logging, and strict data isolation between clients." },
   { q: "Do my clients need to create an account or remember a password?", a: "No. Clients join with a one-click magic link, no password to remember and no login friction. Login frustration is the number-one reason client portals go unused, so we removed it entirely." },
-  { q: "Can clients see my other clients, or my internal work?", a: "Never. Each Client Space is fully isolated. A client sees only their own engagement, never another client's work, and never your internal operations. You control exactly what's visible." },
-  { q: "Is it secure enough for legal and financial documents?", a: "Yes. Documents are encrypted in transit and at rest, access is controlled per client, and every action is logged in an audit trail, far safer than emailing sensitive records, which most firms still do." },
-  { q: "Can I brand it as my own firm?", a: "Yes. Client Space is white-labeled with your logo, colors, and domain. To your clients, it looks and feels like your firm's own portal." },
-  { q: "What is Workspace, and do I need it?", a: "Workspace is a separate product, your firm's internal back office for projects, finances, and billable time. You don't need it to use Client Space. Firms that want both can bundle Workspace and Client Space together for $24.99/month." },
+  { q: "Is there a specialized client portal for accounting firms?", a: "Yes. Pyngyn provides tailored workflows for accounting and CA practices, including PBC document collection checklists, statutory deadline tracking, and multi-tier partner review sign-offs." },
+  { q: "Can I brand it with my firm's own identity?", a: "Yes. ClientSpace is fully white-labeled with your custom logo, brand colors, and firm domain, presenting a cohesive, premium client experience." },
+  { q: "Can I try Pyngyn ClientSpace before committing?", a: "Yes. You can start a 7-day free trial with no credit card required, or book a live 30-minute walkthrough tailored to your practice." }
 ];
 
 function Check() {
@@ -181,17 +182,15 @@ export default function ClientspacePage() {
         <section className="wrap pb-[56px] pt-[140px]">
           <span className="eyebrow">
             <span className="eyebrow-dot" aria-hidden="true" />
-            Client Space · the standalone client portal
+            Secure Client Portal Software · Pyngyn ClientSpace
           </span>
-          <h1 className="mt-4 max-w-[900px] font-display text-[clamp(34px,5.4vw,62px)] font-semibold leading-[1.03] tracking-[-0.027em]">
-            Your clients stop emailing.
-            <br className="hidden sm:block" />
-            <span className="text-accent">They just open their portal.</span>
+          <h1 className="mt-4 max-w-[920px] font-display text-[clamp(34px,5.4vw,62px)] font-semibold leading-[1.03] tracking-[-0.027em]">
+            Secure client portal software for managing client relationships.
           </h1>
-          <p className="lead mt-5 max-w-[660px]">
-            Client Space gives every client a branded, secure portal where they see their status,
-            documents, approvals, and invoices, 24/7. No more &ldquo;did you get my email?&rdquo;,
-            no more being the bottleneck between your client and their own information.
+          <p className="lead mt-5 max-w-[680px]">
+            Pyngyn ClientSpace gives every client a branded, secure portal where they track live milestones,
+            exchange confidential documents, approve deliverables, and review invoices 24/7. Stop email chaos
+            and deliver the best client portal experience your clients deserve.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={DEMO_URL} className="btn btn-accent">Book a demo</a>
@@ -207,7 +206,7 @@ export default function ClientspacePage() {
           <div className="mx-auto max-w-[900px] overflow-hidden rounded-[22px] border border-line bg-white shadow-art">
             <Image
               src="/screens/clientspace-space.webp"
-              alt="Client Space portal showing needs-your-attention items, active engagements, engagement value, and upcoming sessions for a client logging in"
+              alt="Secure client portal software showing needs-your-attention items, active engagements, and document approvals"
               width={1909}
               height={940}
               priority
@@ -223,11 +222,11 @@ export default function ClientspacePage() {
         {/* ===== Pain ===================================================== */}
         <section className="section bg-[#fbfbfd]">
           <div className="wrap">
-            <span className="eyebrow">The problem</span>
+            <span className="eyebrow">Why Firms Switch</span>
             <h2 className="mt-3 max-w-[720px] font-display text-[clamp(26px,3.4vw,42px)] font-semibold leading-tight tracking-[-0.025em]">
-              Your clients are in the dark, and it&apos;s costing you.
+              Why firms switch to dedicated client portal software.
             </h2>
-            <p className="lead mt-4 max-w-[620px]">
+            <p className="lead mt-4 max-w-[640px]">
               Most firms still run client communication through email. Clients can&apos;t see anything
               without asking, so they ask constantly, and the work waits while you answer.
             </p>
@@ -241,9 +240,9 @@ export default function ClientspacePage() {
               ))}
             </div>
             <div className="mt-6 flex items-center justify-center gap-2 text-[14px]">
-              <span className="text-muted">Curious what this actually costs your firm?</span>
-              <Link href={ANY_UPDATE_URL} className="font-semibold text-accent hover:text-accent-dk">
-                Calculate it, free →
+              <span className="text-muted">Want to see how ClientSpace eliminates client communication bottlenecks?</span>
+              <Link href={DEMO_URL} className="font-semibold text-accent hover:text-accent-dk">
+                Book a 30-min walkthrough →
               </Link>
             </div>
           </div>
@@ -252,9 +251,9 @@ export default function ClientspacePage() {
         {/* ===== Features ================================================= */}
         <section className="section">
           <div className="wrap">
-            <span className="eyebrow">What clients get</span>
+            <span className="eyebrow">Complete Client Portal Solution</span>
             <h2 className="mt-3 max-w-[760px] font-display text-[clamp(26px,3.4vw,42px)] font-semibold leading-tight tracking-[-0.025em]">
-              A portal clients actually want to open.
+              Everything your practice needs in secure client portal software.
             </h2>
             <p className="lead mt-4 max-w-[640px]">
               Everything a client needs to feel informed and in control, branded as your firm,
@@ -443,6 +442,54 @@ export default function ClientspacePage() {
                 <a href={SIGNUP_URL} className="btn btn-accent">Start free trial</a>
                 <a href={DEMO_URL} className="btn btn-primary">Book a demo</a>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Deep-dive SEO Pages Hub ================================= */}
+        <section className="section">
+          <div className="wrap">
+            <span className="eyebrow">Explore Client Portals</span>
+            <h2 className="mt-3 font-display text-[clamp(24px,3vw,34px)] font-semibold tracking-[-0.02em]">
+              Specialized client portal software solutions.
+            </h2>
+            <p className="lead mt-4 max-w-[640px]">
+              Explore deep dives into modern client collaboration, security architectures, and practice-specific portals.
+            </p>
+            <div className="mt-8 grid gap-5 sm:grid-cols-3">
+              <Link
+                href="/client-portal-software"
+                className="card group flex flex-col p-6 transition-all hover:border-accent hover:shadow-soft"
+              >
+                <div className="font-bold text-[17px] text-ink group-hover:text-accent transition-colors">
+                  Client Portal Software &rarr;
+                </div>
+                <p className="mt-2 text-[13.5px] leading-relaxed text-muted">
+                  Discover how modern client portal solutions replace email chasing, centralize deliverables, and elevate the client experience.
+                </p>
+              </Link>
+              <Link
+                href="/secure-client-portal"
+                className="card group flex flex-col p-6 transition-all hover:border-accent hover:shadow-soft"
+              >
+                <div className="font-bold text-[17px] text-ink group-hover:text-accent transition-colors">
+                  Secure Client Portal &rarr;
+                </div>
+                <p className="mt-2 text-[13.5px] leading-relaxed text-muted">
+                  Learn about AES-256 encryption, passwordless magic links, and audit-ready compliance built for sensitive financial and legal records.
+                </p>
+              </Link>
+              <Link
+                href="/client-portal-for-accounting-firms"
+                className="card group flex flex-col p-6 transition-all hover:border-accent hover:shadow-soft"
+              >
+                <div className="font-bold text-[17px] text-ink group-hover:text-accent transition-colors">
+                  Portal for Accounting Firms &rarr;
+                </div>
+                <p className="mt-2 text-[13.5px] leading-relaxed text-muted">
+                  Purpose-built for Chartered Accountants and accounting firms: PBC document collection, GST/ROC compliance calendars, and sign-offs.
+                </p>
+              </Link>
             </div>
           </div>
         </section>

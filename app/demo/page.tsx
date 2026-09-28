@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { CalendlyEmbed } from "@/components/CalendlyEmbed";
+import { DemoBookingForm } from "@/components/DemoBookingForm";
 import { ExitIntentModal } from "@/components/ExitIntentModal";
 import { DemoConversionBar, DemoStory, DemoTestimonials } from "@/components/DemoStory";
 import { SIGNUP_URL } from "@/components/config";
@@ -192,11 +192,7 @@ export default function DemoPage() {
 
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-start">
               <div className="lg:sticky lg:top-24">
-                <CalendlyEmbed
-                  url="https://calendly.com/founder-pyngyn/30min"
-                  className="overflow-hidden rounded-2xl border border-line bg-white shadow-card"
-                  height={760}
-                />
+                <DemoBookingForm />
 
                 <div className="mt-4 flex flex-wrap items-center gap-2">
                   <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted">
