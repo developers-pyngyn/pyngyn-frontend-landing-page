@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Fragment } from "react";
+import { useEffect, useState, Fragment } from "react";
 import Link from "next/link";
 import {
   Check,
@@ -18,11 +18,61 @@ import {
   CLIENTSPACE_PLANS,
   FEATURE_CATEGORIES,
   PRICING_FAQS,
+  getPlansForMarket,
+  MARKET_PRICING_MAP,
 } from "@/components/clientspace-pricing-data";
+import { MarketSelector } from "@/components/pricing/MarketSelector";
+import { type MarketCode } from "@/lib/pricing/config";
 
 export function ClientSpacePricing() {
+  const [market, setMarket] = useState<MarketCode>("IN");
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    // 1. Check override cookie first
+    const cookieMatch = document.cookie.match(/(?:^|;\s*)pyngyn_market=([^;]+)/);
+    if (cookieMatch && cookieMatch[1]) {
+      const code = cookieMatch[1].toUpperCase() as MarketCode;
+      if (MARKET_PRICING_MAP[code]) {
+        setMarket(code);
+        return;
+      }
+    }
+
+    // 2. Fetch live edge geo (works with VPNs)
+    fetch("/api/geo")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.market && MARKET_PRICING_MAP[data.market as MarketCode]) {
+          setMarket(data.market as MarketCode);
+        }
+      })
+      .catch(() => {
+        // 3. Fallback: check browser timezone
+        try {
+          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+          if (tz.includes("Calcutta") || tz.includes("Kolkata")) {
+            setMarket("IN");
+          } else if (tz.includes("London")) {
+            setMarket("GB");
+          } else if (tz.includes("Toronto") || tz.includes("Vancouver") || tz.includes("Montreal")) {
+            setMarket("CA");
+          } else if (tz.includes("Sydney") || tz.includes("Melbourne") || tz.includes("Brisbane")) {
+            setMarket("AU");
+          } else if (tz.includes("Dubai")) {
+            setMarket("AE");
+          } else {
+            setMarket("US");
+          }
+        } catch {
+          setMarket("US");
+        }
+      });
+  }, []);
+
+  const plans = getPlansForMarket(market);
+  const marketConfig = MARKET_PRICING_MAP[market] || MARKET_PRICING_MAP.DEFAULT;
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -30,8 +80,8 @@ export function ClientSpacePricing() {
 
   return (
     <div className="w-full">
-      {/* Billing Switcher */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10 sm:mb-14">
+      {/* Billing Switcher & Currency / Market Selector */}
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-14">
         <div className="inline-flex items-center p-1 rounded-full bg-slate-100 border border-slate-200 shadow-inner">
           <button
             type="button"
@@ -59,6 +109,10 @@ export function ClientSpacePricing() {
             </span>
           </button>
         </div>
+
+        {/* Dynamic Country / Currency Selector */}
+        <MarketSelector market={market} onChange={(next) => setMarket(next)} />
+
         <div className="text-xs text-slate-500 flex items-center gap-1.5 font-medium">
           <CheckCircle2 className="w-3.5 h-3.5 text-[#14223d]" />
           <span>7-day free trial on all plans &bull; No credit card required</span>
@@ -67,7 +121,7 @@ export function ClientSpacePricing() {
 
       {/* Pricing Cards Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-7 max-w-7xl mx-auto items-stretch">
-        {CLIENTSPACE_PLANS.map((plan) => {
+        {plans.map((plan) => {
           const isBusiness = plan.id === "business";
           const displayPrice =
             plan.monthlyPrice !== null
@@ -137,12 +191,12 @@ export function ClientSpacePricing() {
                       <div className="mt-1.5 flex items-center justify-between text-[11px] text-slate-500">
                         <span>
                           {billingCycle === "annual"
-                            ? `Billed annually (₹${(displayPrice || 0) * 12}/yr)`
+                            ? `Billed annually (${plan.currencySymbol}${(displayPrice || 0) * 12}/yr)`
                             : "Billed monthly"}
                         </span>
                         {billingCycle === "annual" && (
                           <span className="text-emerald-700 font-bold">
-                            Save ₹{((plan.monthlyPrice || 0) - (plan.annualPrice || 0)) * 12}/yr
+                            Save {plan.currencySymbol}{((plan.monthlyPrice || 0) - (plan.annualPrice || 0)) * 12}/yr
                           </span>
                         )}
                       </div>

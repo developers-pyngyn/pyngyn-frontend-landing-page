@@ -1,5 +1,6 @@
 import { SIGNUP_URL, DEMO_URL } from "./config";
 import { PLAN_ENTITLEMENTS } from "@/lib/entitlements";
+import { type MarketCode } from "@/lib/pricing/config";
 
 export interface PricingPlan {
   id: "pro" | "business" | "enterprise";
@@ -37,6 +38,82 @@ export interface PricingFaq {
   q: string;
   a: string;
 }
+ 
+export type ClientSpaceMarketPrices = {
+  currencySymbol: string;
+  currencyCode: string;
+  proMonthly: number;
+  proAnnual: number;
+  bizMonthly: number;
+  bizAnnual: number;
+  taxNote: string;
+};
+
+export const MARKET_PRICING_MAP: Record<MarketCode, ClientSpaceMarketPrices> = {
+  IN: {
+    currencySymbol: "₹",
+    currencyCode: "INR",
+    proMonthly: 499,
+    proAnnual: 399,
+    bizMonthly: 799,
+    bizAnnual: 649,
+    taxNote: "+ GST 18%",
+  },
+  US: {
+    currencySymbol: "$",
+    currencyCode: "USD",
+    proMonthly: 14,
+    proAnnual: 12,
+    bizMonthly: 24,
+    bizAnnual: 20,
+    taxNote: "Sales tax (state)",
+  },
+  GB: {
+    currencySymbol: "£",
+    currencyCode: "GBP",
+    proMonthly: 12,
+    proAnnual: 11,
+    bizMonthly: 20,
+    bizAnnual: 17,
+    taxNote: "VAT 20% (incl.)",
+  },
+  CA: {
+    currencySymbol: "C$",
+    currencyCode: "CAD",
+    proMonthly: 16,
+    proAnnual: 14,
+    bizMonthly: 28,
+    bizAnnual: 24,
+    taxNote: "GST/HST/PST (varies)",
+  },
+  AU: {
+    currencySymbol: "A$",
+    currencyCode: "AUD",
+    proMonthly: 18,
+    proAnnual: 16,
+    bizMonthly: 31,
+    bizAnnual: 27,
+    taxNote: "GST 10% (incl.)",
+  },
+  AE: {
+    currencySymbol: "AED ",
+    currencyCode: "AED",
+    proMonthly: 52,
+    proAnnual: 44,
+    bizMonthly: 89,
+    bizAnnual: 74,
+    taxNote: "VAT 5% (itemized)",
+  },
+  DEFAULT: {
+    currencySymbol: "$",
+    currencyCode: "USD",
+    proMonthly: 14,
+    proAnnual: 12,
+    bizMonthly: 24,
+    bizAnnual: 20,
+    taxNote: "Tax calculated at checkout",
+  },
+};
 
 // ============================================================================
 // CLIENTSPACE PRICING PLANS (CENTRALIZED VIA LIB/ENTITLEMENTS)
@@ -145,6 +222,35 @@ export const CLIENTSPACE_PLANS: PricingPlan[] = [
     ],
   },
 ];
+
+export function getPlansForMarket(market: MarketCode): PricingPlan[] {
+  const p = MARKET_PRICING_MAP[market] || MARKET_PRICING_MAP.DEFAULT;
+  return CLIENTSPACE_PLANS.map((plan) => {
+    if (plan.id === "pro") {
+      return {
+        ...plan,
+        currencySymbol: p.currencySymbol,
+        currencyCode: p.currencyCode,
+        monthlyPrice: p.proMonthly,
+        annualPrice: p.proAnnual,
+      };
+    }
+    if (plan.id === "business") {
+      return {
+        ...plan,
+        currencySymbol: p.currencySymbol,
+        currencyCode: p.currencyCode,
+        monthlyPrice: p.bizMonthly,
+        annualPrice: p.bizAnnual,
+      };
+    }
+    return {
+      ...plan,
+      currencySymbol: p.currencySymbol,
+      currencyCode: p.currencyCode,
+    };
+  });
+}
 
 // ============================================================================
 // PROTOTYPE-ALIGNED FEATURE COMPARISON MATRIX
