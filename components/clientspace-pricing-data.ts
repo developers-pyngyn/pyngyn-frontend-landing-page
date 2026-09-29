@@ -129,7 +129,7 @@ export const CLIENTSPACE_PLANS: PricingPlan[] = [
     ctaStyle: "ghost",
     summaryLimits: [
       "Unlimited Portfolios & Multi-Branch Entities",
-      "1 TB+ Dedicated Cloud Storage Vault",
+      "200 GB Storage (Customizable)",
       "Unlimited Automations & Integrations",
       "Unlimited Staff & Article Assistants",
       "Unlimited Client Portal Guests",
@@ -248,7 +248,7 @@ export const FEATURE_CATEGORIES: FeatureCategory[] = [
         detail: "256-bit AES encryption at rest and TLS 1.3 in transit with audit-grade isolation",
         pro: "10 GB",
         business: "100 GB",
-        enterprise: "1 TB+ Dedicated",
+        enterprise: "200 GB (Customizable)",
       },
     ],
   },
@@ -410,7 +410,7 @@ export const FEATURE_CATEGORIES: FeatureCategory[] = [
         detail: "Bank-grade encrypted secure client document storage and deliverable exchange",
         pro: "10 GB Storage",
         business: "100 GB Storage",
-        enterprise: "1 TB+ Dedicated",
+        enterprise: "200 GB (Customizable)",
       },
       {
         name: "eMudhra & DocuSign eSign",

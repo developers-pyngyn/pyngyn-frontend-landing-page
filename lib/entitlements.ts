@@ -181,7 +181,7 @@ export const PLAN_ENTITLEMENTS: Record<PlanTierId, PlanEntitlement> = {
       maxIncomeTaxClients: "unlimited",
       maxAutomations: "unlimited",
       maxIntegrations: "unlimited",
-      storageGb: "unlimited",
+      storageGb: 200,
       maxTeamMembers: "unlimited",
       guestPortalAccounts: "unlimited",
       auditLogRetentionDays: "unlimited",
