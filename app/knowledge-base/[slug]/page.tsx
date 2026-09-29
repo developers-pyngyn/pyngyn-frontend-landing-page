@@ -17,6 +17,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ContextualCTA } from "@/components/ContextualCTA";
 import { KB_ARTICLES, getArticle, relatedArticles, defaultBody } from "@/components/kb-data";
+import { KbFeaturePlatformShowcase } from "@/components/kb/KbFeaturePlatformShowcase";
 import { KB_URL, SUPPORT_URL, DEMO_URL, SIGNUP_URL } from "@/components/config";
 import {
   JsonLd,
@@ -119,36 +120,8 @@ export default function KbArticlePage({ params }: { params: Params }) {
           </h1>
           <p className="mt-4 text-[17.5px] sm:text-[18.5px] leading-relaxed text-muted">{a.excerpt}</p>
 
-          {/* Featured Architecture Diagram / Mockup */}
-          {a.cover ? (
-            <div className="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card">
-              <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/70 px-4 py-2.5 text-[12px] text-muted">
-                <span className="flex items-center gap-1.5 font-mono font-medium">
-                  <ShieldCheck className="h-3.5 w-3.5 text-accent" />
-                  <span>Architecture &amp; Workflow Diagram</span>
-                </span>
-                <span className="text-[11px] uppercase tracking-wider text-muted/70">Pyngyn Practice Core</span>
-              </div>
-              <Image
-                src={a.cover}
-                alt={a.title}
-                width={1280}
-                height={720}
-                priority
-                className="h-auto w-full object-cover"
-              />
-              <div className="border-t border-slate-100 bg-slate-50/40 px-4 py-2 text-[12px] text-muted italic">
-                Figure: Official operational data flow for {a.title.toLowerCase()} in Pyngyn ClientSpace.
-              </div>
-            </div>
-          ) : (
-            <div className="mt-8 flex aspect-[16/9] w-full items-center justify-center rounded-2xl border border-line bg-slate-100" aria-hidden="true">
-              <div className="flex flex-col items-center gap-2 text-muted/50">
-                <BookOpen className="h-10 w-10" />
-                <span className="font-mono text-[11px] uppercase tracking-wider">Pyngyn ClientSpace Guide</span>
-              </div>
-            </div>
-          )}
+          {/* Live Pyngyn Platform UI Showcase & Verified Screenshot */}
+          <KbFeaturePlatformShowcase article={a} />
 
           {/* Body Content */}
           <div className="mt-10 flex flex-col gap-9 bg-white p-7 sm:p-10 rounded-3xl border border-line shadow-sm">

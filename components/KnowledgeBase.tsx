@@ -16,6 +16,7 @@ import {
   ArrowRight,
   Sparkles,
   CheckCircle2,
+  Monitor,
 } from "lucide-react";
 import { KB_ARTICLES, KB_CATEGORIES, type KbArticle } from "./kb-data";
 import { KB_URL, SUPPORT_URL, DEMO_URL } from "./config";
@@ -74,6 +75,12 @@ function ArticleCard({ a }: { a: KbArticle }) {
           <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-semibold backdrop-blur-md bg-white/90 shadow-sm ${meta.badgeBg}`}>
             <IconComp className="h-3 w-3" />
             <span>{a.category}</span>
+          </span>
+        </div>
+        <div className="absolute top-3.5 right-3.5">
+          <span className="inline-flex items-center gap-1 rounded-md border border-slate-200/90 bg-white/95 px-2 py-0.5 text-[10.5px] font-mono font-medium text-slate-700 backdrop-blur-md shadow-xs">
+            <Monitor className="h-2.5 w-2.5 text-accent" />
+            <span>App Screen</span>
           </span>
         </div>
       </div>

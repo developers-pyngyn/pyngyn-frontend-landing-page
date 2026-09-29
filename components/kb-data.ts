@@ -10,6 +10,8 @@ export type KbArticle = {
   popular?: boolean;
   editorsPick?: boolean;
   cover?: string;
+  routePath?: string;
+  mockupType?: string;
   body?: KbSection[];
 };
 
@@ -739,10 +741,93 @@ const RAW_KB_ARTICLES: KbArticle[] = [
   },
 ];
 
-export const KB_ARTICLES: KbArticle[] = RAW_KB_ARTICLES.map((article) => ({
-  cover: article.cover ?? `/kb/${article.slug}.png`,
-  ...article,
-}));
+const ARTICLE_METADATA_MAP: Record<string, { routePath: string; mockupType: string }> = {
+  "client-portfolios-entity-hierarchies": {
+    routePath: "app.pyngyn.ai/clientspace/directory/apex-group",
+    mockupType: "client-hierarchies",
+  },
+  "statutory-compliance-master-calendar": {
+    routePath: "app.pyngyn.ai/clientspace/compliance/calendar-2026",
+    mockupType: "statutory-calendar",
+  },
+  "four-eye-partner-review-gates": {
+    routePath: "app.pyngyn.ai/clientspace/governance/review-gates/eqcr-901",
+    mockupType: "four-eye-review",
+  },
+  "gst-reconciliation-gsp-sync": {
+    routePath: "app.pyngyn.ai/clientspace/gst/3-way-recon/27AABCU9603R1ZX",
+    mockupType: "gst-recon",
+  },
+  "income-tax-notice-triage": {
+    routePath: "app.pyngyn.ai/clientspace/tax/notices/sec-143-2",
+    mockupType: "direct-tax",
+  },
+  "whatsapp-business-api-setup": {
+    routePath: "app.pyngyn.ai/clientspace/comms/whatsapp/live-inbox",
+    mockupType: "whatsapp-inbox",
+  },
+  "tally-prime-accounting-sync": {
+    routePath: "app.pyngyn.ai/clientspace/connectors/tally-prime-daemon",
+    mockupType: "tally-connector",
+  },
+  "zoho-books-cloud-sync": {
+    routePath: "app.pyngyn.ai/clientspace/connectors/zoho-books-sync",
+    mockupType: "tally-connector",
+  },
+  "google-workspace-integration": {
+    routePath: "app.pyngyn.ai/clientspace/intake/unified-hub",
+    mockupType: "intake-pipeline",
+  },
+  "aadhaar-esign-statutory-gateway": {
+    routePath: "app.pyngyn.ai/clientspace/governance/esign-uidai-gateway",
+    mockupType: "four-eye-review",
+  },
+  "branded-client-portal-magic-links": {
+    routePath: "portal.kapadia-associates.com/client/horizon-exports",
+    mockupType: "client-portal",
+  },
+  "automated-pbc-document-checklists": {
+    routePath: "app.pyngyn.ai/clientspace/intake/pbc-checklists/audit-2026",
+    mockupType: "intake-pipeline",
+  },
+  "workload-cockpit-capacity-planning": {
+    routePath: "app.pyngyn.ai/clientspace/cockpit/workload-heatmaps",
+    mockupType: "workload-cockpit",
+  },
+  "dsc-token-vault-management": {
+    routePath: "app.pyngyn.ai/clientspace/compliance/dsc-token-vault",
+    mockupType: "dsc-vault",
+  },
+  "my-work-timesheets-execution": {
+    routePath: "app.pyngyn.ai/clientspace/my-work/daily-driver",
+    mockupType: "workload-cockpit",
+  },
+  "razorpay-retainer-payments": {
+    routePath: "app.pyngyn.ai/clientspace/billing/retainers-razorpay",
+    mockupType: "payments",
+  },
+  "caro-2020-statutory-audit-workpapers": {
+    routePath: "app.pyngyn.ai/clientspace/governance/caro-2020-working-papers",
+    mockupType: "audit-papers",
+  },
+  "statutory-notice-response-management": {
+    routePath: "app.pyngyn.ai/clientspace/compliance/notice-registry",
+    mockupType: "direct-tax",
+  },
+};
+
+export const KB_ARTICLES: KbArticle[] = RAW_KB_ARTICLES.map((article) => {
+  const meta = ARTICLE_METADATA_MAP[article.slug] || {
+    routePath: `app.pyngyn.ai/clientspace/${article.slug}`,
+    mockupType: "gst-recon",
+  };
+  return {
+    ...article,
+    cover: `/kb/platform/${article.slug}.png`,
+    routePath: meta.routePath,
+    mockupType: meta.mockupType,
+  };
+});
 
 // Lookup helpers
 export function getArticle(slug: string): KbArticle | undefined {
