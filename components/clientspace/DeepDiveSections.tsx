@@ -660,14 +660,16 @@ export function IntegrationsSection() {
     category: string;
     icon: React.ComponentType<{ className?: string }>;
   }[] = [
-    { name: "TallyPrime", category: "Accounting & Ledgers", icon: BarChart3 },
-    { name: "Computax", category: "Direct Tax & Form 3CD", icon: FileSpreadsheet },
+    { name: "Tally Prime", category: "Accounting & Ledgers", icon: BarChart3 },
     { name: "Zoho Books", category: "Invoicing & Books", icon: Briefcase },
     { name: "QuickBooks Online", category: "Cloud Accounting", icon: Zap },
-    { name: "Calendar Integration", category: "Deadlines & Practice Meetings", icon: Calendar },
-    { name: "Slack", category: "Internal Comms", icon: MessageSquare },
-    { name: "Cloud Storage", category: "Working Papers & Document Sync", icon: Folder },
+    { name: "GST & IT Portals", category: "Gov & Tax Portals", icon: Scale },
     { name: "WhatsApp Business", category: "Client Messaging", icon: Smartphone },
+    { name: "Google Calendar", category: "Deadlines & Practice Meetings", icon: Calendar },
+    { name: "Google Drive", category: "Client Folders & Document Storage", icon: Folder },
+    { name: "Gmail", category: "Client Emails & Task Conversion", icon: Mail },
+    { name: "eMudhra & DocuSign", category: "e-Sign & DSC Tokens", icon: ShieldCheck },
+    { name: "Razorpay Payments", category: "UPI & Fee Collections", icon: Sparkles },
   ];
 
   return (
