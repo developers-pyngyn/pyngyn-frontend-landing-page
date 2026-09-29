@@ -18,6 +18,7 @@ import {
   Smartphone,
   Scale,
   Search,
+  Shield,
   Check,
   ShieldCheck,
   Clock,
@@ -724,27 +725,33 @@ export function UseCasesSection() {
   }[] = [
     {
       title: "Chartered Accountants & CA Practices",
-      desc: "Multi-tier statutory filings, GSTR-1/3B reconciliation, Form 3CD corporate audit working papers, and 4-eye review checkpoints.",
+      desc: "Multi-partner practice governance, article workload cockpits, and ICAI SQC-1 quality review gates.",
       icon: Scale,
       link: "/solutions/accountants",
     },
     {
-      title: "Independent Accounting & Bookkeeping Firms",
-      desc: "Manage monthly bookkeeping retainers, bank reconciliations, payroll vouchers, and client document requests with zero friction.",
+      title: "Accounting & Bookkeeping Firms",
+      desc: "Monthly closing pipelines, automated bank feed reconciliations, MIS dashboards, and AP/AR workflows.",
       icon: BarChart3,
-      link: "/solutions/accountants",
+      link: "/solutions/accounting-firms",
     },
     {
       title: "Corporate Tax & Advisory Partnerships",
-      desc: "Advance tax computations, transfer pricing documentation, scrutiny appeals, and advisory opinions with role-based document access.",
+      desc: "Corporate ITR pipelines, GST 2B reconciliations, advance tax forecasting, and scrutiny notice defense.",
       icon: FileSpreadsheet,
       link: "/solutions/tax-teams",
     },
     {
       title: "Statutory Audit & Assurance Teams",
-      desc: "Phase-gated audit trails, sample testing working papers, partner escalation flags, and digital e-signatures for audit reports.",
+      desc: "Companies Act statutory audits, Form 3CD workpapers, sample vouching trails, and EQCR partner sign-offs.",
       icon: Search,
       link: "/solutions/audit-teams",
+    },
+    {
+      title: "Corporate Secretarial & Compliance Teams",
+      desc: "Master statutory regulatory calendars, director DSC registries, and ROC/MCA secretarial filing pipelines.",
+      icon: Shield,
+      link: "/solutions/compliance-teams",
     },
   ];
 
@@ -755,12 +762,11 @@ export function UseCasesSection() {
           <span className="eyebrow">Solutions</span>
           <h2 className="title mt-3">Built for your practice model.</h2>
           <p className="lead mx-auto mt-4 max-w-[620px]">
-            Whether you are a 5-person CA partnership or a 50-person accounting
-            firm, ClientSpace scales with your team.
+            Whether you are a boutique practice, a fast-growing bookkeeping firm, or a multi-partner CA partnership, ClientSpace scales with your team.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {USE_CASES.map((uc) => {
             const IconComp = uc.icon;
             return (
