@@ -48,55 +48,65 @@ export const ProductCameraController: React.FC<ProductCameraControllerProps> = (
     return () => window.removeEventListener('resize', updateScale);
   }, [nativeWidth]);
 
-  // Dynamic DOM measuring for activeTarget
+  // Predefined target offsets in standard 1440x880 canvas coordinate space
+  // Completely eliminates dynamic bounding box jitter during CSS transform animations
+  const KNOWN_TARGET_CENTERS: Record<string, { x: number; y: number }> = {
+    'task-row-task-gstr1': { x: 740, y: 295 },
+    'task-row-task-gstr3b': { x: 740, y: 350 },
+    'status-dropdown': { x: 810, y: 335 },
+    'status-pill-task-gstr1': { x: 810, y: 295 },
+    'status-pill-task-gstr3b': { x: 810, y: 350 },
+    'workflow-celebration-popup': { x: 720, y: 340 },
+    'kanban-card-card-gstr1': { x: 420, y: 320 },
+    'kanban-column-this-week': { x: 620, y: 360 },
+  };
+
+  // Target centering with 0ms deterministic calculation & safe boundaries
   useEffect(() => {
     if (!activeTarget || !rigRef.current) {
       setComputedPan({ x: panX, y: panY });
       return;
     }
 
-    const measure = () => {
-      if (!rigRef.current) return;
-      const selector = activeTarget.startsWith('[')
-        ? activeTarget
-        : `[data-product-target="${activeTarget}"]`;
-      const targetEl = rigRef.current.querySelector(selector) as HTMLElement | null;
+    // 1. Instant deterministic lookup
+    if (KNOWN_TARGET_CENTERS[activeTarget]) {
+      const target = KNOWN_TARGET_CENTERS[activeTarget];
+      const targetPanX = Math.round(nativeWidth / 2 - target.x);
+      const targetPanY = Math.round(nativeHeight / 2 - target.y);
+      const clampedPanX = Math.max(-200, Math.min(200, targetPanX));
+      const clampedPanY = Math.max(-130, Math.min(130, targetPanY));
+      setComputedPan({ x: clampedPanX, y: clampedPanY });
+      return;
+    }
 
-      if (targetEl && rigRef.current) {
-        const rigRect = rigRef.current.getBoundingClientRect();
-        const targetRect = targetEl.getBoundingClientRect();
+    // 2. Fallback: Measure invariant unscaled offsetParent chain (immune to transform scaling)
+    const selector = activeTarget.startsWith('[')
+      ? activeTarget
+      : `[data-product-target="${activeTarget}"]`;
+    const targetEl = rigRef.current.querySelector(selector) as HTMLElement | null;
 
-        // Effective current viewport scale
-        const currentScaleFactor = rigRect.width / nativeWidth;
-
-        // Target center in unscaled coordinate space
-        const targetCenterX =
-          (targetRect.left - rigRect.left + targetRect.width / 2) / (currentScaleFactor || 1);
-        const targetCenterY =
-          (targetRect.top - rigRect.top + targetRect.height / 2) / (currentScaleFactor || 1);
-
-        // Desired canvas center is (nativeWidth / 2, nativeHeight / 2)
-        const targetPanX = Math.round(nativeWidth / 2 - targetCenterX);
-        const targetPanY = Math.round(nativeHeight / 2 - targetCenterY);
-
-        // Safe clamp allowing full centering
-        const clampedPanX = Math.max(-420, Math.min(420, targetPanX));
-        const clampedPanY = Math.max(-280, Math.min(280, targetPanY));
-
-        setComputedPan({ x: clampedPanX, y: clampedPanY });
-      } else {
-        setComputedPan({ x: panX, y: panY });
+    if (targetEl && rigRef.current) {
+      let left = 0;
+      let top = 0;
+      let curr: HTMLElement | null = targetEl;
+      while (curr && curr !== rigRef.current) {
+        left += curr.offsetLeft;
+        top += curr.offsetTop;
+        curr = curr.offsetParent as HTMLElement | null;
       }
-    };
+      const targetCenterX = left + targetEl.offsetWidth / 2;
+      const targetCenterY = top + targetEl.offsetHeight / 2;
 
-    measure();
-    const rafId = requestAnimationFrame(measure);
-    const timerId = setTimeout(measure, 50);
+      const targetPanX = Math.round(nativeWidth / 2 - targetCenterX);
+      const targetPanY = Math.round(nativeHeight / 2 - targetCenterY);
 
-    return () => {
-      cancelAnimationFrame(rafId);
-      clearTimeout(timerId);
-    };
+      const clampedPanX = Math.max(-200, Math.min(200, targetPanX));
+      const clampedPanY = Math.max(-130, Math.min(130, targetPanY));
+
+      setComputedPan({ x: clampedPanX, y: clampedPanY });
+    } else {
+      setComputedPan({ x: panX, y: panY });
+    }
   }, [activeTarget, panX, panY, nativeWidth, nativeHeight]);
 
   // Motion overrides when reduced motion is preferred
@@ -136,10 +146,14 @@ export const ProductCameraController: React.FC<ProductCameraControllerProps> = (
           transition={
             prefersReducedMotion
               ? { duration: 0 }
-              : { duration: 0.85, ease: [0.16, 1, 0.3, 1] }
+              : { duration: 0.52, ease: [0.22, 1, 0.36, 1] }
           }
           style={{
             transformOrigin: '50% 50%',
+            willChange: 'transform',
+            WebkitBackfaceVisibility: 'hidden',
+            backfaceVisibility: 'hidden',
+            transformStyle: 'preserve-3d',
           }}
         >
           {children}

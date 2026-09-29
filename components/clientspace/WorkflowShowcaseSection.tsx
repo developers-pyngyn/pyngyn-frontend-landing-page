@@ -17,7 +17,7 @@ export function WorkflowShowcaseSection() {
       ([entry]) => {
         setIsInView(entry.isIntersecting);
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
 
     observer.observe(el);
@@ -52,7 +52,7 @@ export function WorkflowShowcaseSection() {
 
         {/* Unified Desktop Mockup Frame with Real Product Components */}
         <DesktopMockupFrame
-          url="app.pyngyn.com/clients/oswal-exports/tasks"
+          url="app.pyngyn.com/clients/corporate-client/tasks"
           imageHeight={880}
           baseWidth={1440}
           maxWidthClass="max-w-[1240px]"

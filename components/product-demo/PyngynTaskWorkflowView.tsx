@@ -34,17 +34,17 @@ export const PyngynTaskWorkflowView: React.FC<PyngynTaskWorkflowViewProps> = ({
     if (!autoPlay || prefersReducedMotion) return;
 
     const timings = [
-      1200, // 0: overview baseline
-      1000, // 1: focus row
-      850,  // 2: open dropdown
-      800,  // 3: select option
-      1100, // 4: state update + effort bar
-      2200, // 5: exact status celebration popup & centered focus zoom
-      1200, // 6: pullback to overview
+      1500, // 0: overview baseline
+      1100, // 1: focus row
+      950,  // 2: open dropdown
+      900,  // 3: select option
+      1200, // 4: state update + effort bar
+      2400, // 5: celebration popup & verification
+      1300, // 6: pullback to overview
     ];
 
     let timer: NodeJS.Timeout;
-    const duration = timings[stepIndex] || 2500;
+    const duration = timings[stepIndex] || 2400;
 
     timer = setTimeout(() => {
       setStepIndex((prev) => (prev + 1) % timings.length);
@@ -53,25 +53,24 @@ export const PyngynTaskWorkflowView: React.FC<PyngynTaskWorkflowViewProps> = ({
     return () => clearTimeout(timer);
   }, [stepIndex, autoPlay, prefersReducedMotion]);
 
-  // Dynamic Camera parameters: dramatic zoom and centered focus on exact status popup
-  let cameraScale = 0.95;
+  // Dynamic Camera parameters: steady, elegant, jitter-free
+  let cameraScale = 1.0;
   let activeTarget: string | undefined = undefined;
 
   if (stepIndex === 1) {
-    cameraScale = 1.15;
+    cameraScale = 1.04;
     activeTarget = workflowMode === 'gstr1' ? 'task-row-task-gstr1' : 'task-row-task-gstr3b';
   } else if (stepIndex === 2 || stepIndex === 3) {
-    cameraScale = 1.22;
+    cameraScale = 1.06;
     activeTarget = 'status-dropdown';
   } else if (stepIndex === 4) {
-    cameraScale = 1.22;
+    cameraScale = 1.06;
     activeTarget = workflowMode === 'gstr1' ? 'status-pill-task-gstr1' : 'status-pill-task-gstr3b';
   } else if (stepIndex === 5) {
-    // DRAMATIC CENTER FOCUS ZOOM INTO EXACT CELEBRATION STATUS POPUP!
-    cameraScale = 1.32;
+    cameraScale = 1.07;
     activeTarget = 'workflow-celebration-popup';
   } else if (stepIndex === 6) {
-    cameraScale = 0.95;
+    cameraScale = 1.0;
     activeTarget = undefined;
   }
 
@@ -117,15 +116,16 @@ export const PyngynTaskWorkflowView: React.FC<PyngynTaskWorkflowViewProps> = ({
           <AnimatePresence>
             {stepIndex === 5 && (
               <div
-                className="absolute top-[230px] left-[500px] z-50 pointer-events-none"
+                className="absolute top-[220px] left-1/2 -translate-x-1/2 z-50 pointer-events-none"
               >
                 <PyngynCelebrationOverlay
                   dataProductTarget="workflow-celebration-popup"
+                  floating={false}
                   title={workflowMode === 'gstr1' ? 'Auto-Filed GSTR-1 Return' : 'Auto-Filed GSTR-3B Return'}
                   subtitle={
                     workflowMode === 'gstr1'
                       ? 'Reconciled with ICEGATE · Synced with GSTN'
-                      : 'Oswal Exports · ARN: AA270826019482M · Synced'
+                      : 'Commercial Client · ARN: AA270826019482M · Synced'
                   }
                   statusText="Filed"
                   avatarSrc="/team/vivek-pandey.png"

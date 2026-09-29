@@ -736,7 +736,7 @@ export const PyngynTaskTable: React.FC<PyngynTaskTableProps> = ({
                   </span>
                   <div className="w-10 h-1.5 rounded-full bg-[#E5EAF2] overflow-hidden shrink-0">
                     <div
-                      className={`h-full rounded-full ${
+                      className={`h-full rounded-full transition-all duration-500 ease-out ${
                         task.effortBarColor === 'green'
                           ? 'bg-[#00960F]'
                           : task.effortBarColor === 'orange'

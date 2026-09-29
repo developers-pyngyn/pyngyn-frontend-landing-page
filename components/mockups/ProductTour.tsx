@@ -170,23 +170,32 @@ export function ProductTour() {
         <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_360px]">
           {/* Main Visual Display */}
           <div className="min-w-0">
-            <div key={activeTab} className="transition-all duration-300">
-              {activeTab === "Clients" ? (
-                <ClientWorkspaceMockup initialClient="oswal" viewMode="dossier" enableCameraZoom={false} />
-              ) : activeTab === "Engagements" ? (
-                <ClientWorkspaceMockup initialClient="shreeji" enableCameraZoom={false} />
-              ) : activeTab === "Tasks" ? (
-                <MyWorkMockup />
-              ) : activeTab === "Workload" ? (
-                <WorkloadCockpitMockup />
-              ) : activeTab === "Automations" ? (
-                <AutomationWorkflowMockup />
-              ) : activeTab === "Client Portal" || activeTab === "Documents" ? (
-                <ClientPortalMockup />
-              ) : (
-                <ClientWorkspaceMockup />
-              )}
-            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full"
+              >
+                {activeTab === "Clients" ? (
+                  <ClientWorkspaceMockup initialClient="oswal" viewMode="dossier" enableCameraZoom={false} />
+                ) : activeTab === "Engagements" ? (
+                  <ClientWorkspaceMockup initialClient="shreeji" enableCameraZoom={false} />
+                ) : activeTab === "Tasks" ? (
+                  <MyWorkMockup />
+                ) : activeTab === "Workload" ? (
+                  <WorkloadCockpitMockup />
+                ) : activeTab === "Automations" ? (
+                  <AutomationWorkflowMockup />
+                ) : activeTab === "Client Portal" || activeTab === "Documents" ? (
+                  <ClientPortalMockup />
+                ) : (
+                  <ClientWorkspaceMockup />
+                )}
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Contextual Narrative Card */}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { HeroSection } from "@/components/clientspace/HeroSection";
+import { WorkflowShowcaseSection } from "@/components/clientspace/WorkflowShowcaseSection";
 import { ProblemBeforeAfter } from "@/components/clientspace/ProblemBeforeAfter";
 import { ProductTour } from "@/components/mockups/ProductTour";
 import {
@@ -79,7 +80,10 @@ export default function Home() {
         {/* 1. Hero Section with Interactive ClientSpace Mockup */}
         <HeroSection />
 
-        {/* 2. Before / After Section (Busy Season Chaos vs Connected Workspace) */}
+        {/* 2. Workflow Showcase: See it in action (Smooth, jitter-free lifecycle) */}
+        <WorkflowShowcaseSection />
+
+        {/* 3. Before / After Section (Busy Season Chaos vs Connected Workspace) */}
         <ProblemBeforeAfter />
 
         {/* 3. Interactive Product Tour (7-in-1 Tabs: Clients, Tasks, Engagements, Documents, Automations, Portal, Workload) */}

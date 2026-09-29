@@ -75,11 +75,14 @@ export function DesktopMockupFrame({
         style={{
           width: `${baseWidth}px`,
           height: `${baseHeight}px`,
-          transform: `scale(${scale})`,
+          transform: `scale(${scale}) translateZ(0)`,
           transformOrigin: "top left",
           position: "absolute",
           top: 0,
           left: 0,
+          willChange: "transform",
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
         }}
         className="flex flex-col bg-white"
       >
