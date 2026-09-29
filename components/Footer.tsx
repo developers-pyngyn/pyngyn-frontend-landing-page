@@ -11,11 +11,9 @@ import {
   SIGNUP_URL,
   DEMO_URL,
   BENEFITS_URL,
-  CUSTOMERS_URL,
   PRICING_URL,
   BLOG_URL,
   ABOUT_URL,
-  CAREERS_URL,
   PRIVACY_URL,
   TERMS_URL,
   REFUND_URL,
@@ -29,18 +27,11 @@ import {
   SOCIAL_YOUTUBE,
   SOCIAL_INSTAGRAM,
   INTEGRATIONS_URL,
-  CHANGELOG_URL,
   GUIDES_URL,
   STATUS_URL,
   KB_URL,
-  ROADMAP_URL,
-  REFER_URL,
   COMPARE_URL,
   COMPETITORS,
-  TOOLS_URL,
-  ROI_URL,
-  UTILIZATION_URL,
-  COST_ESTIMATOR_URL,
 } from "./config";
 
 const faqs: [string, string][] = [
@@ -208,7 +199,7 @@ export function Footer() {
         ],
       },
     ],
-    // Column 4: Resources & Practice Tools (11 links)
+    // Column 4: Resources (5 verified, live practice resources)
     [
       {
         heading: "Resources",
@@ -216,32 +207,18 @@ export function Footer() {
           { label: "Practice Blog", href: BLOG_URL },
           { label: "Setup Guides", href: GUIDES_URL },
           { label: "Knowledge Base", href: KB_URL },
-          { label: "Product Roadmap", href: ROADMAP_URL },
-          { label: "Changelog", href: CHANGELOG_URL },
           { label: "System Status", href: STATUS_URL },
           { label: "Practice FAQ", href: "/#faq" },
         ],
       },
-      {
-        heading: "Practice Tools",
-        links: [
-          { label: "All Free Tools", href: TOOLS_URL },
-          { label: "ROI Calculator", href: ROI_URL },
-          { label: "Team Utilization", href: UTILIZATION_URL },
-          { label: "Cost & Margin Estimator", href: COST_ESTIMATOR_URL },
-        ],
-      },
     ],
-    // Column 5: Company & Legal (9 links)
+    // Column 5: Company & Legal (6 verified, live links)
     [
       {
         heading: "Company",
         links: [
           { label: "About Us", href: ABOUT_URL },
           { label: "Founder Story", href: "/about/founder-story" },
-          { label: "Customer Stories", href: CUSTOMERS_URL },
-          { label: "Careers", href: CAREERS_URL },
-          { label: "Refer & Earn", href: REFER_URL },
           { label: "Contact Us", href: DEMO_URL },
         ],
       },
