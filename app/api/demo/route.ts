@@ -1,5 +1,5 @@
-import { promises as fs } from "fs";
-import path from "path";
+export const dynamic = "force-dynamic";
+export const runtime = "edge";
 
 // Timezone for booking schedule
 const TIMEZONE = "Asia/Kolkata";
@@ -85,27 +85,6 @@ function getCurrentIstTime(now = new Date()): string {
   const hour = parts.find((p) => p.type === "hour")?.value || "00";
   const minute = parts.find((p) => p.type === "minute")?.value || "00";
   return `${hour}:${minute}`;
-}
-
-// Best-effort file persistence if filesystem is writable
-const BACKUP_FILE = path.join(process.cwd(), "scratch", "demo-bookings.json");
-
-async function persistBookingToDisk(record: BookingRecord): Promise<void> {
-  try {
-    let existing: BookingRecord[] = [];
-    try {
-      const data = await fs.readFile(BACKUP_FILE, "utf-8");
-      existing = JSON.parse(data);
-    } catch {
-      // file might not exist yet
-    }
-    existing.push(record);
-    await fs.mkdir(path.dirname(BACKUP_FILE), { recursive: true });
-    await fs.writeFile(BACKUP_FILE, JSON.stringify(existing, null, 2), "utf-8");
-  } catch (err) {
-    // If running in read-only filesystem (e.g. edge worker), in-memory Map handles it
-    console.warn("[demo] Note: could not write booking to disk backup:", err);
-  }
 }
 
 function jsonResponse(data: unknown, status = 200): Response {
@@ -252,9 +231,6 @@ export async function POST(request: Request): Promise<Response> {
 
     // Atomically reserve the slot
     globalStore.bookings.set(slotKey, record);
-
-    // Save to disk backup asynchronously
-    await persistBookingToDisk(record);
 
     // Optional upstream webhook (Slack, CRM, Zapier)
     const webhook = process.env.DEMO_WEBHOOK_URL;
