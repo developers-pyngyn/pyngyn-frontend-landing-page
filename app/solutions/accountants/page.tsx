@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  Scale,
+  Calendar,
+  CheckSquare,
+  ShieldCheck,
+  Zap,
+  Users,
+  FileCheck,
+  FileSpreadsheet,
+  ArrowRight,
+} from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
-import { DEMO_URL, SIGNUP_URL } from "@/components/config";
-import {
-  AccountantsPricingProvider,
-  AccountantsPriceTag,
-  AccountantsPricingSection,
-} from "@/components/solutions/AccountantsPricingComponents";
+import { DEMO_URL, SIGNUP_URL, PRICING_URL } from "@/components/config";
 import {
   OG_IMAGE,
   JsonLd,
@@ -17,95 +23,125 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "PYNGYN for Accountants & CA Firms | Audit & Filing Workflows",
-  description: "PYNGYN ClientSpace runs audit pipelines, tax filings, and statutory deadlines for accounting and CA firms. Branded client portal, automated PBC document collection, and compliance tracking.",
+  title: "PYNGYN for Accountants & CA Firms | Audit & Tax Workflows",
+  description:
+    "The practice operating system for accounting firms, Chartered Accountants, and tax practitioners. Run audit pipelines, statutory filing calendars, PBC checklists, and 4-eye partner review gates.",
   alternates: { canonical: "/solutions/accountants" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "PYNGYN for Accountants & CA Firms | Audit & Filing Workflows",
-    description: "PYNGYN ClientSpace runs audit pipelines, tax filings, and statutory deadlines for accounting and CA firms. Branded client portal, automated PBC document collection, and compliance tracking.",
+    title: "PYNGYN for Accountants & CA Firms | Audit & Tax Workflows",
+    description:
+      "Purpose-built practice management for accounting firms and CAs. Stop chasing documents, balance partner & article workload, and secure client sign-offs.",
     url: "/solutions/accountants",
     type: "website",
   },
 };
 
 const PROBLEMS: { num: string; title: string; body: string }[] = [
-  { num: "01", title: "Deadline chaos in filing season", body: "Statutory deadlines for dozens of clients live in spreadsheets and individual calendars. One missed filing triggers penalties and damages trust." },
-  { num: "02", title: "Status-chasing at review time", body: "Partners spend review week chasing associates for where the files are. The status call is the only source of truth." },
-  { num: "03", title: "Knowledge locked in senior staff", body: "Audit programmes and client context sit with the manager who has always run the engagement. When they leave, onboarding the next person takes months." },
-  { num: "04", title: "Billable time lost to administration", body: "Fee-earners spend time on follow-ups, status updates, and internal check-ins that should be automated, not logged against a client." },
-  { num: "05", title: "No live profitability", body: "You find out an engagement was unprofitable when you review billing at the end of the quarter, not while you could still fix it." },
-  { num: "06", title: "Client documents scattered", body: "Client-provided records arrive by email, WhatsApp, and drive links. Collecting and chasing them is a job in itself." },
+  {
+    num: "01",
+    title: "Statutory deadline chaos in peak season",
+    body: "Statutory due dates for dozens of client entities live across spreadsheets and personal calendars. One missed GST or advance tax date triggers penalties and client friction.",
+  },
+  {
+    num: "02",
+    title: "Partner status-chasing during review cycles",
+    body: "Partners and managers spend days chasing article assistants for working paper status. Without real-time visibility, the review meeting is the only source of truth.",
+  },
+  {
+    num: "03",
+    title: "Client records scattered across channels",
+    body: "Client-provided financial records arrive haphazardly via email, WhatsApp, and Google Drive links. Reconciling what is missing wastes billable hours.",
+  },
+  {
+    num: "04",
+    title: "Knowledge locked in individual staff",
+    body: "Audit programmes and client nuances live only in the manager's memory. When seniors leave, onboarding successors sets the engagement back weeks.",
+  },
+  {
+    num: "05",
+    title: "4-eye review quality bottlenecks",
+    body: "Filing drafts pass back and forth via unversioned attachments. Partner sign-offs get delayed, risking last-minute filing rushes.",
+  },
+  {
+    num: "06",
+    title: "Unbalanced team and article capacity",
+    body: "Some team members drown in compliance volume while others are under-utilized. Partner visibility into weekly capacity is virtually non-existent.",
+  },
 ];
 
-const PRACTICE_BULLETS: string[] = [
-  "Statutory tax and audit due date calendars (GST, ROC, TDS, Form 3CD)",
-  "Practice Workload Cockpit with staff capacity and effort meters",
-  "4-eye partner review gates before deliverables reach client portals",
-  "Automated WhatsApp & email chasers for PBC document collection",
-  "DSC (Digital Signature Certificate) expiry tracking register",
-];
-
-const CLIENTSPACE_BULLETS: string[] = [
-  "Branded client portal per engagement",
-  "Document collection checklist with status",
-  "Client-visible milestones and filing dates",
-  "Approvals for accounts and tax returns before filing",
-];
-
-const BOARD_TASKS: { label: string; tag: string }[] = [
-  { label: "Engagement letter signed", tag: "Done" },
-  { label: "Collect financial records", tag: "In progress" },
-  { label: "Audit fieldwork", tag: "In progress" },
-  { label: "Review queries cleared", tag: "To do" },
-  { label: "File tax return", tag: "At risk" },
+const PRACTICE_FEATURES = [
+  {
+    icon: Calendar,
+    title: "Statutory Due Date Calendar",
+    body: "Automated compliance calendar tracking GST (GSTR-1, 3B), Advance Tax, TDS, Form 3CD, and ROC filings across every client entity.",
+  },
+  {
+    icon: Users,
+    title: "Practice Workload Cockpit",
+    body: "Real-time visibility into staff, article trainee, and manager workload. Balance engagement capacity before filing deadlines slip.",
+  },
+  {
+    icon: CheckSquare,
+    title: "4-Eye Partner Review Gates",
+    body: "Rigorous quality assurance gates. Working papers flow from preparer to manager to signing partner before client presentation.",
+  },
+  {
+    icon: Zap,
+    title: "Automated WhatsApp Document Chasers",
+    body: "Gentle, automated follow-ups chase missing bank statements, trial balances, and PBC documents on your firm's schedule.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "DSC & Key Expiry Register",
+    body: "Centralized register tracking client Digital Signature Certificates (DSC) and statutory portal credentials with automated expiry notices.",
+  },
+  {
+    icon: FileCheck,
+    title: "Branded Client Collaboration Portal",
+    body: "Provide clients with an isolated, white-labeled portal to view compliance status, upload PBC records, and authorize approvals.",
+  },
 ];
 
 const FAQS: { q: string; a: string }[] = [
-  { q: "Does PYNGYN track statutory and tax deadlines?", a: "Yes. Deadlines are first-class objects. The compliance system watches dependencies and flags at-risk filings before the due date, not on it." },
-  { q: "What is Client Space for an accounting firm?", a: "Each client gets a branded portal with a document collection checklist, filing milestones, and an approvals flow for accounts and tax returns before submission." },
-  { q: "How does it handle busy-season volume?", a: "PYNGYN is designed around the multi-client, deadline-driven rhythm of accounting firms. You can run hundreds of concurrent engagements with a single dashboard view." },
-  { q: "Can clients submit documents through their portal?", a: "Clients see a collection checklist in their Client Space and can approve documents. For document upload, connect PYNGYN to Google Drive or your existing document management system." },
-  { q: "How long does setup take?", a: "Most accounting firms have their first client engagements running inside a week. Import existing client lists, set up filing plans, and add clients to their Client Space on day one." },
+  {
+    q: "Does PYNGYN track statutory deadlines across GST, Income Tax, and ROC?",
+    a: "Yes. Statutory due dates are first-class items in Pyngyn ClientSpace. The system tracks recurring compliance deadlines, auto-assigns preparation tasks, and alerts partners when dependencies are at risk.",
+  },
+  {
+    q: "How does the client portal work for accounting clients?",
+    a: "Every client gets an isolated, white-labeled portal accessible via passwordless magic links. Clients see their pending PBC document checklists, active filing status, and can approve returns and accounts with a single click.",
+  },
+  {
+    q: "Can we manage article assistants and multi-tiered partner reviews?",
+    a: "Absolutely. Pyngyn includes 4-eye partner review gates. Work moves through preparer (article assistant/junior), review (manager), and final sign-off (partner) before anything is submitted or shared with clients.",
+  },
+  {
+    q: "How does Pyngyn handle busy tax season volume?",
+    a: "Pyngyn is purpose-built for the high-volume crunch of Indian CA and global accounting practices. The Workload Cockpit rolls up hundreds of concurrent filings into a single unified capacity board.",
+  },
+  {
+    q: "How quickly can our firm get onboarded?",
+    a: "Most CA firms are up and running within 48 hours. You can import existing client master lists via CSV, apply standard statutory workflow templates, and invite your team immediately.",
+  },
 ];
 
-function Check() {
+export default function AccountantsPage() {
   return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="mt-0.5 flex-none text-positive">
-      <path d="M5 12l5 5L20 6" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function TagPill({ tag }: { tag: string }) {
-  const styles: Record<string, string> = {
-    "Done":        "bg-positive/10 text-positive",
-    "In progress": "bg-accent-lt text-accent-dk",
-    "To do":       "bg-surface text-muted",
-    "At risk":     "bg-[#fff3cd] text-[#92400e]",
-  };
-  return (
-    <span className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${styles[tag] ?? "bg-surface text-muted"}`}>
-      {tag}
-    </span>
-  );
-}
-
-export default function VerticalPage() {
-  return (
-    <AccountantsPricingProvider>
+    <>
       <JsonLd
         data={[
           webPageSchema({
             url: "/solutions/accountants",
-            name: "PYNGYN for Accountants & CA Firms | Audit & Filing Workflows",
-            description: "PYNGYN ClientSpace runs audit pipelines, tax filings, and statutory deadlines for accounting and CA firms. Branded client portal, automated PBC document collection, and compliance tracking.",
+            name: "PYNGYN for Accountants & CA Firms | Audit & Tax Workflows",
+            description:
+              "The practice operating system for accounting firms and Chartered Accountants. Automate statutory due dates, PBC document collection, and partner review gates.",
             breadcrumbId: "/solutions/accountants#breadcrumb",
           }),
           breadcrumbSchema(
             [
               { name: "Home", url: "/" },
-              { name: "Solutions", url: "/solutions/professional-services" },
+              { name: "Solutions", url: "/solutions/accountants" },
               { name: "Accountants & CAs", url: "/solutions/accountants" },
             ],
             "/solutions/accountants"
@@ -114,49 +150,57 @@ export default function VerticalPage() {
         ]}
       />
       <Navbar />
-      <main id="main">
 
+      <main id="main">
         {/* ===== Hero ================================================== */}
-        <section className="wrap pb-[60px] pt-[140px]">
-          <span className="eyebrow">Accounting & CA firms</span>
-          <h1 className="mt-4 max-w-[860px] font-display text-[clamp(34px,5.2vw,60px)] font-semibold leading-[1.04] tracking-[-0.025em]">
-            Close the books and
+        <section className="wrap pb-[56px] pt-[140px] text-center">
+          <span className="eyebrow mx-auto justify-center">
+            <span className="eyebrow-dot" aria-hidden="true" />
+            Built for CA &amp; Accounting Practices · Pyngyn ClientSpace
+          </span>
+          <h1 className="mx-auto mt-4 max-w-[920px] font-display text-[clamp(34px,5.2vw,60px)] font-semibold leading-[1.04] tracking-[-0.025em]">
+            Run your accounting practice with
             <br className="hidden sm:block" />{" "}
-            <span className="text-accent">never miss a deadline.</span>
+            <span className="text-accent">statutory clarity &amp; zero missed deadlines.</span>
           </h1>
-          <p className="lead mt-5 max-w-[680px]">PYNGYN ClientSpace gives every client of your accounting firm a branded client portal with document checklists, filing status, statutory due dates, and approvals in one secure place instead of email.</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href={DEMO_URL} className="btn btn-accent">Book a demo</a>
-            <a href={SIGNUP_URL} className="btn btn-primary">Start free trial</a>
+          <p className="lead mx-auto mt-5 max-w-[700px]">
+            PYNGYN ClientSpace unites client portals, statutory due date tracking, automated PBC document chasers,
+            and 4-eye partner review gates in one seamless practice operating system.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3.5">
+            <a href={DEMO_URL} className="btn btn-accent">
+              Book a practice demo
+            </a>
+            <a href={SIGNUP_URL} className="btn btn-primary">
+              Start 7-day free trial
+            </a>
+            <Link href={PRICING_URL} className="btn btn-ghost">
+              View practice pricing
+            </Link>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            30-min walkthrough on your firm&apos;s workflows · No commitment
+            Pro starts at ₹499/mo ($29/mo) · Built for Indian CA &amp; global accounting practices · No credit card required
           </p>
         </section>
 
-        {/* ===== Mini board ============================================= */}
-        <section className="wrap pb-[60px]">
-          <div className="mx-auto max-w-[620px] overflow-hidden rounded-[20px] border border-line bg-white shadow-card">
-            <div className="flex items-center gap-2 border-b border-line px-4 py-3">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#28ca41]" />
-              <span className="ml-2 truncate font-mono text-[11.5px] text-muted">Corporate Client · FY Statutory Audit</span>
+        {/* ===== Metric Highlights ===================================== */}
+        <section className="wrap pb-12">
+          <div className="grid grid-cols-2 gap-4 rounded-2xl border border-line bg-white p-6 shadow-card sm:grid-cols-4 sm:p-8">
+            <div className="text-center">
+              <div className="font-display text-[clamp(26px,3.5vw,38px)] font-bold text-accent">0</div>
+              <div className="mt-1 text-[13px] font-medium text-muted">Missed Statutory Deadlines</div>
             </div>
-            <ul className="divide-y divide-line">
-              {BOARD_TASKS.map((t) => (
-                <li key={t.label} className="flex items-center justify-between px-5 py-3.5">
-                  <span className="text-[14px] text-ink">{t.label}</span>
-                  <TagPill tag={t.tag} />
-                </li>
-              ))}
-            </ul>
-            <div className="flex items-center gap-2 border-t border-line bg-positive/5 px-5 py-3">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="flex-none text-positive">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-                <path d="M12 7v6l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-              <span className="text-[12.5px] text-positive">PYNGYN flagged 1 task at risk: the filing depends on fieldwork, which is 2 days behind.</span>
+            <div className="text-center">
+              <div className="font-display text-[clamp(26px,3.5vw,38px)] font-bold text-accent">65%</div>
+              <div className="mt-1 text-[13px] font-medium text-muted">Faster PBC Document Turnaround</div>
+            </div>
+            <div className="text-center">
+              <div className="font-display text-[clamp(26px,3.5vw,38px)] font-bold text-accent">4-Eye</div>
+              <div className="mt-1 text-[13px] font-medium text-muted">Partner Review Gate Assurance</div>
+            </div>
+            <div className="text-center">
+              <div className="font-display text-[clamp(26px,3.5vw,38px)] font-bold text-accent">100%</div>
+              <div className="mt-1 text-[13px] font-medium text-muted">Client Data Isolation</div>
             </div>
           </div>
         </section>
@@ -164,10 +208,15 @@ export default function VerticalPage() {
         {/* ===== Problems ============================================== */}
         <section className="section bg-[#fbfbfd]">
           <div className="wrap">
-            <span className="eyebrow">Why firms switch</span>
-            <h2 className="mt-3 max-w-[760px] font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
-              The problems every accounting & ca firms knows.
-            </h2>
+            <div className="text-center">
+              <span className="eyebrow">The Practice Reality</span>
+              <h2 className="mt-3 max-w-[760px] mx-auto font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
+                The challenges every growing CA and accounting firm faces.
+              </h2>
+              <p className="lead mx-auto mt-4 max-w-[620px]">
+                Why partner hours get consumed by administrative chaos instead of high-value advisory work.
+              </p>
+            </div>
             <div className="mt-10 grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
               {PROBLEMS.map((p) => (
                 <div key={p.num} className="card h-full">
@@ -180,97 +229,202 @@ export default function VerticalPage() {
           </div>
         </section>
 
-        {/* ===== Client Space =========================================== */}
+        {/* ===== Features Grid ========================================= */}
         <section className="section">
           <div className="wrap">
-            <div className="flex items-center gap-3">
-              <span className="eyebrow">The client portal</span>
-              <span className="rounded-full border border-accent/40 px-2.5 py-0.5 text-[11px] font-bold text-accent">ClientSpace Pro</span>
+            <div className="text-center">
+              <span className="eyebrow">Practice Operating System</span>
+              <h2 className="mt-3 max-w-[820px] mx-auto font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
+                Everything your practice needs from intake to final sign-off.
+              </h2>
+              <p className="lead mx-auto mt-4 max-w-[620px]">
+                Configured specifically for the workflows of Chartered Accountants, tax practitioners, and audit teams.
+              </p>
             </div>
-            <h2 className="mt-3 max-w-[820px] font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
-              A branded portal for every client.
-              <span className="block text-accent">
-                <AccountantsPriceTag type="pro" suffix="per user / month." />
-              </span>
-            </h2>
-            <p className="lead mt-4 max-w-[640px]">
-              Give each client their own isolated, white-labeled portal. They see what you
-              want them to see, nothing from your other clients.
-            </p>
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              {CLIENTSPACE_BULLETS.map((b) => (
-                <li key={b} className="card flex items-start gap-3">
-                  <Check />
-                  <span className="text-[15px]">{b}</span>
-                </li>
-              ))}
-            </ul>
+
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {PRACTICE_FEATURES.map((f) => {
+                const Icon = f.icon;
+                return (
+                  <div key={f.title} className="card flex flex-col p-7 transition-all duration-200 hover:shadow-card-hover">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                      <Icon className="h-6 w-6 stroke-[1.8]" aria-hidden="true" />
+                    </div>
+                    <h3 className="mt-4 text-[17px] font-bold text-ink">{f.title}</h3>
+                    <p className="mt-2 text-[14px] leading-relaxed text-muted">{f.body}</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </section>
 
-        {/* ===== Practice Management & Workload ===== */}
+        {/* ===== Static Practice Pricing Summary ======================== */}
         <section className="section bg-[#fbfbfd]">
-          <div className="wrap">
-            <div className="flex items-center gap-3">
-              <span className="eyebrow">Practice Cockpit</span>
-              <span className="rounded-full border border-accent/30 bg-accent/5 px-2.5 py-0.5 text-[11px] font-bold text-accent">ClientSpace Business</span>
-            </div>
-            <h2 className="mt-3 max-w-[820px] font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
-              Your firm&apos;s practice operating system.
-              <span className="block text-accent">
-                <AccountantsPriceTag type="business" suffix="per user / month." />
-              </span>
+          <div className="wrap text-center">
+            <span className="eyebrow">Practice Pricing</span>
+            <h2 className="mt-3 font-display text-[clamp(26px,3.4vw,38px)] font-semibold tracking-[-0.02em] text-ink">
+              Transparent, practice-friendly plans.
             </h2>
-            <p className="lead mt-4 max-w-[640px]">
-              Everything your practice needs to track filings, balance team capacity across staff and article trainees, and guarantee 4-eye review quality before client submission.
+            <p className="lead mx-auto mt-3 max-w-[580px]">
+              No per-client penalty fees. No hidden implementation charges. Scale your firm with confidence.
             </p>
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              {PRACTICE_BULLETS.map((b) => (
-                <li key={b} className="card flex items-start gap-3">
-                  <Check />
-                  <span className="text-[15px]">{b}</span>
-                </li>
-              ))}
-            </ul>
+
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-[960px] mx-auto text-left">
+              {/* Pro Card */}
+              <div className="rounded-2xl border border-line bg-white p-7 shadow-card flex flex-col justify-between">
+                <div>
+                  <h3 className="text-lg font-bold text-ink">ClientSpace Pro</h3>
+                  <p className="text-xs text-muted mt-1">Essential statutory task tracking &amp; client portal.</p>
+                  <div className="mt-4 flex items-baseline gap-1">
+                    <span className="font-display text-[32px] font-bold text-ink">₹499</span>
+                    <span className="text-xs text-muted">/ user / mo (or $29 global)</span>
+                  </div>
+                  <ul className="mt-5 space-y-2.5 text-[13.5px] text-slate-600">
+                    <li className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>Statutory due date tracker</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>White-labeled client portal</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>PBC document request checklists</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>DSC expiry register</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mt-6 pt-4 border-t border-line">
+                  <a href={SIGNUP_URL} className="btn btn-ghost w-full justify-center">
+                    Start 7-day free trial
+                  </a>
+                </div>
+              </div>
+
+              {/* Business Card */}
+              <div className="rounded-2xl border-2 border-accent bg-accent/5 p-7 shadow-soft flex flex-col justify-between relative">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-white">
+                  Most Popular for CAs
+                </span>
+                <div>
+                  <h3 className="text-lg font-bold text-accent">ClientSpace Business</h3>
+                  <p className="text-xs text-muted mt-1">Full practice operating system &amp; review workflows.</p>
+                  <div className="mt-4 flex items-baseline gap-1">
+                    <span className="font-display text-[32px] font-bold text-accent">₹799</span>
+                    <span className="text-xs text-muted">/ user / mo (or $49 global)</span>
+                  </div>
+                  <ul className="mt-5 space-y-2.5 text-[13.5px] text-slate-700">
+                    <li className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span className="font-semibold">Everything in Pro, plus:</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>Practice Workload Cockpit</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>4-eye partner review gates</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>WhatsApp automated document chase</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>Tally &amp; accounting software sync</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mt-6 pt-4 border-t border-accent/20">
+                  <a href={SIGNUP_URL} className="btn btn-accent w-full justify-center">
+                    Start 7-day free trial
+                  </a>
+                </div>
+              </div>
+
+              {/* Enterprise Card */}
+              <div className="rounded-2xl border border-line bg-white p-7 shadow-card flex flex-col justify-between sm:col-span-2 lg:col-span-1">
+                <div>
+                  <h3 className="text-lg font-bold text-ink">Enterprise</h3>
+                  <p className="text-xs text-muted mt-1">Multi-branch CA partnerships &amp; large firms.</p>
+                  <div className="mt-4 flex items-baseline gap-1">
+                    <span className="font-display text-[32px] font-bold text-ink">Custom</span>
+                    <span className="text-xs text-muted">annual agreement</span>
+                  </div>
+                  <ul className="mt-5 space-y-2.5 text-[13.5px] text-slate-600">
+                    <li className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>Multi-branch practice partitions</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>Dedicated practice data migration</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>Enterprise SSO &amp; SAML</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span>99.9% uptime SLA &amp; account partner</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mt-6 pt-4 border-t border-line">
+                  <a href={DEMO_URL} className="btn btn-primary w-full justify-center">
+                    Book a demo
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8">
+              <Link href={PRICING_URL} className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline">
+                <span>View full currency breakdown &amp; regional pricing</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </section>
 
-        {/* ===== Pricing =============================================== */}
-        <AccountantsPricingSection />
-
-        {/* ===== FAQ =================================================== */}
-        <section className="section bg-[#fbfbfd]">
-          <div className="wrap">
-            <span className="eyebrow">FAQ</span>
-            <h2 className="mt-3 font-display text-[clamp(24px,3vw,32px)] font-semibold tracking-[-0.01em]">
-              Questions from accounting & ca firms.
-            </h2>
-            <div className="mt-7 grid gap-[18px] md:grid-cols-2">
-              {FAQS.map((f) => (
-                <div key={f.q} className="card h-full">
-                  <h3 className="text-[16.5px] font-bold leading-snug">{f.q}</h3>
-                  <p className="mt-2.5 text-[14.5px] leading-relaxed text-muted">{f.a}</p>
+        {/* ===== FAQs ================================================== */}
+        <section className="section">
+          <div className="wrap max-w-[840px]">
+            <div className="text-center">
+              <span className="eyebrow">FAQ</span>
+              <h2 className="mt-3 font-display text-[clamp(24px,3vw,36px)] font-semibold tracking-[-0.02em]">
+                Frequently asked questions from CA &amp; accounting practices.
+              </h2>
+            </div>
+            <div className="mt-10 space-y-4">
+              {FAQS.map((faq) => (
+                <div key={faq.q} className="card p-6">
+                  <h3 className="text-[16.5px] font-bold text-ink">{faq.q}</h3>
+                  <p className="mt-2 text-[14.5px] leading-relaxed text-muted">{faq.a}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ===== Hub link ============================================== */}
-        <section className="section">
-          <div className="wrap text-center">
-            <p className="text-[14px] text-muted">
-              Looking for our practice pricing details?{" "}
-              <Link href="/pricing" className="font-semibold text-accent hover:underline">
-                View full pricing and feature breakdown →
-              </Link>
-            </p>
-          </div>
-        </section>
-
-        <FinalCTA />
+        {/* Final CTA */}
+        <FinalCTA
+          eyebrow="Modernize Your Practice"
+          headline="Take command of your accounting firm's filings and client delivery."
+          body="Book a 30-minute practice walkthrough. See how Pyngyn configures your statutory calendars, review gates, and client portals in minutes."
+          primaryLabel="Book a practice demo &rarr;"
+          secondaryLabel="Start 7-day free trial"
+          note="Tailored to CA & accounting practices · 30-minute walkthrough · No commitment"
+        />
       </main>
+
       <Footer />
-    </AccountantsPricingProvider>
+    </>
   );
 }

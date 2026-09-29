@@ -57,11 +57,14 @@ const STATIC: Entry[] = [
 
   // Solutions / social proof
   { path: "/solutions/professional-services", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/solutions/lawyers", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/solutions/accountants", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/solutions/consultants", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/solutions/creative-services", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/solutions/architects", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/solutions/accountants", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/solutions/tax-teams", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/solutions/audit-teams", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/solutions/compliance-teams", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/solutions/lawyers", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/solutions/consultants", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/solutions/creative-services", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/solutions/architects", priority: 0.7, changeFrequency: "monthly" },
   { path: "/customers", priority: 0.8, changeFrequency: "monthly" },
   { path: "/compare", priority: 0.8, changeFrequency: "monthly" },
 

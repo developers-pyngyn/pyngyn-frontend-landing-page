@@ -108,19 +108,19 @@ const SOLUTIONS_MENU: DropdownItem[] = [
   {
     name: "For Tax Teams",
     desc: "Corporate tax returns, advance tax estimates, and notice tracking",
-    href: "/solutions/professional-services",
+    href: "/solutions/tax-teams",
     icon: FileSpreadsheet,
   },
   {
     name: "For Audit Teams",
     desc: "Structured working papers, 4-eye review queues, and sign-offs",
-    href: "/solutions/accountants",
+    href: "/solutions/audit-teams",
     icon: Search,
   },
   {
     name: "For Compliance Teams",
     desc: "Never miss a statutory deadline across GST, ROC, and TDS",
-    href: "/solutions/professional-services",
+    href: "/solutions/compliance-teams",
     icon: Shield,
   },
 ];

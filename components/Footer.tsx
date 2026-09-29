@@ -180,9 +180,9 @@ export function Footer() {
         heading: "Practice Solutions",
         links: [
           { label: "Chartered Accountants", href: "/solutions/accountants" },
-          { label: "Accounting Firms", href: "/solutions/accountants" },
-          { label: "Tax & Compliance", href: "/solutions/professional-services" },
-          { label: "Audit & Assurance", href: "/solutions/accountants" },
+          { label: "Tax Teams", href: "/solutions/tax-teams" },
+          { label: "Audit Teams", href: "/solutions/audit-teams" },
+          { label: "Compliance Teams", href: "/solutions/compliance-teams" },
         ],
       },
       {
