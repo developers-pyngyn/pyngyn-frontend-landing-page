@@ -94,32 +94,32 @@ const PRODUCT_MENU: DropdownItem[] = [
 const SOLUTIONS_MENU: DropdownItem[] = [
   {
     name: "For CA Firms",
-    desc: "Built for audit, tax filing, and statutory compliance practices",
+    desc: "Multi-partner practice governance, article workload & ICAI review gates",
     href: "/solutions/accountants",
     icon: Scale,
     badge: "Specialized",
   },
   {
     name: "For Accounting Firms",
-    desc: "Streamline monthly retainers, bookkeeping, and year-end closes",
-    href: "/solutions/accountants",
+    desc: "Monthly bookkeeping pipelines, bank feed reconciliations & MIS reports",
+    href: "/solutions/accounting-firms",
     icon: BarChart3,
   },
   {
     name: "For Tax Teams",
-    desc: "Corporate tax returns, advance tax estimates, and notice tracking",
+    desc: "Corporate ITR pipelines, GST 2B reconciliations & advance tax estimates",
     href: "/solutions/tax-teams",
     icon: FileSpreadsheet,
   },
   {
     name: "For Audit Teams",
-    desc: "Structured working papers, 4-eye review queues, and sign-offs",
+    desc: "CARO 2020 programmes, Form 3CD workpapers & sample vouching trails",
     href: "/solutions/audit-teams",
     icon: Search,
   },
   {
     name: "For Compliance Teams",
-    desc: "Never miss a statutory deadline across GST, ROC, and TDS",
+    desc: "Master statutory calendar, director DSC registers & MCA secretarial filings",
     href: "/solutions/compliance-teams",
     icon: Shield,
   },

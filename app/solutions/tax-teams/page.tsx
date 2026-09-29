@@ -9,6 +9,8 @@ import {
   CheckCircle2,
   Zap,
   ArrowRight,
+  Globe2,
+  FileWarning,
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
@@ -22,50 +24,83 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Tax Practice Software for CA & Accounting Teams | Pyngyn ClientSpace",
+  title: "Tax Practice Management Software for Direct & Indirect Tax Teams | Pyngyn ClientSpace",
   description:
-    "Purpose-built tax practice management software for Chartered Accountants, corporate tax teams, and tax consultants. Streamline GST, Corporate Tax, Advance Tax, and TDS filings.",
+    "Purpose-built tax practice software for Chartered Accountants, corporate tax teams, and tax advisory partnerships. Streamline corporate ITR pipelines, GST 2B reconciliations, advance tax, TDS, and scrutiny notices.",
   alternates: { canonical: "/solutions/tax-teams" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Tax Practice Software for CA & Accounting Teams | Pyngyn ClientSpace",
+    title: "Tax Practice Management Software for Direct & Indirect Tax Teams | Pyngyn ClientSpace",
     description:
-      "Automate tax season document collection, track statutory due dates, and secure partner review sign-offs before tax returns are filed.",
+      "Automate corporate tax computations, GST reconciliations, advance tax forecasting, and notice tracking in one tax practice command center.",
     url: "/solutions/tax-teams",
     type: "website",
   },
 };
 
+const TAX_PROBLEMS: { num: string; title: string; body: string }[] = [
+  {
+    num: "01",
+    title: "Last-minute AIS & 26AS mismatch discoveries before deadline",
+    body: "Unreconciled TDS credits, unreported high-value transactions, or AIS discrepancies stall final return sign-offs hours before the tax portal locks.",
+  },
+  {
+    num: "02",
+    title: "Blocked input tax credit (ITC) from delayed GST 2B matching",
+    body: "Corporate clients lose thousands in working capital because vendor invoice mismatches are detected only after monthly GSTR-3B filings are submitted.",
+  },
+  {
+    num: "03",
+    title: "Section 234B & 234C interest penalties from flawed estimates",
+    body: "Manual tax estimation spreadsheets fail to capture quarterly profit spikes, leaving corporate clients with avoidable interest liabilities.",
+  },
+  {
+    num: "04",
+    title: "Department scrutiny notices slipping through the cracks",
+    body: "Faceless assessment notices under Section 142(1) or 148 get buried in client executive inboxes, risking ex-parte adverse orders.",
+  },
+  {
+    num: "05",
+    title: "Endless chase for foreign asset & capital gain disclosures",
+    body: "Tax professionals waste weeks following up for schedule FA foreign asset statements, ESOP valuations, and crypto transaction records.",
+  },
+  {
+    num: "06",
+    title: "Quarterly TDS certificate distribution bottleneck",
+    body: "Generating, verifying, and distributing hundreds of Form 16 and 16A certificates across client workforces drains multiple days of team capacity.",
+  },
+];
+
 const TAX_WORKFLOWS = [
   {
     icon: FileSpreadsheet,
-    title: "Corporate & Individual Tax Filing",
-    desc: "Manage end-to-end income tax filing pipelines. Track computation drafts, 26AS/AIS reconciliations, and final ITR acknowledgments.",
+    title: "Corporate & Individual ITR Pipelines",
+    desc: "Track computation drafts, MAT/AMT schedules, 26AS/AIS reconciliations, and final e-filing acknowledgments across ITR-1 through ITR-7.",
   },
   {
     icon: Receipt,
-    title: "GST Return Reconciliation (GSTR-1, 3B, 9)",
-    desc: "Coordinate monthly, quarterly, and annual GST filing schedules across multiple GSTIN entities with automated mismatch alerts.",
+    title: "GST Monthly & Annual Reconciliations",
+    desc: "Coordinate monthly GSTR-1 & GSTR-3B filings, automated GSTR-2B vs purchase register matching, and annual GSTR-9/9C reconciliation schedules.",
   },
   {
     icon: Calendar,
-    title: "Advance Tax Estimation & Challan Vault",
-    desc: "Calculate quarterly advance tax liabilities, share tax computation summaries with clients, and store tax payment challans securely.",
-  },
-  {
-    icon: Zap,
-    title: "Automated PBC Tax Document Chase",
-    desc: "Chase bank statements, depreciation schedules, 16A certificates, and foreign asset disclosures with automated WhatsApp & email reminders.",
+    title: "Advance Tax Forecasting & Interest Shielding",
+    desc: "Forecast quarterly advance tax liabilities, model Section 234B/234C interest implications, and issue client tax payment challan summaries.",
   },
   {
     icon: FileCheck2,
-    title: "4-Eye Partner Tax Review Gates",
-    desc: "Ensure tax computations and return drafts pass through preparer, manager, and signing tax partner gates before submission.",
+    title: "TDS & TCS Returns & Certificate Generation",
+    desc: "Quarterly Form 24Q, 26Q, and 27Q processing pipelines, challan validation, and automated Form 16/16A client certificate distribution.",
   },
   {
-    icon: ShieldCheck,
-    title: "Statutory Notice Tracking & Appeals",
-    desc: "Log department inquiries, scrutiny notices (Section 143/148), and appeal timelines with audit trails and filing confirmations.",
+    icon: FileWarning,
+    title: "Department Notice Tracking & Scrutiny Appeals",
+    desc: "Log Section 142(1), 143(2), and 148 income tax notices, track statutory limitation dates, and maintain faceless assessment response trails.",
+  },
+  {
+    icon: Globe2,
+    title: "Transfer Pricing & International Tax Registers",
+    desc: "Maintain Form 3CEB accountant certificates, transfer pricing study documentation, and Form 15CA/15CB foreign remittance certification queues.",
   },
 ];
 
@@ -75,12 +110,16 @@ const TAX_FAQS = [
     a: "Yes. Pyngyn organizes client hierarchies by holding company, subsidiaries, LLPs, and individual director tax profiles so all group filings remain visible on a single dashboard.",
   },
   {
-    q: "How does Pyngyn help with GST and TDS document chase?",
-    a: "You can create customized PBC (Provided-By-Client) checklists for GST invoices, 26AS reconciliations, and TDS certificates. Automated WhatsApp and email alerts notify clients until documents are uploaded.",
+    q: "How does Pyngyn help with GST 2B reconciliation and invoice chase?",
+    a: "You can track GSTR-2B vs purchase register matching status directly on the client portfolio. Automated alerts notify clients regarding vendor non-compliance so ITC is never blocked.",
   },
   {
-    q: "Is there a review gate before returns are submitted to government portals?",
-    a: "Yes. Pyngyn enforces 4-eye review gates where article staff prepare computations, managers verify reconciliations, and tax partners approve the final return before filing.",
+    q: "How does Pyngyn manage faceless income tax assessments and scrutiny notices?",
+    a: "Every department notice is logged with its statutory reply cutoff date, assigned tax specialist, draft response file, and portal acknowledgment receipt.",
+  },
+  {
+    q: "Can clients review and approve draft tax computations before filing?",
+    a: "Yes. Tax teams can share draft computations and tax summaries securely via the client portal. Clients approve computations with one click before e-filing.",
   },
 ];
 
@@ -91,7 +130,7 @@ export default function TaxTeamsPage() {
         data={[
           webPageSchema({
             url: "/solutions/tax-teams",
-            name: "Tax Practice Software for CA & Accounting Teams | Pyngyn ClientSpace",
+            name: "Tax Practice Management Software for Direct & Indirect Tax Teams | Pyngyn ClientSpace",
             description:
               "Purpose-built tax practice management software for Chartered Accountants, corporate tax teams, and tax consultants.",
             breadcrumbId: "/solutions/tax-teams#breadcrumb",
@@ -99,7 +138,7 @@ export default function TaxTeamsPage() {
           breadcrumbSchema(
             [
               { name: "Home", url: "/" },
-              { name: "Solutions", url: "/solutions/accountants" },
+              { name: "Solutions", url: "/solutions/professional-services" },
               { name: "For Tax Teams", url: "/solutions/tax-teams" },
             ],
             "/solutions/tax-teams"
@@ -114,16 +153,16 @@ export default function TaxTeamsPage() {
         <section className="wrap pb-[56px] pt-[140px] text-center">
           <span className="eyebrow mx-auto justify-center">
             <span className="eyebrow-dot" aria-hidden="true" />
-            Tax Practice Operating System · Pyngyn ClientSpace
+            Direct &amp; Indirect Tax Practice Software · Pyngyn ClientSpace
           </span>
           <h1 className="mx-auto mt-4 max-w-[920px] font-display text-[clamp(34px,5.2vw,60px)] font-semibold leading-[1.04] tracking-[-0.025em]">
             Deliver every tax return on time with
             <br className="hidden sm:block" />{" "}
-            <span className="text-accent">automated document chase &amp; review gates.</span>
+            <span className="text-accent">automated computation tracking &amp; notice defense.</span>
           </h1>
           <p className="lead mx-auto mt-5 max-w-[700px]">
-            Pyngyn ClientSpace powers modern tax practices: Corporate Tax, GST, Advance Tax, and TDS filings
-            with automated client document collection and partner sign-offs.
+            Pyngyn ClientSpace powers modern tax practices: Corporate Tax computations, GST 2B reconciliations,
+            Advance Tax liability forecasting, and faceless scrutiny tracking in one connected command center.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3.5">
             <a href={DEMO_URL} className="btn btn-accent">
@@ -141,13 +180,41 @@ export default function TaxTeamsPage() {
           </p>
         </section>
 
-        {/* ===== Features Grid ========================================= */}
+        {/* ===== Problems Solved ======================================== */}
+        <section className="section border-t border-rule bg-sand/30">
+          <div className="wrap">
+            <div className="text-center">
+              <span className="eyebrow">The Tax Season Reality</span>
+              <h2 className="mt-3 font-display text-[clamp(26px,3.4vw,40px)] font-semibold tracking-[-0.025em]">
+                Why tax season always ends in a last-minute scramble
+              </h2>
+              <p className="lead mx-auto mt-4 max-w-[620px]">
+                Tax professionals spend up to 40% of peak season resolving document mismatches and tracking department notices.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {TAX_PROBLEMS.map((p) => (
+                <div key={p.num} className="card p-7">
+                  <div className="flex items-center gap-3 text-accent font-mono text-[13px] font-bold">
+                    <span>{p.num}</span>
+                    <span className="h-px flex-1 bg-accent/20" />
+                  </div>
+                  <h3 className="mt-4 text-[17px] font-bold text-ink">{p.title}</h3>
+                  <p className="mt-2 text-[14px] leading-relaxed text-muted">{p.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Dedicated Workflows =================================== */}
         <section className="section bg-[#fbfbfd]">
           <div className="wrap">
             <div className="text-center">
               <span className="eyebrow">Tax Practice Workflows</span>
               <h2 className="mt-3 max-w-[820px] mx-auto font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
-                Everything your tax team needs from computation to filing.
+                Everything your tax team needs from computation to notice resolution.
               </h2>
               <p className="lead mx-auto mt-4 max-w-[620px]">
                 Eliminate tax-season scrambles with standardized working papers and client visibility.
@@ -195,10 +262,10 @@ export default function TaxTeamsPage() {
         <FinalCTA
           eyebrow="Transform Tax Season"
           headline="Take control of corporate tax, GST, and statutory filing deadlines."
-          body="Book a 30-minute practice walkthrough. See how Pyngyn automates tax checklists and client sign-offs."
+          body="Book a 30-minute practice walkthrough. See how Pyngyn automates tax computations, GST reconciliations, and notice tracking."
           primaryLabel="Book a practice demo &rarr;"
           secondaryLabel="Start 7-day free trial"
-          note="Tailored to tax practices & CA firms · 30-minute walkthrough · No commitment"
+          note="Tailored to tax practices &amp; CA firms · 30-minute walkthrough · No commitment"
         />
       </main>
 

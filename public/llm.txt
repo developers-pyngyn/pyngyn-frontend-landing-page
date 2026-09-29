@@ -71,11 +71,12 @@ All plans include a 7-day free trial with no credit card required.
 
 ## Solutions
 
-- [For CA & Accounting Firms](https://pyngyn.ai/solutions/accountants/): Purpose-built for statutory audit, GST filings, corporate tax computation, and compliance management. Includes dynamic regional pricing.
-- [For Tax Teams](https://pyngyn.ai/solutions/tax-teams/): Purpose-built for corporate tax advisory, Advance Tax projections, GST reconciliations, notice tracking, and automated PBC document chasers.
-- [For Audit Teams](https://pyngyn.ai/solutions/audit-teams/): Purpose-built for statutory audits, Form 3CD tax audits, 4-eye partner review gates, and audit working papers trees.
-- [For Compliance Teams](https://pyngyn.ai/solutions/compliance-teams/): Purpose-built for statutory compliance calendars, DSC/MCA expiry registers, group compliance health matrices, and automated WhatsApp alerts.
-- [Practice Solutions Overview](https://pyngyn.ai/solutions/professional-services/): Overview of tailored practice command centers for CA, tax, audit, and statutory compliance practices.
+- [For CA Firms](https://pyngyn.ai/solutions/accountants/): Multi-partner practice governance, article trainee capacity allocation, ICAI SQC-1 quality review gates, and live retainer realization tracking.
+- [For Accounting & Bookkeeping Firms](https://pyngyn.ai/solutions/accounting-firms/): Monthly bookkeeping pipelines, bank feed reconciliations, management MIS reporting packs, and AP/AR workflows.
+- [For Tax Teams](https://pyngyn.ai/solutions/tax-teams/): Corporate ITR pipelines, GST 2B reconciliations, advance tax forecasting, and faceless assessment notice defense.
+- [For Audit Teams](https://pyngyn.ai/solutions/audit-teams/): Companies Act statutory audits, Form 3CD workpapers, sample vouching trails, and EQCR partner sign-offs.
+- [For Compliance Teams](https://pyngyn.ai/solutions/compliance-teams/): Master statutory regulatory calendars, director DSC registries, and ROC/MCA secretarial filing pipelines.
+- [Practice Solutions Overview](https://pyngyn.ai/solutions/professional-services/): Overview of tailored practice command centers connecting CA, bookkeeping, tax, audit, and secretarial compliance practices.
 
 ## Compare (Practice Management Software Comparisons)
 

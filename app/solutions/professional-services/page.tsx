@@ -47,29 +47,29 @@ export const metadata: Metadata = {
 };
 
 const PRACTICE_AREAS: { label: string; href: string; icon: LucideIcon; blurb: string }[] = [
-  { label: "For CA Firms", href: "/solutions/accountants", icon: Scale, blurb: "Statutory deadlines, 4-eye review gates, and audit pipelines for CA partnerships." },
-  { label: "For Accounting Firms", href: "/solutions/accountants", icon: BarChart3, blurb: "Monthly retainers, client bookkeeping, and year-end close collaboration." },
-  { label: "For Tax Teams", href: "/solutions/tax-teams", icon: FileSpreadsheet, blurb: "Corporate tax filings, advance tax estimations, GST reconciliations & notice tracking." },
-  { label: "For Audit Teams", href: "/solutions/audit-teams", icon: Search, blurb: "Statutory audits, Form 3CD, CARO working papers, and partner review gates." },
-  { label: "For Compliance Teams", href: "/solutions/compliance-teams", icon: Shield, blurb: "ROC/MCA schedules, secretarial compliance, and director DSC registers." },
+  { label: "For CA Firms", href: "/solutions/accountants", icon: Scale, blurb: "Partner governance, article trainee capacity, ICAI SQC-1 review gates, and retainer fee realization." },
+  { label: "For Accounting Firms", href: "/solutions/accounting-firms", icon: BarChart3, blurb: "Monthly closing pipelines, automated bank feed reconciliations, MIS dashboards, and AP/AR workflows." },
+  { label: "For Tax Teams", href: "/solutions/tax-teams", icon: FileSpreadsheet, blurb: "Corporate ITR pipelines, GST 2B reconciliations, advance tax forecasting, and scrutiny notice defense." },
+  { label: "For Audit Teams", href: "/solutions/audit-teams", icon: Search, blurb: "Companies Act statutory audits, Form 3CD workpapers, sample vouching trails, and EQCR partner sign-offs." },
+  { label: "For Compliance Teams", href: "/solutions/compliance-teams", icon: Shield, blurb: "Master statutory regulatory calendars, director DSC registries, and ROC/MCA secretarial filing pipelines." },
 ];
 
 const PROBLEMS: { num: string; title: string; body: string }[] = [
-  { num: "01", title: "Statutory status lives across WhatsApp & email", body: "Updates scatter across messaging apps and personal spreadsheets. Nobody has the full picture before a client review, risking missed statutory deadlines." },
-  { num: "02", title: "Unbilled partner hours spent chasing records", body: "Partners and managers spend days chasing clients for missing bank statements, trial balances, and PBC documents instead of doing billable advisory work." },
-  { num: "03", title: "Practice knowledge locked in people", body: "Audit programmes and client nuances live only in a manager's head. When they leave, onboarding successors sets the engagement back weeks." },
-  { num: "04", title: "Clients lack real-time filing visibility", body: "Clients constantly email asking for status updates. Your team wastes hours giving manual status reports that could be automated via a client portal." },
-  { num: "05", title: "Review bottlenecks at deadline time", body: "Unversioned working paper drafts circulate via email attachments. Partner sign-offs get delayed, creating last-minute scrambles." },
-  { num: "06", title: "Unbalanced team and article capacity", body: "Some staff drown in compliance volume while others are under-utilized. Partner visibility into weekly team bandwidth is non-existent." },
+  { num: "01", title: "Practice status lives fragmented across chats & spreadsheets", body: "Critical client filing updates scatter across WhatsApp threads, personal inboxes, and local drives. No partner has real-time visibility across all practice disciplines." },
+  { num: "02", title: "Unbilled partner hours wasted on administrative churn", body: "Partners and managers spend valuable advisory hours chasing clients for missing bank records, trial balances, and PBC documents instead of high-value advisory." },
+  { num: "03", title: "Practice knowledge locked inside departing staff", body: "Client nuances, tax positions, and audit programmes live only in a manager's memory. When seniors leave, onboarding new staff sets engagements back weeks." },
+  { num: "04", title: "Clients lack real-time visibility into their accounts", body: "Clients constantly email and call asking for return status. Staff waste days compiling manual progress reports that could be shared automatically in a client portal." },
+  { num: "05", title: "Review bottlenecks at statutory deadline cutoff", body: "Unversioned working papers and computations circulate via email attachments. Partner sign-offs get delayed, risking frantic last-minute filing scrambles." },
+  { num: "06", title: "Unbalanced practice team and article capacity", body: "Some teams drown in compliance volume while other groups are under-utilized. Partner visibility into weekly practice bandwidth is virtually non-existent." },
 ];
 
 const CLIENTSPACE_FEATURES: { icon: LucideIcon; title: string; body: string }[] = [
-  { icon: Building2, title: "White-labeled client portal", body: "Branded with your firm's domain, logo, and colors. Clients log in to an experience that looks and feels like yours." },
+  { icon: Building2, title: "White-labeled client portal", body: "Branded with your practice domain, logo, and colors. Clients log in to an experience that looks and feels like your firm." },
   { icon: Lock, title: "100% Client data isolation", body: "Each client sees only their own engagements, filing status, and document checklists. Zero risk of data cross-contamination." },
-  { icon: CheckCircle2, title: "Automated PBC document checklists", body: "Set required file types and due dates. Automated WhatsApp and email chasers follow up with clients on your schedule." },
-  { icon: FileCheck, title: "4-Eye partner review gates", body: "Working papers move from preparer to reviewer to partner sign-off before presentations reach client portals." },
-  { icon: Calendar, title: "Statutory compliance master calendar", body: "Pre-configured recurring schedules for GST, TDS, advance tax, corporate filings, and statutory audits." },
-  { icon: Zap, title: "Tally & accounting integrations", body: "Connect Tally Prime, Computax, QuickBooks, and Zoho Books with frictionless two-way sync." },
+  { icon: CheckCircle2, title: "Automated multi-channel client intake", body: "Automate document collection via WhatsApp and email, routing bank statements and PBC files directly into client portfolios." },
+  { icon: Users, title: "Practice workload cockpit", body: "Real-time capacity tracking across partners, managers, qualified accountants, and article assistants with 1-click rebalancing." },
+  { icon: Calendar, title: "Connected statutory radar", body: "Unified timeline aggregating filing deadlines across Income Tax, GST, MCA, TDS, and statutory audit milestones." },
+  { icon: Zap, title: "Tally & core ledger sync", body: "Connect Tally Prime, Computax, QuickBooks, and Zoho Books with frictionless two-way sync for faster reconciliations." },
 ];
 
 const FAQS: { q: string; a: string }[] = [

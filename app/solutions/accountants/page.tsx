@@ -23,15 +23,15 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "PYNGYN for Accountants & CA Firms | Audit & Tax Workflows",
+  title: "Practice Management Software for Chartered Accountants & CA Firms | Pyngyn ClientSpace",
   description:
-    "The practice operating system for accounting firms, Chartered Accountants, and tax practitioners. Run audit pipelines, statutory filing calendars, PBC checklists, and 4-eye partner review gates.",
+    "The practice operating system for Chartered Accountants and multi-partner CA firms. Manage article staff workload, partner review gates, client entity hierarchies, and retainer profitability.",
   alternates: { canonical: "/solutions/accountants" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "PYNGYN for Accountants & CA Firms | Audit & Tax Workflows",
+    title: "Practice Management Software for Chartered Accountants & CA Firms | Pyngyn ClientSpace",
     description:
-      "Purpose-built practice management for accounting firms and CAs. Stop chasing documents, balance partner & article workload, and secure client sign-offs.",
+      "Purpose-built practice management for Chartered Accountants. Balance partner & article workloads, enforce quality control gates, and track retainer realization.",
     url: "/solutions/accountants",
     type: "website",
   },
@@ -40,89 +40,89 @@ export const metadata: Metadata = {
 const PROBLEMS: { num: string; title: string; body: string }[] = [
   {
     num: "01",
-    title: "Statutory deadline chaos in peak season",
-    body: "Statutory due dates for dozens of client entities live across spreadsheets and personal calendars. One missed GST or advance tax date triggers penalties and client friction.",
+    title: "Partner review bottlenecks during peak signing weeks",
+    body: "Senior partners spend 60% of their day reviewing fragmented article draft calculations and unversioned spreadsheets instead of strategic advisory and client acquisition.",
   },
   {
     num: "02",
-    title: "Partner status-chasing during review cycles",
-    body: "Partners and managers spend days chasing article assistants for working paper status. Without real-time visibility, the review meeting is the only source of truth.",
+    title: "Article trainee turnover & lost engagement context",
+    body: "When article assistants complete their tenure, unstandardized working papers leave new joiners in the dark, setting multi-year audit and advisory engagements back weeks.",
   },
   {
     num: "03",
-    title: "Client records scattered across channels",
-    body: "Client-provided financial records arrive haphazardly via email, WhatsApp, and Google Drive links. Reconciling what is missing wastes billable hours.",
+    title: "Unbilled partner effort on fixed-fee advisory retainers",
+    body: "Fixed monthly retainers get consumed by relentless out-of-scope client requests because practice teams lack live meters comparing logged effort against fee caps.",
   },
   {
     num: "04",
-    title: "Knowledge locked in individual staff",
-    body: "Audit programmes and client nuances live only in the manager's memory. When seniors leave, onboarding successors sets the engagement back weeks.",
+    title: "Multi-state client entity records scattered across branches",
+    body: "Client files, state GSTINs, director DIN profiles, and assessment orders remain isolated in branch drives and personal WhatsApp chats without centralized governance.",
   },
   {
     num: "05",
-    title: "4-eye review quality bottlenecks",
-    body: "Filing drafts pass back and forth via unversioned attachments. Partner sign-offs get delayed, risking last-minute filing rushes.",
+    title: "Peer-review compliance & documentation deficiency risks",
+    body: "Lack of timestamped reviewer annotations and unalterable audit trails creates severe compliance vulnerabilities during ICAI peer reviews and quality audits.",
   },
   {
     num: "06",
-    title: "Unbalanced team and article capacity",
-    body: "Some team members drown in compliance volume while others are under-utilized. Partner visibility into weekly capacity is virtually non-existent.",
+    title: "Zero real-time visibility into branch and team capacity",
+    body: "Partners have no live visibility into which article cohorts or managers are overloaded until critical statutory deadlines or client deliverables are already at risk.",
   },
 ];
 
 const PRACTICE_FEATURES = [
   {
-    icon: Calendar,
-    title: "Statutory Due Date Calendar",
-    body: "Automated compliance calendar tracking GST (GSTR-1, 3B), Advance Tax, TDS, Form 3CD, and ROC filings across every client entity.",
+    icon: Users,
+    title: "Multi-Partner Practice Governance",
+    body: "Allocate client portfolios by partner-in-charge, maintain cross-partner oversight, and manage branch offices from a unified firm command center.",
   },
   {
-    icon: Users,
-    title: "Practice Workload Cockpit",
-    body: "Real-time visibility into staff, article trainee, and manager workload. Balance engagement capacity before filing deadlines slip.",
+    icon: Scale,
+    title: "Article Trainee & Staff Workload Cockpit",
+    body: "Track article trainee assignments, monitor budgeted effort hours, and rebalance practice capacity across teams before deadline crunch hits.",
   },
   {
     icon: CheckSquare,
-    title: "4-Eye Partner Review Gates",
-    body: "Rigorous quality assurance gates. Working papers flow from preparer to manager to signing partner before client presentation.",
-  },
-  {
-    icon: Zap,
-    title: "Automated WhatsApp Document Chasers",
-    body: "Gentle, automated follow-ups chase missing bank statements, trial balances, and PBC documents on your firm's schedule.",
+    title: "ICAI SQC-1 Aligned Quality Review Gates",
+    body: "Enforce strict maker-checker approval gates where workpapers flow from article assistant to audit manager to signing partner before release.",
   },
   {
     icon: ShieldCheck,
-    title: "DSC & Key Expiry Register",
-    body: "Centralized register tracking client Digital Signature Certificates (DSC) and statutory portal credentials with automated expiry notices.",
+    title: "Client Entity Group Hierarchy (PAN / GSTIN / DIN)",
+    body: "Map parent holding companies, Indian & overseas subsidiaries, LLPs, and individual director profiles with linked statutory portfolios.",
+  },
+  {
+    icon: FileSpreadsheet,
+    title: "Retainer Effort vs Fee Realization Meters",
+    body: "Live visual meters comparing logged staff hours against agreed monthly retainer fees, preventing unbilled write-offs and quantifying scope changes.",
   },
   {
     icon: FileCheck,
-    title: "Branded Client Collaboration Portal",
-    body: "Provide clients with an isolated, white-labeled portal to view compliance status, upload PBC records, and authorize approvals.",
+    title: "Standardized CA Engagement Letters & Onboarding",
+    body: "Pre-configured engagement letter templates, automated client KYC collection, and digital mandate acceptance for smooth client onboarding.",
   },
 ];
 
 const FAQS: { q: string; a: string }[] = [
   {
-    q: "Does PYNGYN track statutory deadlines across GST, Income Tax, and ROC?",
-    a: "Yes. Statutory due dates are first-class items in Pyngyn ClientSpace. The system tracks recurring compliance deadlines, auto-assigns preparation tasks, and alerts partners when dependencies are at risk.",
+    q: "How does Pyngyn support multi-partner CA firms and branch offices?",
+    a: "Pyngyn enables multi-partner governance with partner-level client partitioning, role-based access permissions, and firm-wide capacity dashboards across headquarters and regional branch offices.",
   },
   {
-    q: "How does the client portal work for accounting clients?",
-    a: "Every client gets an isolated, white-labeled portal accessible via passwordless magic links. Clients see their pending PBC document checklists, active filing status, and can approve returns and accounts with a single click.",
+    q: "Can we track article assistants' billable effort and balance their workload?",
+    a: "Yes. The Practice Workload Cockpit gives partners real-time visibility into article trainee allocations, task completion rates, and logged hours against engagement budgets.",
   },
   {
-    q: "Can we manage article assistants and multi-tiered partner reviews?",
-    a: "Absolutely. Pyngyn includes 4-eye partner review gates. Work moves through preparer (article assistant/junior), review (manager), and final sign-off (partner) before anything is submitted or shared with clients.",
+    q: "How does Pyngyn help CA firms maintain ICAI quality control standards?",
+    a: "Pyngyn incorporates multi-tier review gates (preparer, manager, signing partner) with tamper-evident audit logs and version-controlled working papers aligned with SQC-1 guidelines.",
   },
   {
-    q: "How does Pyngyn handle busy tax season volume?",
-    a: "Pyngyn is purpose-built for the high-volume crunch of Indian CA and global accounting practices. The Workload Cockpit rolls up hundreds of concurrent filings into a single unified capacity board.",
+    q: "How does Pyngyn prevent unbilled write-offs on fixed retainers?",
+    a: "Every engagement tracks logged staff hours against agreed retainer caps in real time. When out-of-scope work or excessive hours accumulate, partners receive immediate alerts.",
   },
   {
-    q: "How quickly can our firm get onboarded?",
-    a: "Most CA firms are up and running within 48 hours. You can import existing client master lists via CSV, apply standard statutory workflow templates, and invite your team immediately.",
+    q: "How quickly can a CA firm migrate existing client portfolios?",
+    a: "Most CA firms migrate within 48 hours. You can import client master lists via CSV, auto-populate PAN and GSTIN structures, and deploy standard workflow templates immediately.",
   },
 ];
 
@@ -156,16 +156,16 @@ export default function AccountantsPage() {
         <section className="wrap pb-[56px] pt-[140px] text-center">
           <span className="eyebrow mx-auto justify-center">
             <span className="eyebrow-dot" aria-hidden="true" />
-            Built for CA &amp; Accounting Practices · Pyngyn ClientSpace
+            Chartered Accountants Practice Operating System · Pyngyn ClientSpace
           </span>
           <h1 className="mx-auto mt-4 max-w-[920px] font-display text-[clamp(34px,5.2vw,60px)] font-semibold leading-[1.04] tracking-[-0.025em]">
-            Run your accounting practice with
+            Run your CA practice with
             <br className="hidden sm:block" />{" "}
-            <span className="text-accent">statutory clarity &amp; zero missed deadlines.</span>
+            <span className="text-accent">partner-level governance &amp; fee realization.</span>
           </h1>
           <p className="lead mx-auto mt-5 max-w-[700px]">
-            PYNGYN ClientSpace unites client portals, statutory due date tracking, automated PBC document chasers,
-            and 4-eye partner review gates in one seamless practice operating system.
+            PYNGYN ClientSpace powers modern CA firms: multi-partner client portfolios, article trainee capacity
+            allocation, ICAI SQC-1 quality review gates, and live retainer realization tracking.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3.5">
             <a href={DEMO_URL} className="btn btn-accent">

@@ -8,6 +8,10 @@ import {
   Users,
   FolderLock,
   ArrowRight,
+  ClipboardList,
+  FileSpreadsheet,
+  Building2,
+  FileText,
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
@@ -21,65 +25,102 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Audit Practice Management Software for CA & Audit Teams | Pyngyn ClientSpace",
+  title: "Audit Practice Management Software for Statutory & Internal Audit Teams | Pyngyn ClientSpace",
   description:
-    "Statutory audit, tax audit, and internal audit software for Chartered Accountants and audit assurance firms. Run working papers, PBC checklists, and 4-eye partner review gates.",
+    "Statutory audit, tax audit, and internal assurance software for Chartered Accountants and audit firms. Run CARO 2020 programmes, Form 3CD workpapers, sample vouching, and EQCR reviews.",
   alternates: { canonical: "/solutions/audit-teams" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Audit Practice Management Software for CA & Audit Teams | Pyngyn ClientSpace",
+    title: "Audit Practice Management Software for Statutory & Internal Audit Teams | Pyngyn ClientSpace",
     description:
-      "Maintain audit quality and working paper integrity with structured review gates, automated PBC tracking, and partner sign-offs.",
+      "Maintain audit quality and working paper integrity with CARO 2020 checklists, Form 3CD schedules, substantive testing logs, and EQCR sign-offs.",
     url: "/solutions/audit-teams",
     type: "website",
   },
 };
 
+const AUDIT_PROBLEMS: { num: string; title: string; body: string }[] = [
+  {
+    num: "01",
+    title: "Unresolved client audit queries stalling final report signing",
+    body: "Open audit observations and pending trial balance schedules sit unanswered in email threads while statutory signing deadlines rapidly approach.",
+  },
+  {
+    num: "02",
+    title: "Disorganized working papers risking peer-review & NFRA exposure",
+    body: "Unlinked spreadsheets, loose notes, and unverified lead schedules create severe non-compliance liabilities during external quality inspections.",
+  },
+  {
+    num: "03",
+    title: "Form 3CD clause verification consuming weeks of manual effort",
+    body: "Cross-checking 44 separate tax audit clauses against raw client general ledgers drains hundreds of senior auditor and manager hours.",
+  },
+  {
+    num: "04",
+    title: "Inadequate evidence trails for CARO 2020 physical inspections",
+    body: "Documenting fixed asset physical verifications, working capital limits, and inventory records on disparate files leaves audit teams vulnerable.",
+  },
+  {
+    num: "05",
+    title: "Concurrent bank audit fieldwork delays & calculation errors",
+    body: "Teams conducting branch concurrent audits struggle to compute drawing power (DP) and verify loan covenants without standardized testing templates.",
+  },
+  {
+    num: "06",
+    title: "Delays in securing signed Management Representation Letters (MRL)",
+    body: "Audit partners cannot issue the final independent auditor's report because signed management representations and confirmations remain pending.",
+  },
+];
+
 const AUDIT_WORKFLOWS = [
   {
+    icon: ClipboardList,
+    title: "Statutory Companies Act Audits & CARO 2020",
+    desc: "Pre-structured audit programmes aligned with Companies Act 2013 disclosures, CARO 2020 reporting requirements, and Schedule III balance sheet presentation.",
+  },
+  {
+    icon: FileSpreadsheet,
+    title: "Section 44AB Form 3CD Workpapers",
+    desc: "Dedicated 44-clause verification modules, depreciation schedule checks, Section 40A(3) cash expense limits, and quantitative stock reconciliation tests.",
+  },
+  {
     icon: Search,
-    title: "Statutory & Tax Audit Programmes",
-    desc: "Standardized audit programmes for Form 3CD, CARO, Companies Act statutory audits, and internal assurance engagements.",
-  },
-  {
-    icon: CheckSquare,
-    title: "4-Eye Partner Review Queues",
-    desc: "Every working paper, ledger schedule, and audit observation moves from article assistant $\\rightarrow$ audit manager $\\rightarrow$ engagement partner before sign-off.",
-  },
-  {
-    icon: FolderLock,
-    title: "PBC (Provided-By-Client) Audit Vault",
-    desc: "Provide clients with categorized checklists for trial balances, fixed asset registers, and bank confirmations with bank-grade encryption.",
-  },
-  {
-    icon: Users,
-    title: "Article Trainee & Fieldwork Allocation",
-    desc: "Allocate client audit fieldwork, set budgeted effort hours, and monitor live audit progress without waiting for weekly status calls.",
-  },
-  {
-    icon: FileCheck2,
-    title: "Management Representation & Sign-Offs",
-    desc: "Collect client management representation letters and audit query responses directly through the secure client portal.",
+    title: "Substantive Fieldwork & Sample Vouching",
+    desc: "Ledger transaction sampling tools, vouching checklists, cutoff testing documentation, and unadjusted audit observation registers.",
   },
   {
     icon: ShieldCheck,
-    title: "Tamper-Evident Working Paper Audit Trails",
-    desc: "Maintain strict compliance standards with unalterable version histories, timestamped reviewer annotations, and access logs.",
+    title: "Internal Financial Controls (IFCoR) Matrices",
+    desc: "Risk-control matrices (RCM), process walkthrough documentation, operating effectiveness testing, and deficiency remediation tracking.",
+  },
+  {
+    icon: Building2,
+    title: "Bank Concurrent & Stock Inspection Audits",
+    desc: "Drawing Power (DP) calculation worksheets, physical stock inspection logs, collateral valuation verifications, and NPA provisioning audits.",
+  },
+  {
+    icon: FileCheck2,
+    title: "Engagement Quality Control Review (EQCR) & MRLs",
+    desc: "Independent EQCR partner sign-off gates, draft audit query clearance, and digital Management Representation Letter (MRL) intake.",
   },
 ];
 
 const AUDIT_FAQS = [
   {
-    q: "How does Pyngyn enforce 4-eye partner review on audit files?",
-    a: "Every deliverable and working paper has configurable review gates. Article staff submit their findings, managers review schedules and queries, and signing partners approve final audit reports before release.",
+    q: "How does Pyngyn support Form 3CD tax audit schedules?",
+    a: "Pyngyn provides standardized clause-by-clause Form 3CD verification modules. Teams can record observations, attach ledger evidence, and track manager reviews for all 44 clauses.",
   },
   {
-    q: "Can clients upload sensitive bank statements and trial balances securely?",
-    a: "Yes. All client uploads are encrypted in transit with TLS 1.3 and at rest with AES-256 bank-grade encryption with dedicated tenant isolation.",
+    q: "Can audit teams record and resolve audit observations with clients?",
+    a: "Yes. Query registers allow auditors to flag draft findings, request client management explanations, and record partner clearance notes directly on the audit file.",
   },
   {
-    q: "Does Pyngyn support Form 3CD tax audit schedules?",
-    a: "Yes. You can use standard statutory audit and Form 3CD checklists, track query clearance status, and share draft observations with clients securely.",
+    q: "Does Pyngyn maintain tamper-evident audit trails for peer reviews?",
+    a: "Yes. Every working paper, reviewer comment, and sign-off is logged with unalterable timestamps and user IDs, ensuring complete audit readiness for ICAI peer review.",
+  },
+  {
+    q: "How does Pyngyn help with concurrent bank audits and drawing power?",
+    a: "Pyngyn includes built-in calculation templates for drawing power, stock statement vetting, and overdue loan accounts, allowing concurrent audit teams to submit clean reports faster.",
   },
 ];
 
@@ -90,7 +131,7 @@ export default function AuditTeamsPage() {
         data={[
           webPageSchema({
             url: "/solutions/audit-teams",
-            name: "Audit Practice Management Software for CA & Audit Teams | Pyngyn ClientSpace",
+            name: "Audit Practice Management Software for Statutory & Internal Audit Teams | Pyngyn ClientSpace",
             description:
               "Statutory audit, tax audit, and internal audit software for Chartered Accountants and audit assurance firms.",
             breadcrumbId: "/solutions/audit-teams#breadcrumb",
@@ -98,7 +139,7 @@ export default function AuditTeamsPage() {
           breadcrumbSchema(
             [
               { name: "Home", url: "/" },
-              { name: "Solutions", url: "/solutions/accountants" },
+              { name: "Solutions", url: "/solutions/professional-services" },
               { name: "For Audit Teams", url: "/solutions/audit-teams" },
             ],
             "/solutions/audit-teams"
@@ -113,16 +154,16 @@ export default function AuditTeamsPage() {
         <section className="wrap pb-[56px] pt-[140px] text-center">
           <span className="eyebrow mx-auto justify-center">
             <span className="eyebrow-dot" aria-hidden="true" />
-            Audit Assurance Operating System · Pyngyn ClientSpace
+            Audit Assurance &amp; Working Papers · Pyngyn ClientSpace
           </span>
           <h1 className="mx-auto mt-4 max-w-[920px] font-display text-[clamp(34px,5.2vw,60px)] font-semibold leading-[1.04] tracking-[-0.025em]">
-            Deliver airtight audit engagements with
+            Deliver statutory &amp; tax audits with
             <br className="hidden sm:block" />{" "}
-            <span className="text-accent">4-eye review gates &amp; structured working papers.</span>
+            <span className="text-accent">tamper-evident workpapers &amp; CARO 2020 controls.</span>
           </h1>
           <p className="lead mx-auto mt-5 max-w-[700px]">
-            Pyngyn ClientSpace powers modern audit practices: Statutory Audits, Tax Audits, and Internal Assurance
-            with complete working paper versioning, automated PBC chasing, and partner sign-off gates.
+            Pyngyn ClientSpace powers modern audit practices: Companies Act statutory audits, Form 3CD tax audits,
+            substantive vouching, and EQCR partner sign-offs in one audit-ready workspace.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3.5">
             <a href={DEMO_URL} className="btn btn-accent">
@@ -136,20 +177,48 @@ export default function AuditTeamsPage() {
             </Link>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Starting at ₹499/mo ($29/mo) · Built for statutory audit firms &amp; CAs · Bank-grade AES-256 encryption
+            Starting at ₹499/mo ($29/mo) · Built for statutory &amp; internal audit teams · No credit card required
           </p>
         </section>
 
-        {/* ===== Features Grid ========================================= */}
+        {/* ===== Problems Solved ======================================== */}
+        <section className="section border-t border-rule bg-sand/30">
+          <div className="wrap">
+            <div className="text-center">
+              <span className="eyebrow">The Audit Season Reality</span>
+              <h2 className="mt-3 font-display text-[clamp(26px,3.4vw,40px)] font-semibold tracking-[-0.025em]">
+                Why audit engagements stall right before the signing date
+              </h2>
+              <p className="lead mx-auto mt-4 max-w-[620px]">
+                Audit assurance teams waste hundreds of hours chasing unlinked trial balance schedules and open query responses.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {AUDIT_PROBLEMS.map((p) => (
+                <div key={p.num} className="card p-7">
+                  <div className="flex items-center gap-3 text-accent font-mono text-[13px] font-bold">
+                    <span>{p.num}</span>
+                    <span className="h-px flex-1 bg-accent/20" />
+                  </div>
+                  <h3 className="mt-4 text-[17px] font-bold text-ink">{p.title}</h3>
+                  <p className="mt-2 text-[14px] leading-relaxed text-muted">{p.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Dedicated Workflows =================================== */}
         <section className="section bg-[#fbfbfd]">
           <div className="wrap">
             <div className="text-center">
-              <span className="eyebrow">Audit Assurance Workflows</span>
+              <span className="eyebrow">Audit Practice Workflows</span>
               <h2 className="mt-3 max-w-[820px] mx-auto font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
-                Quality control, team resourcing, and partner review assurance.
+                Standardized programmes from field vouching to final sign-off.
               </h2>
               <p className="lead mx-auto mt-4 max-w-[620px]">
-                Maintain peer-review audit standards without drowning partners in administrative query chasing.
+                Maintain peer-review audit quality and working paper integrity across all assurance engagements.
               </p>
             </div>
 
@@ -192,12 +261,12 @@ export default function AuditTeamsPage() {
 
         {/* Final CTA */}
         <FinalCTA
-          eyebrow="Upgrade Audit Quality"
-          headline="Maintain audit review standards with zero last-minute bottlenecks."
-          body="Book a 30-minute practice walkthrough. See how Pyngyn standardizes audit working papers and review gates."
-          primaryLabel="Book a practice demo &rarr;"
+          eyebrow="Modernize Audit Assurance"
+          headline="Take control of statutory audits, Form 3CD, and CARO 2020 workflows."
+          body="Book a 30-minute practice walkthrough. See how Pyngyn standardizes audit working papers and ensures peer-review readiness."
+          primaryLabel="Book an audit practice demo &rarr;"
           secondaryLabel="Start 7-day free trial"
-          note="Tailored to CA audit practices · 30-minute walkthrough · No commitment"
+          note="Tailored to statutory audit &amp; assurance practices · 30-minute walkthrough · No commitment"
         />
       </main>
 

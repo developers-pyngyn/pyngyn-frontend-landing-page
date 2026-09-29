@@ -8,6 +8,9 @@ import {
   BellRing,
   CheckCircle,
   ArrowRight,
+  FolderArchive,
+  FileCheck2,
+  Lock,
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
@@ -23,7 +26,7 @@ import {
 export const metadata: Metadata = {
   title: "Statutory Compliance Management Software for CA & Corporate Secretarial Teams | Pyngyn ClientSpace",
   description:
-    "Statutory compliance software for accounting firms, CAs, and CS teams. Track ROC/MCA, GST, TDS, advance tax, and secretarial due dates with automated client alerts.",
+    "Statutory compliance software for accounting firms, CAs, and CS teams. Track ROC/MCA, DSC registries, group compliance hierarchies, and statutory challan archives.",
   alternates: { canonical: "/solutions/compliance-teams" },
   openGraph: {
     images: [OG_IMAGE],
@@ -35,36 +38,69 @@ export const metadata: Metadata = {
   },
 };
 
+const COMPLIANCE_PROBLEMS: { num: string; title: string; body: string }[] = [
+  {
+    num: "01",
+    title: "Missed MCA annual filing deadlines triggering compounding daily fines",
+    body: "Missing AOC-4 or MGT-7 cutoffs costs corporate clients ₹100/day per form, plus compounding director disqualification and strike-off risks.",
+  },
+  {
+    num: "02",
+    title: "Expired director DSC tokens discovered on the day of submission",
+    body: "Filings stall at 11 PM because a key signing director's Digital Signature Certificate expired weeks earlier without automated warning.",
+  },
+  {
+    num: "03",
+    title: "Complex corporate group structures with blind subsidiary filing gaps",
+    body: "Managing holding companies, operating subsidiaries, and LLPs on spreadsheets leaves partners blind to subsidiary compliance lapses.",
+  },
+  {
+    num: "04",
+    title: "Password chaos & OTP lockouts across government portals",
+    body: "Sharing MCA-V3, GST, and Income Tax portal passwords via insecure chat groups results in blocked accounts and frantic last-minute credential resets.",
+  },
+  {
+    num: "05",
+    title: "Scrambling to locate historical SRN receipts and payment challans",
+    body: "Secretarial teams lose days hunting for past approval letters and challans during due diligence, bank loan reviews, and statutory audits.",
+  },
+  {
+    num: "06",
+    title: "Difficulty proving real-time compliance health to corporate boards",
+    body: "Company secretaries lack a clean, live dashboard to present overall statutory compliance standing to board members and audit committees.",
+  },
+];
+
 const COMPLIANCE_WORKFLOWS = [
   {
     icon: Calendar,
-    title: "Statutory Compliance Master Calendar",
-    body: "Pre-configured recurring schedules for ROC annual returns (AOC-4, MGT-7), GST, TDS, Advance Tax, and statutory audits across all entities.",
+    title: "Master Statutory Regulatory Calendar",
+    body: "Pre-configured annual timeline tracking MCA annual filings, ROC event-based forms, GST returns, TDS schedules, and statutory audit cutoff dates.",
   },
   {
     icon: KeyRound,
-    title: "DSC & Government Portal Credential Register",
-    body: "Track client Digital Signature Certificates (DSC) validity, USB tokens, and MCA/IT/GST portal logins with automated expiry alerts.",
+    title: "DSC & USB Token Central Registry",
+    body: "Track director & partner DSC validities, physical USB token locations, PIN vault, and automated 30-day expiry renewal reminders.",
   },
   {
     icon: Building,
-    title: "Multi-Entity Group Compliance Matrix",
-    body: "Maintain bird's-eye visibility across complex conglomerate corporate hierarchies, LLPs, subsidiaries, and director DIN status.",
+    title: "Multi-Tier Corporate Group Hierarchy & DIN Mapping",
+    body: "Dynamic corporate family trees displaying holding companies, Indian & foreign subsidiaries, joint ventures, and LLPs with director DIN mapping.",
   },
   {
-    icon: BellRing,
-    title: "Automated WhatsApp & Email Due Date Alerts",
-    body: "Keep corporate clients informed of upcoming statutory cut-offs well in advance without staff spending hours sending manual reminder emails.",
+    icon: FileCheck2,
+    title: "MCA & ROC Secretarial Filing Pipelines",
+    body: "End-to-end secretarial tracking for AOC-4, MGT-7, DIR-3 KYC, DPT-3, MSME-1, and board resolution registers with live SRN status tracking.",
   },
   {
-    icon: Shield,
-    title: "Statutory Penalty Risk Mitigation",
-    body: "Dependencies and bottleneck tasks flag at-risk filings days before the statutory cutoff, safeguarding clients against late-fee penalties.",
+    icon: Lock,
+    title: "Government Portal Credential & OTP Manager",
+    body: "Role-gated credential repository for secure team access to Income Tax, GST, MCA-V3, DGFT, and TRACES portals without credential leaks.",
   },
   {
-    icon: CheckCircle,
-    title: "Filing Challan & Acknowledgment Archive",
-    body: "Every SRN, GST ARN, and tax acknowledgment challan is systematically tagged to the client portfolio for instant audit retrieval.",
+    icon: FolderArchive,
+    title: "Statutory Challan & Acknowledgment Archive",
+    body: "Centralized document archive for SRNs, GST ARNs, tax payment challans, and government approval orders indexed by client financial year.",
   },
 ];
 
@@ -80,6 +116,10 @@ const COMPLIANCE_FAQS = [
   {
     q: "Can clients check their compliance health status independently?",
     a: "Yes. In their white-labeled ClientSpace portal, clients see their group entity compliance status, pending sign-offs, and historical filing acknowledgments.",
+  },
+  {
+    q: "How does Pyngyn manage secretarial filings like AOC-4 and MGT-7?",
+    a: "Pyngyn tracks the entire lifecycle of ROC forms: draft preparation, board approval date, DSC affixing, SRN generation, and final MCA approval receipt.",
   },
 ];
 
@@ -98,7 +138,7 @@ export default function ComplianceTeamsPage() {
           breadcrumbSchema(
             [
               { name: "Home", url: "/" },
-              { name: "Solutions", url: "/solutions/accountants" },
+              { name: "Solutions", url: "/solutions/professional-services" },
               { name: "For Compliance Teams", url: "/solutions/compliance-teams" },
             ],
             "/solutions/compliance-teams"
@@ -113,16 +153,16 @@ export default function ComplianceTeamsPage() {
         <section className="wrap pb-[56px] pt-[140px] text-center">
           <span className="eyebrow mx-auto justify-center">
             <span className="eyebrow-dot" aria-hidden="true" />
-            Compliance Practice Operating System · Pyngyn ClientSpace
+            Statutory &amp; Secretarial Compliance · Pyngyn ClientSpace
           </span>
           <h1 className="mx-auto mt-4 max-w-[920px] font-display text-[clamp(34px,5.2vw,60px)] font-semibold leading-[1.04] tracking-[-0.025em]">
-            Never miss a statutory filing with
+            Never miss a statutory deadline with
             <br className="hidden sm:block" />{" "}
-            <span className="text-accent">automated calendars, DSC registers &amp; alerts.</span>
+            <span className="text-accent">centralized DSC registers &amp; ROC/MCA pipelines.</span>
           </h1>
           <p className="lead mx-auto mt-5 max-w-[700px]">
-            Pyngyn ClientSpace protects your practice and client entities against missed cut-offs:
-            ROC/MCA filings, GST, TDS, advance tax, and secretarial compliance with automated client chasers.
+            Pyngyn ClientSpace powers modern corporate secretarial and compliance teams: Master statutory calendars,
+            director DSC expiry tracking, multi-entity group matrices, and SRN archives in one secure system.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3.5">
             <a href={DEMO_URL} className="btn btn-accent">
@@ -136,20 +176,48 @@ export default function ComplianceTeamsPage() {
             </Link>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Starting at ₹499/mo ($29/mo) · Built for CA &amp; corporate compliance practices · No credit card required
+            Starting at ₹499/mo ($29/mo) · Built for CS teams, CAs &amp; corporate compliance managers · No credit card required
           </p>
         </section>
 
-        {/* ===== Features Grid ========================================= */}
+        {/* ===== Problems Solved ======================================== */}
+        <section className="section border-t border-rule bg-sand/30">
+          <div className="wrap">
+            <div className="text-center">
+              <span className="eyebrow">The Compliance Reality</span>
+              <h2 className="mt-3 font-display text-[clamp(26px,3.4vw,40px)] font-semibold tracking-[-0.025em]">
+                Why tracking corporate compliance on spreadsheets is a penalty trap
+              </h2>
+              <p className="lead mx-auto mt-4 max-w-[620px]">
+                One missed annual return or expired director signature can trigger thousands in late fees and legal disqualifications.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {COMPLIANCE_PROBLEMS.map((p) => (
+                <div key={p.num} className="card p-7">
+                  <div className="flex items-center gap-3 text-accent font-mono text-[13px] font-bold">
+                    <span>{p.num}</span>
+                    <span className="h-px flex-1 bg-accent/20" />
+                  </div>
+                  <h3 className="mt-4 text-[17px] font-bold text-ink">{p.title}</h3>
+                  <p className="mt-2 text-[14px] leading-relaxed text-muted">{p.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== Dedicated Workflows =================================== */}
         <section className="section bg-[#fbfbfd]">
           <div className="wrap">
             <div className="text-center">
               <span className="eyebrow">Compliance Workflows</span>
               <h2 className="mt-3 max-w-[820px] mx-auto font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
-                Statutory risk prevention, DSC governance, and client visibility.
+                Complete statutory control from secretarial filings to challan archives.
               </h2>
               <p className="lead mx-auto mt-4 max-w-[620px]">
-                Eliminate compliance blind spots across multi-entity groups and statutory deadlines.
+                Safeguard client corporate health with centralized registries and automated expiry alerts.
               </p>
             </div>
 
@@ -176,7 +244,7 @@ export default function ComplianceTeamsPage() {
             <div className="text-center">
               <span className="eyebrow">FAQ</span>
               <h2 className="mt-3 font-display text-[clamp(24px,3vw,36px)] font-semibold tracking-[-0.02em]">
-                Compliance practice questions, answered.
+                Statutory compliance questions, answered.
               </h2>
             </div>
             <div className="mt-10 space-y-4">
@@ -192,12 +260,12 @@ export default function ComplianceTeamsPage() {
 
         {/* Final CTA */}
         <FinalCTA
-          eyebrow="Eliminate Statutory Penalty Risk"
-          headline="Keep every client entity strictly compliant with zero manual stress."
-          body="Book a 30-minute practice walkthrough. See how Pyngyn automates compliance registers and due date tracking."
-          primaryLabel="Book a practice demo &rarr;"
+          eyebrow="Zero Missed Statutory Deadlines"
+          headline="Take control of MCA/ROC filings, director DSCs, and group compliance."
+          body="Book a 30-minute practice walkthrough. See how Pyngyn centralizes secretarial registers and eliminates penalty exposure."
+          primaryLabel="Book a compliance demo &rarr;"
           secondaryLabel="Start 7-day free trial"
-          note="Tailored to CA & compliance practices · 30-minute walkthrough · No commitment"
+          note="Tailored to corporate compliance &amp; secretarial practices · 30-minute walkthrough · No commitment"
         />
       </main>
 

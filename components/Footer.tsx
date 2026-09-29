@@ -180,6 +180,7 @@ export function Footer() {
         heading: "Practice Solutions",
         links: [
           { label: "Chartered Accountants", href: "/solutions/accountants" },
+          { label: "Accounting & Bookkeeping", href: "/solutions/accounting-firms" },
           { label: "Tax Teams", href: "/solutions/tax-teams" },
           { label: "Audit Teams", href: "/solutions/audit-teams" },
           { label: "Compliance Teams", href: "/solutions/compliance-teams" },
