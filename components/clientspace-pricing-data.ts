@@ -132,7 +132,7 @@ export const CLIENTSPACE_PLANS: PricingPlan[] = [
     ],
     keyHighlights: [
       "Everything in Business, plus:",
-      "Enterprise SSO (SAML 2.0, Okta, Azure AD, Google Workspace)",
+      "Enterprise SSO (SAML 2.0, Okta, Azure AD)",
       "Multi-Branch & Multi-Office Practice Partitions",
       "Dedicated White-Glove Client & Document Migration Specialist",
       "Custom DPA (Data Processing Agreement) & Sensitive Audit Isolation",
@@ -455,7 +455,7 @@ export const FEATURE_CATEGORIES: FeatureCategory[] = [
       },
       {
         name: "Enterprise Single Sign-On (SAML 2.0)",
-        detail: "Corporate authentication via Google Workspace, Microsoft Azure AD, or Okta",
+        detail: "Corporate authentication via standard SAML 2.0, Azure AD, or Okta",
         pro: false,
         business: false,
         enterprise: true,
@@ -481,7 +481,7 @@ export const PRICING_FAQS: PricingFaq[] = [
   },
   {
     q: "How does the 7-day free trial work?",
-    a: "You get full access to Pyngyn ClientSpace for 7 days with no credit card required. You can invite your team, add real client portfolios, connect Tally or Google Drive, and test statutory workflows before making any commitment.",
+    a: "You get full access to Pyngyn ClientSpace for 7 days with no credit card required. You can invite your team, add real client portfolios, connect Tally or cloud storage, and test statutory workflows before making any commitment.",
   },
   {
     q: "Can we switch between monthly and annual billing?",
