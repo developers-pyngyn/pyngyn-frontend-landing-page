@@ -231,7 +231,7 @@ export function Footer() {
         ],
       },
     ],
-    // Column 5: Company (6 links)
+    // Column 5: Company & Legal (9 links)
     [
       {
         heading: "Company",
@@ -244,13 +244,21 @@ export function Footer() {
           { label: "Contact Us", href: DEMO_URL },
         ],
       },
+      {
+        heading: "Legal",
+        links: [
+          { label: "Privacy Policy", href: PRIVACY_URL },
+          { label: "Terms of Service", href: TERMS_URL },
+          { label: "Refund Policy", href: REFUND_URL },
+        ],
+      },
     ],
   ];
 
   const compliance = ["SOC 2 aligned", "DPDP (India)", "GDPR", "Encrypted", "SSO / SAML"];
   const legal: [string, string][] = [
-    ["Privacy", PRIVACY_URL],
-    ["Terms", TERMS_URL],
+    ["Privacy Policy", PRIVACY_URL],
+    ["Terms of Service", TERMS_URL],
     ["Cookie Policy", COOKIE_POLICY_URL],
     ["DPA", DPA_URL],
     ["Subprocessors", SUBPROCESSORS_URL],
