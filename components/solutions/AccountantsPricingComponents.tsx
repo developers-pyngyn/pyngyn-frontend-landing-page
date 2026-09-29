@@ -31,10 +31,10 @@ export function AccountantsPricingProvider({
   // Client-side detection if initial was default and user has cookie or local timezone
   useEffect(() => {
     const detected = detectClientMarket();
-    if (detected !== initialMarket && initialMarket === "DEFAULT") {
+    if (detected && detected !== market) {
       setMarket(detected);
     }
-  }, [initialMarket]);
+  }, []);
 
   const pricing = useMemo(() => getAccountantsPricing(market), [market]);
 
@@ -58,16 +58,17 @@ export function useAccountantsPricing() {
 }
 
 export function AccountantsPriceTag({
-  type,
-  suffix,
+  type = "pro",
+  suffix = "",
   className = "",
 }: {
-  type: "clientspace" | "workspace" | "bundle";
+  type?: "pro" | "business" | "clientspace" | "workspace" | "bundle";
   suffix?: string;
   className?: string;
 }) {
   const { pricing } = useAccountantsPricing();
-  const price = pricing[type];
+  const priceKey = (type === "workspace" || type === "bundle") ? "business" : (type === "clientspace" ? "pro" : type);
+  const price = pricing[priceKey] || pricing.pro;
 
   return (
     <span className={className}>
@@ -78,8 +79,6 @@ export function AccountantsPriceTag({
 
 export function AccountantsPricingSection() {
   const { market, setMarket, pricing } = useAccountantsPricing();
-
-  const isIndia = market === "IN";
 
   return (
     <section className="section" id="pricing">
@@ -93,83 +92,146 @@ export function AccountantsPricingSection() {
         </div>
 
         <h2 className="mt-2 font-display text-[clamp(26px,3.4vw,38px)] font-semibold tracking-[-0.02em] text-ink">
-          Simple and predictable.
+          Transparent practice pricing.
         </h2>
-        <p className="lead mx-auto mt-3 max-w-[540px]">
-          Choose Client Space, Workspace, or bundle both for {pricing.bundle}/mo.
+        <p className="lead mx-auto mt-3 max-w-[580px]">
+          Predictable per-user pricing tailored for CA partnerships, audit firms, and tax practitioners.
         </p>
 
         {/* 3 Tier Cards */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-[15px]">
-          {/* Client Space Card */}
-          <div className="min-w-[240px] rounded-2xl border border-accent bg-accent/5 px-6 py-5 text-center shadow-soft">
-            <div className="font-display text-[32px] font-semibold text-accent">
-              {pricing.clientspace}
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-[960px] mx-auto text-left">
+          {/* Pro Card */}
+          <div className="rounded-2xl border border-line bg-white p-6 shadow-card flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-bold text-ink">ClientSpace Pro</h3>
+              </div>
+              <p className="text-xs text-muted mt-1">Essential statutory task tracking & client portal.</p>
+              <div className="mt-4 flex items-baseline gap-1">
+                <span className="font-display text-[32px] font-bold text-ink">{pricing.pro}</span>
+                <span className="text-xs text-muted">/ user / month</span>
+              </div>
+              <ul className="mt-5 space-y-2.5 text-[13.5px] text-slate-600">
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>Statutory due date tracker</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>White-labeled client portal</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>PBC document request checklists</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>DSC expiry register</span>
+                </li>
+              </ul>
             </div>
-            <div className="mt-1 text-xs sm:text-[13px] text-muted">
-              per client / month · Client Space
+            <div className="mt-6 pt-4 border-t border-line">
+              <a href={SIGNUP_URL} className="btn btn-ghost w-full justify-center">
+                Start 7-day free trial
+              </a>
             </div>
           </div>
 
-          {/* Workspace Card */}
-          <div className="min-w-[240px] rounded-2xl border border-line bg-white px-6 py-5 text-center shadow-card">
-            <div className="font-display text-[32px] font-semibold text-ink">
-              {pricing.workspace}
+          {/* Business Card (Featured) */}
+          <div className="rounded-2xl border-2 border-accent bg-accent/5 p-6 shadow-soft flex flex-col justify-between relative">
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-white">
+              Most Popular for CAs
+            </span>
+            <div>
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-bold text-accent">ClientSpace Business</h3>
+              </div>
+              <p className="text-xs text-muted mt-1">Full practice operating system & review workflows.</p>
+              <div className="mt-4 flex items-baseline gap-1">
+                <span className="font-display text-[32px] font-bold text-accent">{pricing.business}</span>
+                <span className="text-xs text-muted">/ user / month</span>
+              </div>
+              <ul className="mt-5 space-y-2.5 text-[13.5px] text-slate-700">
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span className="font-semibold">Everything in Pro, plus:</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>Practice Workload Cockpit</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>4-eye partner review gates</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>WhatsApp automated document chase</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>Tally & accounting software sync</span>
+                </li>
+              </ul>
             </div>
-            <div className="mt-1 text-xs sm:text-[13px] text-muted">
-              per seat / month · Workspace
+            <div className="mt-6 pt-4 border-t border-accent/20">
+              <a href={SIGNUP_URL} className="btn btn-accent w-full justify-center">
+                Start 7-day free trial
+              </a>
             </div>
           </div>
 
-          <span className="text-[20px] font-medium text-muted">or bundle for</span>
-
-          {/* Bundle Card */}
-          <div className="min-w-[240px] rounded-2xl border border-line bg-white px-6 py-5 text-center shadow-card ring-1 ring-accent/30">
-            <div className="font-display text-[32px] font-semibold text-ink">
-              {pricing.bundle}
+          {/* Enterprise Card */}
+          <div className="rounded-2xl border border-line bg-white p-6 shadow-card flex flex-col justify-between sm:col-span-2 lg:col-span-1">
+            <div>
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-bold text-ink">Enterprise</h3>
+              </div>
+              <p className="text-xs text-muted mt-1">Multi-branch CA partnerships & large firms.</p>
+              <div className="mt-4 flex items-baseline gap-1">
+                <span className="font-display text-[32px] font-bold text-ink">Custom</span>
+                <span className="text-xs text-muted">annual agreement</span>
+              </div>
+              <ul className="mt-5 space-y-2.5 text-[13.5px] text-slate-600">
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>Multi-branch practice partitions</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>Dedicated practice data migration</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>Enterprise SSO & SAML</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>99.9% uptime SLA & account partner</span>
+                </li>
+              </ul>
             </div>
-            <div className="mt-1 text-xs sm:text-[13px] text-muted">
-              {pricing.periodText} · both together
+            <div className="mt-6 pt-4 border-t border-line">
+              <a href={DEMO_URL} className="btn btn-primary w-full justify-center">
+                Book a demo
+              </a>
             </div>
           </div>
         </div>
 
         {/* Tax & Currency Notice */}
-        <p className="mt-4 text-[12px] text-muted font-medium">
+        <p className="mt-5 text-[12px] text-muted font-medium">
           {pricing.taxNote}
         </p>
 
-        {/* CTA Buttons */}
-        <div className="mt-7 flex flex-wrap justify-center gap-3">
-          <a href={SIGNUP_URL} className="btn btn-accent">
-            Start free trial
-          </a>
-          <a href={DEMO_URL} className="btn btn-primary">
-            Book a demo
-          </a>
-        </div>
-
         {/* Practice Plan Callout */}
-        <div className="mt-5 text-[13px] text-muted max-w-[620px] mx-auto">
-          {isIndia ? (
-            <p>
-              Looking for our practice-wide CA operating system?{" "}
-              <Link href="/pricing" className="font-semibold text-accent hover:underline">
-                Pro practice plan starts at ₹499/user/month
-              </Link>{" "}
-              with statutory due dates, DSC register, and PBC checklists.{" "}
-              <Link href="/pricing" className="underline underline-offset-2 hover:text-ink">
-                Full practice pricing →
-              </Link>
-            </p>
-          ) : (
-            <p>
-              Enterprise pricing available for larger firms ·{" "}
-              <Link href="/pricing" className="underline underline-offset-2 hover:text-ink">
-                Full pricing →
-              </Link>
-            </p>
-          )}
+        <div className="mt-4 text-[13px] text-muted max-w-[620px] mx-auto">
+          <p>
+            Looking for detailed feature breakdowns?{" "}
+            <Link href="/pricing" className="font-semibold text-accent hover:underline">
+              View full practice pricing &amp; feature comparison →
+            </Link>
+          </p>
         </div>
       </div>
     </section>

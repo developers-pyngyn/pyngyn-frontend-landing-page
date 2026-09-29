@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { headers, cookies } from "next/headers";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SIGNUP_URL } from "@/components/config";
-import { marketFromCountry } from "@/lib/pricing/detect-country";
-import type { MarketCode } from "@/lib/pricing/config";
 import {
   AccountantsPricingProvider,
   AccountantsPriceTag,
@@ -19,17 +16,14 @@ import {
   webPageSchema,
 } from "@/components/schema";
 
-export const runtime = "edge";
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   title: "PYNGYN for Accountants & CA Firms | Audit & Filing Workflows",
-  description: "PYNGYN runs audit pipelines, tax filings, and statutory deadlines for accounting and CA firms. A standalone branded Client Space for every client, with Workspace available on its own or bundled.",
+  description: "PYNGYN ClientSpace runs audit pipelines, tax filings, and statutory deadlines for accounting and CA firms. Branded client portal, automated PBC document collection, and compliance tracking.",
   alternates: { canonical: "/solutions/accountants" },
   openGraph: {
     images: [OG_IMAGE],
     title: "PYNGYN for Accountants & CA Firms | Audit & Filing Workflows",
-    description: "PYNGYN runs audit pipelines, tax filings, and statutory deadlines for accounting and CA firms. A standalone branded Client Space for every client, with Workspace available on its own or bundled.",
+    description: "PYNGYN ClientSpace runs audit pipelines, tax filings, and statutory deadlines for accounting and CA firms. Branded client portal, automated PBC document collection, and compliance tracking.",
     url: "/solutions/accountants",
     type: "website",
   },
@@ -44,12 +38,12 @@ const PROBLEMS: { num: string; title: string; body: string }[] = [
   { num: "06", title: "Client documents scattered", body: "Client-provided records arrive by email, WhatsApp, and drive links. Collecting and chasing them is a job in itself." },
 ];
 
-const WORKSPACE_BULLETS: string[] = [
-  "Audit and filing plans with statutory deadline tracking",
-  "Billable timesheet logging per engagement",
-  "Finance dashboard: revenue, realization, and profitability per client",
-  "Business Brain AI: drafts status, flags at-risk filings",
-  "Roles for partners, managers, and juniors",
+const PRACTICE_BULLETS: string[] = [
+  "Statutory tax and audit due date calendars (GST, ROC, TDS, Form 3CD)",
+  "Practice Workload Cockpit with staff capacity and effort meters",
+  "4-eye partner review gates before deliverables reach client portals",
+  "Automated WhatsApp & email chasers for PBC document collection",
+  "DSC (Digital Signature Certificate) expiry tracking register",
 ];
 
 const CLIENTSPACE_BULLETS: string[] = [
@@ -68,7 +62,7 @@ const BOARD_TASKS: { label: string; tag: string }[] = [
 ];
 
 const FAQS: { q: string; a: string }[] = [
-  { q: "Does PYNGYN track statutory and tax deadlines?", a: "Yes. Deadlines are first-class objects. Business Brain AI watches dependencies and flags at-risk filings before the due date, not on it." },
+  { q: "Does PYNGYN track statutory and tax deadlines?", a: "Yes. Deadlines are first-class objects. The compliance system watches dependencies and flags at-risk filings before the due date, not on it." },
   { q: "What is Client Space for an accounting firm?", a: "Each client gets a branded portal with a document collection checklist, filing milestones, and an approvals flow for accounts and tax returns before submission." },
   { q: "How does it handle busy-season volume?", a: "PYNGYN is designed around the multi-client, deadline-driven rhythm of accounting firms. You can run hundreds of concurrent engagements with a single dashboard view." },
   { q: "Can clients submit documents through their portal?", a: "Clients see a collection checklist in their Client Space and can approve documents. For document upload, connect PYNGYN to Google Drive or your existing document management system." },
@@ -98,20 +92,14 @@ function TagPill({ tag }: { tag: string }) {
 }
 
 export default function VerticalPage() {
-  const cookieStore = cookies();
-  const headersList = headers();
-  const cookieMarket = cookieStore.get("pyngyn_market")?.value as MarketCode | undefined;
-  const ipCountry = headersList.get("cf-ipcountry") || headersList.get("x-vercel-ip-country");
-  const initialMarket: MarketCode = cookieMarket || marketFromCountry(ipCountry);
-
   return (
-    <AccountantsPricingProvider initialMarket={initialMarket}>
+    <AccountantsPricingProvider>
       <JsonLd
         data={[
           webPageSchema({
             url: "/solutions/accountants",
             name: "PYNGYN for Accountants & CA Firms | Audit & Filing Workflows",
-            description: "PYNGYN runs audit pipelines, tax filings, and statutory deadlines for accounting and CA firms. A standalone branded Client Space for every client, with Workspace available on its own or bundled.",
+            description: "PYNGYN ClientSpace runs audit pipelines, tax filings, and statutory deadlines for accounting and CA firms. Branded client portal, automated PBC document collection, and compliance tracking.",
             breadcrumbId: "/solutions/accountants#breadcrumb",
           }),
           breadcrumbSchema(
@@ -136,7 +124,7 @@ export default function VerticalPage() {
             <br className="hidden sm:block" />{" "}
             <span className="text-accent">never miss a deadline.</span>
           </h1>
-          <p className="lead mt-5 max-w-[680px]">PYNGYN gives every client of your accounting firm a standalone branded Client Space, document checklists, filing status, and approvals in one secure place instead of email. Add Workspace, a separate product, to run your audits, filings, and statutory deadlines internally.</p>
+          <p className="lead mt-5 max-w-[680px]">PYNGYN ClientSpace gives every client of your accounting firm a branded client portal with document checklists, filing status, statutory due dates, and approvals in one secure place instead of email.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={DEMO_URL} className="btn btn-accent">Book a demo</a>
             <a href={SIGNUP_URL} className="btn btn-primary">Start free trial</a>
@@ -197,12 +185,12 @@ export default function VerticalPage() {
           <div className="wrap">
             <div className="flex items-center gap-3">
               <span className="eyebrow">The client portal</span>
-              <span className="rounded-full border border-accent/40 px-2.5 py-0.5 text-[11px] font-bold text-accent">Client Space</span>
+              <span className="rounded-full border border-accent/40 px-2.5 py-0.5 text-[11px] font-bold text-accent">ClientSpace Pro</span>
             </div>
             <h2 className="mt-3 max-w-[820px] font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
               A branded portal for every client.
               <span className="block text-accent">
-                <AccountantsPriceTag type="clientspace" suffix="per client / month, standalone." />
+                <AccountantsPriceTag type="pro" suffix="per user / month." />
               </span>
             </h2>
             <p className="lead mt-4 max-w-[640px]">
@@ -220,25 +208,24 @@ export default function VerticalPage() {
           </div>
         </section>
 
-        {/* ===== Workspace ============================================= */}
+        {/* ===== Practice Management & Workload ===== */}
         <section className="section bg-[#fbfbfd]">
           <div className="wrap">
             <div className="flex items-center gap-3">
-              <span className="eyebrow">The engine</span>
-              <span className="rounded-full border border-line px-2.5 py-0.5 text-[11px] font-bold text-muted">Workspace</span>
+              <span className="eyebrow">Practice Cockpit</span>
+              <span className="rounded-full border border-accent/30 bg-accent/5 px-2.5 py-0.5 text-[11px] font-bold text-accent">ClientSpace Business</span>
             </div>
             <h2 className="mt-3 max-w-[820px] font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
-              Your firm&apos;s operating system.
+              Your firm&apos;s practice operating system.
               <span className="block text-accent">
-                <AccountantsPriceTag type="workspace" suffix="per seat / month." />
+                <AccountantsPriceTag type="business" suffix="per user / month." />
               </span>
             </h2>
             <p className="lead mt-4 max-w-[640px]">
-              Everything your team needs to run accounting & ca firms work, with AI that keeps
-              plans, status, and risk current automatically.
+              Everything your practice needs to track filings, balance team capacity across staff and article trainees, and guarantee 4-eye review quality before client submission.
             </p>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              {WORKSPACE_BULLETS.map((b) => (
+              {PRACTICE_BULLETS.map((b) => (
                 <li key={b} className="card flex items-start gap-3">
                   <Check />
                   <span className="text-[15px]">{b}</span>
@@ -273,9 +260,9 @@ export default function VerticalPage() {
         <section className="section">
           <div className="wrap text-center">
             <p className="text-[14px] text-muted">
-              Not exactly your firm?{" "}
-              <Link href="/solutions/professional-services" className="font-semibold text-accent hover:underline">
-                See all professional-services verticals →
+              Looking for our practice pricing details?{" "}
+              <Link href="/pricing" className="font-semibold text-accent hover:underline">
+                View full pricing and feature breakdown →
               </Link>
             </p>
           </div>
