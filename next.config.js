@@ -6,6 +6,15 @@ const nextConfig = {
   // NOTE: do NOT set `output: "export"` here — static export disables API routes.
   images: { unoptimized: true },
   trailingSlash: true,
+  async redirects() {
+    return [
+      {
+        source: "/workspace",
+        destination: "/clientspace",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

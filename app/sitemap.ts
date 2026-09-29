@@ -42,7 +42,6 @@ const STATIC: Entry[] = [
   { path: "/clientspace/branded-portal", priority: 0.7, changeFrequency: "monthly" },
   { path: "/clientspace/secure-documents", priority: 0.7, changeFrequency: "monthly" },
   { path: "/clientspace/approvals", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/workspace", priority: 0.9, changeFrequency: "monthly" },
   { path: "/pricing", priority: 0.9, changeFrequency: "monthly" },
   { path: "/demo", priority: 0.9, changeFrequency: "monthly" },
   { path: "/benefits", priority: 0.9, changeFrequency: "monthly" },

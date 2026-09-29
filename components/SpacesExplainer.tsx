@@ -61,17 +61,6 @@ export function SpacesExplainer() {
           </Reveal>
         </div>
 
-        {/* Brief, secondary mention only — Workspace is a separate add-on
-            product, not given equal billing on this page. */}
-        <Reveal i={1}>
-          <p className="mx-auto mt-6 max-w-[680px] text-center text-[14px] text-muted">
-            Also want to run projects and billable time internally?{" "}
-            <Link href="/workspace" className="font-semibold text-accent hover:underline">
-              Workspace
-            </Link>{" "}
-            is available as an add-on.
-          </p>
-        </Reveal>
       </div>
     </section>
   );
