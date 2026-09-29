@@ -7,14 +7,48 @@ import { useState } from "react";
 import { Reveal } from "./Reveal";
 import { openCookiePreferences } from "./consent";
 import { GetInTouch } from "./footer/GetInTouch";
-import { SIGNUP_URL, DEMO_URL, BENEFITS_URL, CUSTOMERS_URL, PRICING_URL, BLOG_URL, ABOUT_URL, CAREERS_URL, PRIVACY_URL, TERMS_URL, REFUND_URL, COOKIE_POLICY_URL, DPA_URL, SUBPROCESSORS_URL, SOCIAL_X, SOCIAL_LINKEDIN, SOCIAL_REDDIT, SOCIAL_FACEBOOK, SOCIAL_YOUTUBE, SOCIAL_INSTAGRAM, INTEGRATIONS_URL, CHANGELOG_URL, DOCS_URL, GUIDES_URL, BRAND_URL, PARTNERS_URL, STATUS_URL, SUPPORT_URL, KB_URL, ANNOUNCEMENTS_URL, ROADMAP_URL, REFER_URL, COMPARE_URL, COMPETITORS, PLAYSTORE_URL, INVESTORS_URL } from "./config";
+import {
+  SIGNUP_URL,
+  DEMO_URL,
+  BENEFITS_URL,
+  CUSTOMERS_URL,
+  PRICING_URL,
+  BLOG_URL,
+  ABOUT_URL,
+  CAREERS_URL,
+  PRIVACY_URL,
+  TERMS_URL,
+  REFUND_URL,
+  COOKIE_POLICY_URL,
+  DPA_URL,
+  SUBPROCESSORS_URL,
+  SOCIAL_X,
+  SOCIAL_LINKEDIN,
+  SOCIAL_REDDIT,
+  SOCIAL_FACEBOOK,
+  SOCIAL_YOUTUBE,
+  SOCIAL_INSTAGRAM,
+  INTEGRATIONS_URL,
+  CHANGELOG_URL,
+  GUIDES_URL,
+  STATUS_URL,
+  KB_URL,
+  ROADMAP_URL,
+  REFER_URL,
+  COMPARE_URL,
+  COMPETITORS,
+  TOOLS_URL,
+  ROI_URL,
+  UTILIZATION_URL,
+  COST_ESTIMATOR_URL,
+} from "./config";
 
 const faqs: [string, string][] = [
   ["What happens in the demo?", "A 30-minute guided walkthrough where we run PYNGYN on a project like yours, with no generic slideshow."],
   ["Do I have to trust the AI's plan?", "No. Every plan is fully editable. PYNGYN drafts; you decide."],
   ["Can I import from my current tool?", "Yes. One-click import from common trackers, with mapping handled for you."],
   ["Is my data used to train AI?", "Not without your explicit consent. Your data stays yours."],
-  ["Can I just try it instead of booking a demo?", "Absolutely. Start a free trial with no credit card required, Client Space is $19 per client/month standalone, Workspace is $9 per seat/month, or bundle both for $24.99/month."],
+  ["Can I just try it instead of booking a demo?", "Absolutely. Start a 7-day free trial with no credit card required. Explore our Pro and Business practice plans, or book a demo for a personalized firm walkthrough."],
 ];
 
 export function FAQ() {
@@ -118,53 +152,52 @@ type FooterLink = { label: string; href?: string }; // no href = "Soon" (muted, 
 type FooterGroup = { heading: string; links: FooterLink[] };
 
 export function Footer() {
-  // Each column holds stacked groups balanced to 7-11 links each so no column shoots down or leaves empty space.
+  // Each column holds stacked groups balanced to 6-11 links each so no column shoots down or leaves empty space.
   const columns: FooterGroup[][] = [
     // Column 1: Product & Get started (7 links)
     [
       {
         heading: "Product",
         links: [
-          { label: "Clientspace", href: "/clientspace" },
-          { label: "Workspace", href: "/workspace" },
+          { label: "ClientSpace", href: "/clientspace" },
+          { label: "Client Portal", href: "/client-portal-for-accounting-firms" },
+          { label: "Integrations", href: INTEGRATIONS_URL },
           { label: "Benefits", href: BENEFITS_URL },
           { label: "Pricing", href: PRICING_URL },
-          { label: "Integrations", href: INTEGRATIONS_URL },
         ],
       },
       {
         heading: "Get started",
         links: [
           { label: "Book a demo", href: DEMO_URL },
-          { label: "Start free", href: SIGNUP_URL },
+          { label: "Start free trial", href: SIGNUP_URL },
         ],
       },
     ],
-    // Column 2: Solutions & Client Portals (11 links)
+    // Column 2: Solutions & Client Portals (10 links)
     [
       {
-        heading: "Solutions",
+        heading: "Practice Solutions",
         links: [
-          { label: "Lawyers", href: "/solutions/lawyers" },
-          { label: "Accountants & CAs", href: "/solutions/accountants" },
-          { label: "Marketing Consultants", href: "/solutions/consultants" },
-          { label: "Creative Services", href: "/solutions/creative-services" },
-          { label: "Architects", href: "/solutions/architects" },
+          { label: "Chartered Accountants", href: "/solutions/accountants" },
+          { label: "Accounting Firms", href: "/solutions/accountants" },
+          { label: "Tax & Compliance", href: "/solutions/professional-services" },
+          { label: "Audit & Assurance", href: "/solutions/accountants" },
         ],
       },
       {
         heading: "Client Portals",
         links: [
-          { label: "Client portal software", href: "/client-portal-software" },
-          { label: "Secure client portal", href: "/secure-client-portal" },
-          { label: "Portal for accountants", href: "/client-portal-for-accounting-firms" },
-          { label: "Branded client portal", href: "/clientspace/branded-portal" },
-          { label: "Secure documents", href: "/clientspace/secure-documents" },
-          { label: "Client approvals", href: "/clientspace/approvals" },
+          { label: "CA Client Portal", href: "/client-portal-for-accounting-firms" },
+          { label: "Secure Client Portal", href: "/secure-client-portal" },
+          { label: "Client Portal Software", href: "/client-portal-software" },
+          { label: "Branded Portal", href: "/clientspace/branded-portal" },
+          { label: "Document Vault", href: "/clientspace/secure-documents" },
+          { label: "Client Approvals", href: "/clientspace/approvals" },
         ],
       },
     ],
-    // Column 3: Compare (10 links)
+    // Column 3: Compare (6 links)
     [
       {
         heading: "Compare",
@@ -174,42 +207,41 @@ export function Footer() {
         ],
       },
     ],
-    // Column 4: Resources & Help (11 links)
+    // Column 4: Resources & Practice Tools (11 links)
     [
       {
         heading: "Resources",
         links: [
-          { label: "Blog", href: BLOG_URL },
-          { label: "Announcements", href: ANNOUNCEMENTS_URL },
-          { label: "Roadmap", href: ROADMAP_URL },
-          { label: "Refer & earn", href: REFER_URL },
-          { label: "FAQ", href: "/#faq" },
-          { label: "Docs", href: DOCS_URL },
-          { label: "Guides", href: GUIDES_URL },
+          { label: "Practice Blog", href: BLOG_URL },
+          { label: "Setup Guides", href: GUIDES_URL },
+          { label: "Knowledge Base", href: KB_URL },
+          { label: "Product Roadmap", href: ROADMAP_URL },
           { label: "Changelog", href: CHANGELOG_URL },
+          { label: "System Status", href: STATUS_URL },
+          { label: "Practice FAQ", href: "/#faq" },
         ],
       },
       {
-        heading: "Help",
+        heading: "Practice Tools",
         links: [
-          { label: "Knowledge base", href: KB_URL },
-          { label: "Support", href: SUPPORT_URL },
-          { label: "Status", href: STATUS_URL },
+          { label: "All Free Tools", href: TOOLS_URL },
+          { label: "ROI Calculator", href: ROI_URL },
+          { label: "Team Utilization", href: UTILIZATION_URL },
+          { label: "Cost & Margin Estimator", href: COST_ESTIMATOR_URL },
         ],
       },
     ],
-    // Column 5: Company (7 links)
+    // Column 5: Company (6 links)
     [
       {
         heading: "Company",
         links: [
-          { label: "About", href: ABOUT_URL },
-          { label: "Customers", href: CUSTOMERS_URL },
+          { label: "About Us", href: ABOUT_URL },
+          { label: "Founder Story", href: "/about/founder-story" },
+          { label: "Customer Stories", href: CUSTOMERS_URL },
           { label: "Careers", href: CAREERS_URL },
-          { label: "Contact", href: DEMO_URL },
-          { label: "Brand", href: BRAND_URL },
-          { label: "Partners", href: PARTNERS_URL },
-          { label: "Investors", href: INVESTORS_URL },
+          { label: "Refer & Earn", href: REFER_URL },
+          { label: "Contact Us", href: DEMO_URL },
         ],
       },
     ],
@@ -258,34 +290,12 @@ export function Footer() {
               <Image src="/logo.webp" alt="pyngyn" width={150} height={40} className="h-8 w-auto" />
             </Link>
             <p className="max-w-[230px] leading-relaxed">
-              The operating system for professional-services firms.
+              The practice operating system for modern accounting &amp; CA firms.
             </p>
             <p className="mt-2 text-[11.5px] leading-relaxed text-muted/80">
               DPIIT Recognized Startup<br />
               ISO 9001:2015 Certified (QMS)
             </p>
-
-            {/* Google Play / Pay button hidden per design update */}
-            {false && (
-              <a
-                href={PLAYSTORE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 inline-flex items-center gap-2.5 rounded-xl border border-line bg-white px-4 py-2.5 transition-colors hover:border-accent"
-                aria-label="Get PYNGYN on Google Play"
-              >
-                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M3.6 2.3 13 12 3.6 21.7a1.4 1.4 0 0 1-.6-1.2V3.5c0-.5.2-.9.6-1.2z" fill="#34a853" />
-                  <path d="M16.8 8.6 13 12 3.6 2.3c.4-.3.9-.3 1.4 0l8.8 5z" fill="#ea4335" />
-                  <path d="M16.8 15.4 5 22c-.5.3-1 .3-1.4 0L13 12z" fill="#fbbc04" />
-                  <path d="m16.8 8.6 4 2.3c.7.4.7 1.4 0 1.8l-4 2.7L13 12z" fill="#4285f4" />
-                </svg>
-                <span className="flex flex-col leading-tight">
-                  <span className="text-[10px] uppercase tracking-wide text-muted">Get it on</span>
-                  <span className="text-[14px] font-bold text-ink">Google Play</span>
-                </span>
-              </a>
-            )}
           </div>
 
           {columns.map((groups, i) => (
