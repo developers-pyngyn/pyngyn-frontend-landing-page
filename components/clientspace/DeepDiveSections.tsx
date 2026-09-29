@@ -738,13 +738,13 @@ export function UseCasesSection() {
       title: "Corporate Tax & Advisory Partnerships",
       desc: "Advance tax computations, transfer pricing documentation, scrutiny appeals, and advisory opinions with role-based document access.",
       icon: FileSpreadsheet,
-      link: "/solutions/professional-services",
+      link: "/solutions/tax-teams",
     },
     {
       title: "Statutory Audit & Assurance Teams",
       desc: "Phase-gated audit trails, sample testing working papers, partner escalation flags, and digital e-signatures for audit reports.",
       icon: Search,
-      link: "/solutions/accountants",
+      link: "/solutions/audit-teams",
     },
   ];
 

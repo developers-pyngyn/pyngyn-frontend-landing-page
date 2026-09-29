@@ -91,7 +91,10 @@ All plans include a 7-day free trial, cancel anytime, and Client Space functions
 ## Solutions
 
 - [For CA & Accounting Firms](https://pyngyn.ai/solutions/accountants/): Purpose-built for statutory audit, GST filings, corporate tax computation, and compliance management. Includes localized regional pricing.
-- [Professional Services](https://pyngyn.ai/solutions/professional-services/): The operations platform for professional services and advisory firms.
+- [For Tax Teams](https://pyngyn.ai/solutions/tax-teams/): Purpose-built for corporate tax advisory, Advance Tax projections, GST reconciliations, notice tracking, and automated PBC document chasers.
+- [For Audit Teams](https://pyngyn.ai/solutions/audit-teams/): Purpose-built for statutory audits, Form 3CD tax audits, 4-eye partner review gates, and audit working papers trees.
+- [For Compliance Teams](https://pyngyn.ai/solutions/compliance-teams/): Purpose-built for statutory compliance calendars, DSC/MCA expiry registers, group compliance health matrices, and automated WhatsApp alerts.
+- [Practice Solutions Overview](https://pyngyn.ai/solutions/professional-services/): Overview of tailored practice command centers for CA, tax, audit, and statutory compliance practices.
 
 ## Compare (Practice Management Software Comparisons)
 
