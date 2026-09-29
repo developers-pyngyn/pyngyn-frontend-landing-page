@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SIGNUP_URL, PRICING_URL } from "@/components/config";
+import { BrowserFrame } from "@/components/mockups/BrowserFrame";
+import { ClientPortalMockup } from "@/components/mockups/ClientPortalMockup";
+import { ExecutiveDashboardMockup } from "@/components/mockups/ExecutiveDashboardMockup";
+import { ClientSpacePricing } from "@/components/clientspace/ClientSpacePricing";
 import {
   OG_IMAGE,
   JsonLd,
@@ -136,7 +139,7 @@ const VERTICALS: { label: string; href: string; line: string }[] = [
 const FAQS: { q: string; a: string }[] = [
   { q: "What is client portal software, and why does my firm need it?", a: "Client portal software gives your clients a dedicated, branded workspace to view real-time project milestones, exchange confidential documents, review invoices, and approve deliverables. Instead of chasing email threads, clients can self-serve status updates 24/7." },
   { q: "What is Pyngyn ClientSpace?", a: "Pyngyn ClientSpace is secure client portal software purpose-built for professional services, CA practices, and accounting firms. Each client receives their own private, white-labeled portal with bank-grade encryption and passwordless magic links." },
-  { q: "How much does ClientSpace cost?", a: "ClientSpace is $19 per client per month standalone, with transparent practice tiers starting at ₹499/mo. You don't need Workspace to use it. If your firm also wants internal project and resource management, you can bundle both for $24.99/month." },
+  { q: "How much does ClientSpace cost?", a: "ClientSpace offers transparent practice tiers starting at ₹499/mo ($14/mo) for Pro and ₹799/mo ($24/mo) for Business, with annual billing discounts and regional pricing in INR, USD, GBP, CAD, AUD, and AED. All plans include unlimited client guests, secure document vaults, approvals, and a 7-day free trial with no credit card required." },
   { q: "Is Pyngyn a secure client portal software solution?", a: "Yes. All client data and documents are protected with AES-256 encryption at rest and TLS 1.3 in transit. ClientSpace includes role-based access control, comprehensive audit logging, and strict data isolation between clients." },
   { q: "Do my clients need to create an account or remember a password?", a: "No. Clients join with a one-click magic link, no password to remember and no login friction. Login frustration is the number-one reason client portals go unused, so we removed it entirely." },
   { q: "Is there a specialized client portal for accounting firms?", a: "Yes. Pyngyn provides tailored workflows for accounting and CA practices, including PBC document collection checklists, statutory deadline tracking, and multi-tier partner review sign-offs." },
@@ -161,7 +164,7 @@ export default function ClientspacePage() {
             url: "/clientspace",
             name: "Client Space | PYNGYN, the standalone branded client portal for professional-services firms",
             description:
-              "Give every client a branded portal where they see status, documents, and approvals 24/7 instead of emailing you. $19 per client / month, standalone.",
+              "Give every client a branded portal where they see status, documents, and approvals 24/7 instead of emailing you. Transparent practice plans starting at ₹499/mo ($14/mo).",
             breadcrumbId: "/clientspace#breadcrumb",
           }),
           breadcrumbSchema(
@@ -197,25 +200,19 @@ export default function ClientspacePage() {
             <a href={SIGNUP_URL} className="btn btn-primary">Start free trial</a>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            From <strong className="text-ink">$19 per client / month</strong> · standalone, no Workspace required · clients join with one click
+            Plans from <strong className="text-ink">₹499/mo</strong> (or <strong className="text-ink">$14/mo</strong>) · 7-day free trial · Clients join with one click
           </p>
         </section>
 
-        {/* ===== Portal screenshot ========================================= */}
+        {/* ===== Portal interactive mockup (Live Prototype) ================= */}
         <section className="wrap pb-[72px]">
-          <div className="mx-auto max-w-[900px] overflow-hidden rounded-[22px] border border-line bg-white shadow-art">
-            <Image
-              src="/screens/clientspace-space.webp"
-              alt="Secure client portal software showing needs-your-attention items, active engagements, and document approvals"
-              width={1909}
-              height={940}
-              priority
-              sizes="(max-width: 768px) 100vw, 900px"
-              className="h-auto w-full"
-            />
+          <div className="mx-auto max-w-[1040px]">
+            <BrowserFrame url="portal.sharma-cpa.com/oswal-exports" badge="White-labeled Client Portal">
+              <ClientPortalMockup className="border-0 shadow-none rounded-none" />
+            </BrowserFrame>
           </div>
-          <p className="mt-3 text-center text-[13px] text-muted">
-            What your client sees when they log in, branded as your firm, updated automatically.
+          <p className="mt-4 text-center text-[13px] text-muted">
+            What your client sees when they log in — branded as your firm, with live statutory progress, PBC document checklist, and one-click approvals.
           </p>
         </section>
 
@@ -286,15 +283,12 @@ export default function ClientspacePage() {
                   across every client at once.
                 </p>
               </div>
-              <div className="overflow-hidden rounded-[18px] border border-line bg-white shadow-art">
-                <Image
-                  src="/screens/clientspace-director.webp"
-                  alt="Client Space director dashboard showing portfolio-wide revenue, realisation percentage, active engagements, CSAT, and engagement health across all clients"
-                  width={1906}
-                  height={949}
-                  sizes="(max-width: 768px) 100vw, 640px"
-                  className="h-auto w-full"
-                />
+              <div className="w-full">
+                <BrowserFrame url="app.pyngyn.ai/director/portfolio" badge="Director Practice Cockpit">
+                  <div className="h-[460px] overflow-hidden">
+                    <ExecutiveDashboardMockup className="h-full" />
+                  </div>
+                </BrowserFrame>
               </div>
             </div>
           </div>
@@ -319,50 +313,49 @@ export default function ClientspacePage() {
           </div>
         </section>
 
-        {/* ===== Workspace (optional pairing) =============================== */}
+        {/* ===== Unified Practice Platform =============================== */}
         <section className="section">
           <div className="wrap">
             <div className="rounded-[24px] border border-line bg-white p-8 shadow-card sm:p-10">
               <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_1fr]">
                 <div>
-                  <span className="eyebrow">Works standalone. Better together.</span>
+                  <span className="eyebrow">All-In-One Practice Platform</span>
                   <h2 className="mt-3 font-display text-[clamp(22px,3vw,32px)] font-semibold leading-tight tracking-[-0.02em]">
-                    Client Space runs on its own.
-                    <br />
-                    Add Workspace when you want the back office too.
+                    One unified workspace for your firm and your clients.
                   </h2>
                   <p className="mt-4 text-[15px] leading-relaxed text-muted">
-                    Client Space is a complete, standalone product, you don&apos;t need anything
-                    else to give clients a branded portal. If your firm also wants to run projects,
-                    finances, and billable time internally, Workspace is a separate product you can
-                    add, and the two bundle together for less than buying them apart.
+                    No need to juggle multiple disconnected software subscriptions. Pyngyn ClientSpace combines
+                    branded client collaboration with back-office practice management, statutory compliance
+                    calendars, team workload visibility, and 4-eye partner review gates in one seamless system.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-3">
-                    <Link href="/workspace" className="btn btn-primary">Explore Workspace</Link>
-                    <Link href="/pricing" className="btn btn-ghost">See pricing</Link>
+                    <a href="#pricing" className="btn btn-primary">View Plans &amp; Pricing</a>
+                    <a href={DEMO_URL} className="btn btn-ghost">Book a Walkthrough</a>
                   </div>
                 </div>
                 <div className="rounded-[18px] border border-line bg-[#fbfbfd] p-6">
-                  <div className="text-[12px] font-semibold uppercase tracking-wide text-muted">The stack</div>
+                  <div className="text-[12px] font-semibold uppercase tracking-wide text-muted">What&apos;s Included</div>
                   <div className="mt-4 space-y-3">
                     <div className="rounded-xl border border-accent/40 bg-white p-4">
                       <div className="flex items-center justify-between">
-                        <span className="font-bold text-accent">Client Space</span>
-                        <span className="text-[13px] text-muted">$19 / client · standalone</span>
+                        <span className="font-bold text-accent">Client Portal</span>
+                        <span className="text-[12px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Included</span>
                       </div>
-                      <p className="mt-1 text-[12.5px] text-muted">The branded portal your clients log into. Works on its own.</p>
-                    </div>
-                    <div className="flex justify-center text-muted">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
+                      <p className="mt-1 text-[12.5px] text-muted">White-labeled portal, magic links, real-time milestones, and document approvals.</p>
                     </div>
                     <div className="rounded-xl border border-line bg-white p-4">
                       <div className="flex items-center justify-between">
-                        <span className="font-bold">Workspace</span>
-                        <span className="text-[13px] text-muted">$9 / seat · optional</span>
+                        <span className="font-bold text-[#14223d]">Practice Operating Cockpit</span>
+                        <span className="text-[12px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Included</span>
                       </div>
-                      <p className="mt-1 text-[12.5px] text-muted">Your firm's optional back office. Bundle both for $24.99/mo.</p>
+                      <p className="mt-1 text-[12.5px] text-muted">Statutory compliance deadlines, partner review gates, workload capacity, and audit trails.</p>
+                    </div>
+                    <div className="rounded-xl border border-line bg-white p-4">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-[#14223d]">Accounting Ecosystem</span>
+                        <span className="text-[12px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Included</span>
+                      </div>
+                      <p className="mt-1 text-[12.5px] text-muted">Direct sync with Tally, Computax, Zoho, QuickBooks, and automated client chase workflows.</p>
                     </div>
                   </div>
                 </div>
@@ -421,28 +414,20 @@ export default function ClientspacePage() {
           </div>
         </section>
 
-        {/* ===== Pricing band ============================================ */}
-        <section className="section">
+        {/* ===== Pricing Section (Dynamic Geo-Detection & Regional Switcher) = */}
+        <section id="pricing" className="section border-t border-line bg-[#fcfcfd]">
           <div className="wrap">
-            <div className="rounded-[24px] border border-accent bg-accent/[0.04] p-8 text-center shadow-soft sm:p-12">
-              <span className="eyebrow">Pricing</span>
-              <h2 className="mt-3 font-display text-[clamp(26px,3.4vw,40px)] font-semibold tracking-[-0.02em]">
-                $19 per client, standalone. That&apos;s it.
+            <div className="text-center mb-10">
+              <span className="eyebrow">Practice Pricing</span>
+              <h2 className="mt-3 font-display text-[clamp(28px,3.6vw,44px)] font-semibold tracking-[-0.025em]">
+                Simple, transparent practice pricing.
               </h2>
-              <p className="lead mx-auto mt-4 max-w-[560px]">
-                No Workspace purchase required. Add Client Space for each client you bring in.
-                Want Workspace too? Bundle both for $24.99/mo and save.
+              <p className="lead mx-auto mt-4 max-w-[620px]">
+                Choose the right tier for your firm. Includes automated currency localization,
+                7-day free trial with no credit card required, and custom firm onboarding.
               </p>
-              <ul className="mx-auto mt-7 grid max-w-[640px] gap-2.5 text-left sm:grid-cols-2">
-                {["Branded, white-labeled portal", "Unlimited client guests per space", "Secure documents & e-signature", "Approvals with full audit trail", "One-click magic-link access", "Invoices & online payments"].map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-[14.5px]"><Check />{f}</li>
-                ))}
-              </ul>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <a href={SIGNUP_URL} className="btn btn-accent">Start free trial</a>
-                <a href={DEMO_URL} className="btn btn-primary">Book a demo</a>
-              </div>
             </div>
+            <ClientSpacePricing />
           </div>
         </section>
 

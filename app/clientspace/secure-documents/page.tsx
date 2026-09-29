@@ -87,7 +87,7 @@ export default function SecureDocumentsPage() {
           </div>
           <p className="mt-4 text-[13px] text-muted">
             Part of <Link href="/clientspace" className="font-semibold text-accent">Client Space</Link>,
-            from $19 per client/month · standalone, no Workspace required
+            plans starting from ₹499/mo ($14/mo) · 7-day free trial · no credit card required
           </p>
         </section>
 
