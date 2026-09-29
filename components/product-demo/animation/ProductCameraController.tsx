@@ -59,6 +59,9 @@ export const ProductCameraController: React.FC<ProductCameraControllerProps> = (
     'workflow-celebration-popup': { x: 720, y: 340 },
     'kanban-card-card-gstr1': { x: 420, y: 320 },
     'kanban-column-this-week': { x: 620, y: 360 },
+    'workload-capacity': { x: 680, y: 160 },
+    'workload-team': { x: 920, y: 440 },
+    'workload-nikhil': { x: 920, y: 400 },
   };
 
   // Target centering with 0ms deterministic calculation & safe boundaries

@@ -272,7 +272,7 @@ export const PyngynWorkloadView: React.FC<PyngynWorkloadViewProps> = ({
                   <PyngynIcons.bookmark size={12} className="text-[#004AAD] shrink-0" />
                   <span className="truncate">Monthly Practice Master ...</span>
                 </div>
-                <span className="text-[9px] px-1 py-0.2 rounded bg-[#E2E8F0] text-[#475569] font-bold shrink-0">
+                <span className="text-[9px] px-1 py-0.5 rounded bg-[#E2E8F0] text-[#475569] font-bold shrink-0">
                   Default
                 </span>
               </button>
@@ -477,7 +477,7 @@ export const PyngynWorkloadView: React.FC<PyngynWorkloadViewProps> = ({
                   <span className="text-[10px] font-extrabold text-[#627D98] uppercase tracking-wider">
                     Active Tasks
                   </span>
-                  <div className="w-5.5 h-5.5 rounded-[6px] bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center">
+                  <div className="w-6 h-6 rounded-[6px] bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center">
                     <PyngynIcons.checkSquare size={12} />
                   </div>
                 </div>
@@ -550,7 +550,7 @@ export const PyngynWorkloadView: React.FC<PyngynWorkloadViewProps> = ({
                   <span className="text-[10px] font-extrabold text-[#627D98] uppercase tracking-wider">
                     Retainer Value
                   </span>
-                  <div className="w-5.5 h-5.5 rounded-[6px] bg-[#E0F2FE] text-[#0284C7] flex items-center justify-center font-bold text-[11px]">
+                  <div className="w-6 h-6 rounded-[6px] bg-[#E0F2FE] text-[#0284C7] flex items-center justify-center font-bold text-[11px]">
                     $
                   </div>
                 </div>
@@ -580,7 +580,7 @@ export const PyngynWorkloadView: React.FC<PyngynWorkloadViewProps> = ({
                   <span className="text-[10px] font-extrabold text-[#627D98] uppercase tracking-wider">
                     At Risk / Overdue
                   </span>
-                  <div className="w-5.5 h-5.5 rounded-[6px] bg-[#FEF3C7] text-[#D97706] flex items-center justify-center">
+                  <div className="w-6 h-6 rounded-[6px] bg-[#FEF3C7] text-[#D97706] flex items-center justify-center">
                     <PyngynIcons.alertTriangle size={12} />
                   </div>
                 </div>
@@ -631,7 +631,7 @@ export const PyngynWorkloadView: React.FC<PyngynWorkloadViewProps> = ({
 
                 {/* Vertical Bar Chart */}
                 <div className="py-2.5">
-                  <div className="h-30 flex items-end justify-between gap-1.5 px-1 relative border-b border-[#E5EAF2]">
+                  <div className="h-[120px] flex items-end justify-between gap-1.5 px-1 relative border-b border-[#E5EAF2]">
                     {/* Gridlines */}
                     <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-40">
                       <div className="border-b border-dashed border-[#CBD5E1] w-full" />
@@ -703,7 +703,7 @@ export const PyngynWorkloadView: React.FC<PyngynWorkloadViewProps> = ({
 
                 {/* Donut Chart Visual */}
                 <div className="py-1.5 flex items-center justify-center relative">
-                  <div className="relative w-34 h-34 flex items-center justify-center">
+                  <div className="relative w-[136px] h-[136px] flex items-center justify-center">
                     <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                       {(() => {
                         let accumulatedPct = 0;
@@ -813,12 +813,12 @@ export const PyngynWorkloadView: React.FC<PyngynWorkloadViewProps> = ({
                         <div className="flex items-center gap-1.5 truncate">
                           <span className="font-bold text-[#113353] truncate">{member.name}</span>
                           {member.name === 'Nikhil Jain' && effectiveStep >= 2 && (
-                            <span className="text-[8.5px] font-bold px-1 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <span className="text-[8.5px] font-bold px-1 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                               Optimized
                             </span>
                           )}
                           {member.name === 'Vikram Meena' && effectiveStep >= 2 && (
-                            <span className="text-[8.5px] font-bold px-1 py-0.2 rounded bg-sky-50 text-sky-700 border border-sky-200">
+                            <span className="text-[8.5px] font-bold px-1 py-0.5 rounded bg-sky-50 text-sky-700 border border-sky-200">
                               Assigned
                             </span>
                           )}
@@ -840,7 +840,7 @@ export const PyngynWorkloadView: React.FC<PyngynWorkloadViewProps> = ({
                       </div>
 
                       {/* Stacked bar */}
-                      <div className="w-full bg-[#F1F5F9] rounded-[5px] h-4.5 flex overflow-hidden border border-[#CBD5E1]/60">
+                      <div className="w-full bg-[#F1F5F9] rounded-[5px] h-[18px] flex overflow-hidden border border-[#CBD5E1]/60">
                         {member.segments.map((seg) => (
                           <motion.div
                             key={seg.key}
