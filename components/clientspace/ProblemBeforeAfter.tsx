@@ -108,19 +108,81 @@ export function ProblemBeforeAfter() {
           </p>
         </div>
 
-        {/* Mascot Narrative Card */}
+        {/* The Bottleneck Narrative Card */}
         <div className="mt-10 mx-auto max-w-[880px] rounded-2xl border border-slate-200 bg-gradient-to-r from-amber-50/60 via-slate-50 to-indigo-50/60 p-5 sm:p-7 shadow-xs">
-          <div className="grid items-center gap-6 sm:grid-cols-[180px_1fr] md:grid-cols-[210px_1fr]">
-            <div className="mx-auto h-40 w-40 sm:h-44 sm:w-44 flex-none flex items-center justify-center">
-              <img
-                src="/mascot/pyng-busy-season.png"
-                alt="Pyng overwhelmed during accounting busy season"
-                width={176}
-                height={176}
-                loading="eager"
-                className="h-full w-full object-contain"
-              />
+          <div className="grid items-center gap-6 sm:grid-cols-[200px_1fr] md:grid-cols-[220px_1fr]">
+            {/* Visual: Scattered Bottleneck Simulation */}
+            <div className="mx-auto w-full max-w-[220px] rounded-xl border border-amber-200/80 bg-white/95 p-3 shadow-xs">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-rose-500 animate-pulse" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-rose-600">
+                    Live Inbound Chaos
+                  </span>
+                </div>
+                <span className="rounded bg-rose-50 px-1.5 py-0.5 text-[9px] font-bold text-rose-600">
+                  +18 Chases
+                </span>
+              </div>
+
+              <div className="mt-2.5 space-y-2">
+                {/* WhatsApp Ping */}
+                <div className="flex items-start gap-2 rounded-lg bg-emerald-50/80 p-2 border border-emerald-100/80">
+                  <div className="flex h-5 w-5 flex-none items-center justify-center rounded-full bg-emerald-500 text-white mt-0.5">
+                    <MessageSquare className="h-3 w-3 stroke-[2.5]" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold text-emerald-950">WhatsApp</span>
+                      <span className="text-[9px] text-emerald-700/80">10:42 AM</span>
+                    </div>
+                    <p className="text-[10.5px] text-emerald-900 leading-snug font-medium truncate">
+                      &ldquo;Did you get my voucher?&rdquo;
+                    </p>
+                  </div>
+                </div>
+
+                {/* Unorganized Email Inbox */}
+                <div className="flex items-start gap-2 rounded-lg bg-rose-50/80 p-2 border border-rose-100/80">
+                  <div className="flex h-5 w-5 flex-none items-center justify-center rounded-full bg-rose-500 text-white mt-0.5">
+                    <Mail className="h-3 w-3 stroke-[2.5]" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold text-rose-950">Director Inbox</span>
+                      <span className="text-[9px] text-rose-700/80">10:44 AM</span>
+                    </div>
+                    <p className="text-[10.5px] text-rose-900 leading-snug font-medium truncate">
+                      &ldquo;Any update on our filing?&rdquo;
+                    </p>
+                  </div>
+                </div>
+
+                {/* Brittle Excel Spreadsheet */}
+                <div className="flex items-start gap-2 rounded-lg bg-amber-50/80 p-2 border border-amber-100/80">
+                  <div className="flex h-5 w-5 flex-none items-center justify-center rounded-full bg-amber-500 text-white mt-0.5">
+                    <FileSpreadsheet className="h-3 w-3 stroke-[2.5]" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold text-amber-950">Excel Tracker</span>
+                      <span className="text-[9px] text-amber-700/80">Conflict</span>
+                    </div>
+                    <p className="text-[10.5px] text-amber-900 leading-snug font-medium truncate">
+                      ITR_v3_Final(2).xlsx
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-2.5 rounded-md bg-slate-900/5 px-2 py-1 text-center">
+                <span className="text-[9.5px] font-semibold text-slate-700 flex items-center justify-center gap-1">
+                  <Clock className="h-3 w-3 text-slate-500" />
+                  Partner Bottleneck: ~2.5 hrs/day
+                </span>
+              </div>
             </div>
+
             <div>
               <span className="inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-[11px] font-bold text-amber-800 uppercase tracking-wider">
                 The Busy-Season Bottleneck
