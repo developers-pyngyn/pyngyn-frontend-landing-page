@@ -14,6 +14,17 @@ import {
   faqPageSchema,
   webPageSchema,
 } from "@/components/schema";
+import {
+  Palette,
+  Activity,
+  ShieldCheck,
+  FileCheck,
+  CheckCircle2,
+  KeyRound,
+  MessageSquare,
+  CreditCard,
+  type LucideIcon,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Client Portal Software | Secure Client Portal for Modern Firms | Pyngyn ClientSpace",
@@ -78,46 +89,68 @@ const PAINS: { stat: string; title: string; body: string }[] = [
   },
 ];
 
-const FEATURES: { icon: string; title: string; body: string }[] = [
+const FEATURES: {
+  icon: LucideIcon;
+  title: string;
+  body: string;
+  color: string;
+  bgColor: string;
+}[] = [
   {
-    icon: "\uD83C\uDFF7\uFE0F",
+    icon: Palette,
     title: "Branded as your firm",
     body: "White-labeled with your logo, colors, and domain. Clients land in a space that looks like yours, not like a generic tool you bolted on.",
+    color: "text-indigo-600",
+    bgColor: "bg-indigo-50 border-indigo-100/80",
   },
   {
-    icon: "\uD83D\uDCCA",
+    icon: Activity,
     title: "Live status, 24/7",
     body: "Clients see exactly where their engagement stands (current phase, what's done, what's next, and key dates), without emailing anyone.",
+    color: "text-emerald-600",
+    bgColor: "bg-emerald-50 border-emerald-100/80",
   },
   {
-    icon: "\uD83D\uDD12",
+    icon: ShieldCheck,
     title: "One isolated space per client",
     body: "Each client sees only their own engagement. Nothing leaks between clients. Bank-grade encryption and access control on every document.",
+    color: "text-blue-600",
+    bgColor: "bg-blue-50 border-blue-100/80",
   },
   {
-    icon: "\uD83D\uDCCE",
+    icon: FileCheck,
     title: "Secure documents & e-signature",
     body: "Share, request, and sign documents inside the portal. Version-controlled, with a full audit trail, no more attachments lost in email.",
+    color: "text-teal-600",
+    bgColor: "bg-teal-50 border-teal-100/80",
   },
   {
-    icon: "\u2705",
+    icon: CheckCircle2,
     title: "Approvals & sign-off",
     body: "Clients review deliverables and approve them in the portal. Every decision is logged, so there's never a 'who approved what, when' dispute.",
+    color: "text-amber-600",
+    bgColor: "bg-amber-50 border-amber-100/80",
   },
   {
-    icon: "\uD83D\uDD17",
+    icon: KeyRound,
     title: "One-click, password-less access",
     body: "Clients join with a magic link, no password to remember, no login friction, no support tickets. The biggest reason portals fail, solved.",
+    color: "text-violet-600",
+    bgColor: "bg-violet-50 border-violet-100/80",
   },
   {
-    icon: "\uD83D\uDCAC",
+    icon: MessageSquare,
     title: "Messaging in context",
     body: "Client questions and your answers live next to the work they're about, not scattered across inboxes. Everyone sees the same thread.",
+    color: "text-sky-600",
+    bgColor: "bg-sky-50 border-sky-100/80",
   },
   {
-    icon: "\uD83D\uDCB3",
+    icon: CreditCard,
     title: "Invoices & online payment",
     body: "Clients view invoices and pay inside the portal. Faster cash flow, fewer billing disputes, and no chasing.",
+    color: "text-rose-600",
+    bgColor: "bg-rose-50 border-rose-100/80",
   },
 ];
 
@@ -257,13 +290,18 @@ export default function ClientspacePage() {
               secure by default, and effortless to use.
             </p>
             <div className="mt-10 grid gap-[18px] sm:grid-cols-2 lg:grid-cols-4">
-              {FEATURES.map((f) => (
-                <div key={f.title} className="card h-full">
-                  <span className="text-[26px]" aria-hidden="true">{f.icon}</span>
-                  <h3 className="mt-3 text-[15.5px] font-bold leading-snug">{f.title}</h3>
-                  <p className="mt-2 text-[13.5px] leading-relaxed text-muted">{f.body}</p>
-                </div>
-              ))}
+              {FEATURES.map((f) => {
+                const Icon = f.icon;
+                return (
+                  <div key={f.title} className="card group flex h-full flex-col p-6 transition-all hover:border-accent/40 hover:shadow-md">
+                    <div className={`flex h-11 w-11 items-center justify-center rounded-xl border ${f.bgColor} ${f.color} shadow-xs transition-transform duration-200 group-hover:scale-105`}>
+                      <Icon className="h-5 w-5" strokeWidth={2} />
+                    </div>
+                    <h3 className="mt-4 text-[16px] font-bold leading-snug text-[#0c1524]">{f.title}</h3>
+                    <p className="mt-2 text-[13.5px] leading-relaxed text-muted">{f.body}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
