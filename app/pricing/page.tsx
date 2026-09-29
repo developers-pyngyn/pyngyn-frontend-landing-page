@@ -15,7 +15,7 @@ import {
 export const metadata: Metadata = {
   title: "ClientSpace Pricing for CA & Accounting Firms | Pyngyn",
   description:
-    "Transparent pricing for Chartered Accountants, tax practitioners, and audit firms. Pro plan at ₹499/mo, Business plan at ₹799/mo with workload cockpit & automations, and custom Enterprise tier.",
+    "Transparent pricing for Chartered Accountants, tax practitioners, and audit firms. Pro plan at ₹499/mo, Business plan at ₹799/mo with workload cockpit & workflows, and custom Enterprise tier.",
   alternates: { canonical: "/pricing" },
 };
 
@@ -57,7 +57,7 @@ export default function PricingPage() {
                 priceMonthly: 799,
                 priceCurrency: "INR",
                 description:
-                  "Complete practice operating system with Workload Cockpit, WhatsApp automations, Tally/Computax integrations, and 4-eye partner review gates.",
+                  "Complete practice operating system with Workload Cockpit, WhatsApp statutory alerts, Tally/Computax integrations, and 4-eye partner review gates.",
                 url: "/pricing",
               },
               {
@@ -84,7 +84,7 @@ export default function PricingPage() {
             Predictable pricing designed for CA &amp; accounting practices.
           </h1>
           <p className="lead mx-auto mt-4 max-w-[680px] text-sm sm:text-base text-slate-600">
-            No per-client penalty fees. No hidden setup costs. Start on Pro for essential statutory workflows, or unlock the full Business Cockpit with automations and partner review sign-offs.
+            No per-client penalty fees. No hidden setup costs. Start on Pro for essential statutory workflows, or unlock the full Business Cockpit with review workflows and partner review sign-offs.
           </p>
         </section>
 

@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { headers, cookies } from "next/headers";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SIGNUP_URL } from "@/components/config";
+import { marketFromCountry } from "@/lib/pricing/detect-country";
+import type { MarketCode } from "@/lib/pricing/config";
+import {
+  AccountantsPricingProvider,
+  AccountantsPriceTag,
+  AccountantsPricingSection,
+} from "@/components/solutions/AccountantsPricingComponents";
 import {
   OG_IMAGE,
   JsonLd,
@@ -10,6 +18,9 @@ import {
   faqPageSchema,
   webPageSchema,
 } from "@/components/schema";
+
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "PYNGYN for Accountants & CA Firms | Audit & Filing Workflows",
@@ -87,8 +98,14 @@ function TagPill({ tag }: { tag: string }) {
 }
 
 export default function VerticalPage() {
+  const cookieStore = cookies();
+  const headersList = headers();
+  const cookieMarket = cookieStore.get("pyngyn_market")?.value as MarketCode | undefined;
+  const ipCountry = headersList.get("cf-ipcountry") || headersList.get("x-vercel-ip-country");
+  const initialMarket: MarketCode = cookieMarket || marketFromCountry(ipCountry);
+
   return (
-    <>
+    <AccountantsPricingProvider initialMarket={initialMarket}>
       <JsonLd
         data={[
           webPageSchema({
@@ -184,7 +201,9 @@ export default function VerticalPage() {
             </div>
             <h2 className="mt-3 max-w-[820px] font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
               A branded portal for every client.
-              <span className="block text-accent">$19 per client / month, standalone.</span>
+              <span className="block text-accent">
+                <AccountantsPriceTag type="clientspace" suffix="per client / month, standalone." />
+              </span>
             </h2>
             <p className="lead mt-4 max-w-[640px]">
               Give each client their own isolated, white-labeled portal. They see what you
@@ -210,7 +229,9 @@ export default function VerticalPage() {
             </div>
             <h2 className="mt-3 max-w-[820px] font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
               Your firm&apos;s operating system.
-              <span className="block text-accent">$9 per seat / month.</span>
+              <span className="block text-accent">
+                <AccountantsPriceTag type="workspace" suffix="per seat / month." />
+              </span>
             </h2>
             <p className="lead mt-4 max-w-[640px]">
               Everything your team needs to run accounting & ca firms work, with AI that keeps
@@ -228,40 +249,7 @@ export default function VerticalPage() {
         </section>
 
         {/* ===== Pricing =============================================== */}
-        <section className="section">
-          <div className="wrap text-center">
-            <span className="eyebrow">Pricing</span>
-            <h2 className="mt-3 font-display text-[clamp(26px,3.4vw,38px)] font-semibold tracking-[-0.02em]">
-              Simple and predictable.
-            </h2>
-            <p className="lead mx-auto mt-3 max-w-[520px]">
-              Choose Client Space, Workspace, or bundle both for $24.99/mo.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-[15px]">
-              <div className="rounded-2xl border border-accent bg-accent/5 px-6 py-4 text-center shadow-soft">
-                <div className="font-display text-[32px] font-semibold">$19</div>
-                <div className="mt-1 text-muted">per client / month · Client Space</div>
-              </div>
-              <div className="rounded-2xl border border-line bg-white px-6 py-4 text-center shadow-card">
-                <div className="font-display text-[32px] font-semibold">$9</div>
-                <div className="mt-1 text-muted">per seat / month · Workspace</div>
-              </div>
-              <span className="text-[22px] text-muted">or bundle for</span>
-              <div className="rounded-2xl border border-line bg-white px-6 py-4 text-center shadow-card">
-                <div className="font-display text-[32px] font-semibold">$24.99</div>
-                <div className="mt-1 text-muted">/mo · both together</div>
-              </div>
-            </div>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <a href={SIGNUP_URL} className="btn btn-accent">Start free trial</a>
-              <a href={DEMO_URL} className="btn btn-primary">Book a demo</a>
-            </div>
-            <p className="mt-4 text-[13px] text-muted">
-              Enterprise pricing available for larger firms ·{" "}
-              <Link href="/pricing" className="underline underline-offset-2 hover:text-ink">Full pricing →</Link>
-            </p>
-          </div>
-        </section>
+        <AccountantsPricingSection />
 
         {/* ===== FAQ =================================================== */}
         <section className="section bg-[#fbfbfd]">
@@ -296,6 +284,6 @@ export default function VerticalPage() {
         <FinalCTA />
       </main>
       <Footer />
-    </>
+    </AccountantsPricingProvider>
   );
 }

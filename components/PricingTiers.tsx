@@ -52,7 +52,7 @@ const TIERS: Tier[] = [
     groups: [
       { heading: "Run the firm", items: ["Projects, tasks, and calendar", "Goals and OKRs", "Request forms and documents"] },
       { heading: "Money and time", items: ["Finance dashboard: revenue, MRR, profit", "Billable vs non-billable timesheets", "Export to CSV for invoicing"] },
-      { heading: "AI built in", items: ["Business Brain: context-aware AI on your firm's knowledge", "Smart Inbox and AI meeting agendas", "Plain-English automation builder"] },
+      { heading: "Firm intelligence", items: ["Business Brain: context-aware guidance on your firm's knowledge", "Priority Inbox and meeting agendas", "Plain-English workflow builder"] },
       { heading: "Team", items: ["Skills, benchmarks, and skill-gap insights", "240+ workflow templates", "Roles: directors, managers, and ICs"] },
     ],
   },

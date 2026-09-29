@@ -35,9 +35,11 @@ const LABELS: Record<MarketCode, { code: string; label: string }> = {
 export function MarketSelector({
   market,
   className = "",
+  onChange,
 }: {
   market: MarketCode;
   className?: string;
+  onChange?: (next: MarketCode) => void;
 }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -67,6 +69,7 @@ export function MarketSelector({
   function choose(next: MarketCode) {
     setPending(next);
     setOpen(false);
+    onChange?.(next);
     // Not HttpOnly on purpose — this is the client-side override path.
     document.cookie = `${MARKET_COOKIE}=${next}; Path=/; Max-Age=${MARKET_COOKIE_MAX_AGE}; SameSite=Lax`;
     router.refresh();
