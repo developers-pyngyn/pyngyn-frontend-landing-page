@@ -2,11 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import {
+  ArrowLeft,
+  Calendar,
+  CheckCircle2,
+  Clock,
+  FileCheck2,
+  ShieldCheck,
+  Sparkles,
+  ArrowRight,
+  BookOpen,
+} from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ContextualCTA } from "@/components/ContextualCTA";
 import { KB_ARTICLES, getArticle, relatedArticles, defaultBody } from "@/components/kb-data";
-import { KB_URL, SUPPORT_URL } from "@/components/config";
+import { KB_URL, SUPPORT_URL, DEMO_URL, SIGNUP_URL } from "@/components/config";
 import {
   JsonLd,
   articleSchema,
@@ -23,9 +34,9 @@ export function generateStaticParams(): Params[] {
 
 export function generateMetadata({ params }: { params: Params }): Metadata {
   const a = getArticle(params.slug);
-  if (!a) return { title: "Article not found | PYNGYN" };
+  if (!a) return { title: "Article not found | Pyngyn" };
   return {
-    title: `${a.title} | PYNGYN Knowledge base`,
+    title: `${a.title} | Pyngyn ClientSpace Knowledge Base`,
     description: a.excerpt,
     alternates: { canonical: `/knowledge-base/${a.slug}` },
   };
@@ -36,7 +47,7 @@ export default function KbArticlePage({ params }: { params: Params }) {
   if (!a) notFound();
 
   const body = a.body && a.body.length > 0 ? a.body : defaultBody(a);
-  const related = relatedArticles(a.slug);
+  const related = relatedArticles(a.slug, 3);
   const slugUrl = `/knowledge-base/${a.slug}`;
 
   return (
@@ -45,7 +56,7 @@ export default function KbArticlePage({ params }: { params: Params }) {
         data={[
           webPageSchema({
             url: slugUrl,
-            name: a.title,
+            name: `${a.title} | Pyngyn ClientSpace Knowledge Base`,
             description: a.excerpt,
             breadcrumbId: `${slugUrl}#breadcrumb`,
             primaryImageUrl: a.cover ? absoluteUrl(a.cover) : undefined,
@@ -66,77 +77,102 @@ export default function KbArticlePage({ params }: { params: Params }) {
             description: a.excerpt,
             articleSection: a.category,
             imageUrl: a.cover ? absoluteUrl(a.cover) : undefined,
-            keywords: [a.category, "PYNGYN", "knowledge base", "how-to"],
+            keywords: [a.category, "Pyngyn ClientSpace", "CA Practice Management", "how-to", "compliance"],
           }),
         ]}
       />
       <Navbar />
-      <main id="main">
-        <article className="wrap max-w-[760px] pb-[60px] pt-[120px]">
-          {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-[13px] text-muted" aria-label="Breadcrumb">
-            <Link href={KB_URL} className="hover:text-accent">Knowledge base</Link>
-            <span aria-hidden="true">/</span>
-            <span className="text-ink">{a.category}</span>
-          </nav>
 
-          <div className="flex items-center gap-2 text-[13px] text-muted">
-            <span>{a.date}</span>
-            <span aria-hidden="true">·</span>
-            <span className="font-medium text-accent">{a.category}</span>
-            <span aria-hidden="true">·</span>
-            <span>{a.readingTime} read</span>
+      <main id="main" className="bg-[#fbfbfd]">
+        <article className="wrap max-w-[840px] pb-[80px] pt-[130px]">
+          {/* Breadcrumb & Back */}
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3 text-[13px] text-muted">
+            <nav className="flex items-center gap-2" aria-label="Breadcrumb">
+              <Link href={KB_URL} className="flex items-center gap-1.5 font-medium hover:text-accent transition-colors">
+                <ArrowLeft className="h-3.5 w-3.5" />
+                <span>Knowledge Base</span>
+              </Link>
+              <span aria-hidden="true" className="text-muted/40">/</span>
+              <span className="font-semibold text-accent">{a.category}</span>
+            </nav>
+
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-800">
+              <CheckCircle2 className="h-3 w-3 text-emerald-600" />
+              <span>Verified ClientSpace SOP</span>
+            </span>
           </div>
 
-          <h1 className="mt-3 font-display text-[clamp(28px,4vw,42px)] font-semibold leading-[1.1] tracking-[-0.025em]">
+          {/* Article Header */}
+          <div className="flex items-center gap-3 text-[13px] text-muted">
+            <span className="font-mono">{a.date}</span>
+            <span aria-hidden="true">·</span>
+            <span className="font-semibold text-accent">{a.category}</span>
+            <span aria-hidden="true">·</span>
+            <span className="flex items-center gap-1">
+              <Clock className="h-3 w-3" />
+              <span>{a.readingTime} read</span>
+            </span>
+          </div>
+
+          <h1 className="mt-4 font-display text-[clamp(28px,4.2vw,44px)] font-semibold leading-[1.1] tracking-[-0.025em] text-ink">
             {a.title}
           </h1>
-          <p className="mt-4 text-[18px] leading-relaxed text-muted">{a.excerpt}</p>
+          <p className="mt-4 text-[17.5px] sm:text-[18.5px] leading-relaxed text-muted">{a.excerpt}</p>
 
-          {/* Featured image: real cover if set, else placeholder slot */}
+          {/* Featured Architecture Diagram / Mockup */}
           {a.cover ? (
-            <div className="mt-7 overflow-hidden rounded-[18px] border border-line">
+            <div className="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card">
+              <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/70 px-4 py-2.5 text-[12px] text-muted">
+                <span className="flex items-center gap-1.5 font-mono font-medium">
+                  <ShieldCheck className="h-3.5 w-3.5 text-accent" />
+                  <span>Architecture &amp; Workflow Diagram</span>
+                </span>
+                <span className="text-[11px] uppercase tracking-wider text-muted/70">Pyngyn Practice Core</span>
+              </div>
               <Image
                 src={a.cover}
                 alt={a.title}
                 width={1280}
                 height={720}
-                className="h-auto w-full"
+                priority
+                className="h-auto w-full object-cover"
               />
+              <div className="border-t border-slate-100 bg-slate-50/40 px-4 py-2 text-[12px] text-muted italic">
+                Figure: Official operational data flow for {a.title.toLowerCase()} in Pyngyn ClientSpace.
+              </div>
             </div>
           ) : (
-            <div className="mt-7 flex aspect-[16/9] w-full items-center justify-center rounded-[18px] border border-line bg-[#f1f2f5]" aria-hidden="true">
+            <div className="mt-8 flex aspect-[16/9] w-full items-center justify-center rounded-2xl border border-line bg-slate-100" aria-hidden="true">
               <div className="flex flex-col items-center gap-2 text-muted/50">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                  <rect x="3" y="4" width="18" height="16" rx="2.5" stroke="currentColor" strokeWidth="1.5" />
-                  <circle cx="8.5" cy="9.5" r="1.8" stroke="currentColor" strokeWidth="1.5" />
-                  <path d="M5 17l4.5-4.5a2 2 0 012.8 0L19 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <span className="font-mono text-[11px] uppercase tracking-[0.14em]">Featured image</span>
+                <BookOpen className="h-10 w-10" />
+                <span className="font-mono text-[11px] uppercase tracking-wider">Pyngyn ClientSpace Guide</span>
               </div>
             </div>
           )}
 
-          {/* Body */}
-          <div className="mt-9 flex flex-col gap-7">
+          {/* Body Content */}
+          <div className="mt-10 flex flex-col gap-9 bg-white p-7 sm:p-10 rounded-3xl border border-line shadow-sm">
             {body.map((sec, i) => (
-              <section key={i}>
+              <section key={i} className="border-b border-slate-100 pb-7 last:border-b-0 last:pb-0">
                 {sec.heading && (
-                  <h2 className="mb-2.5 font-display text-[22px] font-semibold tracking-[-0.015em]">{sec.heading}</h2>
+                  <h2 className="mb-3 font-display text-[22px] sm:text-[23px] font-semibold tracking-[-0.015em] text-ink flex items-center gap-2">
+                    <span className="grid h-6 w-6 place-items-center rounded-lg bg-accent/10 text-accent text-[12px] font-mono font-bold">
+                      {i + 1}
+                    </span>
+                    <span>{sec.heading}</span>
+                  </h2>
                 )}
                 {sec.paragraphs.map((p, j) => (
-                  <p key={j} className="mb-3 text-[16.5px] leading-relaxed text-[#3a3a42]">{p}</p>
+                  <p key={j} className="mb-3.5 text-[16px] leading-[1.7] text-[#2c323f]">{p}</p>
                 ))}
                 {sec.bullets && (
-                  <ul className="mt-1 flex flex-col gap-2">
+                  <ul className="mt-3 flex flex-col gap-2.5 rounded-2xl bg-slate-50/70 p-5 border border-slate-100">
                     {sec.bullets.map((b, k) => (
-                      <li key={k} className="flex items-start gap-3 text-[16px] text-[#3a3a42]">
-                        <span className="mt-0.5 grid h-5 w-5 flex-none place-items-center rounded-full bg-accent-lt text-accent" aria-hidden="true">
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                            <path d="M5 12l5 5L20 6" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
+                      <li key={k} className="flex items-start gap-3 text-[15px] leading-relaxed text-[#2c323f]">
+                        <span className="mt-1 grid h-4 w-4 flex-none place-items-center rounded-full bg-accent/15 text-accent" aria-hidden="true">
+                          <CheckCircle2 className="h-3.5 w-3.5 stroke-[2.5]" />
                         </span>
-                        {b}
+                        <span>{b}</span>
                       </li>
                     ))}
                   </ul>
@@ -145,35 +181,54 @@ export default function KbArticlePage({ params }: { params: Params }) {
             ))}
           </div>
 
-          {/* Help callout */}
-          <div className="mt-10 flex flex-col items-start gap-3 rounded-2xl border border-line bg-[#fbfbfd] p-6">
-            <h2 className="font-display text-[18px] font-semibold">Still need help?</h2>
-            <p className="text-[15px] text-muted">Our team is happy to walk you through anything in PYNGYN.</p>
-            <a href={SUPPORT_URL} className="btn btn-primary mt-1">Contact support →</a>
+          {/* Practice Pro-Tip / Implementation Alert */}
+          <div className="mt-8 flex items-start gap-4 rounded-2xl border border-accent/20 bg-accent/5 p-6">
+            <Sparkles className="h-6 w-6 flex-none text-accent mt-0.5" />
+            <div>
+              <h3 className="font-bold text-[15.5px] text-ink">Need assistance configuring this module for your firm?</h3>
+              <p className="mt-1 text-[14px] leading-relaxed text-muted">
+                Our practice onboarding specialists provide 1-on-1 migration assistance, custom GSP bridge configuration, and team training for CA partnerships.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <a href={DEMO_URL} className="btn btn-accent text-[13px] py-2 px-4">
+                  Schedule practice walkthrough &rarr;
+                </a>
+                <a href={SUPPORT_URL} className="btn btn-ghost text-[13px] py-2 px-4">
+                  Contact support team
+                </a>
+              </div>
+            </div>
           </div>
         </article>
 
-        {/* Related */}
+        {/* Related Articles */}
         {related.length > 0 && (
-          <section className="wrap pb-[80px]">
-            <h2 className="title mb-6 text-[24px]">Related articles</h2>
-            <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((r) => (
-                <Link
-                  key={r.slug}
-                  href={`${KB_URL}/${r.slug}`}
-                  className="group flex h-full flex-col rounded-[16px] border border-line bg-white p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft"
-                >
-                  <div className="flex items-center gap-2 text-[12px] text-muted">
-                    <span>{r.date}</span>
-                    <span aria-hidden="true">·</span>
-                    <span className="font-medium text-accent">{r.category}</span>
-                  </div>
-                  <h3 className="mt-2 font-display text-[16px] font-semibold leading-snug group-hover:text-accent">{r.title}</h3>
-                  <p className="mt-2 flex-1 text-[14px] leading-relaxed text-muted">{r.excerpt}</p>
-                  <span className="mt-3 text-[13px] font-semibold text-accent">Read more →</span>
-                </Link>
-              ))}
+          <section className="wrap pb-[100px]">
+            <div className="border-t border-line pt-12">
+              <h2 className="title mb-7 text-[24px]">Related Practice Guides</h2>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {related.map((r) => (
+                  <Link
+                    key={r.slug}
+                    href={`${KB_URL}/${r.slug}`}
+                    className="group flex h-full flex-col rounded-2xl border border-line bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-card-hover"
+                  >
+                    <div className="flex items-center gap-2 text-[12px] text-muted">
+                      <span className="font-mono">{r.date}</span>
+                      <span aria-hidden="true">·</span>
+                      <span className="font-semibold text-accent">{r.category}</span>
+                    </div>
+                    <h3 className="mt-2.5 font-display text-[17px] font-semibold leading-snug group-hover:text-accent transition-colors">
+                      {r.title}
+                    </h3>
+                    <p className="mt-2 flex-1 text-[13.5px] leading-relaxed text-muted line-clamp-3">{r.excerpt}</p>
+                    <span className="mt-4 flex items-center gap-1 text-[12.5px] font-semibold text-accent group-hover:gap-1.5 transition-all">
+                      <span>Read guide</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </section>
         )}
