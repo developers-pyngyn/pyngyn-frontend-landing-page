@@ -4,7 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SOCIAL_LINKEDIN, EMAIL_DOMAIN } from "@/components/config";
 
-const INVESTOR_EMAIL = `investors@${EMAIL_DOMAIN}`;
+const INVESTOR_EMAIL = "founder@pyngyn.com";
 
 export const metadata: Metadata = {
   title: "Investors | PYNGYN",
