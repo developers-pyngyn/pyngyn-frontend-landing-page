@@ -94,6 +94,7 @@ export const PyngynTaskWorkflowView: React.FC<PyngynTaskWorkflowViewProps> = ({
         activeTarget={activeTarget}
         nativeWidth={1440}
         nativeHeight={880}
+        disableResponsiveScale={true}
       >
         <div className="w-full h-full relative">
           <PyngynProductShell

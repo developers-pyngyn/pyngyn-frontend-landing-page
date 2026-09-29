@@ -13,6 +13,7 @@ export interface ProductCameraControllerProps {
   children: React.ReactNode;
   className?: string;
   frameClassName?: string;
+  disableResponsiveScale?: boolean;
 }
 
 export const ProductCameraController: React.FC<ProductCameraControllerProps> = ({
@@ -25,6 +26,7 @@ export const ProductCameraController: React.FC<ProductCameraControllerProps> = (
   children,
   className = '',
   frameClassName = '',
+  disableResponsiveScale = false,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const rigRef = useRef<HTMLDivElement>(null);
@@ -33,6 +35,11 @@ export const ProductCameraController: React.FC<ProductCameraControllerProps> = (
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
+    if (disableResponsiveScale) {
+      setViewportScale(1);
+      return;
+    }
+
     const updateScale = () => {
       if (!containerRef.current) return;
       const containerWidth = containerRef.current.clientWidth;

@@ -881,19 +881,22 @@ export function TrustSecuritySection() {
             </div>
           </div>
 
-          {/* Pyng Security Mascot Card */}
-          <motion.div
-            whileHover={{ scale: 1.03, y: -4 }}
-            transition={{ type: "spring", stiffness: 350, damping: 20 }}
-            className="rounded-2xl border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-50 p-6 text-center shadow-soft flex flex-col items-center group cursor-pointer"
-          >
-            <div className="relative h-52 w-52 mb-2">
-              <Image
-                src="/mascot/pyng-security.png"
-                alt="Pyng guarding client security and access control"
-                fill
-                className="object-contain transition-transform group-hover:scale-105"
-              />
+          {/* Bank-Grade Security Visual Protocol Card */}
+          <div className="rounded-2xl border border-slate-200 bg-gradient-to-b from-slate-50 via-white to-slate-50 p-6 text-center shadow-soft flex flex-col items-center">
+            {/* Bank-Grade Concentric Shield & Encryption Visual */}
+            <div className="relative h-44 w-44 sm:h-48 sm:w-48 mb-3 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full bg-emerald-500/10 blur-xl" />
+              <div className="relative flex h-36 w-36 sm:h-40 sm:w-40 items-center justify-center rounded-3xl bg-gradient-to-br from-[#0b192c] via-[#14223d] to-[#1e3a5f] p-5 shadow-xl border border-emerald-500/30">
+                <div className="absolute -top-2 -right-2 flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500 text-white shadow-md border-2 border-white">
+                  <Check className="h-4 w-4 stroke-[3]" />
+                </div>
+                <div className="flex flex-col items-center justify-center text-center">
+                  <ShieldCheck className="h-14 w-14 sm:h-16 sm:w-16 text-emerald-400 drop-shadow-[0_4px_12px_rgba(52,211,153,0.4)]" />
+                  <span className="mt-1 font-mono text-[9px] font-bold uppercase tracking-widest text-emerald-300">
+                    AES-256 · TLS 1.3
+                  </span>
+                </div>
+              </div>
             </div>
             <span className="rounded-full bg-emerald-100 text-emerald-800 px-3 py-1 text-[11px] font-bold uppercase tracking-wider">
               Pyng Shield Protocol
@@ -905,7 +908,7 @@ export function TrustSecuritySection() {
               &ldquo;Your firm&apos;s data stays yours. Privileged working papers
               remain strictly isolated and audit-ready.&rdquo;
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
@@ -924,27 +927,16 @@ export function FinalCTASection() {
 
       <div className="wrap relative z-10">
         <div className="mx-auto max-w-[800px] text-center">
-          {/* Pyng Mascot Rocket Launch Portrait */}
-          <motion.div
-            animate={{
-              y: [0, -8, 0],
-              rotate: [0, 2, -2, 0],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 4,
-              ease: "easeInOut",
-            }}
-            whileHover={{ scale: 1.15 }}
-            className="mx-auto mb-4 relative h-28 w-28 overflow-hidden rounded-full border-2 border-slate-400/60 shadow-lg bg-white p-1 cursor-pointer"
-          >
-            <Image
-              src="/mascot/pyng-rocket-launch.png"
-              alt="Pyng launching your accounting firm into the connected workspace"
-              fill
-              className="object-contain p-1"
+          {/* Pyngyn Official Icon Badge */}
+          <div className="mx-auto mb-4 h-24 w-24 rounded-full border-2 border-slate-400/40 shadow-xl bg-white p-3 flex items-center justify-center">
+            <img
+              src="/pyngyn-icon.png"
+              alt="Pyngyn"
+              width={72}
+              height={72}
+              className="h-full w-full object-contain"
             />
-          </motion.div>
+          </div>
 
           <span className="inline-block rounded-full bg-white/10 border border-white/20 px-3.5 py-1 text-[11.5px] font-semibold text-slate-200">
             Get Started in Minutes
@@ -975,7 +967,7 @@ export function FinalCTASection() {
           </div>
 
           <p className="mt-4 text-[12.5px] text-slate-400">
-            From $19 per client / month · Standalone · 30-minute tailored practice
+            Plans starting from ₹499/mo ($14/mo) · 7-day free trial · 30-minute tailored practice
             walkthrough
           </p>
         </div>

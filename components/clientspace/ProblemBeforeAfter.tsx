@@ -109,18 +109,16 @@ export function ProblemBeforeAfter() {
         </div>
 
         {/* Mascot Narrative Card */}
-        <motion.div
-          whileHover={{ scale: 1.02, y: -3 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="mt-10 mx-auto max-w-[880px] rounded-2xl border border-slate-200 bg-gradient-to-r from-amber-50/60 via-slate-50 to-indigo-50/60 p-5 sm:p-7 shadow-xs group cursor-pointer"
-        >
+        <div className="mt-10 mx-auto max-w-[880px] rounded-2xl border border-slate-200 bg-gradient-to-r from-amber-50/60 via-slate-50 to-indigo-50/60 p-5 sm:p-7 shadow-xs">
           <div className="grid items-center gap-6 sm:grid-cols-[180px_1fr] md:grid-cols-[210px_1fr]">
-            <div className="relative mx-auto h-40 w-40 sm:h-44 sm:w-44 flex-none">
-              <Image
+            <div className="mx-auto h-40 w-40 sm:h-44 sm:w-44 flex-none flex items-center justify-center">
+              <img
                 src="/mascot/pyng-busy-season.png"
                 alt="Pyng overwhelmed during accounting busy season"
-                fill
-                className="object-contain transition-transform group-hover:scale-105"
+                width={176}
+                height={176}
+                loading="eager"
+                className="h-full w-full object-contain"
               />
             </div>
             <div>
@@ -138,17 +136,17 @@ export function ProblemBeforeAfter() {
               </p>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Before vs After Grid */}
-        <div className="mt-12 grid gap-8 lg:grid-cols-2">
+        <div className="mt-12 grid gap-6 sm:gap-8 lg:grid-cols-2">
           {/* Before Column */}
-          <div className="rounded-2xl border border-rose-200/80 bg-rose-50/30 p-6 sm:p-8">
-            <div className="flex items-center gap-2">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-rose-100 text-rose-700">
+          <div className="rounded-2xl border border-rose-200/80 bg-rose-50/30 p-5 sm:p-8">
+            <div className="flex items-start gap-2.5">
+              <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-rose-100 text-rose-700 mt-0.5 shrink-0">
                 <X className="h-3.5 w-3.5 stroke-[2.5]" />
               </span>
-              <h3 className="font-display text-[20px] font-bold text-slate-900">
+              <h3 className="font-display text-[20px] font-bold text-slate-900 leading-tight">
                 Before Pyngyn: Scattered Chaos
               </h3>
             </div>
@@ -156,7 +154,7 @@ export function ProblemBeforeAfter() {
               Disjointed tools, siloed files, and frantic deadline sprints.
             </p>
 
-            <div className="mt-6 space-y-3.5">
+            <div className="mt-6 space-y-3">
               {BEFORE_ITEMS.map((item, idx) => {
                 const IconComp = item.icon;
                 return (
@@ -164,10 +162,10 @@ export function ProblemBeforeAfter() {
                     key={idx}
                     className="flex items-start gap-3 rounded-xl border border-rose-100 bg-white p-3.5 shadow-2xs"
                   >
-                    <div className="flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-rose-50 text-rose-600 mt-0.5">
-                      <IconComp className="h-4 w-4" />
+                    <div className="flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-rose-50 text-rose-600 mt-0.5 shrink-0">
+                      <IconComp className="h-4 w-4 shrink-0" />
                     </div>
-                    <div>
+                    <div className="min-w-0 flex-1">
                       <h4 className="font-bold text-[13.5px] text-slate-900">
                         {item.title}
                       </h4>
@@ -182,12 +180,12 @@ export function ProblemBeforeAfter() {
           </div>
 
           {/* After Column */}
-          <div className="rounded-2xl border border-slate-300 bg-slate-50/60 p-6 sm:p-8 shadow-card">
-            <div className="flex items-center gap-2">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#14223d] text-white">
+          <div className="rounded-2xl border border-slate-300 bg-slate-50/60 p-5 sm:p-8 shadow-card">
+            <div className="flex items-start gap-2.5">
+              <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-[#14223d] text-white mt-0.5 shrink-0">
                 <Check className="h-3.5 w-3.5 stroke-[2.5]" />
               </span>
-              <h3 className="font-display text-[20px] font-bold text-slate-900">
+              <h3 className="font-display text-[20px] font-bold text-slate-900 leading-tight">
                 With Pyngyn ClientSpace: One Connected Workspace
               </h3>
             </div>
@@ -195,7 +193,7 @@ export function ProblemBeforeAfter() {
               Automated workflows, institutional clarity, and relaxed clients.
             </p>
 
-            <div className="mt-6 space-y-3.5">
+            <div className="mt-6 space-y-3">
               {AFTER_ITEMS.map((item, idx) => {
                 const IconComp = item.icon;
                 return (
@@ -203,10 +201,10 @@ export function ProblemBeforeAfter() {
                     key={idx}
                     className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3.5 shadow-2xs hover:border-slate-300 transition-colors"
                   >
-                    <div className="flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-slate-100 text-[#14223d] mt-0.5">
-                      <IconComp className="h-4 w-4" />
+                    <div className="flex h-7 w-7 flex-none items-center justify-center rounded-lg bg-slate-100 text-[#14223d] mt-0.5 shrink-0">
+                      <IconComp className="h-4 w-4 shrink-0" />
                     </div>
-                    <div>
+                    <div className="min-w-0 flex-1">
                       <h4 className="font-bold text-[13.5px] text-slate-950">
                         {item.title}
                       </h4>

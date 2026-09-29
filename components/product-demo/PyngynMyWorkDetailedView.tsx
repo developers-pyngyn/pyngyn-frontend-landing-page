@@ -652,7 +652,7 @@ export const PyngynMyWorkDetailedView: React.FC<PyngynMyWorkDetailedViewProps> =
   const celebrationElement = (
     <AnimatePresence>
       {(animStep === 5 || showManualCelebration || alwaysShowCelebration) && (
-        <div className="absolute top-[105px] sm:top-[115px] right-3 sm:right-6 z-50 pointer-events-none drop-shadow-2xl">
+        <div className="absolute top-[75px] sm:top-[115px] right-2 sm:right-6 z-50 pointer-events-none drop-shadow-2xl origin-top-right scale-[0.72] sm:scale-100 max-w-[calc(100%-16px)]">
           <PyngynCelebrationOverlay
             title="Verified ₹3.2L ITC Match"
             subtitle="Horizon Exports · Reconciled with GSTR-2B"
