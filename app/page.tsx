@@ -2,27 +2,13 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { HeroSection } from "@/components/clientspace/HeroSection";
-import { PersonaShowcaseSection } from "@/components/clientspace/PersonaShowcaseSection";
-import { WorkflowShowcaseSection } from "@/components/clientspace/WorkflowShowcaseSection";
-import { FeatureGridSection } from "@/components/clientspace/FeatureGridSection";
 import { ProblemBeforeAfter } from "@/components/clientspace/ProblemBeforeAfter";
 import { ProductTour } from "@/components/mockups/ProductTour";
 import {
-  ClientManagementSection,
-  TaskManagementSection,
-  EngagementSection,
-  ClientPortalSection,
-  CommunicationSection,
-  AutomationsSection,
-  WorkloadSection,
-  DashboardSection,
   IntegrationsSection,
-  UseCasesSection,
   TrustSecuritySection,
   FinalCTASection,
 } from "@/components/clientspace/DeepDiveSections";
-import { PyngynAiSection } from "@/components/clientspace/PyngynAiSection";
-import { InteractiveMascotCompanion } from "@/components/clientspace/InteractiveMascotCompanion";
 import {
   JsonLd,
   softwareApplicationSchema,
@@ -90,68 +76,26 @@ export default function Home() {
       <Navbar />
 
       <main id="main">
-        {/* 1. Hero Section with Interactive ClientSpace Mockup & Pyng Companion */}
+        {/* 1. Hero Section with Interactive ClientSpace Mockup */}
         <HeroSection />
 
-        {/* 2. Persona Showcase: Built for every role in your firm */}
-        <PersonaShowcaseSection />
-
-        {/* 3. Workflow Showcase: See it in action */}
-        <WorkflowShowcaseSection />
-
-        {/* 4. Supporting Feature Grid: 2x2 Cropped Real Product Screens */}
-        <FeatureGridSection />
-
-        {/* 5. Before / After Section (Busy Season Chaos vs Connected Workspace) */}
+        {/* 2. Before / After Section (Busy Season Chaos vs Connected Workspace) */}
         <ProblemBeforeAfter />
 
-        {/* 3. Interactive Product Tour (Clients, Tasks, Engagements, Documents, Automations, Portal, Workload) */}
+        {/* 3. Interactive Product Tour (7-in-1 Tabs: Clients, Tasks, Engagements, Documents, Automations, Portal, Workload) */}
         <div id="tour">
           <ProductTour />
         </div>
 
-        {/* 4. Client Management (Know every client. At a glance.) */}
-        <ClientManagementSection />
-
-        {/* 5. Task Management (Keep every piece of client work moving.) */}
-        <TaskManagementSection />
-
-        {/* 6. Engagement Management (From engagement letter to sign-off.) */}
-        <EngagementSection />
-
-        {/* 7. Client Portal (Give clients one place to work with your firm.) */}
-        <ClientPortalSection />
-
-        {/* 8. Communication & Intake (WhatsApp, Email & AI in one thread) */}
-        <CommunicationSection />
-
-        {/* 9. Automations (Let routine work run itself.) */}
-        <AutomationsSection />
-
-        {/* 10. Workload Management (See who has capacity before work gets assigned.) */}
-        <WorkloadSection />
-
-        {/* 11. PYNGYN AI (Ask PYNGYN. Get the answer from your firm's work.) */}
-        <PyngynAiSection />
-
-        {/* 12. Dashboard & Compliance Radar (Statutory command & KPIs) */}
-        <DashboardSection />
-
-        {/* 12. Integrations (Accounting ecosystem) */}
+        {/* 4. Integrations (Accounting ecosystem: Tally, Computax, QuickBooks, Drive, Calendar, WhatsApp) */}
         <IntegrationsSection />
 
-        {/* 13. Use Cases (For CA firms, Tax practices, Audit teams, Bookkeepers) */}
-        <UseCasesSection />
-
-        {/* 14. Trust, Security & Client Isolation (Bank-grade privacy) */}
+        {/* 5. Trust, Security & Client Isolation (Bank-grade privacy) */}
         <TrustSecuritySection />
 
-        {/* 15. Final High-Conversion CTA */}
+        {/* 6. Final High-Conversion CTA */}
         <FinalCTASection />
       </main>
-
-      {/* Persistent Interactive Mascot Companion with Live Scroll Tracking */}
-      <InteractiveMascotCompanion />
 
       <Footer />
     </>

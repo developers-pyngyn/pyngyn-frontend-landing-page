@@ -36,7 +36,7 @@ export const PyngynExecutiveDashboardView: React.FC<PyngynExecutiveDashboardView
     {
       id: 'd2',
       title: 'Sec 44AB Tax Audit & Form 3CD Compilation',
-      client: 'Northstar Manufacturing',
+      client: 'Manufacturing Client',
       form: 'Form 3CD',
       priority: 'urgent',
       status: 'review',
@@ -48,7 +48,7 @@ export const PyngynExecutiveDashboardView: React.FC<PyngynExecutiveDashboardView
     {
       id: 'd3',
       title: 'Advance Tax Q2 Instalment Verification',
-      client: 'BluePeak Industries',
+      client: 'Logistics Client',
       form: 'Challan 280',
       priority: 'high',
       status: 'filed',
@@ -60,7 +60,7 @@ export const PyngynExecutiveDashboardView: React.FC<PyngynExecutiveDashboardView
     {
       id: 'd4',
       title: 'Provisional Balance Sheet & Ratio Analysis for SBI',
-      client: 'Shreeji Constructions',
+      client: 'Infrastructure Client',
       form: 'MIS/Banking',
       priority: 'urgent',
       status: 'in-progress',
@@ -72,7 +72,7 @@ export const PyngynExecutiveDashboardView: React.FC<PyngynExecutiveDashboardView
     {
       id: 'd5',
       title: 'ROC Form MGT-7 Annual Return Filing FY26',
-      client: 'Apex Global Corp',
+      client: 'Corporate Enterprise Client',
       form: 'MGT-7',
       priority: 'normal',
       status: 'review',
@@ -285,7 +285,7 @@ export const PyngynExecutiveDashboardView: React.FC<PyngynExecutiveDashboardView
           <div className="my-2 space-y-2">
             <div className="p-2 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center justify-between text-[11.5px]">
               <div>
-                <span className="font-bold text-[#113353]">Northstar Manufacturing</span>
+                <span className="font-bold text-[#113353]">Manufacturing Client</span>
                 <p className="text-[10px] text-[#627D98]">Sec 44AB Form 3CD Final Draft</p>
               </div>
               <span className="px-2 py-0.5 rounded text-[10.5px] font-bold bg-amber-100 text-amber-800">
@@ -295,7 +295,7 @@ export const PyngynExecutiveDashboardView: React.FC<PyngynExecutiveDashboardView
 
             <div className="p-2 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center justify-between text-[11.5px]">
               <div>
-                <span className="font-bold text-[#113353]">Apex Global Corp</span>
+                <span className="font-bold text-[#113353]">Corporate Enterprise Client</span>
                 <p className="text-[10px] text-[#627D98]">ROC Form MGT-7 Annual Filing</p>
               </div>
               <span className="px-2 py-0.5 rounded text-[10.5px] font-bold bg-amber-100 text-amber-800">

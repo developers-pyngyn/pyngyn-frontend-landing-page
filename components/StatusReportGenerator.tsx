@@ -47,7 +47,7 @@ function currentWeekLabel(): string {
   return `${fmt(monday)} – ${fmt(sunday)}`;
 }
 
-const EXAMPLE_NOTES = `Northwind Pvt Ltd · FY Audit
+const EXAMPLE_NOTES = `Corporate Client · FY Statutory Audit
 
 Done this week:
 - fieldwork completed, all accounts reviewed and signed off by senior
@@ -344,7 +344,7 @@ export function StatusReportGenerator() {
                   type="text"
                   value={form.projectName}
                   onChange={(e) => set("projectName", e.target.value)}
-                  placeholder="e.g. Northwind Pvt Ltd · FY Audit"
+                  placeholder="e.g. Corporate Client · FY Statutory Audit"
                   maxLength={120}
                   className="input"
                 />

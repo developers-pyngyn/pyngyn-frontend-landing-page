@@ -183,7 +183,7 @@ export const PyngynAppShell: React.FC<PyngynAppShellProps> = ({
                 >
                   <div className="flex items-center gap-1.5 truncate">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
-                    <span className="truncate">Shreeji Const.</span>
+                    <span className="truncate">Infra Group</span>
                   </div>
                   <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 px-1 rounded border border-emerald-200">
                     Tier 1
@@ -198,7 +198,7 @@ export const PyngynAppShell: React.FC<PyngynAppShellProps> = ({
                   <span>Automotive &amp; Tech</span>
                 </div>
                 <div className="px-2 py-1 text-[11px] text-slate-500">
-                  Zentrix Labs Pvt Ltd
+                  Tech Innovations Pvt Ltd
                 </div>
               </div>
             </div>

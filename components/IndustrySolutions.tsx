@@ -31,7 +31,7 @@ const INDUSTRIES: Industry[] = [
       "Manage matters, deadlines, and client communication in one place, with PYNGYN tracking every filing date and deliverable.",
     bullets: ["Track matters and court deadlines", "Keep client documents and approvals in order", "Flag filings at risk before the deadline"],
     board: {
-      title: "Acme Corp v. Dalton · Matter",
+      title: "Commercial Client · Active Matter",
       tasks: [
         { label: "Open matter & conflicts check", state: "done", tag: "Done" },
         { label: "Draft complaint", state: "prog", tag: "In progress" },
@@ -49,7 +49,7 @@ const INDUSTRIES: Industry[] = [
       "Plan audits, tax filings, and month-end close across clients, with every statutory deadline tracked automatically.",
     bullets: ["Run audits and filings across clients", "Track statutory and tax deadlines", "Catch bottlenecks before the due date"],
     board: {
-      title: "Northwind Pvt Ltd · FY Audit",
+      title: "Corporate Client · FY Statutory Audit",
       tasks: [
         { label: "Engagement letter signed", state: "done", tag: "Done" },
         { label: "Collect financial records", state: "prog", tag: "In progress" },
@@ -67,7 +67,7 @@ const INDUSTRIES: Industry[] = [
       "Manage strategy, content, and deliverables across client accounts, so PYNGYN keeps every campaign on schedule.",
     bullets: ["Juggle multiple client retainers", "Keep content and approvals on track", "Surface bottlenecks before launch"],
     board: {
-      title: "Nova Brand · Q3 Campaign",
+      title: "Strategic Client · Advisory Engagement",
       tasks: [
         { label: "Strategy approved", state: "done", tag: "Done" },
         { label: "Content calendar", state: "prog", tag: "In progress" },
@@ -85,7 +85,7 @@ const INDUSTRIES: Industry[] = [
       "Manage briefs, revisions, and approvals across client projects, with PYNGYN tracking every round and deadline.",
     bullets: ["Track briefs, rounds, and approvals", "Keep feedback and assets in one place", "Flag projects slipping past deadline"],
     board: {
-      title: "Lumen Studio · Rebrand",
+      title: "Design Client · Identity Engagement",
       tasks: [
         { label: "Creative brief signed off", state: "done", tag: "Done" },
         { label: "Concept exploration", state: "prog", tag: "In progress" },

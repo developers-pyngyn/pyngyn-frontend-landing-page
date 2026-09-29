@@ -570,7 +570,7 @@ function DetailsStep({
             value={details.company}
             onChange={(e) => set("company", e.target.value)}
             className="input"
-            placeholder="Acme Inc."
+            placeholder="Your firm or company name"
             autoComplete="organization"
           />
         </Field>

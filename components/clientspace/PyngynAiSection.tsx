@@ -61,7 +61,7 @@ const AI_DEMOS: QueryDemo[] = [
     summaryType: "risk",
     cards: [
       {
-        title: "Horizon Exports",
+        title: "Wholesale Client",
         subtitle: "GSTR-3B Monthly Return",
         status: "At Risk",
         statusColor: "text-rose-700 bg-rose-50 border-rose-200",
@@ -69,7 +69,7 @@ const AI_DEMOS: QueryDemo[] = [
         tag: "Due 20 Sep",
       },
       {
-        title: "Northstar Manufacturing",
+        title: "Manufacturing Client",
         subtitle: "Sec 44AB Tax Audit (Form 3CD)",
         status: "Delayed",
         statusColor: "text-amber-700 bg-amber-50 border-amber-200",
@@ -77,7 +77,7 @@ const AI_DEMOS: QueryDemo[] = [
         tag: "Due 30 Sep",
       },
       {
-        title: "BluePeak Industries",
+        title: "Logistics Client",
         subtitle: "Advance Tax Q2 Instalment",
         status: "Review Pending",
         statusColor: "text-[#14223d] bg-slate-100 border-slate-300",
@@ -85,7 +85,7 @@ const AI_DEMOS: QueryDemo[] = [
         tag: "Due Today",
       },
     ],
-    recommendation: "Automated WhatsApp document reminder ready for Horizon Exports. Dispatch now?",
+    recommendation: "Automated WhatsApp document reminder ready for Wholesale Client. Dispatch now?",
     actionText: "Send 1-Click WhatsApp Follow-up",
     sources: ["Tasks", "Statutory Deadlines", "Client Documents", "Review Gates"],
   },
@@ -183,7 +183,7 @@ const AI_DEMOS: QueryDemo[] = [
     cards: [
       {
         title: "GSTR-3B Final Sign-Off",
-        subtitle: "Rathore Machining Pvt Ltd",
+        subtitle: "Industrial Client Ltd",
         status: "Statutory Deadline",
         statusColor: "text-rose-700 bg-rose-50 border-rose-200",
         details: "Draft computation matches GSTR-2B. Partner DSC token required for portal upload.",
@@ -191,7 +191,7 @@ const AI_DEMOS: QueryDemo[] = [
       },
       {
         title: "Audit Engagement Letter",
-        subtitle: "Apex Logistics LLP",
+        subtitle: "Commercial Logistics LLP",
         status: "Approval Needed",
         statusColor: "text-slate-800 bg-slate-100 border-slate-300",
         details: "Scope document and statutory fee schedule revised as per Partner review.",
@@ -199,14 +199,14 @@ const AI_DEMOS: QueryDemo[] = [
       },
       {
         title: "Bank Reconciliation Sign-Off",
-        subtitle: "Bansal Heavy Ltd",
+        subtitle: "Heavy Equipment Ltd",
         status: "Manager Checked",
         statusColor: "text-emerald-700 bg-emerald-50 border-emerald-200",
         details: "Uncleared cheques for ₹4.8L verified against counterfoils by senior article.",
         tag: "Sign-Off Ready",
       },
     ],
-    recommendation: "Sign off on Rathore Machining GSTR-3B first to avoid late filing statutory fees.",
+    recommendation: "Sign off on Industrial Client GSTR-3B first to avoid late filing statutory fees.",
     actionText: "Review Priority Queue",
     sources: ["Partner Review Queue", "Statutory Deadlines", "DSC Queue"],
   },

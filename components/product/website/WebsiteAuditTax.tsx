@@ -218,7 +218,7 @@ export const WebsiteAuditTax: React.FC = () => {
 
               <div className="p-1.5 rounded-[6px] border border-slate-100 flex items-center justify-between">
                 <div>
-                  <div className="font-bold text-slate-800">Shreeji Constructions</div>
+                  <div className="font-bold text-slate-800">Infrastructure Developers</div>
                   <div className="text-[10px] text-slate-500">Tax Audit Sec 44AB · Partner Signoff</div>
                 </div>
                 <div className="text-right">
@@ -229,7 +229,7 @@ export const WebsiteAuditTax: React.FC = () => {
 
               <div className="p-1.5 rounded-[6px] border border-slate-100 flex items-center justify-between">
                 <div>
-                  <div className="font-bold text-slate-800">Apex Healthcare LLP</div>
+                  <div className="font-bold text-slate-800">Healthcare Services LLP</div>
                   <div className="text-[10px] text-slate-500">Internal Controls &amp; CARO · Planning</div>
                 </div>
                 <div className="text-right">

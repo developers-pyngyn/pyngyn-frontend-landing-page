@@ -135,7 +135,7 @@ export default function VerticalPage() {
               <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
               <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
               <span className="h-2.5 w-2.5 rounded-full bg-[#28ca41]" />
-              <span className="ml-2 truncate font-mono text-[11.5px] text-muted">Lumen Studio · Brand Refresh</span>
+              <span className="ml-2 truncate font-mono text-[11.5px] text-muted">Design Client · Identity Engagement</span>
             </div>
             <ul className="divide-y divide-line">
               {BOARD_TASKS.map((t) => (

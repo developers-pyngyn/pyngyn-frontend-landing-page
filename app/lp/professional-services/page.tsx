@@ -407,9 +407,9 @@ function DashboardMock() {
 
         {/* AI alerts */}
         <div className="mt-3 space-y-1.5">
-          <AlertRow tone="amber" tag="Risk" body="Acme audit may slip by 2 days, partner review pending" />
+          <AlertRow tone="amber" tag="Risk" body="Statutory audit may slip by 2 days, partner review pending" />
           <AlertRow tone="accent" tag="AI" body="Drafted Friday status for 9 engagements - ready to send" />
-          <AlertRow tone="emerald" tag="Won" body="Beacon Capital approved phase 2 - 3 weeks of work added" />
+          <AlertRow tone="emerald" tag="Won" body="Enterprise client approved phase 2 - 3 weeks of work added" />
         </div>
       </div>
     </div>

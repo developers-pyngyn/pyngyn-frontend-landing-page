@@ -356,7 +356,7 @@ export const PyngynWebsiteProduct: React.FC<PyngynWebsiteProductProps> = ({
                   <div className="flex items-center justify-between px-2 py-1 rounded-[6px] text-slate-600 hover:bg-slate-100 cursor-pointer">
                     <div className="flex items-center gap-1.5 truncate">
                       <span className="w-2 h-2 rounded-full bg-blue-500" />
-                      <span className="truncate">Rathore Eng.</span>
+                      <span className="truncate">Precision Eng.</span>
                     </div>
                     <span className="font-mono text-[10px] text-slate-400">3</span>
                   </div>
@@ -364,7 +364,7 @@ export const PyngynWebsiteProduct: React.FC<PyngynWebsiteProductProps> = ({
                   <div className="flex items-center justify-between px-2 py-1 rounded-[6px] text-slate-600 hover:bg-slate-100 cursor-pointer">
                     <div className="flex items-center gap-1.5 truncate">
                       <span className="w-2 h-2 rounded-full bg-amber-500" />
-                      <span className="truncate">Aakash Metals</span>
+                      <span className="truncate">Allied Metals</span>
                     </div>
                     <span className="font-mono text-[10px] text-slate-400">3</span>
                   </div>
@@ -391,7 +391,7 @@ export const PyngynWebsiteProduct: React.FC<PyngynWebsiteProductProps> = ({
                   >
                     <div className="flex items-center gap-1.5 truncate">
                       <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                      <span className="truncate">Shreeji Const.</span>
+                      <span className="truncate">Infra Developers</span>
                     </div>
                     <span className="font-mono text-[10px] text-slate-500 bg-white px-1 rounded border border-slate-200">
                       3

@@ -33,7 +33,7 @@ const RAW_KB_ARTICLES: KbArticle[] = [
     cover: "/kb/create-your-first-project.png",
     body: [
       { paragraphs: ["The fastest way to learn PYNGYN is to create a project from a single sentence and watch it turn into a working plan. This guide walks you through it end to end."] },
-      { heading: "1. Describe your goal", paragraphs: ["From your workspace, click New project and type a plain-language goal, for example \"Complete the Northwind year-end audit and file by March 31.\" Be specific about the outcome and any hard dates."] },
+      { heading: "1. Describe your goal", paragraphs: ["From your workspace, click New project and type a plain-language goal, for example \"Complete the client year-end audit and file by March 31.\" Be specific about the outcome and any hard dates."] },
       { heading: "2. Review the generated plan", paragraphs: ["PYNGYN drafts tasks, suggested owners, and a timeline. Nothing is locked, the AI gives you a starting point you can reshape."], bullets: ["Reassign owners by clicking any avatar", "Drag tasks to adjust the schedule", "Add or remove tasks as needed"] },
       { heading: "3. Invite your team", paragraphs: ["Add teammates and assign them to tasks. Everyone sees the same live plan, and status stays current automatically as work moves."] },
       { heading: "You're set", paragraphs: ["That's the core loop: describe, review, and run. Explore the rest of this knowledge base to go deeper on AI planning, integrations, and collaboration."] },
@@ -114,7 +114,7 @@ const RAW_KB_ARTICLES: KbArticle[] = [
   { slug: "ask-pyng", title: "Asking Pyng, your AI assistant", excerpt: "Get quick answers about your plan and PYNGYN without leaving your workspace.", category: "AI features", readingTime: "3 min", date: "May 8",
     body: [
       { paragraphs: ["Pyng is the AI assistant built into your workspace, for quick questions about your projects or about how to use PYNGYN itself, without switching tools or digging through settings."] },
-      { heading: "What you can ask", paragraphs: [], bullets: ["\"What's at risk this week across my projects?\"", "\"Summarize the status of the Northwind engagement.\"", "\"How do I set up SSO for my team?\"", "\"What changed on this project since Monday?\""] },
+      { heading: "What you can ask", paragraphs: [], bullets: ["\"What's at risk this week across my projects?\"", "\"Summarize the status of the statutory audit engagement.\"", "\"How do I set up SSO for my team?\"", "\"What changed on this project since Monday?\""] },
       { heading: "Where to find it", paragraphs: ["Pyng is available from the assistant icon in your workspace, on any page. It has context on the project you're currently viewing, so you don't need to re-explain what you're looking at."] },
       { heading: "A note on your data", paragraphs: ["Questions you ask Pyng are processed to generate an answer and are not used to train AI models without your explicit consent."] },
     ],

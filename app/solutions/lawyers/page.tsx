@@ -136,7 +136,7 @@ export default function VerticalPage() {
               <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
               <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
               <span className="h-2.5 w-2.5 rounded-full bg-[#28ca41]" />
-              <span className="ml-2 truncate font-mono text-[11.5px] text-muted">Acme Corp v. Dalton · Matter</span>
+              <span className="ml-2 truncate font-mono text-[11.5px] text-muted">Commercial Client · Active Matter</span>
             </div>
             <ul className="divide-y divide-line">
               {BOARD_TASKS.map((t) => (

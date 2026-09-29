@@ -65,7 +65,7 @@ const EXAMPLE_PROMPTS: { label: string; form: FormState }[] = [
   {
     label: "M&A due diligence for a client",
     form: {
-      projectName: "Northwind acquisition · due diligence",
+      projectName: "Commercial acquisition · due diligence",
       projectType: "Advisory project",
       industry: "Legal",
       weeks: 8,
@@ -77,7 +77,7 @@ const EXAMPLE_PROMPTS: { label: string; form: FormState }[] = [
   {
     label: "Year-end audit for a client",
     form: {
-      projectName: "Northwind Pvt Ltd · FY audit",
+      projectName: "Corporate Client · FY audit",
       projectType: "Audit & assessment",
       industry: "Accounting",
       weeks: 6,
@@ -89,7 +89,7 @@ const EXAMPLE_PROMPTS: { label: string; form: FormState }[] = [
   {
     label: "New client onboarding",
     form: {
-      projectName: "Acme Corp · client onboarding",
+      projectName: "Strategic Client · onboarding",
       projectType: "Client onboarding",
       industry: "Consulting",
       weeks: 4,
@@ -385,7 +385,7 @@ export function ProjectPlanGenerator() {
                   type="text"
                   value={form.projectName}
                   onChange={(e) => set("projectName", e.target.value)}
-                  placeholder="e.g. Acme CRM rollout"
+                  placeholder="e.g. Enterprise Client System Rollout"
                   maxLength={120}
                   className="input"
                 />

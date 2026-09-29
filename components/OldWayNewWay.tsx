@@ -64,7 +64,7 @@ function SheetIcon() {
 const CHAOS_CHIPS: { icon: JSX.Element; label: string; sub: string; rotate: string; top: string; left: string }[] = [
   { icon: <MailIcon />, label: "Proposal_final_v3.pdf", sub: "Gmail · attachment", rotate: "-rotate-3", top: "6%", left: "6%" },
   { icon: <ChatIcon />, label: "\"did we sign this yet?\"", sub: "WhatsApp thread", rotate: "rotate-2", top: "2%", left: "46%" },
-  { icon: <SheetIcon />, label: "Pricing_ACME_v7.xlsx", sub: "Downloads folder", rotate: "rotate-1", top: "34%", left: "2%" },
+  { icon: <SheetIcon />, label: "Pricing_Schedule_v7.xlsx", sub: "Downloads folder", rotate: "rotate-1", top: "34%", left: "2%" },
   { icon: <MailIcon />, label: "Re: Re: Re: status update", sub: "Gmail · unread", rotate: "-rotate-1", top: "40%", left: "52%" },
   { icon: <ChatIcon />, label: "call recording link", sub: "Slack DM", rotate: "-rotate-2", top: "66%", left: "10%" },
   { icon: <SheetIcon />, label: "Engagement_tracker_FINAL2.xlsx", sub: "Shared drive", rotate: "rotate-2", top: "70%", left: "44%" },

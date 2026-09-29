@@ -119,7 +119,7 @@ export const PyngynClientSidebar: React.FC<PyngynClientSidebarProps> = ({
             <div className="flex items-center justify-between pl-3 pr-2 py-0.5 text-[#627D98] hover:text-[#113353] hover:bg-white rounded-[5px] cursor-pointer text-[11px]">
               <div className="flex items-center gap-1.5 truncate">
                 <PyngynIcons.user size={11} className="text-[#627D98] shrink-0" />
-                <span className="truncate">Rathore ...</span>
+                <span className="truncate">Precision ...</span>
               </div>
               <span className="text-[10px] text-[#627D98]">3</span>
             </div>
@@ -127,7 +127,7 @@ export const PyngynClientSidebar: React.FC<PyngynClientSidebarProps> = ({
             <div className="flex items-center justify-between pl-3 pr-2 py-0.5 text-[#627D98] hover:text-[#113353] hover:bg-white rounded-[5px] cursor-pointer text-[11px]">
               <div className="flex items-center gap-1.5 truncate">
                 <PyngynIcons.user size={11} className="text-[#627D98] shrink-0" />
-                <span className="truncate">Aakash ...</span>
+                <span className="truncate">Allied ...</span>
               </div>
               <span className="text-[10px] text-[#627D98]">3</span>
             </div>
@@ -135,7 +135,7 @@ export const PyngynClientSidebar: React.FC<PyngynClientSidebarProps> = ({
             <div className="flex items-center justify-between pl-3 pr-2 py-0.5 text-[#627D98] hover:text-[#113353] hover:bg-white rounded-[5px] cursor-pointer text-[11px]">
               <div className="flex items-center gap-1.5 truncate">
                 <PyngynIcons.user size={11} className="text-[#627D98] shrink-0" />
-                <span className="truncate">Apex Co...</span>
+                <span className="truncate">Apex ...</span>
               </div>
               <span className="text-[10px] text-[#627D98]">0</span>
             </div>
@@ -151,28 +151,28 @@ export const PyngynClientSidebar: React.FC<PyngynClientSidebarProps> = ({
             <div className="flex items-center justify-between pl-3 pr-2 py-0.5 text-[#627D98] hover:bg-white rounded-[5px] cursor-pointer text-[11px]">
               <div className="flex items-center gap-1.5 truncate">
                 <PyngynIcons.user size={11} className="text-[#627D98] shrink-0" />
-                <span className="truncate">Shreeji ...</span>
+                <span className="truncate">Infra ...</span>
               </div>
               <span className="text-[10px] text-[#627D98]">3</span>
             </div>
             <div className="flex items-center justify-between pl-3 pr-2 py-0.5 text-[#627D98] hover:bg-white rounded-[5px] cursor-pointer text-[11px]">
               <div className="flex items-center gap-1.5 truncate">
                 <PyngynIcons.user size={11} className="text-[#627D98] shrink-0" />
-                <span className="truncate">Nirmal F...</span>
+                <span className="truncate">Logistics ...</span>
               </div>
               <span className="text-[10px] text-[#627D98]">1</span>
             </div>
             <div className="flex items-center justify-between pl-3 pr-2 py-0.5 text-[#627D98] hover:bg-white rounded-[5px] cursor-pointer text-[11px]">
               <div className="flex items-center gap-1.5 truncate">
                 <PyngynIcons.user size={11} className="text-[#627D98] shrink-0" />
-                <span className="truncate">Matrix R...</span>
+                <span className="truncate">Commercial ...</span>
               </div>
               <span className="text-[10px] text-[#627D98]">0</span>
             </div>
             <div className="flex items-center justify-between pl-3 pr-2 py-0.5 text-[#627D98] hover:bg-white rounded-[5px] cursor-pointer text-[11px]">
               <div className="flex items-center gap-1.5 truncate">
                 <PyngynIcons.user size={11} className="text-[#627D98] shrink-0" />
-                <span className="truncate">Blue Star Ind...</span>
+                <span className="truncate">Manufacturing ...</span>
               </div>
               <span className="text-[10px] text-[#627D98]">0</span>
             </div>
