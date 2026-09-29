@@ -1,5 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  Scale,
+  BarChart3,
+  Megaphone,
+  Palette,
+  Compass,
+  Calendar,
+  Coins,
+  Clock,
+  Sparkles,
+  Zap,
+  Users,
+  Tag,
+  Lock,
+  CheckCircle2,
+  FileCheck,
+  Link2,
+  Building2,
+  Target,
+  Briefcase,
+  UserCheck,
+  type LucideIcon,
+} from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SIGNUP_URL } from "@/components/config";
@@ -30,12 +53,12 @@ export const metadata: Metadata = {
 // Data
 // ---------------------------------------------------------------------------
 
-const VERTICALS: { label: string; href: string; icon: string; blurb: string }[] = [
-  { label: "Lawyers", href: "/solutions/lawyers", icon: "⚖️", blurb: "Matter management, deadlines, and client portals for law firms." },
-  { label: "Accountants & CAs", href: "/solutions/accountants", icon: "📊", blurb: "Audit pipelines, statutory deadlines, and filing workflows." },
-  { label: "Marketing Consultants", href: "/solutions/consultants", icon: "📣", blurb: "Retainers, campaigns, and client approvals in one place." },
-  { label: "Creative Services", href: "/solutions/creative-services", icon: "🎨", blurb: "Briefs, revision rounds, and sign-offs across client projects." },
-  { label: "Architects", href: "/solutions/architects", icon: "📐", blurb: "Design phases, consultant coordination, and permit tracking." },
+const VERTICALS: { label: string; href: string; icon: LucideIcon; blurb: string }[] = [
+  { label: "Lawyers", href: "/solutions/lawyers", icon: Scale, blurb: "Matter management, deadlines, and client portals for law firms." },
+  { label: "Accountants & CAs", href: "/solutions/accountants", icon: BarChart3, blurb: "Audit pipelines, statutory deadlines, and filing workflows." },
+  { label: "Marketing Consultants", href: "/solutions/consultants", icon: Megaphone, blurb: "Retainers, campaigns, and client approvals in one place." },
+  { label: "Creative Services", href: "/solutions/creative-services", icon: Palette, blurb: "Briefs, revision rounds, and sign-offs across client projects." },
+  { label: "Architects", href: "/solutions/architects", icon: Compass, blurb: "Design phases, consultant coordination, and permit tracking." },
 ];
 
 const PROBLEMS: { num: string; title: string; body: string }[] = [
@@ -47,28 +70,28 @@ const PROBLEMS: { num: string; title: string; body: string }[] = [
   { num: "06", title: "Deadlines slip without warning", body: "Risk is invisible until it has already cost you the date. The first time you hear about a problem is when the client does." },
 ];
 
-const WORKSPACE_FEATURES: { icon: string; title: string; body: string }[] = [
-  { icon: "📋", title: "Projects, tasks, and calendar", body: "Run all client engagements and internal work in one board. Milestones, owners, and due dates always visible." },
-  { icon: "💰", title: "Finance dashboard", body: "Revenue, MRR, and profit tracked live. Know if an engagement is profitable while it's running, not after the invoice." },
-  { icon: "⏱️", title: "Billable timesheets", body: "Log billable vs non-billable hours. Export to CSV for invoicing with one click." },
-  { icon: "🧠", title: "Business Brain", body: "Context-aware AI trained on your firm's knowledge. Drafts plans, writes status, and flags risk." },
-  { icon: "⚡", title: "Automation builder", body: "Plain-English automation: 'when a task moves to review, notify the client.' No code needed." },
-  { icon: "👥", title: "Team skills and roles", body: "Skills, benchmarks, and gap insights across directors, managers, and ICs. 240+ workflow templates." },
+const WORKSPACE_FEATURES: { icon: LucideIcon; title: string; body: string }[] = [
+  { icon: Calendar, title: "Projects, tasks, and calendar", body: "Run all client engagements and internal work in one board. Milestones, owners, and due dates always visible." },
+  { icon: Coins, title: "Finance dashboard", body: "Revenue, MRR, and profit tracked live. Know if an engagement is profitable while it's running, not after the invoice." },
+  { icon: Clock, title: "Billable timesheets", body: "Log billable vs non-billable hours. Export to CSV for invoicing with one click." },
+  { icon: Sparkles, title: "Business Brain", body: "Context-aware AI trained on your firm's knowledge. Drafts plans, writes status, and flags risk." },
+  { icon: Zap, title: "Automation builder", body: "Plain-English automation: 'when a task moves to review, notify the client.' No code needed." },
+  { icon: Users, title: "Team skills and roles", body: "Skills, benchmarks, and gap insights across directors, managers, and ICs. 240+ workflow templates." },
 ];
 
-const CLIENTSPACE_FEATURES: { icon: string; title: string; body: string }[] = [
-  { icon: "🏷️", title: "Branded client portal", body: "White-labeled with your firm's identity. Clients land in a space that looks like yours." },
-  { icon: "🔒", title: "One isolated space per client", body: "Each client sees only their own engagement. Nothing leaks between clients." },
-  { icon: "✅", title: "Client-visible tasks and status", body: "Clients see what you want them to see: deliverables, milestones, and current status, nothing else." },
-  { icon: "📝", title: "Approvals and sign-off", body: "Clients approve deliverables inside their portal. No email threads, no lost attachments." },
-  { icon: "🔗", title: "Shareable invite links", body: "Add clients with a link. No onboarding required on their end." },
+const CLIENTSPACE_FEATURES: { icon: LucideIcon; title: string; body: string }[] = [
+  { icon: Tag, title: "Branded client portal", body: "White-labeled with your firm's identity. Clients land in a space that looks like yours." },
+  { icon: Lock, title: "One isolated space per client", body: "Each client sees only their own engagement. Nothing leaks between clients." },
+  { icon: CheckCircle2, title: "Client-visible tasks and status", body: "Clients see what you want them to see: deliverables, milestones, and current status, nothing else." },
+  { icon: FileCheck, title: "Approvals and sign-off", body: "Clients approve deliverables inside their portal. No email threads, no lost attachments." },
+  { icon: Link2, title: "Shareable invite links", body: "Add clients with a link. No onboarding required on their end." },
 ];
 
-const ROLES: { role: string; icon: string; sees: string; does: string }[] = [
-  { role: "Director / Partner", icon: "🏛️", sees: "Firm-wide: all engagements, finances, utilisation, and goals.", does: "Sets strategy, approves scope changes, reviews profitability." },
-  { role: "Manager", icon: "📌", sees: "Their engagements: tasks, timelines, team workload, and risk.", does: "Plans delivery, unblocks the team, writes client updates." },
-  { role: "IC / Associate", icon: "💼", sees: "Their assigned tasks and what they need to complete them.", does: "Does the work, logs time, flags blockers." },
-  { role: "Client", icon: "🤝", sees: "Their Client Space only: deliverables, status, and approvals.", does: "Reviews work, gives feedback, signs off deliverables." },
+const ROLES: { role: string; icon: LucideIcon; sees: string; does: string }[] = [
+  { role: "Director / Partner", icon: Building2, sees: "Firm-wide: all engagements, finances, utilisation, and goals.", does: "Sets strategy, approves scope changes, reviews profitability." },
+  { role: "Manager", icon: Target, sees: "Their engagements: tasks, timelines, team workload, and risk.", does: "Plans delivery, unblocks the team, writes client updates." },
+  { role: "IC / Associate", icon: Briefcase, sees: "Their assigned tasks and what they need to complete them.", does: "Does the work, logs time, flags blockers." },
+  { role: "Client", icon: UserCheck, sees: "Their Client Space only: deliverables, status, and approvals.", does: "Reviews work, gives feedback, signs off deliverables." },
 ];
 
 const FAQS: { q: string; a: string }[] = [
@@ -152,20 +175,25 @@ export default function ProfessionalServicesPage() {
             Which type of firm are you?
           </h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {VERTICALS.map((v) => (
-              <Link
-                key={v.label}
-                href={v.href}
-                className="card group flex flex-col gap-3 transition-all hover:border-accent hover:shadow-soft"
-              >
-                <span className="text-[28px]" aria-hidden="true">{v.icon}</span>
-                <div>
-                  <div className="font-semibold text-ink group-hover:text-accent transition-colors">{v.label}</div>
-                  <div className="mt-1 text-[13px] leading-relaxed text-muted">{v.blurb}</div>
-                </div>
-                <span className="mt-auto text-[12.5px] font-semibold text-accent">See how it works →</span>
-              </Link>
-            ))}
+            {VERTICALS.map((v) => {
+              const Icon = v.icon;
+              return (
+                <Link
+                  key={v.label}
+                  href={v.href}
+                  className="card group flex flex-col gap-3 transition-all hover:border-accent hover:shadow-soft"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent group-hover:bg-accent group-hover:text-white transition-colors">
+                    <Icon className="h-5 w-5 stroke-[1.8]" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-ink group-hover:text-accent transition-colors">{v.label}</div>
+                    <div className="mt-1 text-[13px] leading-relaxed text-muted">{v.blurb}</div>
+                  </div>
+                  <span className="mt-auto text-[12.5px] font-semibold text-accent">See how it works →</span>
+                </Link>
+              );
+            })}
           </div>
         </section>
 
@@ -205,13 +233,18 @@ export default function ProfessionalServicesPage() {
               from your internal operations.
             </p>
             <div className="mt-10 grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
-              {CLIENTSPACE_FEATURES.map((f) => (
-                <div key={f.title} className="card h-full">
-                  <span className="text-[28px]" aria-hidden="true">{f.icon}</span>
-                  <h3 className="mt-3 text-[16px] font-bold">{f.title}</h3>
-                  <p className="mt-2 text-[14px] leading-relaxed text-muted">{f.body}</p>
-                </div>
-              ))}
+              {CLIENTSPACE_FEATURES.map((f) => {
+                const Icon = f.icon;
+                return (
+                  <div key={f.title} className="card h-full">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                      <Icon className="h-5 w-5 stroke-[1.8]" aria-hidden="true" />
+                    </div>
+                    <h3 className="mt-3.5 text-[16px] font-bold text-ink">{f.title}</h3>
+                    <p className="mt-2 text-[14px] leading-relaxed text-muted">{f.body}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -232,13 +265,18 @@ export default function ProfessionalServicesPage() {
               one place, with AI that keeps plans, status, and risk current automatically.
             </p>
             <div className="mt-10 grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
-              {WORKSPACE_FEATURES.map((f) => (
-                <div key={f.title} className="card h-full">
-                  <span className="text-[28px]" aria-hidden="true">{f.icon}</span>
-                  <h3 className="mt-3 text-[16px] font-bold">{f.title}</h3>
-                  <p className="mt-2 text-[14px] leading-relaxed text-muted">{f.body}</p>
-                </div>
-              ))}
+              {WORKSPACE_FEATURES.map((f) => {
+                const Icon = f.icon;
+                return (
+                  <div key={f.title} className="card h-full">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                      <Icon className="h-5 w-5 stroke-[1.8]" aria-hidden="true" />
+                    </div>
+                    <h3 className="mt-3.5 text-[16px] font-bold text-ink">{f.title}</h3>
+                    <p className="mt-2 text-[14px] leading-relaxed text-muted">{f.body}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -255,24 +293,29 @@ export default function ProfessionalServicesPage() {
               enforced automatically, no configuration required.
             </p>
             <div className="mt-10 grid gap-[18px] sm:grid-cols-2">
-              {ROLES.map((r) => (
-                <div key={r.role} className="card h-full">
-                  <div className="flex items-center gap-3">
-                    <span className="text-[28px]" aria-hidden="true">{r.icon}</span>
-                    <h3 className="text-[17px] font-bold">{r.role}</h3>
-                  </div>
-                  <div className="mt-4 space-y-2">
-                    <div className="flex gap-2 text-[14px]">
-                      <Check />
-                      <span><strong>Sees:</strong> {r.sees}</span>
+              {ROLES.map((r) => {
+                const Icon = r.icon;
+                return (
+                  <div key={r.role} className="card h-full">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                        <Icon className="h-5 w-5 stroke-[1.8]" aria-hidden="true" />
+                      </div>
+                      <h3 className="text-[17px] font-bold">{r.role}</h3>
                     </div>
-                    <div className="flex gap-2 text-[14px]">
-                      <Check />
-                      <span><strong>Does:</strong> {r.does}</span>
+                    <div className="mt-4 space-y-2">
+                      <div className="flex gap-2 text-[14px]">
+                        <Check />
+                        <span><strong>Sees:</strong> {r.sees}</span>
+                      </div>
+                      <div className="flex gap-2 text-[14px]">
+                        <Check />
+                        <span><strong>Does:</strong> {r.does}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>

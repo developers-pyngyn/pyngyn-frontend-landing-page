@@ -177,8 +177,12 @@ function Sidebar({ active }: { active: string }) {
       {/* brand */}
       <div className="flex items-center justify-between px-4 pb-2 pt-4">
         <div className="flex items-center gap-2.5">
-          <span className="grid h-9 w-9 place-items-center rounded-xl" style={{ background: "#1c2740" }}>
-            <span className="text-[16px]">🐧</span>
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-accent text-white shadow-xs">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polygon points="12 2 2 7 12 12 22 7 12 2" />
+              <polyline points="2 17 12 22 22 17" />
+              <polyline points="2 12 12 17 22 12" />
+            </svg>
           </span>
           <span className="leading-none">
             <span className="block text-[15px] font-extrabold tracking-tight text-white">PYNGYN</span>
@@ -331,7 +335,7 @@ function DashboardMain() {
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-[27px] font-extrabold tracking-tight text-[#0f172a]">
-            Welcome back, {USER.name.split(" ")[0]} <span aria-hidden="true">👋</span>
+            Welcome back, {USER.name.split(" ")[0]}
           </h1>
           <p className="mt-1 text-[13.5px] text-[#64748b]">Here&apos;s what&apos;s happening across {WORKSPACE.name} today.</p>
         </div>

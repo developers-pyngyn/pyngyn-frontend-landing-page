@@ -1,5 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  MessageSquare,
+  Search,
+  RefreshCw,
+  BarChart3,
+  Clock,
+  PhoneCall,
+  Users,
+  Zap,
+  CheckCircle2,
+  type LucideIcon,
+} from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SIGNUP_URL } from "@/components/config";
@@ -41,12 +53,12 @@ const HERO_STATS: { value: string; label: string }[] = [
   { value: "$9", label: "Per seat / month. Cancel anytime." },
 ];
 
-const BEFORE_MONDAY: { time: string; icon: string; body: string }[] = [
-  { time: "8:45 am", icon: "📱", body: "Opened WhatsApp to find 47 messages from 3 different client threads." },
-  { time: "9:10 am", icon: "💻", body: "Spent 20 minutes hunting for the proposal draft, was it in Google Drive, Notion, or email?" },
-  { time: "9:35 am", icon: "🔄", body: "New consultant asked where the SOPs are. You said 'check Notion', they're outdated." },
-  { time: "10:00 am", icon: "📊", body: "Client asked for a status update. You had to ping 3 people to piece together an answer." },
-  { time: "10:30 am", icon: "😤", body: "First 2 hours gone. Zero billable work done. This is the fragmentation tax." },
+const BEFORE_MONDAY: { time: string; icon: LucideIcon; body: string }[] = [
+  { time: "8:45 am", icon: MessageSquare, body: "Opened WhatsApp to find 47 messages from 3 different client threads." },
+  { time: "9:10 am", icon: Search, body: "Spent 20 minutes hunting for the proposal draft, was it in Google Drive, Notion, or email?" },
+  { time: "9:35 am", icon: RefreshCw, body: "New consultant asked where the SOPs are. You said 'check Notion', they're outdated." },
+  { time: "10:00 am", icon: BarChart3, body: "Client asked for a status update. You had to ping 3 people to piece together an answer." },
+  { time: "10:30 am", icon: Clock, body: "First 2 hours gone. Zero billable work done. This is the fragmentation tax." },
 ];
 
 const AFTER_MONDAY: { time: string; icon: string; body: string }[] = [
@@ -54,7 +66,7 @@ const AFTER_MONDAY: { time: string; icon: string; body: string }[] = [
   { time: "9:05 am", icon: "✓", body: "New consultant onboards. Finds all SOPs, client history, and playbooks in one place. Productive in 2 hours, not 2 weeks." },
   { time: "9:25 am", icon: "✓", body: "Client asks for status update. You open the engagement view, everything is there. Answer in 60 seconds." },
   { time: "9:45 am", icon: "✓", body: "AI suggests the right SOP as you create a new task. It already knows your firm's way of handling this type of engagement." },
-  { time: "10:00 am", icon: "🐧", body: "Entire team is aligned. Knowledge is live. First 2 hours = 2 hours of billable work. That's the Pyngyn difference." },
+  { time: "10:00 am", icon: "✓", body: "Entire team is aligned. Knowledge is live. First 2 hours = 2 hours of billable work. That's the Pyngyn difference." },
 ];
 
 const COST_STATS: { stat: string; title: string; body: string }[] = [
@@ -112,11 +124,11 @@ const COMPARE_ROWS: [string, string, string, string, string, string][] = [
   ["2x task completion proven", "✓", "✗", "✗", "✗", "✗"],
 ];
 
-const HOW_IT_WORKS: { day: string; icon: string; title: string; body: string }[] = [
-  { day: "Day 1", icon: "📞", title: "Setup call", body: "We set up your workspace together. Import your existing SOPs, connect your team. Takes 60 minutes." },
-  { day: "Day 2–3", icon: "👥", title: "Team onboarding", body: "Your team logs in. No training required, the interface is intuitive from day one. We stay on standby." },
-  { day: "Day 4–7", icon: "⚡", title: "First workflows live", body: "Your first client engagement runs through Pyngyn. Tasks assigned, SOPs active, AI learning your context." },
-  { day: "Day 30", icon: "✓", title: "Review & decide", body: "We review what time was saved, what got easier. If you're happy, you pay. If not, you walk away. No hard sell." },
+const HOW_IT_WORKS: { day: string; icon: LucideIcon; title: string; body: string }[] = [
+  { day: "Day 1", icon: PhoneCall, title: "Setup call", body: "We set up your workspace together. Import your existing SOPs, connect your team. Takes 60 minutes." },
+  { day: "Day 2–3", icon: Users, title: "Team onboarding", body: "Your team logs in. No training required, the interface is intuitive from day one. We stay on standby." },
+  { day: "Day 4–7", icon: Zap, title: "First workflows live", body: "Your first client engagement runs through Pyngyn. Tasks assigned, SOPs active, AI learning your context." },
+  { day: "Day 30", icon: CheckCircle2, title: "Review & decide", body: "We review what time was saved, what got easier. If you're happy, you pay. If not, you walk away. No hard sell." },
 ];
 
 const PLAN_FEATURES: string[] = [
@@ -246,20 +258,23 @@ export default function SalesPitchPage() {
           </h2>
 
           <ol className="mt-7 space-y-2.5">
-            {BEFORE_MONDAY.map((b) => (
-              <li
-                key={b.time}
-                className="flex items-start gap-4 rounded-2xl border border-line bg-white p-4 shadow-card"
-              >
-                <span className="w-[78px] flex-none text-[13px] font-mono font-semibold uppercase tracking-wide text-muted">
-                  {b.time}
-                </span>
-                <span className="text-[18px]" aria-hidden="true">
-                  {b.icon}
-                </span>
-                <span className="text-[14.5px] leading-relaxed text-ink">{b.body}</span>
-              </li>
-            ))}
+            {BEFORE_MONDAY.map((b) => {
+              const Icon = b.icon;
+              return (
+                <li
+                  key={b.time}
+                  className="flex items-start gap-4 rounded-2xl border border-line bg-white p-4 shadow-card"
+                >
+                  <span className="w-[78px] flex-none text-[13px] font-mono font-semibold uppercase tracking-wide text-muted">
+                    {b.time}
+                  </span>
+                  <div className="flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-rose-50 text-rose-600">
+                    <Icon className="h-3.5 w-3.5 stroke-[2]" aria-hidden="true" />
+                  </div>
+                  <span className="text-[14.5px] leading-relaxed text-ink">{b.body}</span>
+                </li>
+              );
+            })}
           </ol>
         </section>
 
@@ -461,18 +476,21 @@ export default function SalesPitchPage() {
           </h2>
 
           <div className="mt-8 grid gap-[18px] sm:grid-cols-2 lg:grid-cols-4">
-            {HOW_IT_WORKS.map((h) => (
-              <div key={h.day} className="card h-full">
-                <div className="text-[22px]" aria-hidden="true">
-                  {h.icon}
+            {HOW_IT_WORKS.map((h) => {
+              const Icon = h.icon;
+              return (
+                <div key={h.day} className="card h-full">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                    <Icon className="h-5 w-5 stroke-[1.8]" aria-hidden="true" />
+                  </div>
+                  <div className="mt-3 text-[11.5px] font-bold uppercase tracking-wide text-accent">
+                    {h.day}
+                  </div>
+                  <div className="mt-1 text-[16.5px] font-bold text-ink">{h.title}</div>
+                  <p className="mt-2 text-[13.5px] leading-relaxed text-muted">{h.body}</p>
                 </div>
-                <div className="mt-3 text-[11.5px] font-bold uppercase tracking-wide text-accent">
-                  {h.day}
-                </div>
-                <div className="mt-1 text-[16.5px] font-bold text-ink">{h.title}</div>
-                <p className="mt-2 text-[13.5px] leading-relaxed text-muted">{h.body}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <p className="mt-5 text-[14px] text-muted">
             We handle the entire setup. You focus on client work. Our goal: you feel value in

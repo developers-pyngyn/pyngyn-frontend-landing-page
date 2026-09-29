@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Laptop, FileText, Tag } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { DemoBookingForm } from "@/components/DemoBookingForm";
@@ -71,17 +72,17 @@ const AGENDA = [
 // Tangible takeaways: what the prospect owns after the call.
 const TAKEAWAYS = [
   {
-    icon: "🖥️",
+    icon: Laptop,
     title: "A Clientspace you can show around",
     body: "The portal we configure on the call is yours to keep exploring, share it internally before you decide anything.",
   },
   {
-    icon: "📋",
+    icon: FileText,
     title: "A written rollout plan",
     body: "A one-page summary of what we covered, what a rollout would look like for your firm, and honest effort estimates.",
   },
   {
-    icon: "💰",
+    icon: Tag,
     title: "A pricing recommendation",
     body: "Clientspace standalone, Workspace standalone, or the bundle, we'll tell you which actually fits, including when the answer is \"start smaller.\"",
   },
@@ -317,13 +318,18 @@ export default function DemoPage() {
               </h2>
             </div>
             <div className="mx-auto mt-10 grid max-w-[1040px] gap-[18px] md:grid-cols-3">
-              {TAKEAWAYS.map((t) => (
-                <div key={t.title} className="card h-full text-center">
-                  <span className="text-[30px]" aria-hidden="true">{t.icon}</span>
-                  <h3 className="mt-3 text-[16.5px] font-bold leading-snug">{t.title}</h3>
-                  <p className="mt-2 text-[14px] leading-relaxed text-muted">{t.body}</p>
-                </div>
-              ))}
+              {TAKEAWAYS.map((t) => {
+                const Icon = t.icon;
+                return (
+                  <div key={t.title} className="card h-full flex flex-col items-center text-center p-7 transition-all duration-200 hover:shadow-card-hover">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                      <Icon className="h-6 w-6 stroke-[1.8]" aria-hidden="true" />
+                    </div>
+                    <h3 className="mt-4 text-[16.5px] font-bold leading-snug text-ink">{t.title}</h3>
+                    <p className="mt-2 text-[14px] leading-relaxed text-muted">{t.body}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>

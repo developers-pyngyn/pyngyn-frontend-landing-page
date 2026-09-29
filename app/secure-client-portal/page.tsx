@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  ShieldCheck,
+  Lock,
+  Zap,
+  FileText,
+  UserCheck,
+  Building2,
+} from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SIGNUP_URL } from "@/components/config";
@@ -28,32 +36,32 @@ export const metadata: Metadata = {
 
 const SECURITY_PILLARS = [
   {
-    icon: "🛡️",
+    icon: ShieldCheck,
     title: "AES-256 & TLS 1.3 Encryption",
     desc: "All client documents, messages, and engagement files are encrypted at rest using industry-standard AES-256 and protected in transit with TLS 1.3 cryptographic protocols.",
   },
   {
-    icon: "🔐",
+    icon: Lock,
     title: "Zero Cross-Client Data Leaks",
     desc: "Strict logical tenancy and isolated client spaces ensure no client can ever view, search, or access another client's engagement, documents, or data.",
   },
   {
-    icon: "⚡",
+    icon: Zap,
     title: "Passwordless Magic-Link Defense",
     desc: "Eliminate credential stuffing, brute force attacks, and weak passwords. Verified clients receive cryptographically signed, single-use authentication links directly to their inbox.",
   },
   {
-    icon: "📜",
+    icon: FileText,
     title: "Tamper-Evident Audit Logs",
     desc: "Every document view, download, upload, and approval is captured in immutable audit logs with timestamps, client identifiers, and IP addresses.",
   },
   {
-    icon: "👤",
+    icon: UserCheck,
     title: "Granular Role & Permission Gates",
     desc: "Control who sees what down to the individual document. Internal working papers stay strictly internal; external clients only see authorized deliverables.",
   },
   {
-    icon: "🏛️",
+    icon: Building2,
     title: "Regulatory Compliance Readiness",
     desc: "Engineered to satisfy DPDP (India), GDPR (EU), and SOC 2 security principles. Pyngyn is operated under an ISO 9001:2015 certified Quality Management System.",
   },
@@ -174,15 +182,18 @@ export default function SecureClientPortalPage() {
               </p>
             </div>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {SECURITY_PILLARS.map((p) => (
-                <div key={p.title} className="card flex flex-col p-7">
-                  <span className="text-3xl" aria-hidden="true">
-                    {p.icon}
-                  </span>
-                  <h3 className="mt-4 text-[17px] font-bold text-ink">{p.title}</h3>
-                  <p className="mt-2 text-[14px] leading-relaxed text-muted">{p.desc}</p>
-                </div>
-              ))}
+              {SECURITY_PILLARS.map((p) => {
+                const Icon = p.icon;
+                return (
+                  <div key={p.title} className="card flex flex-col p-7 transition-all duration-200 hover:shadow-card-hover">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                      <Icon className="h-6 w-6 stroke-[1.8]" aria-hidden="true" />
+                    </div>
+                    <h3 className="mt-4 text-[17px] font-bold text-ink">{p.title}</h3>
+                    <p className="mt-2 text-[14px] leading-relaxed text-muted">{p.desc}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>

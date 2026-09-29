@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  Palette,
+  BarChart3,
+  ShieldCheck,
+  FileCheck,
+  Zap,
+  MessageSquare,
+} from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SIGNUP_URL } from "@/components/config";
@@ -26,34 +34,34 @@ export const metadata: Metadata = {
   },
 };
 
-const PILLARS: { title: string; desc: string; icon: string }[] = [
+const PILLARS = [
   {
-    icon: "🎨",
+    icon: Palette,
     title: "White-Labeled Client Experience",
     desc: "Every portal carries your firm's branding, custom domain, and colors. Clients interact with your identity, not a third-party tool.",
   },
   {
-    icon: "📊",
+    icon: BarChart3,
     title: "Real-Time Milestone Tracking",
     desc: "Give clients continuous visibility into phases, deliverables, and progress so they stop emailing you asking for updates.",
   },
   {
-    icon: "🔒",
+    icon: ShieldCheck,
     title: "Bank-Grade Document Exchange",
     desc: "Centralize sensitive contracts, financial records, and deliverables with AES-256 encryption, access logs, and version control.",
   },
   {
-    icon: "✍️",
+    icon: FileCheck,
     title: "Instant Approvals & Sign-Offs",
     desc: "Accelerate phase sign-offs and engagement letter approvals with tamper-evident digital confirmations and automated reminders.",
   },
   {
-    icon: "⚡",
+    icon: Zap,
     title: "Passwordless Magic Link Access",
     desc: "Eliminate forgotten passwords and login friction. Clients access their portal instantly with one-click magic links.",
   },
   {
-    icon: "💬",
+    icon: MessageSquare,
     title: "In-Context Client Communication",
     desc: "Keep discussions and questions tied directly to the relevant document or deliverable rather than scattered across inboxes.",
   },
@@ -228,15 +236,18 @@ export default function ClientPortalSoftwarePage() {
               </p>
             </div>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {PILLARS.map((p) => (
-                <div key={p.title} className="card flex flex-col p-7">
-                  <span className="text-3xl" aria-hidden="true">
-                    {p.icon}
-                  </span>
-                  <h3 className="mt-4 text-[17px] font-bold text-ink">{p.title}</h3>
-                  <p className="mt-2 text-[14px] leading-relaxed text-muted">{p.desc}</p>
-                </div>
-              ))}
+              {PILLARS.map((p) => {
+                const Icon = p.icon;
+                return (
+                  <div key={p.title} className="card flex flex-col p-7 transition-all duration-200 hover:shadow-card-hover">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                      <Icon className="h-6 w-6 stroke-[1.8]" aria-hidden="true" />
+                    </div>
+                    <h3 className="mt-4 text-[17px] font-bold text-ink">{p.title}</h3>
+                    <p className="mt-2 text-[14px] leading-relaxed text-muted">{p.desc}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>

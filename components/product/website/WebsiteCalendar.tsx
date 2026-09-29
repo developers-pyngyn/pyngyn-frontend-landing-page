@@ -137,8 +137,9 @@ export const WebsiteCalendar: React.FC = () => {
                 Today
               </span>
             </div>
-            <div className="mt-1 p-1 rounded bg-rose-600 text-white font-bold text-[9px] leading-tight shadow-2xs">
-              ⚠️ 9 OVERDUE TASKS
+            <div className="mt-1 p-1 rounded bg-rose-600 text-white font-bold text-[9px] leading-tight shadow-2xs flex items-center justify-center gap-1">
+              <AlertTriangle className="w-2.5 h-2.5 flex-none" />
+              <span>9 OVERDUE TASKS</span>
             </div>
           </div>
           <div className="p-1 font-mono text-slate-700">25</div>

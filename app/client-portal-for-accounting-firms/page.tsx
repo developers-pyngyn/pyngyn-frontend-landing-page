@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  ClipboardCheck,
+  Calendar,
+  CheckSquare,
+  ShieldCheck,
+  Zap,
+  Briefcase,
+} from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SIGNUP_URL, PRICING_URL } from "@/components/config";
@@ -28,32 +36,32 @@ export const metadata: Metadata = {
 
 const ACCOUNTING_WORKFLOWS = [
   {
-    icon: "📋",
+    icon: ClipboardCheck,
     title: "Automated PBC Checklists",
     desc: "Set up Provided-By-Client document checklists with specific file types and due dates. Automated WhatsApp and email chasers follow up so your team doesn't have to.",
   },
   {
-    icon: "📅",
+    icon: Calendar,
     title: "Statutory Tax & Filing Deadlines",
     desc: "Clients see live progress on GST returns, advance tax filings, corporate tax audits, and ROC compliances without calling your partners.",
   },
   {
-    icon: "👁️",
+    icon: CheckSquare,
     title: "4-Eye Review & Partner Sign-Off Gates",
     desc: "Maintain rigorous review standards. Deliverables move through preparer, manager, and signing partner review gates before presentation in the client portal.",
   },
   {
-    icon: "🔐",
+    icon: ShieldCheck,
     title: "Bank-Grade Working Paper Security",
     desc: "Protect confidential balance sheets, ledger exports, and tax computation files with AES-256 encryption, access logs, and tenant isolation.",
   },
   {
-    icon: "⚡",
+    icon: Zap,
     title: "Passwordless Magic-Link Access",
     desc: "No account setup or password frustration for business owners. Clients click a secure magic link from their email and land straight in their portal.",
   },
   {
-    icon: "💼",
+    icon: Briefcase,
     title: "Retainers & Fixed-Fee Tracking",
     desc: "Keep recurring accounting retainers and audit milestones organized with clear billing deliverables and integrated payment options.",
   },
@@ -191,15 +199,18 @@ export default function ClientPortalForAccountingFirmsPage() {
               </p>
             </div>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {ACCOUNTING_WORKFLOWS.map((w) => (
-                <div key={w.title} className="card flex flex-col p-7">
-                  <span className="text-3xl" aria-hidden="true">
-                    {w.icon}
-                  </span>
-                  <h3 className="mt-4 text-[17px] font-bold text-ink">{w.title}</h3>
-                  <p className="mt-2 text-[14px] leading-relaxed text-muted">{w.desc}</p>
-                </div>
-              ))}
+              {ACCOUNTING_WORKFLOWS.map((w) => {
+                const Icon = w.icon;
+                return (
+                  <div key={w.title} className="card flex flex-col p-7 transition-all duration-200 hover:shadow-card-hover">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                      <Icon className="h-6 w-6 stroke-[1.8]" aria-hidden="true" />
+                    </div>
+                    <h3 className="mt-4 text-[17px] font-bold text-ink">{w.title}</h3>
+                    <p className="mt-2 text-[14px] leading-relaxed text-muted">{w.desc}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>

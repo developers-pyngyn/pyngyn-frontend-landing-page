@@ -13,6 +13,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Globe } from "lucide-react";
 import { PRICING, type MarketCode } from "@/lib/pricing/config";
 import {
   MARKET_COOKIE,
@@ -20,15 +21,15 @@ import {
   SELECTABLE_MARKETS,
 } from "@/lib/pricing/detect-country";
 
-/** Flag + label per selectable market. `DEFAULT` is the USD catch-all. */
-const LABELS: Record<MarketCode, { flag: string; label: string }> = {
-  US: { flag: "🇺🇸", label: "United States" },
-  GB: { flag: "🇬🇧", label: "United Kingdom" },
-  CA: { flag: "🇨🇦", label: "Canada" },
-  AU: { flag: "🇦🇺", label: "Australia" },
-  AE: { flag: "🇦🇪", label: "United Arab Emirates" },
-  IN: { flag: "🇮🇳", label: "India" },
-  DEFAULT: { flag: "🌍", label: "Other" },
+/** Code + label per selectable market. `DEFAULT` is the USD catch-all. */
+const LABELS: Record<MarketCode, { code: string; label: string }> = {
+  US: { code: "US", label: "United States" },
+  GB: { code: "GB", label: "United Kingdom" },
+  CA: { code: "CA", label: "Canada" },
+  AU: { code: "AU", label: "Australia" },
+  AE: { code: "AE", label: "United Arab Emirates" },
+  IN: { code: "IN", label: "India" },
+  DEFAULT: { code: "GLOBAL", label: "Other" },
 };
 
 export function MarketSelector({
@@ -81,10 +82,11 @@ export function MarketSelector({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={`Currency: ${currency}. Change country`}
-        className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1.5 text-[13px] font-semibold text-ink transition-colors hover:border-accent"
+        className="inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-3 py-1.5 text-[13px] font-semibold text-ink transition-colors hover:border-accent"
       >
-        <span aria-hidden="true">{current.flag}</span>
-        {currency}
+        <Globe className="h-3.5 w-3.5 text-muted" aria-hidden="true" />
+        <span className="font-mono text-[11px] font-bold text-muted">{current.code}</span>
+        <span>{currency}</span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
             d="M6 9.5 12 15.5 18 9.5"
@@ -114,7 +116,7 @@ export function MarketSelector({
                     selected ? "font-semibold text-ink" : "text-muted"
                   }`}
                 >
-                  <span aria-hidden="true">{item.flag}</span>
+                  <span className="flex-none font-mono text-[11px] font-bold text-muted w-7 text-left">{item.code}</span>
                   <span className="flex-1 truncate">
                     {code === "DEFAULT" ? "Other (USD)" : item.label}
                   </span>
