@@ -13,9 +13,9 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "ClientSpace Pricing for CA & Accounting Firms | Pyngyn",
+  title: "Pyngyn Pricing | Professional & Business Practice Plans",
   description:
-    "Transparent pricing for Chartered Accountants, tax practitioners, and audit firms. Pro plan at ₹499/mo, Business plan at ₹799/mo with workload cockpit & workflows, and custom Enterprise tier.",
+    "Transparent pricing for Chartered Accountants, tax practitioners, and audit firms. Professional plan at ₹999/mo and Business plan at ₹1,599/mo with workload cockpit & practice reporting.",
   alternates: { canonical: "/pricing" },
 };
 
@@ -26,9 +26,9 @@ export default function PricingPage() {
         data={[
           webPageSchema({
             url: "/pricing",
-            name: "ClientSpace Pricing | Pyngyn",
+            name: "Pyngyn Practice Pricing",
             description:
-              "ClientSpace pricing purpose-built for Chartered Accountants and accounting firms: Pro plan at ₹499/mo, Business plan at ₹799/mo, and custom Enterprise tier.",
+              "Pricing purpose-built for Chartered Accountants and accounting firms: Professional plan at ₹999/mo and Business plan at ₹1,599/mo.",
             breadcrumbId: "/pricing#breadcrumb",
           }),
           breadcrumbSchema(
@@ -42,30 +42,22 @@ export default function PricingPage() {
             url: "/pricing",
             name: "Pyngyn ClientSpace",
             description:
-              "The practice operating system for Chartered Accountants, tax practitioners, and audit firms: Pro plan at ₹499/user/month, Business plan at ₹799/user/month, and Enterprise.",
+              "The practice operating system for Chartered Accountants, tax practitioners, and audit firms: Professional plan at ₹999/user/month and Business plan at ₹1,599/user/month.",
             offers: [
               {
-                name: "ClientSpace Pro",
-                priceMonthly: 499,
+                name: "Pyngyn Professional",
+                priceMonthly: 999,
                 priceCurrency: "INR",
                 description:
-                  "Essential client workspace, regulatory task tracking, and white-labeled client portal for boutique CA & tax firms.",
+                  "Tasks, projects, client spaces, collaboration, knowledge, workflows, and client communication.",
                 url: "/pricing",
               },
               {
-                name: "ClientSpace Business",
-                priceMonthly: 799,
+                name: "Pyngyn Business",
+                priceMonthly: 1599,
                 priceCurrency: "INR",
                 description:
-                  "Complete practice operating system with Workload Cockpit, WhatsApp statutory alerts, Tally/Computax integrations, and 4-eye partner review gates.",
-                url: "/pricing",
-              },
-              {
-                name: "ClientSpace Enterprise",
-                isCustom: true,
-                priceCurrency: "INR",
-                description:
-                  "Dedicated practice migration, multi-branch practice partitions, enterprise SSO, and 99.9% uptime SLA for large CA partnerships.",
+                  "Everything in Professional plus workload cockpit, review workflows, practice-level reporting, and advanced permissions.",
                 url: "/pricing",
               },
             ],
@@ -78,13 +70,13 @@ export default function PricingPage() {
         <section className="wrap pb-[30px] pt-[130px] sm:pt-[150px] text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#14223d]/20 bg-[#f0f4fa] px-3.5 py-1 text-[12px] font-semibold text-[#14223d] shadow-2xs mb-4">
             <span className="h-1.5 w-1.5 rounded-full bg-[#14223d] animate-pulse" />
-            <span>Pyngyn ClientSpace &bull; Practice-Friendly Pricing</span>
+            <span>Pyngyn Practice Pricing &bull; Predictable Plans</span>
           </div>
           <h1 className="mx-auto mt-2 max-w-[840px] font-display text-[clamp(30px,4.5vw,52px)] font-bold leading-[1.12] tracking-[-0.025em] text-slate-950">
             Predictable pricing designed for CA &amp; accounting practices.
           </h1>
           <p className="lead mx-auto mt-4 max-w-[680px] text-sm sm:text-base text-slate-600">
-            No per-client penalty fees. No hidden setup costs. Start on Pro for essential statutory workflows, or unlock the full Business Cockpit with review workflows and partner review sign-offs.
+            No per-client penalty fees. No hidden setup costs. Start on Professional for core client workspaces, or unlock the full Business Cockpit with review gates and practice-level reporting.
           </p>
         </section>
 
