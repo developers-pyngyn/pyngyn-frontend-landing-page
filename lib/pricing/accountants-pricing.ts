@@ -114,11 +114,6 @@ export function getAccountantsPricing(market: MarketCode): AccountantsTierPricin
 
 export function detectClientMarket(): MarketCode {
   if (typeof document !== "undefined") {
-    const match = document.cookie.match(/pyngyn_market=([^;]+)/);
-    if (match && match[1]) {
-      const code = match[1].trim().toUpperCase();
-      if (code in ACCOUNTANTS_REGIONAL_PRICING) return code as MarketCode;
-    }
     try {
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
       if (tz.includes("Calcutta") || tz.includes("Kolkata") || tz.includes("Asia/Kolkata")) return "IN";

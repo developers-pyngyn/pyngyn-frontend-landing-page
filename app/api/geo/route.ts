@@ -1,44 +1,15 @@
-import { detectCountry, marketFromCountry, MARKET_COOKIE } from "@/lib/pricing/detect-country";
+import { detectCountry, marketFromCountry } from "@/lib/pricing/detect-country";
 import { type MarketCode } from "@/lib/pricing/config";
 
 export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
-function getCookie(header: string | null, name: string): string | null {
-  if (!header) return null;
-  for (const part of header.split(";")) {
-    const [key, ...rest] = part.trim().split("=");
-    if (key === name) return decodeURIComponent(rest.join("="));
-  }
-  return null;
-}
-
 export async function GET(request: Request): Promise<Response> {
   try {
     const headers = request?.headers;
-    const cookieHeader = headers?.get?.("cookie") || "";
-    const cookieMarket = getCookie(cookieHeader, MARKET_COOKIE);
 
-    // 1. Check override cookie first (user manual selection)
-    if (cookieMarket) {
-      const market = marketFromCountry(cookieMarket);
-      return new Response(
-        JSON.stringify({
-          market,
-          country: cookieMarket,
-          source: "cookie",
-        }),
-        {
-          status: 200,
-          headers: {
-            "Content-Type": "application/json",
-            "Cache-Control": "private, no-cache, no-store, must-revalidate",
-          },
-        }
-      );
-    }
-
-    // 2. Direct edge header check (fast path on Cloudflare Pages)
+    // 1. Direct edge header check (fast path on Cloudflare Pages)
+    // Cloudflare edge automatically populates cf-ipcountry based on visitor / VPN IP
     const cfCountry = headers?.get?.("cf-ipcountry");
     if (cfCountry && cfCountry.length === 2 && cfCountry !== "XX" && cfCountry !== "T1") {
       const countryCode = cfCountry.toUpperCase();
@@ -59,7 +30,7 @@ export async function GET(request: Request): Promise<Response> {
       );
     }
 
-    // 3. Fall back to multi-provider detectCountry (handles Vercel, CloudFront, ipwhois, ipapi)
+    // 2. Fall back to multi-provider detectCountry (handles Vercel, CloudFront, and IP geolocation)
     const result = await detectCountry(request);
 
     return new Response(

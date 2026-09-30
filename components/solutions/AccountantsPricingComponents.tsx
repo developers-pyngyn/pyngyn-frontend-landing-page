@@ -2,12 +2,12 @@
 
 import React, { createContext, useContext, useEffect, useState, useMemo } from "react";
 import Link from "next/link";
-import { MarketSelector } from "@/components/pricing/MarketSelector";
 import { SIGNUP_URL, DEMO_URL } from "@/components/config";
 import {
   type AccountantsTierPricing,
   getAccountantsPricing,
   detectClientMarket,
+  ACCOUNTANTS_REGIONAL_PRICING,
 } from "@/lib/pricing/accountants-pricing";
 import type { MarketCode } from "@/lib/pricing/config";
 
@@ -28,12 +28,24 @@ export function AccountantsPricingProvider({
 }) {
   const [market, setMarket] = useState<MarketCode>(initialMarket);
 
-  // Client-side detection if initial was default and user has cookie or local timezone
+  // Auto-detect visitor / VPN country via /api/geo/
   useEffect(() => {
-    const detected = detectClientMarket();
-    if (detected && detected !== market) {
-      setMarket(detected);
-    }
+    fetch("/api/geo/")
+      .then((res) => {
+        if (!res.ok) throw new Error("geo fetch failed");
+        return res.json();
+      })
+      .then((data) => {
+        if (data?.market && data.market in ACCOUNTANTS_REGIONAL_PRICING) {
+          setMarket(data.market as MarketCode);
+        }
+      })
+      .catch(() => {
+        const detected = detectClientMarket();
+        if (detected && detected !== market) {
+          setMarket(detected);
+        }
+      });
   }, []);
 
   const pricing = useMemo(() => getAccountantsPricing(market), [market]);
@@ -78,18 +90,12 @@ export function AccountantsPriceTag({
 }
 
 export function AccountantsPricingSection() {
-  const { market, setMarket, pricing } = useAccountantsPricing();
+  const { pricing } = useAccountantsPricing();
 
   return (
     <section className="section" id="pricing">
       <div className="wrap text-center">
-        {/* Market Selector Header Row */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
-          <span className="eyebrow">Pricing</span>
-          <div className="inline-flex items-center">
-            <MarketSelector market={market} onChange={setMarket} />
-          </div>
-        </div>
+        <span className="eyebrow">Pricing</span>
 
         <h2 className="mt-2 font-display text-[clamp(26px,3.4vw,38px)] font-semibold tracking-[-0.02em] text-ink">
           Transparent practice pricing.

@@ -21,7 +21,6 @@ import {
   getPlansForMarket,
   MARKET_PRICING_MAP,
 } from "@/components/clientspace-pricing-data";
-import { MarketSelector } from "@/components/pricing/MarketSelector";
 import { type MarketCode } from "@/lib/pricing/config";
 
 export function ClientSpacePricing() {
@@ -30,17 +29,12 @@ export function ClientSpacePricing() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    // 1. Check override cookie first
-    const cookieMatch = document.cookie.match(/(?:^|;\s*)pyngyn_market=([^;]+)/);
-    if (cookieMatch && cookieMatch[1]) {
-      const code = cookieMatch[1].toUpperCase() as MarketCode;
-      if (MARKET_PRICING_MAP[code]) {
-        setMarket(code);
-        return;
-      }
+    // 1. Expire any stale pyngyn_market cookie from previous manual selectors
+    if (typeof document !== "undefined" && document.cookie.includes("pyngyn_market")) {
+      document.cookie = "pyngyn_market=; Path=/; Max-Age=0; SameSite=Lax";
     }
 
-    // 2. Fetch live edge geo (works with VPNs)
+    // 2. Auto-detect visitor / VPN country from edge headers
     fetch("/api/geo/")
       .then((res) => {
         if (!res.ok) throw new Error("geo fetch failed");
@@ -55,11 +49,11 @@ export function ClientSpacePricing() {
         // 3. Fallback: check browser timezone
         try {
           const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-          if (tz.includes("Calcutta") || tz.includes("Kolkata")) {
+          if (tz.includes("Calcutta") || tz.includes("Kolkata") || tz.includes("Asia/Kolkata")) {
             setMarket("IN");
-          } else if (tz.includes("London")) {
+          } else if (tz.includes("London") || tz.includes("Europe/London")) {
             setMarket("GB");
-          } else if (tz.includes("Toronto") || tz.includes("Vancouver") || tz.includes("Montreal")) {
+          } else if (tz.includes("Toronto") || tz.includes("Vancouver") || tz.includes("Montreal") || tz.includes("Edmonton")) {
             setMarket("CA");
           } else if (tz.includes("Sydney") || tz.includes("Melbourne") || tz.includes("Brisbane")) {
             setMarket("AU");
@@ -83,7 +77,7 @@ export function ClientSpacePricing() {
 
   return (
     <div className="w-full">
-      {/* Billing Switcher & Currency / Market Selector */}
+      {/* Billing Switcher */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-14">
         <div className="inline-flex items-center p-1 rounded-full bg-slate-100 border border-slate-200 shadow-inner">
           <button
@@ -112,9 +106,6 @@ export function ClientSpacePricing() {
             </span>
           </button>
         </div>
-
-        {/* Dynamic Country / Currency Selector */}
-        <MarketSelector market={market} onChange={(next) => setMarket(next)} />
 
         <div className="text-xs text-slate-500 flex items-center gap-1.5 font-medium">
           <CheckCircle2 className="w-3.5 h-3.5 text-[#14223d]" />
