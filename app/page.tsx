@@ -49,8 +49,8 @@ const CLIENTSPACE_FAQS: { q: string; a: string }[] = [
     a: "Never. Each client workspace operates with strict multi-tenant isolation. A client sees only their own deliverables, document requests, and approved files. Internal review notes and practitioner discussions remain strictly private.",
   },
   {
-    q: "Does ClientSpace integrate with our existing accounting software?",
-    a: "Yes. ClientSpace connects with Tally, Computax, Zoho Books, QuickBooks, Google Calendar, and Slack, ensuring your team does not need to duplicate client records or change core ledger software.",
+    q: "Does ClientSpace work alongside our existing firm tools?",
+    a: "Yes. ClientSpace connects with Google Calendar, Google Drive, Gmail, Slack, and supports 1-click Excel/CSV spreadsheet imports for your client masters and tasks, ensuring your team does not need to duplicate records or change how you work.",
   },
   {
     q: "Can we book a personalized practice walkthrough for our firm?",

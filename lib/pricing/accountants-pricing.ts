@@ -26,7 +26,7 @@ export const ACCOUNTANTS_REGIONAL_PRICING: Record<MarketCode, AccountantsTierPri
     bundle: "₹1,599",
     periodText: "/user/month",
     taxNote: "GST 18% (itemized) · Billed in INR (₹)",
-    fullPricingNote: "Dedicated CA practice tiers with statutory calendars, DSC registers & PBC audit checklists available on full pricing.",
+    fullPricingNote: "Dedicated practice tiers with tasks, client spaces, workflows & PBC audit checklists available on full pricing.",
   },
   US: {
     currency: "USD",

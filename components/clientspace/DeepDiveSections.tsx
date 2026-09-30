@@ -460,8 +460,8 @@ export function AutomationsSection() {
           {/* Floating Celebration Overlay on top */}
           <div className="absolute -top-3 sm:-top-5 right-4 sm:right-10 z-50 pointer-events-none drop-shadow-2xl">
             <PyngynCelebrationOverlay
-              title="Auto-Dispatched GSTR-2B Notice"
-              subtitle="Jain Traders · ₹3.2L Variance Claimed"
+              title="Automated Document Request"
+              subtitle="Jain Traders · Bank Statement & Invoices"
               statusText="Triggered"
               avatarSrc="/team/vivek-pandey.png"
               mascotSrc="/mascot/pyngyn-ai-avatar.png"
@@ -653,7 +653,7 @@ export function DashboardSection() {
 }
 
 // ============================================================================
-// 9. INTEGRATIONS (HONEST ACCOUNTING ECOSYSTEM)
+// 9. INTEGRATIONS & FILE TOOLS
 // ============================================================================
 export function IntegrationsSection() {
   const INTEGRATIONS: {
@@ -661,16 +661,12 @@ export function IntegrationsSection() {
     category: string;
     icon: React.ComponentType<{ className?: string }>;
   }[] = [
-    { name: "Tally Prime", category: "Accounting & Ledgers", icon: BarChart3 },
-    { name: "Zoho Books", category: "Invoicing & Books", icon: Briefcase },
-    { name: "QuickBooks Online", category: "Cloud Accounting", icon: Zap },
-    { name: "GST & IT Portals", category: "Gov & Tax Portals", icon: Scale },
-    { name: "WhatsApp Business", category: "Client Messaging", icon: Smartphone },
     { name: "Google Calendar", category: "Deadlines & Practice Meetings", icon: Calendar },
     { name: "Google Drive", category: "Client Folders & Document Storage", icon: Folder },
     { name: "Gmail", category: "Client Emails & Task Conversion", icon: Mail },
-    { name: "eMudhra & DocuSign", category: "e-Sign & DSC Tokens", icon: ShieldCheck },
-    { name: "Razorpay Payments", category: "UPI & Fee Collections", icon: Sparkles },
+    { name: "Excel & CSV", category: "1-Click Client & Task Import", icon: FileSpreadsheet },
+    { name: "Slack", category: "Team Notifications & Updates", icon: MessageSquare },
+    { name: "Document Vault", category: "Bank-Grade Encrypted Storage", icon: ShieldCheck },
   ];
 
   return (
@@ -679,15 +675,14 @@ export function IntegrationsSection() {
         <div className="mx-auto max-w-[760px] text-center">
           <span className="eyebrow">Integrations</span>
           <h2 className="title mt-3">
-            Connects with your firm&apos;s existing tools.
+            Connects with your firm&apos;s daily workflow.
           </h2>
           <p className="lead mx-auto mt-4 max-w-[620px]">
-            No need to replace your accounting stack. ClientSpace works alongside
-            your core ledger software, tax suites, and calendars.
+            ClientSpace works alongside your firm&apos;s calendar, email, cloud storage, and client spreadsheets.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-[960px] mx-auto">
           {INTEGRATIONS.map((tool) => {
             const IconComp = tool.icon;
             return (
@@ -737,19 +732,19 @@ export function UseCasesSection() {
     },
     {
       title: "Corporate Tax & Advisory Partnerships",
-      desc: "Corporate ITR pipelines, GST 2B reconciliations, advance tax forecasting, and scrutiny notice defense.",
+      desc: "Corporate tax deadlines, client document checklists, advance tax schedules, and filing pipelines.",
       icon: FileSpreadsheet,
       link: "/solutions/tax-teams",
     },
     {
       title: "Statutory Audit & Assurance Teams",
-      desc: "Companies Act statutory audits, Form 3CD workpapers, sample vouching trails, and EQCR partner sign-offs.",
+      desc: "Statutory audit phases, engagement deliverable milestones, and 4-eye partner review sign-offs.",
       icon: Search,
       link: "/solutions/audit-teams",
     },
     {
       title: "Corporate Secretarial & Compliance Teams",
-      desc: "Master statutory regulatory calendars, director DSC registries, and ROC/MCA secretarial filing pipelines.",
+      desc: "Master statutory regulatory calendars, secretarial compliance checklists, and filing pipelines.",
       icon: Shield,
       link: "/solutions/compliance-teams",
     },

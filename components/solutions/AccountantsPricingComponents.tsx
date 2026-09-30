@@ -104,39 +104,51 @@ export function AccountantsPricingSection() {
           Predictable per-user pricing tailored for CA partnerships, audit firms, and tax practitioners.
         </p>
 
-        {/* 3 Tier Cards */}
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-[960px] mx-auto text-left">
+        {/* 2 Tier Cards — Professional & Business */}
+        <div className="mt-8 grid gap-8 md:grid-cols-2 max-w-4xl mx-auto text-left">
           {/* Pro Card */}
-          <div className="rounded-2xl border border-line bg-white p-6 shadow-card flex flex-col justify-between">
+          <div className="rounded-2xl border border-line bg-white p-6 sm:p-8 shadow-card flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold text-ink">ClientSpace Pro</h3>
+                <h3 className="text-xl font-bold text-ink">Pyngyn Professional</h3>
               </div>
-              <p className="text-xs text-muted mt-1">Essential statutory task tracking & client portal.</p>
+              <p className="text-xs text-muted mt-1">Tasks, projects, client spaces, collaboration, knowledge & workflows.</p>
               <div className="mt-4 flex items-baseline gap-1">
-                <span className="font-display text-[32px] font-bold text-ink">{pricing.pro}</span>
+                <span className="font-display text-[32px] sm:text-[36px] font-bold text-ink">{pricing.pro}</span>
                 <span className="text-xs text-muted">/ user / month</span>
               </div>
-              <ul className="mt-5 space-y-2.5 text-[13.5px] text-slate-600">
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>Statutory due date tracker</span>
+              <ul className="mt-6 space-y-3 text-[13.5px] text-slate-600">
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>Tasks, Kanban boards & project timelines</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>White-labeled client portal</span>
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>Branded client spaces with magic links</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>PBC document request checklists</span>
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>Team collaboration, discussions & activity feeds</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>DSC expiry register</span>
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>Firm knowledge base & practice SOPs</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>Practice workflows & statutory due dates</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>Client communication & email intake</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>25 GB secure encrypted document vault</span>
                 </li>
               </ul>
             </div>
-            <div className="mt-6 pt-4 border-t border-line">
+            <div className="mt-8 pt-4 border-t border-line">
               <a href={SIGNUP_URL} className="btn btn-ghost w-full justify-center">
                 Start 7-day free trial
               </a>
@@ -144,82 +156,57 @@ export function AccountantsPricingSection() {
           </div>
 
           {/* Business Card (Featured) */}
-          <div className="rounded-2xl border-2 border-accent bg-accent/5 p-6 shadow-soft flex flex-col justify-between relative">
+          <div className="rounded-2xl border-2 border-accent bg-accent/5 p-6 sm:p-8 shadow-soft flex flex-col justify-between relative">
             <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-white">
-              Most Popular for CAs
+              Most Popular for Growing Firms
             </span>
             <div>
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold text-accent">ClientSpace Business</h3>
+                <h3 className="text-xl font-bold text-accent">Pyngyn Business</h3>
               </div>
-              <p className="text-xs text-muted mt-1">Full practice operating system & review workflows.</p>
+              <p className="text-xs text-muted mt-1">Everything + automation, analytics, permissions & AI.</p>
               <div className="mt-4 flex items-baseline gap-1">
-                <span className="font-display text-[32px] font-bold text-accent">{pricing.business}</span>
+                <span className="font-display text-[32px] sm:text-[36px] font-bold text-accent">{pricing.business}</span>
                 <span className="text-xs text-muted">/ user / month</span>
               </div>
-              <ul className="mt-5 space-y-2.5 text-[13.5px] text-slate-700">
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span className="font-semibold">Everything in Pro, plus:</span>
+              <ul className="mt-6 space-y-3 text-[13.5px] text-slate-700">
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span className="font-semibold">Everything in Professional, plus:</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>Practice Workload Cockpit</span>
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>Multi-step workflow automations & triggers</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>4-eye partner review gates</span>
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>Practice Workload Cockpit & capacity meters</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>WhatsApp automated document chase</span>
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>1-click team workload auto-rebalance</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>Tally & accounting software sync</span>
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>4-eye partner review gates & granular roles</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>AI project plans & living status reports</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>Practice-level reporting & compliance radar</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span>100 GB secure encrypted document vault</span>
                 </li>
               </ul>
             </div>
-            <div className="mt-6 pt-4 border-t border-accent/20">
+            <div className="mt-8 pt-4 border-t border-accent/20">
               <a href={SIGNUP_URL} className="btn btn-accent w-full justify-center">
                 Start 7-day free trial
-              </a>
-            </div>
-          </div>
-
-          {/* Enterprise Card */}
-          <div className="rounded-2xl border border-line bg-white p-6 shadow-card flex flex-col justify-between sm:col-span-2 lg:col-span-1">
-            <div>
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold text-ink">Enterprise</h3>
-              </div>
-              <p className="text-xs text-muted mt-1">Multi-branch CA partnerships & large firms.</p>
-              <div className="mt-4 flex items-baseline gap-1">
-                <span className="font-display text-[32px] font-bold text-ink">Custom</span>
-                <span className="text-xs text-muted">annual agreement</span>
-              </div>
-              <ul className="mt-5 space-y-2.5 text-[13.5px] text-slate-600">
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>Multi-branch practice partitions</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>Dedicated practice data migration</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>Enterprise SSO & SAML</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span>99.9% uptime SLA & account partner</span>
-                </li>
-              </ul>
-            </div>
-            <div className="mt-6 pt-4 border-t border-line">
-              <a href={DEMO_URL} className="btn btn-primary w-full justify-center">
-                Book a demo
               </a>
             </div>
           </div>

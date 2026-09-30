@@ -173,7 +173,7 @@ export const CLIENTSPACE_PLANS: PricingPlan[] = [
     ctaStyle: "accent",
     summaryLimits: [
       "Everything in Pyngyn Professional",
-      "Multi-step automated workflows & WhatsApp auto-chasing",
+      "Multi-step automated workflows & trigger rules",
       "Workload Cockpit: live capacity meters & 1-click rebalance",
       "4-Eye partner review gates & advanced role permissions",
       "AI project plan generation & executive status reports",
@@ -183,13 +183,13 @@ export const CLIENTSPACE_PLANS: PricingPlan[] = [
     ],
     keyHighlights: [
       "Everything in Pyngyn Professional, plus:",
-      "Automation: Multi-step triggers & WhatsApp automated document chasing",
+      "Automation: Multi-step triggers & automated workflow rules",
       "Analytics: Workload Cockpit, capacity meters & 1-click team auto-rebalance",
-      "Advanced Permissions: 4-Eye partner review gates (Associate → Manager → Partner)",
+      "Advanced Permissions: 4-Eye partner review gates & granular roles",
       "AI: AI project plans, living status reports & risk detection",
       "Practice-Level Reporting: Executive partner dashboards & firm-wide compliance radar",
-      "Accounting Integrations: Tally Prime, Zoho Books & QuickBooks Online sync",
-      "Compliance Registers: Statutory tax notices, DIN register & ITC tracking",
+      "Document Requests: Automated PBC intake & client status notifications",
+      "Audit Trail: Detailed activity history & file version control",
       "100 GB secure document vault with audit trail history",
       "Priority WhatsApp, phone & dedicated partner advisory support",
     ],
@@ -212,13 +212,12 @@ export const CLIENTSPACE_PLANS: PricingPlan[] = [
     summaryLimits: [
       "Unlimited Portfolios & Multi-Branch Entities",
       "200 GB Storage (Customizable)",
-      "Unlimited Automations & Integrations",
-      "Unlimited Staff & Article Assistants",
+      "Unlimited Automations & Workflows",
+      "Unlimited Staff & Team Members",
       "Unlimited Client Portal Guests",
     ],
     keyHighlights: [
       "Everything in Business, plus:",
-      "Enterprise SSO (SAML 2.0, Okta, Azure AD)",
       "Multi-Branch & Multi-Office Practice Partitions",
       "Dedicated White-Glove Client & Document Migration Specialist",
       "Custom DPA (Data Processing Agreement) & Sensitive Audit Isolation",
@@ -259,57 +258,43 @@ export function getPlansForMarket(market: MarketCode): PricingPlan[] {
 
 // ============================================================================
 // PROTOTYPE-ALIGNED FEATURE COMPARISON MATRIX
-// Grouped into the 7 core CA practice categories:
-// 1. CLIENT MANAGEMENT
-// 2. CLIENT PORTAL
-// 3. ACCOUNTING & TAX
-// 4. AUTOMATION
-// 5. INTEGRATIONS
-// 6. WORKFLOW & PRODUCTIVITY
-// 7. COLLABORATION
+// Grouped into the core practice categories:
+// 1. TASKS & PROJECTS
+// 2. CLIENT SPACES & PORTAL
+// 3. COLLABORATION & KNOWLEDGE
+// 4. WORKFLOWS & COMMUNICATION
+// 5. AUTOMATION (BUSINESS)
+// 6. ANALYTICS, PERMISSIONS & AI (BUSINESS)
+// 7. STORAGE, SECURITY & SUPPORT
 // ============================================================================
 export const FEATURE_CATEGORIES: FeatureCategory[] = [
   {
-    title: "Client Management",
+    title: "Tasks & Projects",
     features: [
       {
-        name: "Active Client Portfolios",
-        detail: "Centralized client master records with legal entity names, PAN, and GSTIN identifiers",
-        pro: "Up to 50",
-        business: "Unlimited",
-        enterprise: "Unlimited",
-      },
-      {
-        name: "Entity Hierarchy & Group Portfolios",
-        detail: "Manage parent companies, subsidiaries, directors, and partner relationships under one umbrella",
+        name: "Task Lists & Kanban Boards",
+        detail: "Interactive task execution tables, status columns, priorities, and flexible Kanban views",
         pro: true,
         business: true,
         enterprise: true,
       },
       {
-        name: "Compliance Health Flags",
-        detail: "Visual At-Risk, Overdue, and Attention status indicators based on statutory deadlines",
+        name: "Project Timelines & Milestones",
+        detail: "Structured phases, engagement milestones, and deliverable target tracking",
         pro: true,
         business: true,
         enterprise: true,
       },
       {
-        name: "DSC (Digital Signature Certificate) Register",
-        detail: "Track client DSC token holders, issuing authorities, and proactive expiry countdowns",
+        name: "Due Dates & Target Tracking",
+        detail: "Custom due dates, recurring task schedules, and statutory filing target milestones",
         pro: true,
         business: true,
         enterprise: true,
       },
       {
-        name: "Statutory Tax Notices Register",
-        detail: "Track Income Tax Department notices (Section 143(1), 148), DINs, demand amounts, and reply deadlines",
-        pro: false,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "1-Click Client Master Importer",
-        detail: "Import client portfolios directly from Excel or CSV with automatic PAN and GSTIN validation",
+        name: "Spreadsheet Importer (Excel / CSV)",
+        detail: "1-Click import of client master records and task lists with column auto-mapping",
         pro: true,
         business: true,
         enterprise: true,
@@ -317,133 +302,124 @@ export const FEATURE_CATEGORIES: FeatureCategory[] = [
     ],
   },
   {
-    title: "Client Portal",
+    title: "Client Spaces & Portal",
     features: [
       {
-        name: "Standalone Branded Client Portal",
-        detail: "Dedicated portal branded with your firm's identity, logo, and practice styling",
+        name: "Branded Client Spaces",
+        detail: "Dedicated, private portal for each client branded with your firm's name and logo",
         pro: true,
         business: true,
         enterprise: "Custom Domain & Whitelabel",
       },
       {
         name: "Frictionless Magic Link Access",
-        detail: "Clients access their portal securely without remembering passwords or undergoing complicated signups",
+        detail: "Clients log in securely via 1-click magic link with zero passwords to remember",
         pro: true,
         business: true,
         enterprise: true,
       },
       {
-        name: "Client Portal Guest Accounts",
-        detail: "Invite client directors, accountants, and finance heads to upload files and review drafts",
+        name: "Unlimited Client Guest Accounts",
+        detail: "Invite client directors, accountants, and finance heads at zero additional cost",
         pro: "Unlimited",
         business: "Unlimited",
         enterprise: "Unlimited",
       },
       {
         name: "PBC Document Request Checklists",
-        detail: "Structured document intake lists with real-time status (Pending → Uploaded → Verified)",
+        detail: "Structured document intake lists with real-time status (Requested → Uploaded → Approved)",
         pro: true,
         business: true,
         enterprise: true,
       },
       {
         name: "Deliverable & Report Downloads",
-        detail: "Secure distribution of finalized tax computations, audit reports, and statutory acknowledgments",
+        detail: "Secure client access to finalized tax computations, reports, and acknowledgments",
         pro: true,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Bank-Grade Encrypted Storage Vault",
-        detail: "256-bit AES encryption at rest and TLS 1.3 in transit with audit-grade isolation",
-        pro: "25 GB",
-        business: "100 GB",
-        enterprise: "200 GB (Customizable)",
-      },
-    ],
-  },
-  {
-    title: "Accounting & Tax",
-    features: [
-      {
-        name: "GST Client Compliance Tracking",
-        detail: "Track monthly and quarterly filing milestones for GSTR-1, GSTR-3B, and annual returns",
-        pro: true,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "GSTR-2B Statement & ITC Reconciliation Tracking",
-        detail: "Monitor auto-drafted ITC statements against purchase books and flag variance discrepancies",
-        pro: false,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Income Tax Client Workflows & ITR Due Dates",
-        detail: "Track return filing cycles (ITR-1 through ITR-7), Assessment Year milestones, and Advance Tax dates",
-        pro: true,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Form 26AS & AIS Reconciliation Tracking",
-        detail: "Cross-check TDS/TCS entries against client ledger claims to prevent demand intimations",
-        pro: false,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Form 3CD Tax Audit Working Papers",
-        detail: "Clause-by-clause scrutiny checklists, vouching logs, and UDIN generation tracking",
-        pro: false,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Bank Reconciliation & Daybook Vouching Filters",
-        detail: "Categorize bank transactions and verify vouchers directly from imported ledgers",
-        pro: false,
         business: true,
         enterprise: true,
       },
     ],
   },
   {
-    title: "Automation",
+    title: "Collaboration & Knowledge",
     features: [
       {
-        name: "Statutory Deadline Escalations",
-        detail: "Automated alert banners and task prioritizations as statutory filing dates draw near",
+        name: "Team Collaboration & Discussions",
+        detail: "Internal comments, query notes, @mentions, and discussions linked directly to tasks",
         pro: true,
         business: true,
         enterprise: true,
       },
       {
-        name: "Automated WhatsApp Document Chasing",
-        detail: "Trigger template-based WhatsApp follow-ups for pending bank statements, invoices, and signed letters",
+        name: "Firm Knowledge Base & SOPs",
+        detail: "Centralized practice documentation, standard operating procedures, and compliance guidelines",
+        pro: true,
+        business: true,
+        enterprise: true,
+      },
+      {
+        name: "Activity Feeds & Audit History",
+        detail: "Chronological activity logging across all tasks, client spaces, and deliverables",
+        pro: "90-Day History",
+        business: "Unlimited History",
+        enterprise: "Unlimited History",
+      },
+    ],
+  },
+  {
+    title: "Workflows & Client Communication",
+    features: [
+      {
+        name: "Practice Workflows & Checklists",
+        detail: "Standardized workflow templates for routine accounting, tax, and audit procedures",
+        pro: true,
+        business: true,
+        enterprise: true,
+      },
+      {
+        name: "Client Portal Messaging",
+        detail: "Direct, contextual client communications attached directly to deliverables and requests",
+        pro: true,
+        business: true,
+        enterprise: true,
+      },
+      {
+        name: "Unified Email Intake",
+        detail: "Forward client requests and documents directly into task queues and client spaces",
+        pro: true,
+        business: true,
+        enterprise: true,
+      },
+    ],
+  },
+  {
+    title: "Automation (Business Plan)",
+    features: [
+      {
+        name: "Multi-Step Workflow Automations",
+        detail: "Configurable event-driven trigger rules that automate routine practice actions",
         pro: false,
         business: true,
         enterprise: true,
       },
       {
-        name: "Automated PBC Stage Triggers",
-        detail: "Automatically update task status and notify assigned associates when a client uploads requested files",
+        name: "Automatic Task & Stage Triggers",
+        detail: "Auto-advance task status and alert assignees when clients upload requested documents",
         pro: false,
         business: true,
         enterprise: true,
       },
       {
-        name: "Partner Review Escalation Rules",
-        detail: "Auto-escalate high-priority filings to senior partners when review milestones are pending",
+        name: "Deadline Escalation Rules",
+        detail: "Automatic escalation alerts to managers and partners as statutory target dates approach",
         pro: false,
         business: true,
         enterprise: true,
       },
       {
         name: "Active Automation Rules Limit",
-        detail: "Maximum configurable workflow rules running concurrently across your firm",
+        detail: "Number of concurrent automated rules running across your practice",
         pro: "Up to 10",
         business: "Unlimited",
         enterprise: "Unlimited",
@@ -451,117 +427,21 @@ export const FEATURE_CATEGORIES: FeatureCategory[] = [
     ],
   },
   {
-    title: "Integrations",
-    features: [
-      {
-        name: "GST Portal",
-        detail: "Monthly returns, filing status tracking, and GSTR-2B ITC reconciliation",
-        pro: "Status Tracking",
-        business: "Directly Integrated",
-        enterprise: "Directly Integrated",
-      },
-      {
-        name: "Income Tax Portal",
-        detail: "IT returns, statutory notices (Section 143(1)), and refund tracking",
-        pro: "Status Tracking",
-        business: "Directly Integrated",
-        enterprise: "Directly Integrated",
-      },
-      {
-        name: "Tally Prime",
-        detail: "Accounting ledgers, trial balance, and daybook voucher sync via local bridge",
-        pro: false,
-        business: "Ready to Sync",
-        enterprise: "Ready to Sync",
-      },
-      {
-        name: "Zoho Books",
-        detail: "Invoices, bills, client ledgers, and transactions synchronization",
-        pro: false,
-        business: "Ready to Sync",
-        enterprise: "Ready to Sync",
-      },
-      {
-        name: "QuickBooks Online",
-        detail: "Invoices, bills, and ledger sync via Intuit OAuth active connection",
-        pro: false,
-        business: "Intuit OAuth Active",
-        enterprise: "Intuit OAuth Active",
-      },
-      {
-        name: "WhatsApp Business",
-        detail: "Official client alerts, automated filing reminders, and PBC document requests",
-        pro: false,
-        business: "Active & Verified",
-        enterprise: "Active & Verified",
-      },
-      {
-        name: "Google Calendar",
-        detail: "Review meetings, Meet video calls, and statutory deadline synchronization",
-        pro: "Calendar Synced",
-        business: "Calendar Synced",
-        enterprise: "Calendar Synced",
-      },
-      {
-        name: "Google Drive",
-        detail: "Client audit folders, working papers, and continuous document synchronization",
-        pro: "Storage Active",
-        business: "Storage Active",
-        enterprise: "Storage Active",
-      },
-      {
-        name: "Gmail",
-        detail: "Client email synchronization, auto-thread attachment intake, and task conversion",
-        pro: "Email Synced",
-        business: "Email Synced",
-        enterprise: "Email Synced",
-      },
-      {
-        name: "Document Vault",
-        detail: "Bank-grade encrypted secure client document storage and deliverable exchange",
-        pro: "25 GB Storage",
-        business: "100 GB Storage",
-        enterprise: "200 GB (Customizable)",
-      },
-      {
-        name: "eMudhra & DocuSign eSign",
-        detail: "Aadhaar OTP eSign, Class 3 DSC tokens, and client engagement letters (with Protean, Leegality & Digio)",
-        pro: "Standard eSign",
-        business: "Signing Active",
-        enterprise: "Signing Active",
-      },
-      {
-        name: "Razorpay Payments",
-        detail: "UPI payment links, fee collections, and QR codes for client billing",
-        pro: false,
-        business: "Gateway Active",
-        enterprise: "Gateway Active",
-      },
-    ],
-  },
-  {
-    title: "Workflow & Productivity",
+    title: "Analytics, Permissions & AI (Business Plan)",
     features: [
       {
         name: "Practice Workload Cockpit",
-        detail: "Firm-wide capacity meters displaying practitioner allocations, active filings, and bottlenecks",
+        detail: "Live capacity meters displaying practitioner allocations, active filings, and bottlenecks",
         pro: false,
         business: true,
         enterprise: true,
       },
       {
         name: "1-Click Workload Auto-Rebalance",
-        detail: "Automatically redistribute pending filings from overloaded staff or article assistants",
+        detail: "Redistribute pending deliverables from overloaded staff or article assistants with one click",
         pro: false,
         business: true,
         enterprise: true,
-      },
-      {
-        name: "Accounting Engagement Pipelines",
-        detail: "Structured stage progression: Scoping → Vouching → Computation → 4-Eye Review → Filing",
-        pro: "Single-Tier Pipeline",
-        business: "Multi-Tier Pipelines",
-        enterprise: "Custom Stage Gates",
       },
       {
         name: "4-Eye Partner Review Gates",
@@ -571,28 +451,35 @@ export const FEATURE_CATEGORIES: FeatureCategory[] = [
         enterprise: true,
       },
       {
-        name: "Live Effort Tracking & Practice Timers",
-        detail: "Track actual hours spent vs budgeted fees with persistent companion timer to avoid billing write-offs",
+        name: "Granular Role Hierarchy",
+        detail: "Role-based permissions tailored for Partner, Manager, Senior Associate, and Article Assistant",
+        pro: "Standard Roles",
+        business: "Enforced Hierarchy",
+        enterprise: "Custom Granular RBAC",
+      },
+      {
+        name: "Live Effort Tracking & Timers",
+        detail: "Track actual hours spent vs budgeted fees with persistent companion timers",
         pro: "Basic Tracking",
         business: "Full Timers & Meters",
         enterprise: "Full Timers & Meters",
       },
       {
         name: "AI Project Plan & Workflow Builder",
-        detail: "Generate end-to-end task breakdowns, milestones, and statutory deliverables automatically",
+        detail: "Generate end-to-end task breakdowns, milestones, and deliverables automatically",
         pro: false,
         business: true,
         enterprise: true,
       },
       {
-        name: "AI Living Status Reports & Risk Detection",
-        detail: "Continuous automated synthesis of blocked tasks, pending client approvals, and deadline risks",
+        name: "AI Status Reports & Risk Detection",
+        detail: "Automated synthesis of blocked tasks, pending client approvals, and deadline risks",
         pro: false,
         business: true,
         enterprise: true,
       },
       {
-        name: "Practice-Level Executive Dashboards & Radar",
+        name: "Practice-Level Executive Dashboards",
         detail: "Cross-client visibility into partner capacity, filing completion rates, and team throughput",
         pro: false,
         business: true,
@@ -601,49 +488,28 @@ export const FEATURE_CATEGORIES: FeatureCategory[] = [
     ],
   },
   {
-    title: "Collaboration",
+    title: "Storage, Security & Support",
     features: [
       {
-        name: "CA Firm Role Hierarchy",
-        detail: "Granular permissions for Partners, Managers, Senior Associates, Article Assistants, and Administrative Staff",
-        pro: "Standard Roles",
-        business: "Enforced Hierarchy",
-        enterprise: "Custom Granular RBAC",
+        name: "Encrypted Document Vault Storage",
+        detail: "Bank-grade 256-bit AES encrypted secure client document storage",
+        pro: "25 GB Storage",
+        business: "100 GB Storage",
+        enterprise: "200 GB Storage",
       },
       {
-        name: "Multi-Assignee Ownership",
-        detail: "Assign a partner, supervising manager, and working associate to the same deliverable or return",
-        pro: false,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Internal Scrutiny Notes & Work Threads",
-        detail: "Private team commentary and query logs attached directly to client vouchers and audit clauses",
+        name: "Google Calendar & Drive Integration",
+        detail: "Sync task deadlines to calendar and link Google Drive working paper folders",
         pro: true,
         business: true,
         enterprise: true,
       },
       {
-        name: "Tamper-Evident Audit Trails",
-        detail: "Unchangeable chronological history of who viewed, edited, signed off, or downloaded client files",
-        pro: "90-Day Logs",
-        business: "Unlimited History",
-        enterprise: "Institutional Audit Trails",
-      },
-      {
-        name: "Enterprise Single Sign-On (SAML 2.0)",
-        detail: "Corporate authentication via standard SAML 2.0, Azure AD, or Okta",
-        pro: false,
-        business: false,
-        enterprise: true,
-      },
-      {
         name: "Support Channels & Onboarding",
         detail: "Direct assistance from practice operations specialists",
-        pro: "Email & Knowledge Base",
-        business: "Priority WhatsApp, Phone & Email",
-        enterprise: "24/7 Dedicated Account Partner",
+        pro: "Email & Help Center",
+        business: "Priority Support",
+        enterprise: "Dedicated Account Partner",
       },
     ],
   },
@@ -659,7 +525,7 @@ export const PRICING_FAQS: PricingFaq[] = [
   },
   {
     q: "How does the 7-day free trial work?",
-    a: "You get full access to Pyngyn ClientSpace for 7 days with no credit card required. You can invite your team, add real client portfolios, connect Tally or cloud storage, and test statutory workflows before making any commitment.",
+    a: "You get full access to Pyngyn ClientSpace for 7 days with no credit card required. You can invite your team, add real client portfolios, import spreadsheets, and test practice workflows before making any commitment.",
   },
   {
     q: "Can we switch between monthly and annual billing?",
@@ -667,18 +533,18 @@ export const PRICING_FAQS: PricingFaq[] = [
   },
   {
     q: "What is the difference between Pyngyn Professional and Pyngyn Business?",
-    a: "Pyngyn Professional (₹999/user/month) covers all essential day-to-day operations: tasks, projects, client spaces, team collaboration, firm knowledge base, standard workflows, and client communication. Pyngyn Business (₹1,599/user/month) adds full practice superpowers: multi-step automation, WhatsApp chasing, live workload analytics with auto-rebalancing, 4-eye partner review gates, AI project planning & status reporting, and firm-wide executive compliance reporting.",
+    a: "Pyngyn Professional (₹999/user/month) covers all essential day-to-day operations: tasks, projects, client spaces, team collaboration, firm knowledge base, standard workflows, and client communication. Pyngyn Business (₹1,599/user/month) adds full practice superpowers: multi-step automation, live workload analytics with auto-rebalancing, 4-eye partner review gates, AI project planning & status reporting, and firm-wide executive reporting.",
   },
   {
-    q: "How does Pyngyn handle GST and Income Tax compliance?",
-    a: "Pyngyn ClientSpace tracks return filing statuses (GSTR-1, GSTR-3B, ITR-1 to 7), monitors GSTR-2B ITC variance against your books, reconciles Form 26AS/AIS entries, and manages Income Tax Department statutory notices (Section 143(1)). It streamlines your practice workflows and document collection. It does not replace your professional judgment or perform automated tax calculations without partner review.",
+    q: "How does Pyngyn handle statutory deadlines and compliance workflows?",
+    a: "Pyngyn ClientSpace organizes compliance schedules, task checklists, and statutory target dates (such as GST and Income Tax filing milestones). It streamlines document collection, client follow-ups, and internal review queues so your team never misses a statutory deadline.",
   },
   {
     q: "How do you protect client financial data and working papers?",
     a: "All client records and audit files are encrypted with 256-bit AES at rest and in transit via TLS 1.3 in ISO 27001-certified data centers. Your data is isolated per firm, and under no circumstances is confidential client financial information used to train public AI models.",
   },
   {
-    q: "Can we import our existing client master list from Tally or Excel?",
+    q: "Can we import our existing client master list from Excel or CSV?",
     a: "Yes. ClientSpace includes a 1-click spreadsheet importer that automatically maps entity names, PAN/GSTIN numbers, contact persons, and industrial sectors. For Business and Enterprise plans, our practice onboarding team assists with your migration.",
   },
   {

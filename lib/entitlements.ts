@@ -11,19 +11,13 @@ export type PlanTierId = "trial" | "pro" | "business" | "enterprise";
 export interface EntitlementLimits {
   /** Total active client portfolios managed in the firm workspace */
   maxClients: number | "unlimited";
-  /** Maximum client entities with active GST compliance workflows (GSTR-1, 3B, 2B tracking) */
-  maxGstClients: number | "unlimited";
-  /** Maximum client entities with active Income Tax workflows (ITR, 26AS, Form 3CD) */
-  maxIncomeTaxClients: number | "unlimited";
-  /** Maximum active event-driven automation rules (statutory alerts, WhatsApp chasers, escalations) */
+  /** Maximum active event-driven automation rules */
   maxAutomations: number | "unlimited";
-  /** Maximum connected integrations (Tally Prime, Zoho Books, WhatsApp, Google Drive, etc.) */
-  maxIntegrations: number | "unlimited";
   /** Secure cloud storage allocation in Gigabytes (GB) */
   storageGb: number | "unlimited";
   /** Maximum practitioner seats included or allowed on the plan */
   maxTeamMembers: number | "unlimited";
-  /** Client portal guest accounts for taxpayer document uploads and deliverable reviews */
+  /** Client portal guest accounts for client document uploads and deliverable reviews */
   guestPortalAccounts: "unlimited";
   /** Audit log history retention in days */
   auditLogRetentionDays: number | "unlimited";
@@ -37,23 +31,20 @@ export interface PlanEntitlement {
   limits: EntitlementLimits;
   /** Granular capability flags supported on this plan */
   features: {
+    tasksAndProjects: boolean;
     clientPortals: boolean;
     magicLinkAccess: boolean;
-    statutoryComplianceRadar: boolean;
-    gstWorkflows: boolean;
-    incomeTaxWorkflows: boolean;
-    dscRegister: boolean;
-    statutoryNoticesRegister: boolean;
-    fourEyeReviewGates: boolean;
+    teamCollaboration: boolean;
+    knowledgeBase: boolean;
+    standardWorkflows: boolean;
+    clientCommunication: boolean;
+    multiStepAutomations: boolean;
     workloadCockpit: boolean;
     capacityAutoRebalance: boolean;
-    tallySync: boolean;
-    zohoBooksIntegration: boolean;
-    whatsAppReminders: boolean;
-    emailIntake: boolean;
+    fourEyeReviewGates: boolean;
+    aiProjectPlanning: boolean;
+    practiceReporting: boolean;
     customDomainWhitelabel: boolean;
-    enterpriseSso: boolean;
-    dedicatedMigration: boolean | "assisted" | "white-glove";
   };
 }
 
@@ -69,33 +60,27 @@ export const PLAN_ENTITLEMENTS: Record<PlanTierId, PlanEntitlement> = {
     tagline: "Full access to evaluate Pyngyn ClientSpace with up to 10 clients.",
     limits: {
       maxClients: 10,
-      maxGstClients: 10,
-      maxIncomeTaxClients: 10,
       maxAutomations: 5,
-      maxIntegrations: 3,
       storageGb: 5,
       maxTeamMembers: 5,
       guestPortalAccounts: "unlimited",
       auditLogRetentionDays: 30,
     },
     features: {
+      tasksAndProjects: true,
       clientPortals: true,
       magicLinkAccess: true,
-      statutoryComplianceRadar: true,
-      gstWorkflows: true,
-      incomeTaxWorkflows: true,
-      dscRegister: true,
-      statutoryNoticesRegister: true,
-      fourEyeReviewGates: true,
+      teamCollaboration: true,
+      knowledgeBase: true,
+      standardWorkflows: true,
+      clientCommunication: true,
+      multiStepAutomations: true,
       workloadCockpit: true,
       capacityAutoRebalance: false,
-      tallySync: true,
-      zohoBooksIntegration: true,
-      whatsAppReminders: true,
-      emailIntake: true,
+      fourEyeReviewGates: true,
+      aiProjectPlanning: true,
+      practiceReporting: true,
       customDomainWhitelabel: false,
-      enterpriseSso: false,
-      dedicatedMigration: false,
     },
   },
   pro: {
@@ -105,33 +90,27 @@ export const PLAN_ENTITLEMENTS: Record<PlanTierId, PlanEntitlement> = {
     tagline: "Tasks, projects, client spaces, collaboration, knowledge, workflows, client communication.",
     limits: {
       maxClients: 50,
-      maxGstClients: 50,
-      maxIncomeTaxClients: 50,
       maxAutomations: 10,
-      maxIntegrations: 3,
       storageGb: 25,
       maxTeamMembers: "unlimited",
       guestPortalAccounts: "unlimited",
       auditLogRetentionDays: 90,
     },
     features: {
+      tasksAndProjects: true,
       clientPortals: true,
       magicLinkAccess: true,
-      statutoryComplianceRadar: true,
-      gstWorkflows: true,
-      incomeTaxWorkflows: true,
-      dscRegister: true,
-      statutoryNoticesRegister: true,
-      fourEyeReviewGates: false,
+      teamCollaboration: true,
+      knowledgeBase: true,
+      standardWorkflows: true,
+      clientCommunication: true,
+      multiStepAutomations: false,
       workloadCockpit: false,
       capacityAutoRebalance: false,
-      tallySync: false,
-      zohoBooksIntegration: false,
-      whatsAppReminders: false,
-      emailIntake: true,
+      fourEyeReviewGates: false,
+      aiProjectPlanning: false,
+      practiceReporting: false,
       customDomainWhitelabel: false,
-      enterpriseSso: false,
-      dedicatedMigration: false,
     },
   },
   business: {
@@ -141,33 +120,27 @@ export const PLAN_ENTITLEMENTS: Record<PlanTierId, PlanEntitlement> = {
     tagline: "Everything + automation, analytics, advanced permissions, AI, practice-level reporting.",
     limits: {
       maxClients: "unlimited",
-      maxGstClients: "unlimited",
-      maxIncomeTaxClients: "unlimited",
       maxAutomations: "unlimited",
-      maxIntegrations: "unlimited",
       storageGb: 100,
       maxTeamMembers: "unlimited",
       guestPortalAccounts: "unlimited",
       auditLogRetentionDays: "unlimited",
     },
     features: {
+      tasksAndProjects: true,
       clientPortals: true,
       magicLinkAccess: true,
-      statutoryComplianceRadar: true,
-      gstWorkflows: true,
-      incomeTaxWorkflows: true,
-      dscRegister: true,
-      statutoryNoticesRegister: true,
-      fourEyeReviewGates: true,
+      teamCollaboration: true,
+      knowledgeBase: true,
+      standardWorkflows: true,
+      clientCommunication: true,
+      multiStepAutomations: true,
       workloadCockpit: true,
       capacityAutoRebalance: true,
-      tallySync: true,
-      zohoBooksIntegration: true,
-      whatsAppReminders: true,
-      emailIntake: true,
+      fourEyeReviewGates: true,
+      aiProjectPlanning: true,
+      practiceReporting: true,
       customDomainWhitelabel: false,
-      enterpriseSso: false,
-      dedicatedMigration: "assisted",
     },
   },
   enterprise: {
@@ -177,33 +150,27 @@ export const PLAN_ENTITLEMENTS: Record<PlanTierId, PlanEntitlement> = {
     tagline: "Custom scale, dedicated compliance isolation, and white-glove migration for large partnerships.",
     limits: {
       maxClients: "unlimited",
-      maxGstClients: "unlimited",
-      maxIncomeTaxClients: "unlimited",
       maxAutomations: "unlimited",
-      maxIntegrations: "unlimited",
       storageGb: 200,
       maxTeamMembers: "unlimited",
       guestPortalAccounts: "unlimited",
       auditLogRetentionDays: "unlimited",
     },
     features: {
+      tasksAndProjects: true,
       clientPortals: true,
       magicLinkAccess: true,
-      statutoryComplianceRadar: true,
-      gstWorkflows: true,
-      incomeTaxWorkflows: true,
-      dscRegister: true,
-      statutoryNoticesRegister: true,
-      fourEyeReviewGates: true,
+      teamCollaboration: true,
+      knowledgeBase: true,
+      standardWorkflows: true,
+      clientCommunication: true,
+      multiStepAutomations: true,
       workloadCockpit: true,
       capacityAutoRebalance: true,
-      tallySync: true,
-      zohoBooksIntegration: true,
-      whatsAppReminders: true,
-      emailIntake: true,
+      fourEyeReviewGates: true,
+      aiProjectPlanning: true,
+      practiceReporting: true,
       customDomainWhitelabel: true,
-      enterpriseSso: true,
-      dedicatedMigration: "white-glove",
     },
   },
 };
