@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check, AlertTriangle, Loader2, ShieldCheck, Sparkles } from "lucide-react";
 import { PyngynWebsiteProduct } from "../product/website/PyngynWebsiteProduct";
 import { PyngynCelebrationOverlay } from "../product-demo/PyngynCelebrationOverlay";
+import { ResponsiveMockupFrame } from "./ResponsiveMockupFrame";
 
 interface AgentStep {
   id: number;
@@ -173,8 +174,10 @@ export function SplitAgentWorkShowcase() {
       </div>
 
       {/* 2. FULL-WIDTH DESKTOP VIEWPORT PRODUCT MOCKUP */}
-      <div className="relative w-full overflow-visible rounded-[14px] border border-slate-200/90 shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white">
-        <PyngynWebsiteProduct screen="tasks" clientId="oswal" />
+      <div className="relative w-full overflow-visible">
+        <ResponsiveMockupFrame baseWidth={1040} baseHeight={640}>
+          <PyngynWebsiteProduct screen="tasks" clientId="oswal" className="w-full h-full" />
+        </ResponsiveMockupFrame>
 
         {/* Floating Celebration Overlay on top / outer side */}
         <div className="absolute -top-3 sm:-top-5 right-4 sm:right-10 z-50 pointer-events-none drop-shadow-2xl">

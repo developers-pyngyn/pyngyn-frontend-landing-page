@@ -20,18 +20,15 @@ export function ResponsiveMockupFrame({
 }: ResponsiveMockupFrameProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState<number>(1);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const container = containerRef.current;
     if (!container) return;
 
     const updateScale = () => {
       const currentWidth = container.offsetWidth;
       if (currentWidth > 0) {
-        const computedScale = Math.min(1, currentWidth / baseWidth);
-        setScale(computedScale);
+        setScale(currentWidth / baseWidth);
       }
     };
 
@@ -42,39 +39,37 @@ export function ResponsiveMockupFrame({
     });
 
     resizeObserver.observe(container);
-    return () => resizeObserver.disconnect();
+    window.addEventListener("resize", updateScale);
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateScale);
+    };
   }, [baseWidth]);
 
   return (
-    <motion.div
+    <div
       ref={containerRef}
-      className={`relative w-full overflow-hidden rounded-[18px] sm:rounded-[22px] border border-slate-200/90 bg-white shadow-[0_25px_60px_-15px_rgba(15,23,42,0.1),0_0_1px_rgba(15,23,42,0.08)] ${className}`}
+      className={`relative w-full overflow-hidden rounded-[14px] sm:rounded-[18px] border border-slate-200/90 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.08)] ${className}`}
+      style={{
+        aspectRatio: `${baseWidth} / ${baseHeight}`,
+      }}
     >
-      {/* Outer sizing box that shrinks height proportionally to avoid blank gaps */}
       <div
         style={{
-          height: mounted ? `${baseHeight * scale}px` : `${baseHeight}px`,
-          width: "100%",
-          position: "relative",
-          overflow: "hidden",
+          width: `${baseWidth}px`,
+          height: `${baseHeight}px`,
+          transform: `scale(${scale}) translateZ(0)`,
+          transformOrigin: "top left",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          willChange: "transform",
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
         }}
       >
-        {/* Scaled Inner Canvas */}
-        <div
-          style={{
-            width: `${baseWidth}px`,
-            height: `${baseHeight}px`,
-            transform: `scale(${scale})`,
-            transformOrigin: "top left",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            overflow: "hidden",
-          }}
-        >
-          {children}
-        </div>
+        {children}
       </div>
-    </motion.div>
+    </div>
   );
 }

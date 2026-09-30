@@ -7,6 +7,8 @@ interface BrowserFrameProps {
   url?: string;
   badge?: string;
   className?: string;
+  baseWidth?: number;
+  baseHeight?: number;
 }
 
 export function BrowserFrame({
@@ -14,13 +16,44 @@ export function BrowserFrame({
   url = "app.pyngyn.ai/clientspace/horizon-exports",
   badge = "Live ClientSpace",
   className = "",
+  baseWidth,
+  baseHeight,
 }: BrowserFrameProps) {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [scale, setScale] = React.useState(1);
+
+  React.useEffect(() => {
+    if (!baseWidth) return;
+    const container = containerRef.current;
+    if (!container) return;
+
+    const updateScale = () => {
+      const w = container.offsetWidth;
+      if (w > 0) {
+        setScale(w / baseWidth);
+      }
+    };
+
+    updateScale();
+    const ro = new ResizeObserver(updateScale);
+    ro.observe(container);
+    window.addEventListener("resize", updateScale);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", updateScale);
+    };
+  }, [baseWidth]);
+
+  const hasScale = Boolean(baseWidth && baseHeight);
+
   return (
     <div
+      ref={containerRef}
       className={`w-full max-w-full overflow-hidden rounded-[16px] sm:rounded-[20px] border border-[#e2e8f0] bg-white shadow-[0_20px_60px_-15px_rgba(15,23,42,0.12),0_0_1px_rgba(15,23,42,0.08)] ${className}`}
+      style={hasScale ? { aspectRatio: `${baseWidth} / ${(baseHeight || 600) + 44}` } : undefined}
     >
       {/* Window Header */}
-      <div className="flex h-11 items-center justify-between border-b border-[#e2e8f0] bg-[#f8fafc] px-3 sm:px-4 select-none">
+      <div className="flex h-11 items-center justify-between border-b border-[#e2e8f0] bg-[#f8fafc] px-3 sm:px-4 select-none flex-none">
         {/* Traffic Lights */}
         <div className="flex items-center gap-1.5 sm:gap-2">
           <span className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-[#ff5f57] border border-[#e0443e]/50" />
@@ -56,7 +89,26 @@ export function BrowserFrame({
       </div>
 
       {/* Frame Content */}
-      <div className="relative w-full max-w-full overflow-x-auto bg-[#f8fafc]">{children}</div>
+      {hasScale ? (
+        <div className="relative w-full overflow-hidden bg-[#f8fafc]" style={{ height: `calc(100% - 44px)` }}>
+          <div
+            style={{
+              width: `${baseWidth}px`,
+              height: `${baseHeight}px`,
+              transform: `scale(${scale}) translateZ(0)`,
+              transformOrigin: "top left",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              willChange: "transform",
+            }}
+          >
+            {children}
+          </div>
+        </div>
+      ) : (
+        <div className="relative w-full max-w-full overflow-x-auto bg-[#f8fafc]">{children}</div>
+      )}
     </div>
   );
 }

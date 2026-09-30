@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SIGNUP_URL, PRICING_URL } from "@/components/config";
-import { BrowserFrame } from "@/components/mockups/BrowserFrame";
-import { ClientPortalMockup } from "@/components/mockups/ClientPortalMockup";
+import { DesktopMockupFrame } from "@/components/clientspace/DesktopMockupFrame";
+import { PyngynClientSpaceView } from "@/components/product-demo/PyngynClientSpaceView";
 import { ExecutiveDashboardMockup } from "@/components/mockups/ExecutiveDashboardMockup";
 import { ClientSpacePricing } from "@/components/clientspace/ClientSpacePricing";
 import {
@@ -240,9 +240,24 @@ export default function ClientspacePage() {
         {/* ===== Portal interactive mockup (Live Prototype) ================= */}
         <section className="wrap pb-[72px]">
           <div className="mx-auto max-w-[1040px]">
-            <BrowserFrame url="portal.sharma-cpa.com/oswal-exports" badge="White-labeled Client Portal">
-              <ClientPortalMockup className="border-0 shadow-none rounded-none" />
-            </BrowserFrame>
+            <DesktopMockupFrame
+              url="portal.sharma-cpa.com/oswal-exports"
+              baseWidth={1200}
+              imageHeight={720}
+              maxWidthClass="max-w-[1040px]"
+              headerActions={
+                <span className="rounded-full bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 text-[10.5px] font-semibold text-emerald-700 whitespace-nowrap">
+                  White-labeled Client Portal
+                </span>
+              }
+            >
+              <PyngynClientSpaceView
+                clientName="Oswal Exports"
+                firmName="Sharma & Associates"
+                className="w-full h-full"
+                autoPlay={true}
+              />
+            </DesktopMockupFrame>
           </div>
           <p className="mt-4 text-center text-[13px] text-muted">
             What your client sees when they log in — branded as your firm, with live statutory progress, PBC document checklist, and one-click approvals.
@@ -322,11 +337,19 @@ export default function ClientspacePage() {
                 </p>
               </div>
               <div className="w-full">
-                <BrowserFrame url="app.pyngyn.ai/director/portfolio" badge="Director Practice Cockpit">
-                  <div className="h-[460px] overflow-hidden">
-                    <ExecutiveDashboardMockup className="h-full" />
-                  </div>
-                </BrowserFrame>
+                <DesktopMockupFrame
+                  url="app.pyngyn.ai/director/portfolio"
+                  baseWidth={1080}
+                  imageHeight={640}
+                  maxWidthClass="w-full"
+                  headerActions={
+                    <span className="rounded-full bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 text-[10.5px] font-semibold text-emerald-700 whitespace-nowrap">
+                      Director Cockpit
+                    </span>
+                  }
+                >
+                  <ExecutiveDashboardMockup className="h-full" />
+                </DesktopMockupFrame>
               </div>
             </div>
           </div>

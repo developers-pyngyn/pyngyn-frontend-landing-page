@@ -8,6 +8,7 @@ import {
   PyngynWebsiteProduct,
   ProductScreenType,
 } from "../product/website/PyngynWebsiteProduct";
+import { ResponsiveMockupFrame } from "./ResponsiveMockupFrame";
 
 interface HeroTabItem {
   id: string;
@@ -287,39 +288,36 @@ export function HeroInteractiveMockup() {
           </div>
         </div>
 
-        {/* Mockup Frame Container */}
-        <div
-          className="relative overflow-x-auto max-w-full rounded-[14px] border border-slate-200/90 shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white scrollbar-none"
-        >
-          <div className="min-w-[720px] md:min-w-0">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab.id}
-                initial={
-                  prefersReducedMotion
-                    ? { opacity: 0 }
-                    : { opacity: 0, y: 10 }
-                }
-                animate={{ opacity: 1, y: 0 }}
-                exit={
-                  prefersReducedMotion
-                    ? { opacity: 0 }
-                    : { opacity: 0, y: -10 }
-                }
-                transition={{
-                  duration: 0.3,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="w-full transform-gpu"
-              >
-                <PyngynWebsiteProduct
-                  screen={activeTab.screen}
-                  clientId={activeTab.clientId || "oswal"}
-                />
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
+        {/* Mockup Frame Container - Scaled Desktop Viewport */}
+        <ResponsiveMockupFrame baseWidth={1040} baseHeight={640}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab.id}
+              initial={
+                prefersReducedMotion
+                  ? { opacity: 0 }
+                  : { opacity: 0, y: 10 }
+              }
+              animate={{ opacity: 1, y: 0 }}
+              exit={
+                prefersReducedMotion
+                  ? { opacity: 0 }
+                  : { opacity: 0, y: -10 }
+              }
+              transition={{
+                duration: 0.3,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="w-full h-full transform-gpu"
+            >
+              <PyngynWebsiteProduct
+                screen={activeTab.screen}
+                clientId={activeTab.clientId || "oswal"}
+                className="w-full h-full"
+              />
+            </motion.div>
+          </AnimatePresence>
+        </ResponsiveMockupFrame>
       </div>
     </div>
   );
