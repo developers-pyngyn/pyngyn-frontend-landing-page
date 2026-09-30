@@ -41,8 +41,11 @@ export function ClientSpacePricing() {
     }
 
     // 2. Fetch live edge geo (works with VPNs)
-    fetch("/api/geo")
-      .then((res) => res.json())
+    fetch("/api/geo/")
+      .then((res) => {
+        if (!res.ok) throw new Error("geo fetch failed");
+        return res.json();
+      })
       .then((data) => {
         if (data?.market && MARKET_PRICING_MAP[data.market as MarketCode]) {
           setMarket(data.market as MarketCode);

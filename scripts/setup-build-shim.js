@@ -16,11 +16,6 @@ const path = require('path');
 console.log('Running @cloudflare/next-on-pages for Cloudflare Pages deployment...');
 try {
   execSync('npx @cloudflare/next-on-pages@1', { stdio: 'inherit' });
-  const staticDir = path.resolve(__dirname, '..', '..', '.vercel', 'output', 'static');
-  if (fs.existsSync(staticDir)) {
-    fs.writeFileSync(path.join(staticDir, '.assetsignore'), '_worker.js\\n_routes.json\\nnop-build-log.json\\n');
-    console.log('[setup-build-shim] Placed .assetsignore in .vercel/output/static');
-  }
 } catch (err) {
   process.exit(err.status || 1);
 }
