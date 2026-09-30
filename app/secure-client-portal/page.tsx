@@ -63,15 +63,15 @@ const SECURITY_PILLARS = [
   {
     icon: Building2,
     title: "Regulatory Compliance Readiness",
-    desc: "Engineered to satisfy DPDP (India), GDPR (EU), and SOC 2 security principles. Pyngyn is operated under an ISO 9001:2015 certified Quality Management System.",
+    desc: "Engineered to satisfy DPDP (India) and statutory data privacy principles. Pyngyn is a DPIIT-recognized startup operated under an ISO 9001:2015 certified Quality Management System.",
   },
 ];
 
 const COMPLIANCE_STANDARDS = [
+  { name: "DPIIT Recognized", detail: "Recognized startup by the Department for Promotion of Industry and Internal Trade, Govt. of India." },
+  { name: "ISO 9001:2015", detail: "Certified Quality Management System (QMS) ensuring dependable software delivery and processes." },
   { name: "DPDP Act (India)", detail: "Strict consent logging, purpose limitation, and data fiduciary compliance." },
-  { name: "GDPR Compliant", detail: "Data subject rights, encryption by default, and EU data privacy protections." },
-  { name: "SOC 2 Principles", detail: "Rigorous operational controls governing confidentiality and system availability." },
-  { name: "ISO 9001:2015", detail: "Certified Quality Management System (QMS) ensuring dependable software delivery." },
+  { name: "Bank-Grade Encryption", detail: "AES-256 encryption at rest and TLS 1.3 in transit across all client communications." },
 ];
 
 const FAQS = [
@@ -145,7 +145,7 @@ export default function SecureClientPortalPage() {
             </a>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            AES-256 at rest · TLS 1.3 in transit · DPDP &amp; GDPR aligned · ISO 9001:2015 Certified
+            AES-256 at rest · TLS 1.3 in transit · DPDP (India) aligned · DPIIT Recognized · ISO 9001:2015 Certified
           </p>
         </section>
 

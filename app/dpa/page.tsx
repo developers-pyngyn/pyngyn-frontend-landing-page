@@ -123,7 +123,7 @@ export default function DPAPage() {
             },
             {
               type: "p",
-              text: "Our controls are designed with reference to SOC 2 Trust Services Criteria and ISO/IEC 27001 principles. Our operating entity holds ISO 9001:2015 certification for Quality Management Systems and is recognized by DPIIT, Government of India. Additional technical domains are summarized in Annex B.",
+              text: "Our controls are designed with reference to industry-leading data security and privacy principles. Our operating entity holds ISO 9001:2015 certification for Quality Management Systems and is recognized by DPIIT, Government of India. Additional technical domains are summarized in Annex B.",
             },
           ],
         },
@@ -244,7 +244,7 @@ export default function DPAPage() {
           blocks: [
             {
               type: "p",
-              text: "Pyngyn maintains the following technical and organizational security controls designed with reference to SOC 2 Trust Services Criteria and ISO/IEC 27001 principles:",
+              text: "Pyngyn maintains the following technical and organizational security controls designed under our ISO 9001:2015 Quality Management System and DPIIT-recognized operating framework:",
             },
             {
               type: "table",

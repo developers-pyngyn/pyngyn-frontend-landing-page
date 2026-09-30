@@ -282,7 +282,7 @@ export function softwareApplicationSchema(opts?: {
       "Timeline and Gantt views",
       "Task dependencies and owners",
       "One-click import from other trackers",
-      "SSO / SAML and SOC 2 aligned controls",
+      "SSO / SAML, DPIIT recognized, and ISO 9001:2015 certified controls",
     ],
     aggregateRating:
       opts?.ratingValue && opts?.ratingCount

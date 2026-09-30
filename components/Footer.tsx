@@ -233,7 +233,7 @@ export function Footer() {
     ],
   ];
 
-  const compliance = ["SOC 2 aligned", "DPDP (India)", "GDPR", "Encrypted", "SSO / SAML"];
+  const compliance = ["DPIIT Recognized", "ISO 9001:2015 Certified", "DPDP (India)", "Encrypted", "SSO / SAML"];
   const legal: [string, string][] = [
     ["Privacy Policy", PRIVACY_URL],
     ["Terms of Service", TERMS_URL],

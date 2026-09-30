@@ -870,11 +870,10 @@ export function TrustSecuritySection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-[14px] text-slate-900">
-                    SOC 2 Aligned Infrastructure
+                    DPIIT Recognized &amp; ISO 9001:2015 Certified
                   </h4>
                   <p className="text-[12.5px] text-slate-500">
-                    Built upon enterprise Cloudflare and cloud data centers with
-                    99.9% uptime SLAs.
+                    Operated under certified quality management systems on high-reliability cloud data centers.
                   </p>
                 </div>
               </div>

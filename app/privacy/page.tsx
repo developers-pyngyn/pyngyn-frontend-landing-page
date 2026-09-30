@@ -296,7 +296,7 @@ export default function PrivacyPage() {
           blocks: [
             {
               type: "p",
-              text: "Pyngyn maintains administrative, technical, and organizational safeguards designed to protect personal data against unauthorized access, loss, misuse, or alteration. Our controls are designed with reference to industry standards and leading cybersecurity principles, including the SOC 2 Trust Services Criteria and ISO/IEC 27001 principles. Controls implemented include:",
+              text: "Pyngyn maintains administrative, technical, and organizational safeguards designed to protect personal data against unauthorized access, loss, misuse, or alteration. Our controls are designed with reference to industry standards and leading cybersecurity principles. Controls implemented include:",
             },
             {
               type: "list",
@@ -308,7 +308,7 @@ export default function PrivacyPage() {
                 "**Backup & Recovery:** Appropriate backup and recovery measures are maintained to support service continuity and data protection, with automated encrypted snapshots designed for disaster recovery.",
                 "**Vulnerability Management & Security Testing:** Pyngyn periodically performs security assessments, vulnerability management, and security testing appropriate to the service, including automated code analysis and dependency vulnerability reviews.",
                 "**Edge Network Defense:** Web Application Firewall (WAF) filtering, DDoS mitigation, and rate-limiting protect public application endpoints against malicious traffic and common web vulnerabilities.",
-                "**Corporate Standards & Quality Management:** Pyngyn's operating entity, VIMOVI GlobalTech Private Limited, holds ISO 9001:2015 certification for Quality Management Systems and is recognized by the Department for Promotion of Industry and Internal Trade (DPIIT), Government of India. Please note that ISO 9001:2015 and DPIIT recognition are organizational quality and startup recognitions, not information-security certifications. Pyngyn's software runs on ISO 27001-certified cloud infrastructure (Google Cloud Platform and Cloudflare) and designs its controls with reference to SOC 2 and ISO/IEC 27001 principles, without claiming unobtained ISO 27001, ISO 27701, or SOC 2 certifications for Pyngyn directly.",
+                "**Corporate Standards & Quality Management:** Pyngyn's operating entity, VIMOVI GlobalTech Private Limited, holds ISO 9001:2015 certification for Quality Management Systems and is recognized by the Department for Promotion of Industry and Internal Trade (DPIIT), Government of India. Pyngyn's software runs on secure, high-availability enterprise cloud infrastructure (Google Cloud Platform and Cloudflare) with automated backups, DDoS mitigation, and robust data protection standards.",
               ],
             },
           ],
