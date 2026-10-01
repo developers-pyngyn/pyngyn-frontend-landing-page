@@ -128,8 +128,8 @@ export function ClientSpacePricing() {
         </div>
       </div>
 
-      {/* Pricing Cards Grid — 2 Prominent Cards for Professional & Business (100px left & right breathing space) */}
-      <div className="w-full px-4 sm:px-8 md:px-[60px] lg:px-[100px]">
+      {/* Pricing Cards Grid — 2 Prominent Cards for Professional & Business (150px left & right breathing space) */}
+      <div className="w-full px-4 sm:px-8 md:px-[80px] lg:px-[150px]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full items-stretch">
         {plans.map((plan) => {
           const isBusiness = plan.id === "business";
