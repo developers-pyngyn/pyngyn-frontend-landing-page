@@ -58,17 +58,68 @@ export const ProductCameraController: React.FC<ProductCameraControllerProps> = (
   // Predefined target offsets in standard 1440x880 canvas coordinate space
   // Completely eliminates dynamic bounding box jitter during CSS transform animations
   const KNOWN_TARGET_CENTERS: Record<string, { x: number; y: number }> = {
-    'task-row-task-gstr1': { x: 740, y: 295 },
+    'task-row-task-gstr1': { x: 740, y: 300 },
     'task-row-task-gstr3b': { x: 740, y: 350 },
-    'status-dropdown': { x: 810, y: 335 },
-    'status-pill-task-gstr1': { x: 810, y: 295 },
-    'status-pill-task-gstr3b': { x: 810, y: 350 },
-    'workflow-celebration-popup': { x: 720, y: 340 },
+    'status-dropdown': { x: 760, y: 390 },
+    'status-pill-task-gstr1': { x: 760, y: 300 },
+    'status-pill-task-gstr3b': { x: 760, y: 350 },
+    'workflow-celebration-popup': { x: 720, y: 310 },
     'kanban-card-card-gstr1': { x: 420, y: 320 },
     'kanban-column-this-week': { x: 620, y: 360 },
     'workload-capacity': { x: 680, y: 160 },
     'workload-team': { x: 920, y: 440 },
     'workload-nikhil': { x: 920, y: 400 },
+    'calendar-today': { x: 820, y: 420 },
+    'calendar-gstr3b': { x: 720, y: 380 },
+    'calendar-adv-tax': { x: 620, y: 340 },
+  };
+
+  // Motion overrides when reduced motion is preferred
+  const activeScale = prefersReducedMotion ? 1 : scale;
+
+  /**
+   * Mathematically bounded camera pan calculator.
+   * Ensures that scaling around 50% 50% NEVER detaches from any edge of the viewport
+   * (top <= 0, bottom >= nativeHeight, left <= 0, right >= nativeWidth), completely
+   * eliminating any empty space above or around the mockup canvas during camera zooms.
+   */
+  const computeSafePan = (
+    targetX: number,
+    targetY: number,
+    currentScale: number
+  ): { x: number; y: number } => {
+    if (currentScale <= 1.001) {
+      return { x: 0, y: 0 };
+    }
+
+    const cx = nativeWidth / 2;
+    const cy = nativeHeight / 2;
+
+    // Hard boundary clamps for scale > 1 around center (cx, cy):
+    // top = (1 - scale) * cy + panY <= 0  ==> panY <= (scale - 1) * cy
+    // bottom = (1 + scale) * cy + panY >= 2 * cy ==> panY >= -(scale - 1) * cy
+    // left = (1 - scale) * cx + panX <= 0 ==> panX <= (scale - 1) * cx
+    // right = (1 + scale) * cx + panX >= 2 * cx ==> panX >= -(scale - 1) * cx
+    const maxPanX = Math.max(0, (currentScale - 1) * cx);
+    const maxPanY = Math.max(0, (currentScale - 1) * cy);
+
+    // Frame the target smoothly towards the viewport center
+    const desiredPanX = (cx - targetX) * 0.65;
+    const desiredPanY = (cy - targetY) * 0.55;
+
+    // For desktop application mockups, we never want the top of the canvas to sag downward
+    // away from the browser chrome header (which leaves an empty gap above).
+    // By keeping panY <= maxPanY * 0.35, top is guaranteed <= -0.65 * maxPanY < 0.
+    const safeMaxPanY = maxPanY * 0.35;
+    const safeMinPanY = -maxPanY;
+
+    const clampedX = Math.max(-maxPanX, Math.min(maxPanX, desiredPanX));
+    const clampedY = Math.max(safeMinPanY, Math.min(safeMaxPanY, desiredPanY));
+
+    return {
+      x: Math.round(clampedX),
+      y: Math.round(clampedY),
+    };
   };
 
   // Target centering with 0ms deterministic calculation & safe boundaries
@@ -81,11 +132,7 @@ export const ProductCameraController: React.FC<ProductCameraControllerProps> = (
     // 1. Instant deterministic lookup
     if (KNOWN_TARGET_CENTERS[activeTarget]) {
       const target = KNOWN_TARGET_CENTERS[activeTarget];
-      const targetPanX = Math.round(nativeWidth / 2 - target.x);
-      const targetPanY = Math.round(nativeHeight / 2 - target.y);
-      const clampedPanX = Math.max(-200, Math.min(200, targetPanX));
-      const clampedPanY = Math.max(-130, Math.min(130, targetPanY));
-      setComputedPan({ x: clampedPanX, y: clampedPanY });
+      setComputedPan(computeSafePan(target.x, target.y, activeScale));
       return;
     }
 
@@ -107,20 +154,13 @@ export const ProductCameraController: React.FC<ProductCameraControllerProps> = (
       const targetCenterX = left + targetEl.offsetWidth / 2;
       const targetCenterY = top + targetEl.offsetHeight / 2;
 
-      const targetPanX = Math.round(nativeWidth / 2 - targetCenterX);
-      const targetPanY = Math.round(nativeHeight / 2 - targetCenterY);
-
-      const clampedPanX = Math.max(-200, Math.min(200, targetPanX));
-      const clampedPanY = Math.max(-130, Math.min(130, targetPanY));
-
-      setComputedPan({ x: clampedPanX, y: clampedPanY });
+      setComputedPan(computeSafePan(targetCenterX, targetCenterY, activeScale));
     } else {
       setComputedPan({ x: panX, y: panY });
     }
-  }, [activeTarget, panX, panY, nativeWidth, nativeHeight]);
+  }, [activeTarget, activeScale, panX, panY, nativeWidth, nativeHeight]);
 
   // Motion overrides when reduced motion is preferred
-  const activeScale = prefersReducedMotion ? 1 : scale;
   const effectivePanX = prefersReducedMotion ? 0 : computedPan.x;
   const effectivePanY = prefersReducedMotion ? 0 : computedPan.y;
 
@@ -156,7 +196,7 @@ export const ProductCameraController: React.FC<ProductCameraControllerProps> = (
           transition={
             prefersReducedMotion
               ? { duration: 0 }
-              : { duration: 0.52, ease: [0.22, 1, 0.36, 1] }
+              : { duration: 0.62, ease: [0.16, 1, 0.3, 1] }
           }
           style={{
             transformOrigin: '50% 50%',

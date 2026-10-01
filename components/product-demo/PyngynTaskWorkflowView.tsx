@@ -34,17 +34,17 @@ export const PyngynTaskWorkflowView: React.FC<PyngynTaskWorkflowViewProps> = ({
     if (!autoPlay || prefersReducedMotion) return;
 
     const timings = [
-      1500, // 0: overview baseline
-      1100, // 1: focus row
-      950,  // 2: open dropdown
-      900,  // 3: select option
-      1200, // 4: state update + effort bar
-      2400, // 5: celebration popup & verification
-      1300, // 6: pullback to overview
+      1800, // 0: overview baseline (full dashboard context)
+      1500, // 1: focus overdue task row (tight cinematic zoom onto filing row)
+      1200, // 2: open status dropdown
+      1100, // 3: select "Internal Review"
+      1600, // 4: state update + effort bar fill
+      2600, // 5: celebration popup & verification confirmation
+      1800, // 6: smooth pullback to full overview
     ];
 
     let timer: NodeJS.Timeout;
-    const duration = timings[stepIndex] || 2400;
+    const duration = timings[stepIndex] || 2500;
 
     timer = setTimeout(() => {
       setStepIndex((prev) => (prev + 1) % timings.length);
@@ -53,21 +53,21 @@ export const PyngynTaskWorkflowView: React.FC<PyngynTaskWorkflowViewProps> = ({
     return () => clearTimeout(timer);
   }, [stepIndex, autoPlay, prefersReducedMotion]);
 
-  // Dynamic Camera parameters: steady, elegant, jitter-free
+  // Dynamic Camera parameters: prominent, legible, jitter-free with zero top whitespace gap
   let cameraScale = 1.0;
   let activeTarget: string | undefined = undefined;
 
   if (stepIndex === 1) {
-    cameraScale = 1.04;
+    cameraScale = 1.24;
     activeTarget = workflowMode === 'gstr1' ? 'task-row-task-gstr1' : 'task-row-task-gstr3b';
   } else if (stepIndex === 2 || stepIndex === 3) {
-    cameraScale = 1.06;
+    cameraScale = 1.28;
     activeTarget = 'status-dropdown';
   } else if (stepIndex === 4) {
-    cameraScale = 1.06;
+    cameraScale = 1.26;
     activeTarget = workflowMode === 'gstr1' ? 'status-pill-task-gstr1' : 'status-pill-task-gstr3b';
   } else if (stepIndex === 5) {
-    cameraScale = 1.07;
+    cameraScale = 1.22;
     activeTarget = 'workflow-celebration-popup';
   } else if (stepIndex === 6) {
     cameraScale = 1.0;
