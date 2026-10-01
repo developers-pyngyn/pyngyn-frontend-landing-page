@@ -16,7 +16,7 @@ const path = require('path');
 console.log('Running @cloudflare/next-on-pages for Cloudflare Pages deployment...');
 try {
   execSync('npx @cloudflare/next-on-pages@1', { stdio: 'inherit' });
-  const staticDir = path.resolve(__dirname, '..', '.vercel', 'output', 'static');
+  const staticDir = path.resolve(process.cwd(), '.vercel', 'output', 'static');
   if (fs.existsSync(staticDir)) {
     fs.writeFileSync(path.join(staticDir, '.assetsignore'), ['_worker.js', '_routes.json', 'nop-build-log.json', ''].join(String.fromCharCode(10)));
   }
