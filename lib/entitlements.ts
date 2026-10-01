@@ -117,7 +117,7 @@ export const PLAN_ENTITLEMENTS: Record<PlanTierId, PlanEntitlement> = {
     id: "business",
     name: "Pyngyn Business",
     badge: "Most Popular for Growing Firms",
-    tagline: "Everything + automation, analytics, advanced permissions, AI, practice-level reporting.",
+    tagline: "Everything + analytics, advanced permissions, AI, practice-level reporting.",
     limits: {
       maxClients: "unlimited",
       maxAutomations: "unlimited",

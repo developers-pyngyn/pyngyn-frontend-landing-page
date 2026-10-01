@@ -31,7 +31,7 @@ Pyngyn auto-detects the visitor's country and displays single regional pricing w
   - Australia: A$44 / user / month (A$36 / mo billed annually)
   - UAE: AED 109 / user / month (AED 89 / mo billed annually)
   - What is included: Tasks, projects, client spaces, collaboration, firm knowledge base, standard workflows, and client communication.
-  - Plan Capacity: Up to 25 Active Client Portfolios, 25 GST & 25 Income Tax Clients, 25 GB Bank-Grade Encrypted Document Vault, 15 Active Automation Rules, Unlimited Client Portal Guests.
+  - Plan Capacity: Up to 25 Active Client Portfolios, 25 GB Bank-Grade Encrypted Document Vault, Unlimited Client Portal Guests.
   - Target: Boutique CA practices, growing audit & tax firms, and independent accounting practitioners.
 
 - **Pyngyn Business — ₹1,599 / user / month (or ₹1,279 / user / month billed annually, save 20%)**:
@@ -40,8 +40,8 @@ Pyngyn auto-detects the visitor's country and displays single regional pricing w
   - Canada: C$65 / user / month (C$52 / mo billed annually)
   - Australia: A$75 / user / month (A$62 / mo billed annually)
   - UAE: AED 179 / user / month (AED 145 / mo billed annually)
-  - What is included: Everything in Professional PLUS automation, analytics, advanced permissions, AI, and practice-level reporting.
-  - Advanced Features: Workload Cockpit (capacity meters & 1-click auto-rebalance), 4-Eye Partner Review Gates (maker-checker sign-off protocol), AI Project Plan & Workflow Builder, AI Status Reports & Risk Detection, Practice-Level Executive Dashboards, 100 GB Bank-Grade Encrypted Vault, Unlimited Portfolios & Workflows, Unlimited Automation Rules, Priority Support.
+  - What is included: Everything in Professional PLUS analytics, advanced permissions, AI, and practice-level reporting.
+  - Advanced Features: Workload Cockpit (capacity meters & 1-click auto-rebalance), 4-Eye Partner Review Gates (maker-checker sign-off protocol), AI Project Plan & Workflow Builder, AI Status Reports & Risk Detection, Practice-Level Executive Dashboards, 100 GB Bank-Grade Encrypted Vault, Unlimited Portfolios & Workflows, Priority Support.
   - Target: Multi-partner CA partnerships, high-velocity corporate tax advisory firms, and statutory audit teams.
 
 - **Enterprise**: Custom deployment for national CA networks and multi-branch practices with custom storage and dedicated migration. Contact practice advisory.
@@ -54,7 +54,7 @@ Pyngyn is the unified practice operating system and client portal software purpo
 ### How much does Pyngyn cost?
 Pyngyn offers two straightforward tiers:
 1. **Pyngyn Professional**: ₹999/user/month (or ₹799/user/month billed annually) in India, and $29/user/month ($24 billed annually) internationally. Includes tasks, projects, client spaces, collaboration, knowledge, workflows, and client communication.
-2. **Pyngyn Business**: ₹1,599/user/month (or ₹1,279/user/month billed annually) in India, and $49/user/month ($39 billed annually) internationally. Includes everything in Professional plus automation, workload analytics, advanced permissions, AI workflow builder, and practice-level reporting.
+2. **Pyngyn Business**: ₹1,599/user/month (or ₹1,279/user/month billed annually) in India, and $49/user/month ($39 billed annually) internationally. Includes everything in Professional plus workload analytics, advanced permissions, AI workflow builder, and practice-level reporting.
 
 ### Is there a free trial?
 Yes. Pyngyn offers a full-featured 7-day free trial on all plans. No credit card is required to sign up.

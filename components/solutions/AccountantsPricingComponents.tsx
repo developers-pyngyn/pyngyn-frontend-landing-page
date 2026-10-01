@@ -150,7 +150,7 @@ export function AccountantsPricingSection() {
                 </li>
                 <li className="flex items-center gap-2.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
-                  <span>Client communication & email intake</span>
+                  <span>Client communication &amp; portal messaging</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
@@ -174,7 +174,7 @@ export function AccountantsPricingSection() {
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-bold text-accent">Pyngyn Business</h3>
               </div>
-              <p className="text-xs text-muted mt-1">Everything + automation, analytics, permissions & AI.</p>
+              <p className="text-xs text-muted mt-1">Everything + analytics, permissions &amp; AI.</p>
               <div className="mt-4 flex items-baseline gap-1">
                 <span className="font-display text-[32px] sm:text-[36px] font-bold text-accent">{pricing.business}</span>
                 <span className="text-xs text-muted">/ user / month</span>
@@ -186,7 +186,7 @@ export function AccountantsPricingSection() {
                 </li>
                 <li className="flex items-center gap-2.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
-                  <span>Multi-step workflow automations & triggers</span>
+                  <span>Live effort tracking timers &amp; capacity meters</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
