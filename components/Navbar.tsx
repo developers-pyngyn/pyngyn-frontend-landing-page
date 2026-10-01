@@ -41,51 +41,51 @@ interface DropdownItem {
 
 const PRODUCT_MENU: DropdownItem[] = [
   {
-    name: "ClientSpace",
+    name: "ClientSpace Hub",
     desc: "The unified client workspace for modern accounting & CA firms",
-    href: "/#clientspace",
+    href: "/clientspace",
     icon: Building2,
     badge: "Core",
   },
   {
-    name: "Client Management",
-    desc: "Entity hierarchy, tax profiles, and compliance health status",
-    href: "/#client-management",
-    icon: Users,
-  },
-  {
-    name: "Task Management",
-    desc: "Statutory deadlines, effort meters, and 4-eye review gates",
-    href: "/#task-management",
-    icon: CheckSquare,
-  },
-  {
-    name: "Engagements",
-    desc: "Fixed-fee retainers, corporate audit milestones & deliverables",
-    href: "/#engagements",
-    icon: Briefcase,
-  },
-  {
     name: "Client Portal",
-    desc: "White-labeled, password-less client collaboration portal",
-    href: "/#client-portal",
+    desc: "White-labeled, frictionless magic-link client collaboration portal",
+    href: "/clientspace/branded-portal",
     icon: Layout,
   },
   {
-    name: "Documents",
-    desc: "Bank-encrypted file collection, versioning & e-signatures",
-    href: "/#documents",
+    name: "Secure Documents",
+    desc: "Bank-encrypted file collection, versioning & secure vault",
+    href: "/clientspace/secure-documents",
     icon: ShieldCheck,
   },
   {
-    name: "Automations",
-    desc: "Automated document chase, WhatsApp reminders & alerts",
-    href: "/#automations",
+    name: "Task & Review Gates",
+    desc: "Statutory task execution, effort tracking & 4-eye review gates",
+    href: "/clientspace/approvals",
+    icon: CheckSquare,
+  },
+  {
+    name: "Deadline & Risk Radar",
+    desc: "Proactive statutory deadline monitoring & risk detection",
+    href: "/benefits/risk-detection",
     icon: Zap,
   },
   {
+    name: "Practice Reporting",
+    desc: "Executive partner dashboards & practice throughput metrics",
+    href: "/benefits/reporting",
+    icon: BarChart3,
+  },
+  {
+    name: "Interactive Tour",
+    desc: "Explore live interactive client & task workspace tour",
+    href: "/#tour",
+    icon: Users,
+  },
+  {
     name: "Integrations",
-    desc: "Tally, Computax, Zoho Books, QuickBooks, Slack & Calendars",
+    desc: "Connects with Google Calendar, Drive, Gmail, Slack & spreadsheets",
     href: "/integrations",
     icon: Plug,
   },
@@ -172,6 +172,7 @@ export function Navbar() {
   const [mobileExpandedSection, setMobileExpandedSection] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastMouseEnterTime = useRef<number>(0);
 
   // Scroll detection
   useEffect(() => {
@@ -207,6 +208,7 @@ export function Navbar() {
 
   const handleMouseEnter = (name: string) => {
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    lastMouseEnterTime.current = Date.now();
     setActiveDropdown(name);
   };
 
@@ -214,6 +216,18 @@ export function Navbar() {
     closeTimeoutRef.current = setTimeout(() => {
       setActiveDropdown(null);
     }, 180);
+  };
+
+  const handleDropdownButtonClick = (e: React.MouseEvent, name: string) => {
+    e.stopPropagation();
+    if (activeDropdown === name) {
+      if (Date.now() - lastMouseEnterTime.current < 350) {
+        return;
+      }
+      setActiveDropdown(null);
+    } else {
+      setActiveDropdown(name);
+    }
   };
 
   return (
@@ -228,7 +242,7 @@ export function Navbar() {
       <div className="wrap flex h-[70px] items-center justify-between">
         {/* Brand Logo: Pyngyn is the brand name */}
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center" aria-label="Pyngyn Home">
+          <Link href="/" prefetch={true} className="flex items-center" aria-label="Pyngyn Home">
             <Image
               src="/logo.webp"
               alt="Pyngyn"
@@ -248,9 +262,8 @@ export function Navbar() {
               onMouseLeave={handleMouseLeave}
             >
               <button
-                onClick={() =>
-                  setActiveDropdown(activeDropdown === "product" ? null : "product")
-                }
+                type="button"
+                onClick={(e) => handleDropdownButtonClick(e, "product")}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-colors ${
                   activeDropdown === "product"
                     ? "text-[#14223d] bg-slate-100 font-semibold"
@@ -277,6 +290,7 @@ export function Navbar() {
                         <Link
                           key={item.name}
                           href={item.href}
+                          prefetch={true}
                           onClick={() => setActiveDropdown(null)}
                           className="group flex items-start gap-3 rounded-xl p-2.5 hover:bg-slate-50 transition-colors"
                         >
@@ -311,9 +325,8 @@ export function Navbar() {
               onMouseLeave={handleMouseLeave}
             >
               <button
-                onClick={() =>
-                  setActiveDropdown(activeDropdown === "solutions" ? null : "solutions")
-                }
+                type="button"
+                onClick={(e) => handleDropdownButtonClick(e, "solutions")}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-colors ${
                   activeDropdown === "solutions"
                     ? "text-[#14223d] bg-slate-100 font-semibold"
@@ -340,6 +353,7 @@ export function Navbar() {
                         <Link
                           key={item.name}
                           href={item.href}
+                          prefetch={true}
                           onClick={() => setActiveDropdown(null)}
                           className="group flex items-start gap-3 rounded-xl p-2.5 hover:bg-slate-50 transition-colors"
                         >
@@ -370,6 +384,7 @@ export function Navbar() {
             {/* Features Link */}
             <Link
               href="/#features"
+              prefetch={true}
               className="px-3 py-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition-colors"
             >
               Features
@@ -382,9 +397,8 @@ export function Navbar() {
               onMouseLeave={handleMouseLeave}
             >
               <button
-                onClick={() =>
-                  setActiveDropdown(activeDropdown === "resources" ? null : "resources")
-                }
+                type="button"
+                onClick={(e) => handleDropdownButtonClick(e, "resources")}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-colors ${
                   activeDropdown === "resources"
                     ? "text-[#14223d] bg-slate-100 font-semibold"
@@ -411,6 +425,7 @@ export function Navbar() {
                         <Link
                           key={item.name}
                           href={item.href}
+                          prefetch={true}
                           onClick={() => setActiveDropdown(null)}
                           className="group flex items-start gap-3 rounded-xl p-2.5 hover:bg-slate-50 transition-colors"
                         >
@@ -436,6 +451,7 @@ export function Navbar() {
             {/* Pricing */}
             <Link
               href="/pricing"
+              prefetch={true}
               className="px-3 py-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition-colors"
             >
               Pricing
@@ -451,12 +467,13 @@ export function Navbar() {
           >
             Login
           </a>
-          <a
+          <Link
             href={DEMO_URL}
+            prefetch={true}
             className="btn btn-ghost text-[13.5px] px-3.5 py-2 border-slate-300"
           >
             Book a Demo
-          </a>
+          </Link>
           <a
             href={SIGNUP_URL}
             className="btn btn-accent text-[13.5px] px-4 py-2"
@@ -510,6 +527,7 @@ export function Navbar() {
                         <Link
                           key={item.name}
                           href={item.href}
+                          prefetch={true}
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center gap-2 text-[13.5px] font-medium text-slate-600 hover:text-[#14223d] py-1"
                         >
@@ -525,6 +543,7 @@ export function Navbar() {
               {/* Solutions Section */}
               <div>
                 <button
+                  type="button"
                   onClick={() =>
                     setMobileExpandedSection(
                       mobileExpandedSection === "solutions" ? null : "solutions"
@@ -547,6 +566,7 @@ export function Navbar() {
                         <Link
                           key={item.name}
                           href={item.href}
+                          prefetch={true}
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center gap-2 text-[13.5px] font-medium text-slate-600 hover:text-[#14223d] py-1"
                         >
@@ -562,6 +582,7 @@ export function Navbar() {
               {/* Features Link */}
               <Link
                 href="/#features"
+                prefetch={true}
                 onClick={() => setMobileMenuOpen(false)}
                 className="block py-2 text-[15px] font-bold text-slate-900"
               >
@@ -571,6 +592,7 @@ export function Navbar() {
               {/* Resources Section */}
               <div>
                 <button
+                  type="button"
                   onClick={() =>
                     setMobileExpandedSection(
                       mobileExpandedSection === "resources" ? null : "resources"
@@ -593,6 +615,7 @@ export function Navbar() {
                         <Link
                           key={item.name}
                           href={item.href}
+                          prefetch={true}
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center gap-2 text-[13.5px] font-medium text-slate-600 hover:text-[#14223d] py-1"
                         >
@@ -608,6 +631,7 @@ export function Navbar() {
               {/* Pricing */}
               <Link
                 href="/pricing"
+                prefetch={true}
                 onClick={() => setMobileMenuOpen(false)}
                 className="block py-2 text-[15px] font-bold text-slate-900"
               >
@@ -622,12 +646,14 @@ export function Navbar() {
                 >
                   Login
                 </a>
-                <a
+                <Link
                   href={DEMO_URL}
+                  prefetch={true}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="btn btn-primary w-full text-center py-2.5"
                 >
                   Book a Demo
-                </a>
+                </Link>
                 <a
                   href={SIGNUP_URL}
                   className="btn btn-accent w-full text-center py-2.5"

@@ -15,6 +15,11 @@ import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SIGNUP_URL, PRICING_URL } from "@/components/config";
 import {
+  AccountantsPricingProvider,
+  AccountantsPricingSection,
+  AccountantsPriceTag,
+} from "@/components/solutions/AccountantsPricingComponents";
+import {
   OG_IMAGE,
   JsonLd,
   breadcrumbSchema,
@@ -128,7 +133,7 @@ const FAQS: { q: string; a: string }[] = [
 
 export default function AccountantsPage() {
   return (
-    <>
+    <AccountantsPricingProvider>
       <JsonLd
         data={[
           webPageSchema({
@@ -179,7 +184,7 @@ export default function AccountantsPage() {
             </Link>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Pro starts at ₹499/mo ($29/mo) · Built for Indian CA &amp; global accounting practices · No credit card required
+            Pro starts at <AccountantsPriceTag type="pro" />/user/mo · Built for CA &amp; global accounting practices · No credit card required
           </p>
         </section>
 
@@ -259,139 +264,8 @@ export default function AccountantsPage() {
           </div>
         </section>
 
-        {/* ===== Static Practice Pricing Summary ======================== */}
-        <section className="section bg-[#fbfbfd]">
-          <div className="wrap text-center">
-            <span className="eyebrow">Practice Pricing</span>
-            <h2 className="mt-3 font-display text-[clamp(26px,3.4vw,38px)] font-semibold tracking-[-0.02em] text-ink">
-              Transparent, practice-friendly plans.
-            </h2>
-            <p className="lead mx-auto mt-3 max-w-[580px]">
-              No per-client penalty fees. No hidden implementation charges. Scale your firm with confidence.
-            </p>
-
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-[960px] mx-auto text-left">
-              {/* Pro Card */}
-              <div className="rounded-2xl border border-line bg-white p-7 shadow-card flex flex-col justify-between">
-                <div>
-                  <h3 className="text-lg font-bold text-ink">ClientSpace Pro</h3>
-                  <p className="text-xs text-muted mt-1">Essential statutory task tracking &amp; client portal.</p>
-                  <div className="mt-4 flex items-baseline gap-1">
-                    <span className="font-display text-[32px] font-bold text-ink">₹499</span>
-                    <span className="text-xs text-muted">/ user / mo (or $29 global)</span>
-                  </div>
-                  <ul className="mt-5 space-y-2.5 text-[13.5px] text-slate-600">
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span>Statutory due date tracker</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span>White-labeled client portal</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span>PBC document request checklists</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span>DSC expiry register</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="mt-6 pt-4 border-t border-line">
-                  <a href={SIGNUP_URL} className="btn btn-ghost w-full justify-center">
-                    Start 7-day free trial
-                  </a>
-                </div>
-              </div>
-
-              {/* Business Card */}
-              <div className="rounded-2xl border-2 border-accent bg-accent/5 p-7 shadow-soft flex flex-col justify-between relative">
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-white">
-                  Most Popular for CAs
-                </span>
-                <div>
-                  <h3 className="text-lg font-bold text-accent">ClientSpace Business</h3>
-                  <p className="text-xs text-muted mt-1">Full practice operating system &amp; review workflows.</p>
-                  <div className="mt-4 flex items-baseline gap-1">
-                    <span className="font-display text-[32px] font-bold text-accent">₹799</span>
-                    <span className="text-xs text-muted">/ user / mo (or $49 global)</span>
-                  </div>
-                  <ul className="mt-5 space-y-2.5 text-[13.5px] text-slate-700">
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span className="font-semibold">Everything in Pro, plus:</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span>Practice Workload Cockpit</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span>4-eye partner review gates</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span>WhatsApp automated document chase</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span>Tally &amp; accounting software sync</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="mt-6 pt-4 border-t border-accent/20">
-                  <a href={SIGNUP_URL} className="btn btn-accent w-full justify-center">
-                    Start 7-day free trial
-                  </a>
-                </div>
-              </div>
-
-              {/* Enterprise Card */}
-              <div className="rounded-2xl border border-line bg-white p-7 shadow-card flex flex-col justify-between sm:col-span-2 lg:col-span-1">
-                <div>
-                  <h3 className="text-lg font-bold text-ink">Enterprise</h3>
-                  <p className="text-xs text-muted mt-1">Multi-branch CA partnerships &amp; large firms.</p>
-                  <div className="mt-4 flex items-baseline gap-1">
-                    <span className="font-display text-[32px] font-bold text-ink">Custom</span>
-                    <span className="text-xs text-muted">annual agreement</span>
-                  </div>
-                  <ul className="mt-5 space-y-2.5 text-[13.5px] text-slate-600">
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span>Multi-branch practice partitions</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span>Dedicated practice data migration</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span>Enterprise SSO &amp; SAML</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                      <span>99.9% uptime SLA &amp; account partner</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="mt-6 pt-4 border-t border-line">
-                  <a href={DEMO_URL} className="btn btn-primary w-full justify-center">
-                    Book a demo
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8">
-              <Link href={PRICING_URL} className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline">
-                <span>View full currency breakdown &amp; regional pricing</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
+        {/* ===== Practice Pricing (Auto-detected per region) ======================== */}
+        <AccountantsPricingSection />
 
         {/* ===== FAQs ================================================== */}
         <section className="section">
@@ -425,6 +299,6 @@ export default function AccountantsPage() {
       </main>
 
       <Footer />
-    </>
+    </AccountantsPricingProvider>
   );
 }

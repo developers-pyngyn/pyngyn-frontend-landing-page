@@ -24,7 +24,22 @@ import {
 import { type MarketCode } from "@/lib/pricing/config";
 
 export function ClientSpacePricing() {
-  const [market, setMarket] = useState<MarketCode>("IN");
+  const [market, setMarket] = useState<MarketCode>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+        if (tz.includes("Calcutta") || tz.includes("Kolkata") || tz.includes("Asia/Kolkata")) return "IN";
+        if (tz.includes("London") || tz.includes("Europe/London")) return "GB";
+        if (tz.includes("Toronto") || tz.includes("Vancouver") || tz.includes("Montreal") || tz.includes("Edmonton")) return "CA";
+        if (tz.includes("Sydney") || tz.includes("Melbourne") || tz.includes("Brisbane")) return "AU";
+        if (tz.includes("Dubai")) return "AE";
+        if (tz.includes("America") || tz.includes("US")) return "US";
+      } catch {
+        return "IN";
+      }
+    }
+    return "IN";
+  });
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 

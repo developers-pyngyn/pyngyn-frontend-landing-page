@@ -670,7 +670,7 @@ export function IntegrationsSection() {
   ];
 
   return (
-    <section id="features" className="section bg-white border-b border-slate-200">
+    <section id="integrations" className="section bg-white border-b border-slate-200">
       <div className="wrap">
         <div className="mx-auto max-w-[760px] text-center">
           <span className="eyebrow">Integrations</span>
@@ -946,12 +946,13 @@ export function FinalCTASection() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <a
+            <Link
               href={DEMO_URL}
+              prefetch={true}
               className="btn btn-accent text-[15px] px-7 py-3.5 shadow-cta font-bold"
             >
               Book a 30-Min Demo
-            </a>
+            </Link>
             <a
               href={SIGNUP_URL}
               className="btn bg-white/10 hover:bg-white/20 text-white border border-white/20 text-[15px] px-6 py-3.5 font-semibold"
@@ -961,8 +962,7 @@ export function FinalCTASection() {
           </div>
 
           <p className="mt-4 text-[12.5px] text-slate-400">
-            Plans starting from ₹499/mo ($14/mo) · 7-day free trial · 30-minute tailored practice
-            walkthrough
+            Plans starting from ₹999/user/mo · 7-day free trial · 30-minute tailored practice walkthrough
           </p>
         </div>
       </div>

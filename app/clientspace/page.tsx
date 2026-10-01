@@ -172,7 +172,7 @@ const VERTICALS: { label: string; href: string; line: string }[] = [
 const FAQS: { q: string; a: string }[] = [
   { q: "What is client portal software, and why does my firm need it?", a: "Client portal software gives your clients a dedicated, branded workspace to view real-time project milestones, exchange confidential documents, review invoices, and approve deliverables. Instead of chasing email threads, clients can self-serve status updates 24/7." },
   { q: "What is Pyngyn ClientSpace?", a: "Pyngyn ClientSpace is secure client portal software purpose-built for professional services, CA practices, and accounting firms. Each client receives their own private, white-labeled portal with bank-grade encryption and passwordless magic links." },
-  { q: "How much does ClientSpace cost?", a: "ClientSpace offers transparent practice tiers starting at ₹499/mo ($14/mo) for Pro and ₹799/mo ($24/mo) for Business, with annual billing discounts and regional pricing in INR, USD, GBP, CAD, AUD, and AED. All plans include unlimited client guests, secure document vaults, approvals, and a 7-day free trial with no credit card required." },
+  { q: "How much does ClientSpace cost?", a: "Pyngyn ClientSpace offers transparent practice tiers starting at ₹999/user/month for Professional and ₹1,599/user/month for Business, with annual billing discounts and regional pricing automatically detected for your country. All plans include client spaces, secure document vaults, approvals, and a 7-day free trial with no credit card required." },
   { q: "Is Pyngyn a secure client portal software solution?", a: "Yes. All client data and documents are protected with AES-256 encryption at rest and TLS 1.3 in transit. ClientSpace includes role-based access control, comprehensive audit logging, and strict data isolation between clients." },
   { q: "Do my clients need to create an account or remember a password?", a: "No. Clients join with a one-click magic link, no password to remember and no login friction. Login frustration is the number-one reason client portals go unused, so we removed it entirely." },
   { q: "Is there a specialized client portal for accounting firms?", a: "Yes. Pyngyn provides tailored workflows for accounting and CA practices, including PBC document collection checklists, statutory deadline tracking, and multi-tier partner review sign-offs." },
@@ -197,7 +197,7 @@ export default function ClientspacePage() {
             url: "/clientspace",
             name: "Client Space | PYNGYN, the standalone branded client portal for professional-services firms",
             description:
-              "Give every client a branded portal where they see status, documents, and approvals 24/7 instead of emailing you. Transparent practice plans starting at ₹499/mo ($14/mo).",
+              "Give every client a branded portal where they see status, documents, and approvals 24/7 instead of emailing you. Transparent practice plans starting at ₹999/user/mo.",
             breadcrumbId: "/clientspace#breadcrumb",
           }),
           breadcrumbSchema(
@@ -229,11 +229,11 @@ export default function ClientspacePage() {
             and deliver the best client portal experience your clients deserve.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href={DEMO_URL} className="btn btn-accent">Book a demo</a>
+            <Link href={DEMO_URL} prefetch={true} className="btn btn-accent">Book a demo</Link>
             <a href={SIGNUP_URL} className="btn btn-primary">Start free trial</a>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Plans from <strong className="text-ink">₹499/mo</strong> (or <strong className="text-ink">$14/mo</strong>) · 7-day free trial · Clients join with one click
+            Plans from <strong className="text-ink">₹999/user/mo</strong> · 7-day free trial · Clients join with one click
           </p>
         </section>
 

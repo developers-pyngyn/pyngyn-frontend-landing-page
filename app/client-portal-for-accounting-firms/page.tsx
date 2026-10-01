@@ -93,7 +93,7 @@ const FAQS = [
   },
   {
     q: "What does Pyngyn ClientSpace cost for accounting practices?",
-    a: "ClientSpace pricing starts at ₹499 per user/month for the Pro practice plan (or $19 per client/month standalone), making it highly cost-effective for boutique CA firms and scaling accounting partnerships alike.",
+    a: "Pyngyn pricing starts at ₹999 per user/month for the Professional practice plan, making it highly cost-effective for boutique CA firms and scaling accounting partnerships alike.",
   },
 ];
 
@@ -137,18 +137,18 @@ export default function ClientPortalForAccountingFirmsPage() {
             and secure partner review sign-offs in a branded, bank-grade client portal.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3.5">
-            <a href={DEMO_URL} className="btn btn-accent">
+            <Link href={DEMO_URL} prefetch={true} className="btn btn-accent">
               Book a CA practice demo
-            </a>
+            </Link>
             <a href={SIGNUP_URL} className="btn btn-primary">
               Start 7-day free trial
             </a>
-            <Link href={PRICING_URL} className="btn btn-ghost">
+            <Link href={PRICING_URL} prefetch={true} className="btn btn-ghost">
               View practice pricing
             </Link>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Starting at ₹499/mo · Built for Indian CA &amp; global accounting practices · 1-click magic links
+            Starting at ₹999/user/mo · Built for CA &amp; accounting practices · 1-click magic links
           </p>
         </section>
 

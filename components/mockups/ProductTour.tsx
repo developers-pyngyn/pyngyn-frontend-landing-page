@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check } from "lucide-react";
 import { ClientWorkspaceMockup } from "./ClientWorkspaceMockup";
@@ -114,6 +114,46 @@ const TOUR_CONTENT: Record<TourTab, TabMeta> = {
 
 export function ProductTour() {
   const [activeTab, setActiveTab] = useState<TourTab>("Tasks");
+
+  useEffect(() => {
+    function handleHash() {
+      if (typeof window === "undefined") return;
+      const hash = window.location.hash.toLowerCase().replace("#", "");
+      if (!hash) return;
+
+      const map: Record<string, TourTab> = {
+        clients: "Clients",
+        "client-management": "Clients",
+        clientspace: "Clients",
+        tasks: "Tasks",
+        "task-management": "Tasks",
+        engagements: "Engagements",
+        documents: "Documents",
+        automations: "Automations",
+        "client-portal": "Client Portal",
+        portal: "Client Portal",
+        workload: "Workload",
+      };
+
+      if (map[hash]) {
+        setActiveTab(map[hash]);
+        const el = document.getElementById("tour") || document.getElementById("features");
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      } else if (hash === "tour" || hash === "features") {
+        const el = document.getElementById("tour") || document.getElementById("features");
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    }
+
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   const meta = TOUR_CONTENT[activeTab];
 
   return (

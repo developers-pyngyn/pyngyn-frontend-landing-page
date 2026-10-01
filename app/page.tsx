@@ -86,10 +86,12 @@ export default function Home() {
         {/* 3. Before / After Section (Busy Season Chaos vs Connected Workspace) */}
         <ProblemBeforeAfter />
 
-        {/* 3. Interactive Product Tour (7-in-1 Tabs: Clients, Tasks, Engagements, Documents, Automations, Portal, Workload) */}
-        <div id="tour">
-          <ProductTour />
-        </div>
+        {/* 3. Interactive Product Tour & Features (7-in-1 Tabs: Clients, Tasks, Engagements, Documents, Automations, Portal, Workload) */}
+        <section id="features" className="scroll-mt-20">
+          <div id="tour" className="scroll-mt-20">
+            <ProductTour />
+          </div>
+        </section>
 
         {/* 4. Integrations (Accounting ecosystem: Tally, Computax, QuickBooks, Drive, Calendar, WhatsApp) */}
         <IntegrationsSection />

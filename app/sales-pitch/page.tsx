@@ -425,12 +425,12 @@ export default function SalesPitchPage() {
               </div>
               <div className="mt-3 flex items-baseline gap-2">
                 <span className="font-display text-[44px] font-semibold leading-none tracking-[-0.02em]">
-                  $9
+                  ₹999
                 </span>
-                <span className="text-[14px] text-muted">per seat / month</span>
+                <span className="text-[14px] text-muted">/ user / month</span>
               </div>
               <div className="mt-1 text-[13.5px] text-muted">
-                Workspace · pair with Client Space ($19/client) or bundle for $24.99/mo
+                Professional plan · tasks, projects, client spaces, collaboration, workflows
               </div>
               <ul className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                 {PLAN_FEATURES.map((f) => (

@@ -26,10 +26,20 @@ export function AccountantsPricingProvider({
   initialMarket?: MarketCode;
   children: React.ReactNode;
 }) {
-  const [market, setMarket] = useState<MarketCode>(initialMarket);
+  const [market, setMarket] = useState<MarketCode>(() => {
+    if (typeof window !== "undefined") {
+      const client = detectClientMarket();
+      if (client && client !== "DEFAULT") return client;
+    }
+    return initialMarket;
+  });
 
   // Auto-detect visitor / VPN country via /api/geo/
   useEffect(() => {
+    if (typeof document !== "undefined" && document.cookie.includes("pyngyn_market")) {
+      document.cookie = "pyngyn_market=; Path=/; Max-Age=0; SameSite=Lax";
+    }
+
     fetch("/api/geo/")
       .then((res) => {
         if (!res.ok) throw new Error("geo fetch failed");
