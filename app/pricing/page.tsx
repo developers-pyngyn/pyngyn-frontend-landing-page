@@ -180,7 +180,7 @@ export default function PricingPage() {
         </section>
 
         {/* Pricing Matrix & Features */}
-        <section className="wrap pb-20">
+        <section className="w-full pb-20">
           <ClientSpacePricing />
         </section>
 

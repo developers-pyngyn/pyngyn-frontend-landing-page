@@ -128,8 +128,9 @@ export function ClientSpacePricing() {
         </div>
       </div>
 
-      {/* Pricing Cards Grid — 2 Prominent Cards for Professional & Business */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-5xl mx-auto items-stretch">
+      {/* Pricing Cards Grid — 2 Prominent Cards for Professional & Business (Full width with 10px margins) */}
+      <div className="w-full px-[10px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[10px] w-full items-stretch">
         {plans.map((plan) => {
           const isBusiness = plan.id === "business";
           const displayPrice =
@@ -274,10 +275,11 @@ export function ClientSpacePricing() {
             </div>
           );
         })}
+        </div>
       </div>
 
       {/* Feature Comparison Table Section */}
-      <section className="mt-24 max-w-6xl mx-auto">
+      <section className="mt-24 max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-10">
           <span className="text-xs font-bold text-[#14223d] tracking-wider uppercase bg-[#f0f4fa] px-3 py-1 rounded-full border border-[#14223d]/20">
             Side-by-Side Breakdown
@@ -350,7 +352,7 @@ export function ClientSpacePricing() {
       </section>
 
       {/* CA Firm Value Pillars */}
-      <section className="mt-20 max-w-6xl mx-auto">
+      <section className="mt-20 max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
             <div className="w-10 h-10 rounded-xl bg-[#f0f4fa] border border-[#14223d]/20 flex items-center justify-center text-[#14223d] mb-4">
@@ -385,7 +387,7 @@ export function ClientSpacePricing() {
       </section>
 
       {/* Frequently Asked Questions */}
-      <section className="mt-20 max-w-4xl mx-auto">
+      <section className="mt-20 max-w-4xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-10">
           <span className="text-xs font-bold text-[#14223d] tracking-wider uppercase bg-[#f0f4fa] px-3 py-1 rounded-full border border-[#14223d]/20">
             Frequently Asked Questions
