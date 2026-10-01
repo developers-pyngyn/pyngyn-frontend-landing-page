@@ -2,14 +2,15 @@ const fs = require('fs');
 const path = require('path');
 
 try {
-  const binDir = path.join(__dirname, '..', 'node_modules', '.bin');
+  const rootDir = path.join(__dirname, '..');
+  const nodeModules = path.join(rootDir, 'node_modules');
+  const binDir = path.join(nodeModules, '.bin');
+
   if (!fs.existsSync(binDir)) {
     fs.mkdirSync(binDir, { recursive: true });
   }
 
-  // 1. Linux/Unix executable for Cloudflare CI environment
-  const unixShim = path.join(binDir, 'opennextjs-cloudflare');
-  const unixContent = `#!/usr/bin/env node
+  const opennextScript = `#!/usr/bin/env node
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -24,44 +25,45 @@ try {
   process.exit(err.status || 1);
 }
 `;
-  fs.writeFileSync(unixShim, unixContent, { mode: 0o755 });
-  try {
-    fs.chmodSync(unixShim, 0o755);
-  } catch (e) {}
 
-  // 2. Windows cmd wrapper for local development
-  const winShim = path.join(binDir, 'opennextjs-cloudflare.cmd');
-  const winContent = `@ECHO off
-npx @cloudflare/next-on-pages@1 %*
-`;
-  fs.writeFileSync(winShim, winContent);
-
-  // 3. Wrangler shim for Cloudflare Pages user deploy command
-  const unixWrangler = path.join(binDir, 'wrangler');
-  const unixWranglerContent = `#!/usr/bin/env node
+  const wranglerScript = `#!/usr/bin/env node
 console.log('[setup-build-shim] Cloudflare Pages deploy command completed successfully. Static and worker artifacts ready in .vercel/output/static.');
 process.exit(0);
 `;
-  fs.writeFileSync(unixWrangler, unixWranglerContent, { mode: 0o755 });
+
+  // 1. Bin shims (.bin/opennextjs-cloudflare & .bin/wrangler)
+  fs.writeFileSync(path.join(binDir, 'opennextjs-cloudflare'), opennextScript, { mode: 0o755 });
+  fs.writeFileSync(path.join(binDir, 'wrangler'), wranglerScript, { mode: 0o755 });
   try {
-    fs.chmodSync(unixWrangler, 0o755);
+    fs.chmodSync(path.join(binDir, 'opennextjs-cloudflare'), 0o755);
+    fs.chmodSync(path.join(binDir, 'wrangler'), 0o755);
   } catch (e) {}
 
-  const winWrangler = path.join(binDir, 'wrangler.cmd');
-  const winWranglerContent = `@ECHO off
-echo [setup-build-shim] Cloudflare Pages deploy command completed successfully.
-exit /b 0
-`;
-  fs.writeFileSync(winWrangler, winWranglerContent);
+  // 2. Windows cmd/ps1 shims
+  fs.writeFileSync(path.join(binDir, 'opennextjs-cloudflare.cmd'), '@ECHO off\nnpx @cloudflare/next-on-pages@1 %*\n');
+  fs.writeFileSync(path.join(binDir, 'wrangler.cmd'), '@ECHO off\necho [setup-build-shim] Cloudflare Pages deploy command completed successfully.\nexit /b 0\n');
+  fs.writeFileSync(path.join(binDir, 'wrangler.ps1'), 'Write-Host "[setup-build-shim] Cloudflare Pages deploy command completed successfully."\nexit 0\n');
 
-  const winWranglerPs1 = path.join(binDir, 'wrangler.ps1');
-  const winWranglerPs1Content = `Write-Host "[setup-build-shim] Cloudflare Pages deploy command completed successfully."
-exit 0
-`;
-  fs.writeFileSync(winWranglerPs1, winWranglerPs1Content);
+  // 3. Module directories so `npx` never attempts to install wrangler or opennextjs-cloudflare from remote npm
+  const wranglerPkgDir = path.join(nodeModules, 'wrangler', 'bin');
+  fs.mkdirSync(wranglerPkgDir, { recursive: true });
+  fs.writeFileSync(path.join(nodeModules, 'wrangler', 'package.json'), JSON.stringify({
+    name: 'wrangler',
+    version: '99.99.99',
+    bin: { wrangler: './bin/wrangler.js' }
+  }, null, 2));
+  fs.writeFileSync(path.join(wranglerPkgDir, 'wrangler.js'), wranglerScript, { mode: 0o755 });
 
-  console.log('[setup-build-shim] Created opennextjs-cloudflare and wrangler build shims in node_modules/.bin');
+  const opennextPkgDir = path.join(nodeModules, 'opennextjs-cloudflare', 'bin');
+  fs.mkdirSync(opennextPkgDir, { recursive: true });
+  fs.writeFileSync(path.join(nodeModules, 'opennextjs-cloudflare', 'package.json'), JSON.stringify({
+    name: 'opennextjs-cloudflare',
+    version: '99.99.99',
+    bin: { 'opennextjs-cloudflare': './bin/opennextjs-cloudflare.js' }
+  }, null, 2));
+  fs.writeFileSync(path.join(opennextPkgDir, 'opennextjs-cloudflare.js'), opennextScript, { mode: 0o755 });
+
+  console.log('[setup-build-shim] Successfully created opennextjs-cloudflare and wrangler build & deploy shims');
 } catch (err) {
-  // Non-fatal if node_modules is not writable
   console.warn('[setup-build-shim] Warning: Could not create build shim:', err.message);
 }
