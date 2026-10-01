@@ -18,7 +18,7 @@ try {
   execSync('npx @cloudflare/next-on-pages@1', { stdio: 'inherit' });
   const staticDir = path.resolve(__dirname, '..', '.vercel', 'output', 'static');
   if (fs.existsSync(staticDir)) {
-    fs.writeFileSync(path.join(staticDir, '.assetsignore'), '_worker.js\n_routes.json\nnop-build-log.json\n');
+    fs.writeFileSync(path.join(staticDir, '.assetsignore'), ['_worker.js', '_routes.json', 'nop-build-log.json', ''].join(String.fromCharCode(10)));
   }
 } catch (err) {
   process.exit(err.status || 1);
