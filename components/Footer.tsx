@@ -165,7 +165,7 @@ export function Footer() {
         ],
       },
     ],
-    // Column 2: Solutions & Client Portals (10 links)
+    // Column 2: Solutions
     [
       {
         heading: "Practice Solutions",
@@ -175,17 +175,6 @@ export function Footer() {
           { label: "Tax Teams", href: "/solutions/tax-teams" },
           { label: "Audit Teams", href: "/solutions/audit-teams" },
           { label: "Compliance Teams", href: "/solutions/compliance-teams" },
-        ],
-      },
-      {
-        heading: "Client Portals",
-        links: [
-          { label: "CA Client Portal", href: "/client-portal-for-accounting-firms" },
-          { label: "Secure Client Portal", href: "/secure-client-portal" },
-          { label: "Client Portal Software", href: "/client-portal-software" },
-          { label: "Branded Portal", href: "/clientspace/branded-portal" },
-          { label: "Document Vault", href: "/clientspace/secure-documents" },
-          { label: "Client Approvals", href: "/clientspace/approvals" },
         ],
       },
     ],
@@ -199,7 +188,7 @@ export function Footer() {
         ],
       },
     ],
-    // Column 4: Resources (5 verified, live practice resources)
+    // Column 4: Resources & Legal
     [
       {
         heading: "Resources",
@@ -211,8 +200,16 @@ export function Footer() {
           { label: "Practice FAQ", href: "/#faq" },
         ],
       },
+      {
+        heading: "Legal",
+        links: [
+          { label: "Privacy Policy", href: PRIVACY_URL },
+          { label: "Terms of Service", href: TERMS_URL },
+          { label: "Refund Policy", href: REFUND_URL },
+        ],
+      },
     ],
-    // Column 5: Company & Legal (6 verified, live links)
+    // Column 5: Company & Client Portals
     [
       {
         heading: "Company",
@@ -223,11 +220,14 @@ export function Footer() {
         ],
       },
       {
-        heading: "Legal",
+        heading: "Client Portals",
         links: [
-          { label: "Privacy Policy", href: PRIVACY_URL },
-          { label: "Terms of Service", href: TERMS_URL },
-          { label: "Refund Policy", href: REFUND_URL },
+          { label: "CA Client Portal", href: "/client-portal-for-accounting-firms" },
+          { label: "Secure Client Portal", href: "/secure-client-portal" },
+          { label: "Client Portal Software", href: "/client-portal-software" },
+          { label: "Branded Portal", href: "/clientspace/branded-portal" },
+          { label: "Document Vault", href: "/clientspace/secure-documents" },
+          { label: "Client Approvals", href: "/clientspace/approvals" },
         ],
       },
     ],
