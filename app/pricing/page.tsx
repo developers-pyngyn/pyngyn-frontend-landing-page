@@ -10,13 +10,31 @@ import {
   breadcrumbSchema,
   productSchema,
   webPageSchema,
+  faqPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
+import { PRICING_FAQS } from "@/components/clientspace-pricing-data";
 
 export const metadata: Metadata = {
   title: "Pyngyn Pricing | Professional & Business Practice Plans",
   description:
-    "Transparent pricing for Chartered Accountants, tax practitioners, and audit firms. Professional plan at ₹999/mo and Business plan at ₹1,599/mo with workload cockpit & practice reporting.",
+    "Predictable pricing for Chartered Accountants, tax practitioners, and audit firms: Professional plan at ₹999/user/mo and Business plan at ₹1,599/user/mo with workload cockpit & practice reporting. 7-day free trial.",
   alternates: { canonical: "/pricing" },
+  openGraph: {
+    title: "Pyngyn Pricing | Professional & Business Practice Plans",
+    description:
+      "Predictable pricing for Chartered Accountants, tax practitioners, and audit firms: Professional plan at ₹999/user/mo and Business plan at ₹1,599/user/mo. 7-day free trial.",
+    url: "/pricing",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pyngyn Pricing | Professional & Business Practice Plans",
+    description:
+      "Predictable pricing for Chartered Accountants and audit firms: Professional at ₹999/user/mo and Business at ₹1,599/user/mo.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 export default function PricingPage() {
@@ -38,6 +56,7 @@ export default function PricingPage() {
             ],
             "/pricing"
           ),
+          faqPageSchema(PRICING_FAQS, "/pricing"),
           productSchema({
             url: "/pricing",
             name: "Pyngyn ClientSpace",
@@ -45,7 +64,7 @@ export default function PricingPage() {
               "The practice operating system for Chartered Accountants, tax practitioners, and audit firms: Professional plan at ₹999/user/month and Business plan at ₹1,599/user/month.",
             offers: [
               {
-                name: "Pyngyn Professional",
+                name: "Pyngyn Professional (India)",
                 priceMonthly: 999,
                 priceCurrency: "INR",
                 description:
@@ -53,9 +72,89 @@ export default function PricingPage() {
                 url: "/pricing",
               },
               {
-                name: "Pyngyn Business",
+                name: "Pyngyn Business (India)",
                 priceMonthly: 1599,
                 priceCurrency: "INR",
+                description:
+                  "Everything in Professional plus workload cockpit, review workflows, practice-level reporting, and advanced permissions.",
+                url: "/pricing",
+              },
+              {
+                name: "Pyngyn Professional (Global USD)",
+                priceMonthly: 29,
+                priceCurrency: "USD",
+                description:
+                  "Tasks, projects, client spaces, collaboration, knowledge, workflows, and client communication.",
+                url: "/pricing",
+              },
+              {
+                name: "Pyngyn Business (Global USD)",
+                priceMonthly: 49,
+                priceCurrency: "USD",
+                description:
+                  "Everything in Professional plus workload cockpit, review workflows, practice-level reporting, and advanced permissions.",
+                url: "/pricing",
+              },
+              {
+                name: "Pyngyn Professional (United Kingdom)",
+                priceMonthly: 24,
+                priceCurrency: "GBP",
+                description:
+                  "Tasks, projects, client spaces, collaboration, knowledge, workflows, and client communication.",
+                url: "/pricing",
+              },
+              {
+                name: "Pyngyn Business (United Kingdom)",
+                priceMonthly: 39,
+                priceCurrency: "GBP",
+                description:
+                  "Everything in Professional plus workload cockpit, review workflows, practice-level reporting, and advanced permissions.",
+                url: "/pricing",
+              },
+              {
+                name: "Pyngyn Professional (Canada)",
+                priceMonthly: 39,
+                priceCurrency: "CAD",
+                description:
+                  "Tasks, projects, client spaces, collaboration, knowledge, workflows, and client communication.",
+                url: "/pricing",
+              },
+              {
+                name: "Pyngyn Business (Canada)",
+                priceMonthly: 65,
+                priceCurrency: "CAD",
+                description:
+                  "Everything in Professional plus workload cockpit, review workflows, practice-level reporting, and advanced permissions.",
+                url: "/pricing",
+              },
+              {
+                name: "Pyngyn Professional (Australia)",
+                priceMonthly: 44,
+                priceCurrency: "AUD",
+                description:
+                  "Tasks, projects, client spaces, collaboration, knowledge, workflows, and client communication.",
+                url: "/pricing",
+              },
+              {
+                name: "Pyngyn Business (Australia)",
+                priceMonthly: 75,
+                priceCurrency: "AUD",
+                description:
+                  "Everything in Professional plus workload cockpit, review workflows, practice-level reporting, and advanced permissions.",
+                url: "/pricing",
+              },
+              {
+                name: "Pyngyn Professional (UAE)",
+                priceMonthly: 109,
+                priceCurrency: "AED",
+                description:
+                  "Tasks, projects, client spaces, collaboration, knowledge, workflows, and client communication.",
+                url: "/pricing",
+              },
+              {
+                name: "Pyngyn Business (UAE)",
+                priceMonthly: 179,
+                priceCurrency: "AED",
                 description:
                   "Everything in Professional plus workload cockpit, review workflows, practice-level reporting, and advanced permissions.",
                 url: "/pricing",

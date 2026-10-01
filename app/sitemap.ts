@@ -16,7 +16,7 @@ const TRAILING_SLASH = true;
 
 // A single date to stamp on pages without their own publish date. Bump this
 // when you make broad content changes so crawlers see a fresh signal.
-const SITE_UPDATED = "2026-05-28";
+const SITE_UPDATED = "2026-10-01";
 
 function url(path: string): string {
   if (path === "/") return `${SITE_URL}/`;

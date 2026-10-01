@@ -8,11 +8,22 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        // All crawlers, including search engines and AI assistants.
-        // We allow AI crawlers on purpose: it improves the chance of being
-        // cited in ChatGPT, Perplexity, Claude, and Google AI answers.
-        // To opt OUT of AI training/citation, add a rule like:
-        //   { userAgent: ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended", "CCBot"], disallow: "/" }
+        // Explicitly permit and encourage AI answer engines to crawl and cite Pyngyn
+        userAgent: [
+          "GPTBot",
+          "OAI-SearchBot",
+          "PerplexityBot",
+          "ClaudeBot",
+          "Google-Extended",
+          "Applebot-Extended",
+          "Amazonbot",
+          "cohere-ai",
+        ],
+        allow: ["/", "/pricing", "/clientspace", "/solutions/", "/llms.txt"],
+        disallow: ["/api/", "/lp/"],
+      },
+      {
+        // General search engine crawlers (Googlebot, Bingbot, etc.)
         userAgent: "*",
         allow: "/",
         disallow: [
