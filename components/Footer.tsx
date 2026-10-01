@@ -233,7 +233,7 @@ export function Footer() {
     ],
   ];
 
-  const compliance = ["DPIIT Recognized", "ISO 9001:2015 Certified", "DPDP (India)", "Encrypted", "SSO / SAML"];
+  const compliance = ["DPIIT Recognized", "ISO 9001:2015 Certified", "DPDP Aligned"];
   const legal: [string, string][] = [
     ["Privacy Policy", PRIVACY_URL],
     ["Terms of Service", TERMS_URL],
@@ -280,7 +280,8 @@ export function Footer() {
             </p>
             <p className="mt-2 text-[11.5px] leading-relaxed text-muted/80">
               DPIIT Recognized Startup<br />
-              ISO 9001:2015 Certified (QMS)
+              ISO 9001:2015 Certified (QMS)<br />
+              DPDP Aligned
             </p>
           </div>
 

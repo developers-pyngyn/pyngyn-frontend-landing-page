@@ -348,7 +348,7 @@ export function Integrations() {
 }
 
 export function Security() {
-  const items = ["DPIIT Recognized", "ISO 9001:2015 Certified", "DPDP (India) aligned", "Encrypted in transit & at rest", "SSO / SAML"];
+  const items = ["DPIIT Recognized", "ISO 9001:2015 Certified", "DPDP Aligned"];
   return (
     <section className="section">
       <div className="wrap max-w-[800px] text-center">
