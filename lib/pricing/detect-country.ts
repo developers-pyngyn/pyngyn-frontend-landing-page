@@ -428,7 +428,7 @@ export async function detectCountry(request: DetectRequest): Promise<DetectionRe
     };
     countSource(source);
     // Debug only, and never the IP next to the country in one record.
-    if (process.env.NODE_ENV !== "production") {
+    if (typeof process !== "undefined" && process?.env?.NODE_ENV !== "production") {
       console.debug("[pricing] country resolved", {
         source: result.source,
         market: result.market,
