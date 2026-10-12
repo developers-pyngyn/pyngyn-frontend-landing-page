@@ -9,14 +9,30 @@ import {
   itemListSchema,
   webPageSchema,
   faqPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
-  title: "Integrations | PYNGYN",
+  title: "Pyngyn Integrations | Tally, Zoho, Drive, WhatsApp & More",
   description:
-    "Connect ClientSpace with the tools your team uses every day, from chat and email to accounting and e-signature, so updates show up in your clients' portal automatically.",
+    "Connect Pyngyn ClientSpace with Tally, Computax, Zoho Books, QuickBooks, Google Drive, WhatsApp, and Slack to automate document collection and practice workflows.",
   alternates: { canonical: "/integrations" },
+  openGraph: {
+    title: "Pyngyn Integrations | Tally, Zoho, Drive, WhatsApp & More",
+    description:
+      "Connect Pyngyn ClientSpace with Tally, Computax, Zoho Books, QuickBooks, Google Drive, WhatsApp, and Slack to automate document collection and practice workflows.",
+    url: "/integrations",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pyngyn Integrations | Tally, Zoho, Drive, WhatsApp & More",
+    description:
+      "Connect Pyngyn ClientSpace with Tally Prime, Zoho Books, Computax, QuickBooks, and Google Drive.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 const INTEGRATION_FAQS = [

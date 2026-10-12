@@ -9,6 +9,7 @@ import {
   breadcrumbSchema,
   collectionPageSchema,
   itemListSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 
 export const metadata: Metadata = {
@@ -16,6 +17,21 @@ export const metadata: Metadata = {
   description:
     "Practical playbooks for Chartered Accountants and accounting firms: statutory audit workflows, PBC checklists, 4-eye partner review gates, and firm scaling.",
   alternates: { canonical: "/guides" },
+  openGraph: {
+    title: "CA Practice Playbooks & Operational Guides | Pyngyn",
+    description:
+      "Practical playbooks for Chartered Accountants and accounting firms: statutory audit workflows, PBC checklists, and 4-eye partner review gates.",
+    url: "/guides",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CA Practice Playbooks & Operational Guides | Pyngyn",
+    description:
+      "Practical playbooks for Chartered Accountants: statutory audit workflows, PBC checklists, and partner review gates.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 const CATEGORIES = ["All", "Planning", "Status", "Risk", "Rollout", "AI", "Workflows"] as const;

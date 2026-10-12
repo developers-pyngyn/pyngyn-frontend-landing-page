@@ -12,16 +12,22 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Secure Documents & E-Signature | Client Space | PYNGYN",
+  title: "Secure Document Exchange & E-Signatures | Pyngyn ClientSpace",
   description:
-    "Share, request, and sign documents inside the client portal. Version-controlled, encrypted, and audit-logged, instead of moving financial and legal records through unsecured email.",
+    "Share, request, and sign confidential documents inside the client portal. Bank-grade 256-bit encryption, version control, and tamper-evident audit logs.",
   alternates: { canonical: "/clientspace/secure-documents" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Secure Documents & E-Signature | PYNGYN",
-    description: "Documents and e-signatures, without the inbox risk.",
+    title: "Secure Document Exchange & E-Signatures | Pyngyn ClientSpace",
+    description: "Documents and digital signatures without the inbox risk. Bank-grade client document vaults.",
     url: "/clientspace/secure-documents",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Secure Document Exchange & E-Signatures | Pyngyn ClientSpace",
+    description: "Share and sign confidential documents inside secure, isolated client portals.",
+    images: [OG_IMAGE.url],
   },
 };
 

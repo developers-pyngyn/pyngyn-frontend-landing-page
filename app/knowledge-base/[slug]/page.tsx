@@ -25,6 +25,7 @@ import {
   breadcrumbSchema,
   webPageSchema,
   absoluteUrl,
+  OG_IMAGE,
 } from "@/components/schema";
 
 type Params = { slug: string };
@@ -35,11 +36,27 @@ export function generateStaticParams(): Params[] {
 
 export function generateMetadata({ params }: { params: Params }): Metadata {
   const a = getArticle(params.slug);
-  if (!a) return { title: "Article not found | Pyngyn" };
+  if (!a) return { title: "Article Not Found | Pyngyn" };
+  const pageTitle = `${a.title} | Pyngyn Knowledge Base`;
+  const url = `/knowledge-base/${a.slug}`;
+  const ogImage = a.cover ? { url: a.cover, alt: a.title } : OG_IMAGE;
   return {
-    title: `${a.title} | Pyngyn ClientSpace Knowledge Base`,
+    title: pageTitle,
     description: a.excerpt,
-    alternates: { canonical: `/knowledge-base/${a.slug}` },
+    alternates: { canonical: url },
+    openGraph: {
+      title: pageTitle,
+      description: a.excerpt,
+      url,
+      type: "article",
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: a.excerpt,
+      images: [typeof ogImage === "string" ? ogImage : ogImage.url],
+    },
   };
 }
 

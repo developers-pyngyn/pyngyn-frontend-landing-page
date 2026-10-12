@@ -12,16 +12,22 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Risk Detection | PYNGYN",
+  title: "AI Engagement Risk Detection & Slip Prevention | Pyngyn",
   description:
-    "AI watches workload, dependencies, and deadlines across every engagement, and flags what threatens a date or margin, days before it becomes a problem.",
+    "AI monitors workload, dependencies, and deadlines across client engagements. Flag what threatens statutory dates or margin days before it becomes a problem.",
   alternates: { canonical: "/benefits/risk-detection" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Risk Detection | PYNGYN",
-    description: "See the slip before it happens, not after.",
+    title: "AI Engagement Risk Detection & Slip Prevention | Pyngyn",
+    description: "See the deadline slip before it happens, not after.",
     url: "/benefits/risk-detection",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Engagement Risk Detection & Slip Prevention | Pyngyn",
+    description: "Detect client deliverable risks and deadline slips days before they happen.",
+    images: [OG_IMAGE.url],
   },
 };
 

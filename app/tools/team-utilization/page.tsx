@@ -13,17 +13,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Team Utilization Calculator | PYNGYN",
+  title: "Team Utilization Calculator | Pyngyn Tools",
   description:
-    "Work out billable utilization across your bench, see what your current rate is worth, and find the revenue upside of hitting your target. Free, no signup. Built for professional-services teams.",
+    "Calculate billable team utilization, identify bench capacity, and discover revenue upside from improved staff scheduling. Free calculator, no signup.",
   alternates: { canonical: "/tools/team-utilization" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Team Utilization Calculator | PYNGYN",
+    title: "Team Utilization Calculator | Pyngyn Tools",
     description:
       "Measure billable utilization across your team and spot where capacity is being lost. Free, no signup.",
     type: "website",
     url: "/tools/team-utilization",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Team Utilization Calculator | Pyngyn Tools",
+    description:
+      "Measure billable utilization across your team and spot where capacity is being lost. Free, no signup.",
+    images: [OG_IMAGE.url],
   },
 };
 

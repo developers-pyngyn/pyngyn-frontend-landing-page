@@ -12,16 +12,22 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Admin & Security | PYNGYN",
+  title: "Admin Governance & Bank-Grade Security | Pyngyn",
   description:
-    "SSO/SAML, role-based permissions, data isolation, and audit logs, enterprise-grade controls without enterprise complexity.",
+    "SSO/SAML authentication, role-based permissions, client data isolation, and audit logs. Enterprise-grade security for accounting and CA practices.",
   alternates: { canonical: "/benefits/admin-security" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Admin & Security | PYNGYN",
-    description: "Enterprise-grade controls, without enterprise complexity.",
+    title: "Admin Governance & Bank-Grade Security | Pyngyn",
+    description: "Enterprise-grade controls and data isolation without enterprise complexity.",
     url: "/benefits/admin-security",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Admin Governance & Bank-Grade Security | Pyngyn",
+    description: "Enterprise-grade security controls and client data isolation for professional firms.",
+    images: [OG_IMAGE.url],
   },
 };
 

@@ -19,16 +19,22 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Pyngyn ClientSpace | Client Management for CA & Accounting Firms",
+  title: "Client Management for CA & Accounting Firms | Pyngyn",
   description:
     "Manage clients, tasks, documents, deadlines, communication and workflows in one workspace built for modern CA and accounting firms.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Pyngyn ClientSpace | Client Management for CA & Accounting Firms",
+    title: "Client Management for CA & Accounting Firms | Pyngyn",
     description:
       "Run your accounting firm from one client workspace. Manage clients, tasks, documents, deadlines and communication.",
     url: "/",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Client Management for CA & Accounting Firms | Pyngyn",
+    description:
+      "Run your accounting firm from one client workspace. Manage clients, tasks, documents, deadlines and communication.",
   },
 };
 

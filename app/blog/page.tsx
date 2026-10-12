@@ -9,13 +9,29 @@ import {
   blogSchema,
   breadcrumbSchema,
   webPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Blog | PYNGYN",
+  title: "Pyngyn Blog | CA Practice Management & Growth Insights",
   description:
-    "Ideas on running professional-services firms, client work, and operations, from the team building PYNGYN.",
+    "Actionable insights on practice management, statutory compliance automation, client retention, and firm profitability for Chartered Accountants and accounting firms.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Pyngyn Blog | CA Practice Management & Growth Insights",
+    description:
+      "Actionable insights on practice management, statutory compliance automation, client retention, and firm profitability for Chartered Accountants and accounting firms.",
+    url: "/blog",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pyngyn Blog | CA Practice Management & Growth Insights",
+    description:
+      "Actionable insights on practice management, compliance automation, and firm profitability for Chartered Accountants.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 export default function BlogIndex() {

@@ -19,8 +19,19 @@ export default function robots(): MetadataRoute.Robots {
           "Amazonbot",
           "cohere-ai",
         ],
-        allow: ["/", "/pricing", "/clientspace", "/solutions/", "/llms.txt"],
-        disallow: ["/api/", "/lp/"],
+        allow: [
+          "/",
+          "/pricing",
+          "/clientspace",
+          "/solutions/",
+          "/tools/",
+          "/blog/",
+          "/guides/",
+          "/knowledge-base/",
+          "/compare/",
+          "/llms.txt",
+        ],
+        disallow: ["/api/", "/lp/", "/mockup-preview/"],
       },
       {
         // General search engine crawlers (Googlebot, Bingbot, etc.)
@@ -29,7 +40,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           "/api/", // server endpoints, not pages
           "/lp/", // paid-traffic landing pages (noindex)
-          "/tools/", // unlisted tools
+          "/mockup-preview/", // internal QA preview
         ],
       },
     ],

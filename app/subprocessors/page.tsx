@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
+import { OG_IMAGE } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Subprocessors | PYNGYN",
+  title: "Subprocessors & Infrastructure Partners | Pyngyn ClientSpace",
   description:
     "The verified third-party subprocessors used by VIMOVI GlobalTech Private Limited to provide the Pyngyn website, tools, and ClientSpace application.",
   alternates: { canonical: "/subprocessors" },
+  openGraph: {
+    title: "Subprocessors & Infrastructure Partners | Pyngyn ClientSpace",
+    description:
+      "The verified third-party subprocessors used by VIMOVI GlobalTech Private Limited to provide Pyngyn ClientSpace.",
+    url: "/subprocessors",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Subprocessors & Infrastructure Partners | Pyngyn ClientSpace",
+    description:
+      "Verified third-party subprocessors used to provide Pyngyn ClientSpace.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 export default function SubprocessorsPage() {

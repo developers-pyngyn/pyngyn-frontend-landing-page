@@ -24,17 +24,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Accounting & Bookkeeping Practice Management Software | Pyngyn ClientSpace",
+  title: "Accounting & Bookkeeping Practice Software | Pyngyn",
   description:
-    "Purpose-built practice software for accounting firms, outsourced bookkeepers, and Client Accounting Services (CAS) teams. Streamline monthly ledger closes, bank reconciliations, MIS reports, and AP/AR.",
+    "Purpose-built practice software for accounting firms, bookkeepers, and CAS teams. Streamline monthly ledger closes, bank reconciliations, MIS reports, and AP/AR.",
   alternates: { canonical: "/solutions/accounting-firms" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Accounting & Bookkeeping Practice Management Software | Pyngyn ClientSpace",
+    title: "Accounting & Bookkeeping Practice Software | Pyngyn",
     description:
       "Eliminate month-end scrambles with automated bank statement intake, recurring closing pipelines, and real-time management accounts for clients.",
     url: "/solutions/accounting-firms",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Accounting & Bookkeeping Practice Software | Pyngyn",
+    description:
+      "Eliminate month-end scrambles with automated bank statement intake, recurring closing pipelines, and real-time management accounts.",
+    images: [OG_IMAGE.url],
   },
 };
 

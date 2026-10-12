@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
+import { OG_IMAGE } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Data Processing Agreement (DPA) | PYNGYN",
+  title: "Data Processing Agreement (DPA) | Pyngyn ClientSpace",
   description:
     "Data Processing Agreement between Customer (Data Fiduciary / Controller) and VIMOVI GlobalTech Private Limited (Data Processor).",
   alternates: { canonical: "/dpa" },
+  openGraph: {
+    title: "Data Processing Agreement (DPA) | Pyngyn ClientSpace",
+    description:
+      "Data Processing Agreement between Customer (Data Fiduciary / Controller) and VIMOVI GlobalTech Private Limited (Data Processor).",
+    url: "/dpa",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Data Processing Agreement (DPA) | Pyngyn ClientSpace",
+    description:
+      "Data Processing Agreement between Customer and Pyngyn.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 export default function DPAPage() {

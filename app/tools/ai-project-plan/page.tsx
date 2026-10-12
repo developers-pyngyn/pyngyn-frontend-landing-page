@@ -13,17 +13,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Free Engagement Plan Generator | PYNGYN",
+  title: "Free Engagement Plan Generator | Pyngyn Tools",
   description:
-    "Describe your project in plain English and get a complete plan in seconds: phases, tasks, owners, milestones, a suggested team, risks, and cadence. Free, no signup. Export to Markdown or CSV.",
+    "Describe your project in plain English and get a structured plan in seconds: phases, tasks, owners, milestones, and risks. Free, no signup required.",
   alternates: { canonical: "/tools/ai-project-plan" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Free Engagement Plan Generator | PYNGYN",
+    title: "Free Engagement Plan Generator | Pyngyn Tools",
     description:
-      "Turn a plain-English brief into a structured project plan in seconds. Phases, tasks, owners, milestones, team, risks. Free, no signup.",
+      "Turn a plain-English brief into a structured project plan in seconds. Phases, tasks, owners, milestones, and risks. Free, no signup.",
     type: "website",
     url: "/tools/ai-project-plan",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Engagement Plan Generator | Pyngyn Tools",
+    description:
+      "Turn a plain-English brief into a structured project plan in seconds. Free, no signup.",
+    images: [OG_IMAGE.url],
   },
 };
 

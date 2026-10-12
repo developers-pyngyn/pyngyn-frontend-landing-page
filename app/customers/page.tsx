@@ -8,14 +8,30 @@ import {
   breadcrumbSchema,
   webPageSchema,
   faqPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
-  title: "Customers | PYNGYN",
+  title: "Customer Stories & Case Studies | Pyngyn ClientSpace",
   description:
-    "500+ professional-services firms run on PYNGYN. What firms tell us, what customers get, and how to get started.",
+    "See how modern Chartered Accountants, audit teams, and accounting firms eliminate status-chasing, improve review turnaround, and scale client delivery on Pyngyn.",
   alternates: { canonical: "/customers" },
+  openGraph: {
+    title: "Customer Stories & Case Studies | Pyngyn ClientSpace",
+    description:
+      "See how modern Chartered Accountants, audit teams, and accounting firms eliminate status-chasing, improve review turnaround, and scale client delivery on Pyngyn.",
+    url: "/customers",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Customer Stories & Case Studies | Pyngyn ClientSpace",
+    description:
+      "See how modern Chartered Accountants and accounting firms eliminate status-chasing and scale client delivery on Pyngyn.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 // Discovery-call observations, pulled from the same honestly-labelled pool

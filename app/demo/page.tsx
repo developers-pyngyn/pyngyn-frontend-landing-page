@@ -16,17 +16,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Book a demo | PYNGYN",
+  title: "Book a Practice Demo | See Pyngyn ClientSpace Live",
   description:
-    "Book a free 30-minute live walkthrough. We set up a Clientspace on one of your real engagements, map pricing to your firm, and you leave with a written rollout plan.",
+    "Schedule a tailored 30-minute walkthrough of Pyngyn ClientSpace. See how your CA firm can automate client intake, statutory deadlines, and partner reviews.",
   alternates: { canonical: "/demo" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Book a demo | PYNGYN",
+    title: "Book a Practice Demo | See Pyngyn ClientSpace Live",
     description:
-      "30 minutes, live, no slideshow. We set up a Clientspace on a real engagement of yours and leave you with a tailored rollout plan.",
+      "Schedule a tailored 30-minute walkthrough of Pyngyn ClientSpace. See how your CA firm can automate client intake, statutory deadlines, and partner reviews.",
     url: "/demo",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Book a Practice Demo | See Pyngyn ClientSpace Live",
+    description:
+      "Schedule a tailored 30-minute walkthrough of Pyngyn ClientSpace. See how your CA firm automates client intake and partner reviews.",
+    images: [OG_IMAGE.url],
   },
 };
 

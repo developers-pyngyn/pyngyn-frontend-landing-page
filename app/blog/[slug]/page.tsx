@@ -37,6 +37,12 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
       authors: [post.author],
       tags: [post.category],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [OG_IMAGE.url],
+    },
   };
 }
 

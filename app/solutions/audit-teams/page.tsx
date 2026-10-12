@@ -25,17 +25,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Audit Practice Management Software for Statutory & Internal Audit Teams | Pyngyn ClientSpace",
+  title: "Audit Practice Management Software for CA Teams | Pyngyn",
   description:
-    "Statutory audit, tax audit, and internal assurance software for Chartered Accountants and audit firms. Run CARO 2020 programmes, Form 3CD workpapers, sample vouching, and EQCR reviews.",
+    "Statutory audit, tax audit, and internal assurance software for Chartered Accountants. Run CARO 2020 programmes, Form 3CD workpapers, and EQCR reviews.",
   alternates: { canonical: "/solutions/audit-teams" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Audit Practice Management Software for Statutory & Internal Audit Teams | Pyngyn ClientSpace",
+    title: "Audit Practice Management Software for CA Teams | Pyngyn",
     description:
       "Maintain audit quality and working paper integrity with CARO 2020 checklists, Form 3CD schedules, substantive testing logs, and EQCR sign-offs.",
     url: "/solutions/audit-teams",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Audit Practice Management Software for CA Teams | Pyngyn",
+    description:
+      "Maintain audit quality and working paper integrity with CARO 2020 checklists, Form 3CD schedules, and EQCR sign-offs.",
+    images: [OG_IMAGE.url],
   },
 };
 

@@ -24,17 +24,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Statutory Compliance Management Software for CA & Corporate Secretarial Teams | Pyngyn ClientSpace",
+  title: "Statutory Compliance Software for CA Teams | Pyngyn",
   description:
-    "Statutory compliance software for accounting firms, CAs, and CS teams. Track ROC/MCA, DSC registries, group compliance hierarchies, and statutory challan archives.",
+    "Statutory compliance software for accounting firms, CAs, and CS teams. Track ROC/MCA filings, DSC registries, group compliance hierarchies, and challans.",
   alternates: { canonical: "/solutions/compliance-teams" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Statutory Compliance Management Software for CA & Corporate Secretarial Teams | Pyngyn ClientSpace",
+    title: "Statutory Compliance Software for CA Teams | Pyngyn",
     description:
       "Never miss a statutory due date. Track ROC/MCA, GST, TDS, and secretarial deadlines with centralized DSC registries and client alerts.",
     url: "/solutions/compliance-teams",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Statutory Compliance Software for CA Teams | Pyngyn",
+    description:
+      "Never miss a statutory due date. Track ROC/MCA, GST, TDS, and secretarial deadlines with centralized DSC registries.",
+    images: [OG_IMAGE.url],
   },
 };
 

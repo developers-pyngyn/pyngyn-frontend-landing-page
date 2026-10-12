@@ -15,17 +15,24 @@ import {
 // ---------------------------------------------------------------------------
 
 export const metadata: Metadata = {
-  title: "Founder Story · Why I built Pyngyn | Vivek Pandey",
+  title: "Founder Story: Why I Built Pyngyn | Vivek Pandey",
   description:
-    "The problem I lived. The insight I couldn't unsee. The conviction that drove me to build. Vivek Pandey, Founder & CEO of Pyngyn, on why he built the operating system for professional services firms.",
+    "Six years inside Wrike, ClickUp, and Meta watching firms fail to consolidate. Vivek Pandey on why he built the practice operating system for accounting teams.",
   alternates: { canonical: "/about/founder-story" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Founder Story · Why I built Pyngyn",
+    title: "Founder Story: Why I Built Pyngyn | Vivek Pandey",
     description:
-      "Six years inside Wrike, ClickUp and Meta watching PS firms fail to consolidate. Why Vivek Pandey built Pyngyn.",
+      "Six years inside Wrike, ClickUp and Meta watching firms fail to consolidate. Why Vivek Pandey built Pyngyn.",
     url: "/about/founder-story",
     type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Founder Story: Why I Built Pyngyn | Vivek Pandey",
+    description:
+      "Why Vivek Pandey built the practice operating system for professional services firms.",
+    images: [OG_IMAGE.url],
   },
 };
 

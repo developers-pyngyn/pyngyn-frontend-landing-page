@@ -22,6 +22,12 @@ export const metadata: Metadata = {
     url: "/solutions/consultants",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "PYNGYN for Marketing Consultants | Retainers & Client Portals",
+    description: "Retainers, campaigns, and client approvals for marketing consultants.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 const PROBLEMS: { num: string; title: string; body: string }[] = [

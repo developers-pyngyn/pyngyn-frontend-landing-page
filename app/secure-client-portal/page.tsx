@@ -20,17 +20,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Secure Client Portal Software | Bank-Grade Encryption & Compliance | Pyngyn",
+  title: "Secure Client Portal Software | Bank-Grade Security | Pyngyn",
   description:
-    "Protect sensitive client files and communications with Pyngyn's secure client portal software. Featuring AES-256 encryption, passwordless magic links, and immutable audit trails.",
+    "Protect sensitive client files and compliance communications with 256-bit AES encryption, multi-factor authentication, and tamper-evident audit logs.",
   alternates: { canonical: "/secure-client-portal" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Secure Client Portal Software | Bank-Grade Encryption & Compliance | Pyngyn",
+    title: "Secure Client Portal Software | Bank-Grade Security | Pyngyn",
     description:
       "Bank-grade security meets effortless client experience. Protect confidential financial, legal, and tax documents in an isolated, secure client portal.",
     url: "/secure-client-portal",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Secure Client Portal Software | Bank-Grade Security | Pyngyn",
+    description:
+      "Bank-grade security meets effortless client experience. Protect confidential files in an isolated client portal.",
+    images: [OG_IMAGE.url],
   },
 };
 

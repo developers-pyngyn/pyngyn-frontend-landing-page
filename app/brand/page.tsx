@@ -1,10 +1,27 @@
 import type { Metadata } from "next";
 import { ContentPage } from "@/components/ContentPage";
+import { OG_IMAGE } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Brand | PYNGYN",
-  description: "PYNGYN brand assets, logo usage, and guidelines.",
+  title: "Pyngyn Brand Assets, Logo & Identity Guidelines",
+  description:
+    "Official brand assets, vector logos, mascot artwork, typography, and color palettes for Pyngyn ClientSpace. Guidelines for media and partner use.",
   alternates: { canonical: "/brand" },
+  openGraph: {
+    title: "Pyngyn Brand Assets, Logo & Identity Guidelines",
+    description:
+      "Official brand assets, vector logos, mascot artwork, typography, and color palettes for Pyngyn ClientSpace. Guidelines for media and partner use.",
+    url: "/brand",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pyngyn Brand Assets, Logo & Identity Guidelines",
+    description:
+      "Official brand assets, vector logos, mascot artwork, typography, and color palettes for Pyngyn ClientSpace.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 export default function BrandPage() {

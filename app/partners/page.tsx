@@ -1,10 +1,27 @@
 import type { Metadata } from "next";
 import { ContentPage } from "@/components/ContentPage";
+import { OG_IMAGE } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Partners | PYNGYN",
-  description: "Partner with PYNGYN: agencies, consultants, and technology partners.",
+  title: "Pyngyn Partner Program | Scale Practice Solutions",
+  description:
+    "Join the Pyngyn Partner Program for technology consultants, accounting networks, and practice advisors. Access revenue share, dedicated support, and co-marketing.",
   alternates: { canonical: "/partners" },
+  openGraph: {
+    title: "Pyngyn Partner Program | Scale Practice Solutions",
+    description:
+      "Join the Pyngyn Partner Program for technology consultants, accounting networks, and practice advisors. Access revenue share, dedicated support, and co-marketing.",
+    url: "/partners",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pyngyn Partner Program | Scale Practice Solutions",
+    description:
+      "Partner with Pyngyn: practice advisors, technology consultants, and accounting networks.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 const PARTNER_FAQS = [

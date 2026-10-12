@@ -20,17 +20,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Best Client Portal Software for Professional Services | Pyngyn ClientSpace",
+  title: "Best Client Portal Software for Client Firms | Pyngyn",
   description:
-    "Discover Pyngyn ClientSpace, the best client portal software for professional services and accounting firms. Deliver branded client portals, real-time status, secure file sharing, and approvals.",
+    "Deliver branded client portals, real-time status tracking, secure file exchange, and instant sign-offs with Pyngyn ClientSpace. Built for professional firms.",
   alternates: { canonical: "/client-portal-software" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Best Client Portal Software for Professional Services | Pyngyn ClientSpace",
+    title: "Best Client Portal Software for Client Firms | Pyngyn",
     description:
       "Modern, white-labeled client portal software. Eliminate status update emails and give your clients a secure, branded window into their engagements.",
     url: "/client-portal-software",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Client Portal Software for Client Firms | Pyngyn",
+    description:
+      "Modern, white-labeled client portal software. Eliminate status update emails and give your clients a secure, branded window.",
+    images: [OG_IMAGE.url],
   },
 };
 

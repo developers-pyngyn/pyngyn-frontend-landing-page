@@ -16,6 +16,7 @@ import {
   breadcrumbSchema,
   faqPageSchema,
   webPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 
 type Params = { slug: string };
@@ -26,11 +27,28 @@ export function generateStaticParams(): Params[] {
 
 export function generateMetadata({ params }: { params: Params }): Metadata {
   const content = getCompareContent(params.slug);
-  if (!content) return { title: "Compare | PYNGYN" };
+  if (!content) return { title: "Compare Software Alternatives for CA Firms | Pyngyn" };
+  const pageTitle = `Pyngyn vs ${content.name} | CA Practice Comparison`;
+  const desc = `${content.intro} Detailed side-by-side comparison, migration guide, and FAQs.`.slice(0, 158);
+  const url = `/compare/${content.slug}`;
+
   return {
-    title: `PYNGYN vs ${content.name} | Practice Management for CA Firms | PYNGYN`,
-    description: `${content.intro} Factual side-by-side comparison, key differences, migration steps, and FAQs.`,
-    alternates: { canonical: `/compare/${content.slug}` },
+    title: pageTitle,
+    description: desc,
+    alternates: { canonical: url },
+    openGraph: {
+      title: pageTitle,
+      description: desc,
+      url,
+      type: "website",
+      images: [OG_IMAGE],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: desc,
+      images: [OG_IMAGE.url],
+    },
   };
 }
 

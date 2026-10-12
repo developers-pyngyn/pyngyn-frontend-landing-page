@@ -68,6 +68,15 @@ const STATIC: Entry[] = [
   { path: "/customers", priority: 0.8, changeFrequency: "monthly" },
   { path: "/compare", priority: 0.8, changeFrequency: "monthly" },
 
+  // Free Tools & Practice Calculators
+  { path: "/tools", priority: 0.85, changeFrequency: "weekly" },
+  { path: "/tools/roi-calculator", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/tools/team-utilization", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/tools/cost-margin-estimator", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/tools/any-update-cost", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/tools/status-report", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/tools/ai-project-plan", priority: 0.8, changeFrequency: "monthly" },
+
   // Content hubs
   { path: "/blog", priority: 0.7, changeFrequency: "weekly" },
   { path: "/guides", priority: 0.7, changeFrequency: "weekly" },

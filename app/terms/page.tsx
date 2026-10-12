@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
+import { OG_IMAGE } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | PYNGYN",
+  title: "Terms of Service | Pyngyn ClientSpace",
   description:
-    "Terms of Service governing your access to and use of Pyngyn ClientSpace and Workspace software applications and services.",
+    "Terms of Service governing your access to and use of Pyngyn ClientSpace and associated practice management software applications and services.",
   alternates: { canonical: "/terms" },
+  openGraph: {
+    title: "Terms of Service | Pyngyn ClientSpace",
+    description:
+      "Terms of Service governing your access to and use of Pyngyn ClientSpace software applications and services.",
+    url: "/terms",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms of Service | Pyngyn ClientSpace",
+    description:
+      "Terms of Service governing your access to and use of Pyngyn ClientSpace.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 export default function TermsPage() {

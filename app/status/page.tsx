@@ -6,12 +6,29 @@ import {
   breadcrumbSchema,
   itemListSchema,
   webPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Status | PYNGYN",
-  description: "Live status of PYNGYN services.",
+  title: "System Status & Uptime | Pyngyn ClientSpace",
+  description:
+    "Real-time service status, uptime metrics, and incident history for the Pyngyn ClientSpace cloud platform, magic-link portals, and API endpoints.",
   alternates: { canonical: "/status" },
+  openGraph: {
+    title: "System Status & Uptime | Pyngyn ClientSpace",
+    description:
+      "Real-time service status, uptime metrics, and incident history for the Pyngyn ClientSpace cloud platform, magic-link portals, and API endpoints.",
+    url: "/status",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "System Status & Uptime | Pyngyn ClientSpace",
+    description:
+      "Real-time service status, uptime metrics, and incident history for the Pyngyn platform.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 const systems: { name: string; status: string }[] = [

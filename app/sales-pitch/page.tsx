@@ -28,17 +28,24 @@ import {
 // ---------------------------------------------------------------------------
 
 export const metadata: Metadata = {
-  title: "Your firm's knowledge, finally working for you | Pyngyn",
+  title: "Practice Knowledge & Engagement Operations | Pyngyn",
   description:
-    "Pyngyn is the operating system for professional services firms, built for 15–30 person consulting teams who are tired of juggling 5 platforms just to deliver one engagement. This is a 20-minute conversation, not a pitch.",
+    "Pyngyn is the operating system for professional services firms. Unify client portals, knowledge, and practice delivery without juggling five disjointed platforms.",
   alternates: { canonical: "/sales-pitch" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Pyngyn for PS firms, your knowledge, working for you",
+    title: "Practice Knowledge & Engagement Operations | Pyngyn",
     description:
-      "Built for 15–30 person consulting teams who are tired of juggling 5 platforms just to deliver one engagement.",
+      "Built for consulting and professional services firms tired of juggling 5 platforms to deliver one engagement.",
     url: "/sales-pitch",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Practice Knowledge & Engagement Operations | Pyngyn",
+    description:
+      "Unify client portals, knowledge, and practice delivery for professional services teams.",
+    images: [OG_IMAGE.url],
   },
 };
 

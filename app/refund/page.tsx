@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
+import { OG_IMAGE } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Refund & Subscription Cancellation Policy | PYNGYN",
+  title: "Refund & Subscription Cancellation Policy | Pyngyn ClientSpace",
   description:
-    "Refund and subscription cancellation policy for Pyngyn ClientSpace and Workspace software applications.",
+    "Refund and subscription cancellation policy for Pyngyn ClientSpace software applications and subscriptions.",
   alternates: { canonical: "/refund" },
+  openGraph: {
+    title: "Refund & Subscription Cancellation Policy | Pyngyn ClientSpace",
+    description:
+      "Refund and subscription cancellation policy for Pyngyn ClientSpace software applications and subscriptions.",
+    url: "/refund",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Refund & Subscription Cancellation Policy | Pyngyn ClientSpace",
+    description:
+      "Refund and subscription cancellation policy for Pyngyn ClientSpace.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 export default function RefundPage() {

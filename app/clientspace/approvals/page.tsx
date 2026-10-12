@@ -12,16 +12,22 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Approvals & Sign-Off | Client Space | PYNGYN",
+  title: "Client Approvals & Sign-Off Workflows | Pyngyn ClientSpace",
   description:
-    "Clients review deliverables and approve them inside their portal. Every decision is logged, so there's never a dispute about who approved what, when.",
+    "Clients review deliverables and approve them inside their portal. Every decision is logged with tamper-evident audit trails for dispute-free compliance sign-offs.",
   alternates: { canonical: "/clientspace/approvals" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Approvals & Sign-Off | PYNGYN",
-    description: "Every approval, logged. No more \"who signed off on this?\"",
+    title: "Client Approvals & Sign-Off Workflows | Pyngyn ClientSpace",
+    description: "Every approval logged with immutable audit trails. Dispute-free client delivery sign-offs.",
     url: "/clientspace/approvals",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Client Approvals & Sign-Off Workflows | Pyngyn ClientSpace",
+    description: "Clients review deliverables and sign off inside their portal with logged audit trails.",
+    images: [OG_IMAGE.url],
   },
 };
 

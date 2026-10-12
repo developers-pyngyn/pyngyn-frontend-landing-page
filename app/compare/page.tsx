@@ -16,14 +16,30 @@ import {
   itemListSchema,
   webPageSchema,
   faqPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
-  title: "Client Management for CA & Accounting Firms | Compare | PYNGYN",
+  title: "Compare Practice Management Alternatives | Pyngyn",
   description:
-    "Factual, transparent comparison of PYNGYN ClientSpace against Karbon, TaxDome, Canopy, Zoho Practice, and Spreadsheets. Built specifically for CA firms, tax practitioners, and accounting practices.",
+    "Side-by-side comparison of Pyngyn ClientSpace against Karbon, TaxDome, Canopy, and Zoho Practice. See why modern CA and accounting firms make the switch.",
   alternates: { canonical: "/compare" },
+  openGraph: {
+    title: "Compare Practice Management Alternatives | Pyngyn",
+    description:
+      "Side-by-side comparison of Pyngyn ClientSpace against Karbon, TaxDome, Canopy, and Zoho Practice. See why modern CA and accounting firms switch to Pyngyn.",
+    url: "/compare",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Compare Practice Management Alternatives | Pyngyn",
+    description:
+      "Side-by-side comparison of Pyngyn ClientSpace against Karbon, TaxDome, Canopy, and Zoho Practice.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 function CellMark({ v }: { v: Cell }) {

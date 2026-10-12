@@ -20,17 +20,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Client Portal for Accounting Firms & CAs | Pyngyn ClientSpace",
+  title: "Client Portal for Accounting & CA Firms | Pyngyn",
   description:
-    "The dedicated client portal software for accounting firms, Chartered Accountants, and tax teams. Automate PBC document collection, track statutory deadlines, and collect approvals securely.",
+    "The dedicated client portal software for accounting firms and CAs: automated PBC checklists, secure tax document vault, and instant client approvals.",
   alternates: { canonical: "/client-portal-for-accounting-firms" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Client Portal for Accounting Firms & CAs | Pyngyn ClientSpace",
+    title: "Client Portal for Accounting & CA Firms | Pyngyn",
     description:
       "Purpose-built client portal software for accountants and CAs. Stop chasing tax documents, provide 24/7 compliance visibility, and accelerate client sign-offs.",
     url: "/client-portal-for-accounting-firms",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Client Portal for Accounting & CA Firms | Pyngyn",
+    description:
+      "Purpose-built client portal software for accountants and CAs. Stop chasing tax documents and accelerate client sign-offs.",
+    images: [OG_IMAGE.url],
   },
 };
 

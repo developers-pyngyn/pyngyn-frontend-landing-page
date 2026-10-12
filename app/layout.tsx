@@ -76,6 +76,9 @@ export const metadata: Metadata = {
   title: "Pyngyn ClientSpace | Client Management for CA & Accounting Firms",
   description:
     "Manage clients, tasks, documents, deadlines and workflows in one connected workspace purpose-built for CA, accounting and tax practices.",
+  alternates: {
+    canonical: "./",
+  },
   icons: {
     apple: "/apple-icon.png",
   },
@@ -83,21 +86,21 @@ export const metadata: Metadata = {
     ? { google: process.env.GOOGLE_SITE_VERIFICATION }
     : undefined,
   openGraph: {
-    title: "PYNGYN: The operating system for professional-services firms",
+    title: "Pyngyn ClientSpace | Client Management for CA & Accounting Firms",
     description:
-      "Run your firm and every client engagement in one place. The operating system for professional-services firms.",
+      "Manage clients, tasks, documents, statutory deadlines, and workflows in one connected workspace purpose-built for CA, accounting, and tax practices.",
     type: "website",
     url: SITE_URL,
-    siteName: "PYNGYN",
+    siteName: "Pyngyn ClientSpace",
     images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     site: "@Pyngyn_Official",
     creator: "@Pyngyn_Official",
-    title: "PYNGYN: The operating system for professional-services firms",
+    title: "Pyngyn ClientSpace | Client Management for CA & Accounting Firms",
     description:
-      "Run your firm and every client engagement in one place. The operating system for professional-services firms.",
+      "Manage clients, tasks, documents, statutory deadlines, and workflows in one connected workspace purpose-built for CA, accounting, and tax practices.",
     images: [OG_IMAGE.url],
   },
 };

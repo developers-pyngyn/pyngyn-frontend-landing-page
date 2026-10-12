@@ -8,12 +8,29 @@ import {
   breadcrumbSchema,
   itemListSchema,
   webPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Roadmap | PYNGYN",
-  description: "See what the PYNGYN team is planning, building, and has recently shipped.",
+  title: "Pyngyn Product Roadmap | Upcoming Practice Features",
+  description:
+    "Explore upcoming features on the Pyngyn ClientSpace roadmap: automated ICAI compliance checks, enhanced DSC signing, AI workpaper summaries, and ledger sync.",
   alternates: { canonical: "/roadmap" },
+  openGraph: {
+    title: "Pyngyn Product Roadmap | Upcoming Practice Features",
+    description:
+      "Explore upcoming features on the Pyngyn ClientSpace roadmap: automated ICAI compliance checks, enhanced DSC signing, and AI workpaper summaries.",
+    url: "/roadmap",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pyngyn Product Roadmap | Upcoming Practice Features",
+    description:
+      "Upcoming features on the Pyngyn ClientSpace roadmap: automated ICAI compliance, DSC signing, and workpaper summaries.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 type RoadmapItem = { title: string; body: string; tag?: string; votes: number };

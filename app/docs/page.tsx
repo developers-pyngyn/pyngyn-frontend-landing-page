@@ -1,10 +1,27 @@
 import type { Metadata } from "next";
 import { ContentPage } from "@/components/ContentPage";
+import { OG_IMAGE } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Documentation | PYNGYN",
-  description: "Guides and reference for getting the most out of PYNGYN.",
+  title: "Pyngyn Product Documentation & Developer Reference",
+  description:
+    "Comprehensive documentation for Pyngyn ClientSpace: API integrations, webhook triggers, security architecture, and automated workflow configuration.",
   alternates: { canonical: "/docs" },
+  openGraph: {
+    title: "Pyngyn Product Documentation & Developer Reference",
+    description:
+      "Comprehensive documentation for Pyngyn ClientSpace: API integrations, webhook triggers, security architecture, and automated workflow configuration.",
+    url: "/docs",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pyngyn Product Documentation & Developer Reference",
+    description:
+      "Comprehensive documentation for Pyngyn ClientSpace: API integrations, webhook triggers, and automated workflows.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 export default function DocsPage() {

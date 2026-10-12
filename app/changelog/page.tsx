@@ -6,12 +6,29 @@ import {
   breadcrumbSchema,
   itemListSchema,
   webPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Changelog | PYNGYN",
-  description: "What's new in PYNGYN.",
+  title: "Pyngyn Changelog | Weekly Release Notes & Updates",
+  description:
+    "Track all new features, performance enhancements, and bug fixes shipped to Pyngyn ClientSpace. Updated weekly for modern accounting and audit teams.",
   alternates: { canonical: "/changelog" },
+  openGraph: {
+    title: "Pyngyn Changelog | Weekly Release Notes & Updates",
+    description:
+      "Track all new features, performance enhancements, and bug fixes shipped to Pyngyn ClientSpace. Updated weekly for modern accounting and audit teams.",
+    url: "/changelog",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pyngyn Changelog | Weekly Release Notes & Updates",
+    description:
+      "Track all new features and updates shipped to Pyngyn ClientSpace.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 type Entry = { date: string; tag: string; title: string; points: string[] };

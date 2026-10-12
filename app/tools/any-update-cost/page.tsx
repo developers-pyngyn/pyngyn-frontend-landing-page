@@ -12,17 +12,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "\"Any Update?\" Cost Calculator | PYNGYN",
+  title: "Client Status Cost Calculator | Pyngyn Tools",
   description:
-    "See what answering client status emails and calls costs your firm every year, and how much a branded client portal could win back. Free, no signup.",
+    "Calculate what answering client status emails and calls costs your firm annually, and how much a branded client portal saves. Free, no signup.",
   alternates: { canonical: "/tools/any-update-cost" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "\"Any Update?\" Cost Calculator | PYNGYN",
+    title: "Client Status Cost Calculator | Pyngyn Tools",
     description:
-      "Put a number on the hours your team spends answering \"any update?\" Free, no signup.",
+      "Put a number on the hours your team spends answering status update requests. Free calculator, no signup required.",
     type: "website",
     url: "/tools/any-update-cost",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Client Status Cost Calculator | Pyngyn Tools",
+    description:
+      "Put a number on the hours your team spends answering status update requests. Free, no signup required.",
+    images: [OG_IMAGE.url],
   },
 };
 

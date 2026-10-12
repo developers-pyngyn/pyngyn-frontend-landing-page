@@ -7,13 +7,29 @@ import {
   itemListSchema,
   jobPostingSchema,
   webPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Careers | PYNGYN",
+  title: "Careers at Pyngyn | Help Build Modern Practice Tech",
   description:
-    "Join PYNGYN and help build the operating system for professional-services firms. See open roles.",
+    "Join the team building the operating system for Chartered Accountants and professional services firms. Explore open engineering, design, and customer roles at Pyngyn.",
   alternates: { canonical: "/careers" },
+  openGraph: {
+    title: "Careers at Pyngyn | Help Build Modern Practice Tech",
+    description:
+      "Join the team building the operating system for Chartered Accountants and professional services firms. Explore open engineering, design, and customer roles.",
+    url: "/careers",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Careers at Pyngyn | Help Build Modern Practice Tech",
+    description:
+      "Join the team building the operating system for Chartered Accountants and professional services firms.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 const perks: [string, string][] = [

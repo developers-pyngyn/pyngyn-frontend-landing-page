@@ -10,6 +10,7 @@ import {
   breadcrumbSchema,
   webPageSchema,
   articleSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 
 type Params = { slug: string };
@@ -21,11 +22,26 @@ export function generateStaticParams(): Params[] {
 export function generateMetadata({ params }: { params: Params }): Metadata {
   const guide = getGuide(params.slug);
   if (!guide) return { title: "Guide Not Found | Pyngyn" };
+  const pageTitle = `${guide.title} | CA Practice Playbook | Pyngyn`;
+  const url = `/guides/${guide.slug}`;
 
   return {
-    title: `${guide.title} | CA Practice Playbooks | Pyngyn`,
+    title: pageTitle,
     description: guide.excerpt,
-    alternates: { canonical: `/guides/${guide.slug}` },
+    alternates: { canonical: url },
+    openGraph: {
+      title: pageTitle,
+      description: guide.excerpt,
+      url,
+      type: "article",
+      images: [OG_IMAGE],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: guide.excerpt,
+      images: [OG_IMAGE.url],
+    },
   };
 }
 

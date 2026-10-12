@@ -24,17 +24,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Tax Practice Management Software for Direct & Indirect Tax Teams | Pyngyn ClientSpace",
+  title: "Tax Practice Management Software for CAs | Pyngyn",
   description:
-    "Purpose-built tax practice software for Chartered Accountants, corporate tax teams, and tax advisory partnerships. Streamline corporate ITR pipelines, GST 2B reconciliations, advance tax, TDS, and scrutiny notices.",
+    "Tax practice software for Chartered Accountants and corporate tax teams. Streamline corporate ITR, GST reconciliations, advance tax, TDS, and scrutiny notices.",
   alternates: { canonical: "/solutions/tax-teams" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Tax Practice Management Software for Direct & Indirect Tax Teams | Pyngyn ClientSpace",
+    title: "Tax Practice Management Software for CAs | Pyngyn",
     description:
       "Automate corporate tax computations, GST reconciliations, advance tax forecasting, and notice tracking in one tax practice command center.",
     url: "/solutions/tax-teams",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tax Practice Management Software for CAs | Pyngyn",
+    description:
+      "Automate corporate tax computations, GST reconciliations, advance tax forecasting, and notice tracking in one tax practice command center.",
+    images: [OG_IMAGE.url],
   },
 };
 

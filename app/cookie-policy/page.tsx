@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
+import { OG_IMAGE } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | PYNGYN",
+  title: "Cookie Policy & Tracking Technologies | Pyngyn",
   description:
     "How VIMOVI GlobalTech Private Limited (Pyngyn) uses cookies, browser storage, and tracking technologies across pyngyn.ai and app.pyngyn.ai.",
   alternates: { canonical: "/cookie-policy" },
+  openGraph: {
+    title: "Cookie Policy & Tracking Technologies | Pyngyn",
+    description:
+      "How VIMOVI GlobalTech Private Limited (Pyngyn) uses cookies, browser storage, and tracking technologies across our platform.",
+    url: "/cookie-policy",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cookie Policy & Tracking Technologies | Pyngyn",
+    description:
+      "How Pyngyn uses cookies and browser storage technologies.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 export default function CookiePolicyPage() {

@@ -1,7 +1,16 @@
 import React from "react";
+import type { Metadata } from "next";
 import { PyngynWebsiteProduct, ProductScreenType } from "@/components/product/website/PyngynWebsiteProduct";
 
 export const runtime = "edge";
+
+export const metadata: Metadata = {
+  title: "Product Mockups Visual QA | Pyngyn Internal",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 interface PageProps {
   searchParams?: {

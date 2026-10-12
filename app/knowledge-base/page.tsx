@@ -8,13 +8,29 @@ import {
   breadcrumbSchema,
   collectionPageSchema,
   itemListSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Knowledge base | PYNGYN",
+  title: "Pyngyn Knowledge Base | Setup, Workflows & Support",
   description:
-    "Guides, how-tos, and answers to help you get the most out of PYNGYN, from getting started to AI features, integrations, and admin.",
+    "Explore step-by-step documentation, configuration guides, and best practice playbooks for managing client spaces, review gates, and statutory compliance on Pyngyn.",
   alternates: { canonical: "/knowledge-base" },
+  openGraph: {
+    title: "Pyngyn Knowledge Base | Setup, Workflows & Support",
+    description:
+      "Explore step-by-step documentation, configuration guides, and best practice playbooks for managing client spaces, review gates, and statutory compliance on Pyngyn.",
+    url: "/knowledge-base",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pyngyn Knowledge Base | Setup, Workflows & Support",
+    description:
+      "Explore step-by-step documentation and configuration guides for managing client spaces and review gates on Pyngyn.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 export default function KnowledgeBasePage() {

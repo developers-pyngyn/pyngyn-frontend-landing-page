@@ -7,15 +7,31 @@ import {
   JsonLd,
   breadcrumbSchema,
   webPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 
 const INVESTOR_EMAIL = "founder@pyngyn.com";
 
 export const metadata: Metadata = {
-  title: "Investors | PYNGYN",
+  title: "Pyngyn Investor Relations | Company Growth & Vision",
   description:
-    "PYNGYN is building the AI operating system for professional-services firms. Learn about the opportunity and request investor materials.",
+    "Information for investors and partners on Pyngyn (VIMOVI GlobalTech): market opportunity, practice operating system traction, and enterprise roadmap.",
   alternates: { canonical: "/investors" },
+  openGraph: {
+    title: "Pyngyn Investor Relations | Company Growth & Vision",
+    description:
+      "Information for investors and partners on Pyngyn (VIMOVI GlobalTech): market opportunity, practice operating system traction, and enterprise roadmap.",
+    url: "/investors",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pyngyn Investor Relations | Company Growth & Vision",
+    description:
+      "Information for investors and partners on Pyngyn: practice operating system traction and roadmap.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 // Qualitative highlights only — no confidential figures. Detailed financials,

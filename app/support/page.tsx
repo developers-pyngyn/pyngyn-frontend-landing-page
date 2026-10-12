@@ -1,10 +1,27 @@
 import type { Metadata } from "next";
 import { ContentPage } from "@/components/ContentPage";
+import { OG_IMAGE } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Support | PYNGYN",
-  description: "Get help with PYNGYN.",
+  title: "Pyngyn Client Support | Help Desk & Assistance",
+  description:
+    "Contact Pyngyn customer support for assistance with your account, client portal setup, statutory calendar configuration, or billing questions. We are here to help.",
   alternates: { canonical: "/support" },
+  openGraph: {
+    title: "Pyngyn Client Support | Help Desk & Assistance",
+    description:
+      "Contact Pyngyn customer support for assistance with your account, client portal setup, statutory calendar configuration, or billing questions.",
+    url: "/support",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pyngyn Client Support | Help Desk & Assistance",
+    description:
+      "Contact Pyngyn customer support for help with client portals, statutory calendar setup, or billing.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 const SUPPORT_FAQS = [

@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
+import { OG_IMAGE } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | PYNGYN",
+  title: "Privacy Policy | Pyngyn ClientSpace",
   description:
     "How VIMOVI GlobalTech Private Limited (Pyngyn) collects, uses, and safeguards personal data under India's DPDP Act, 2023 and the GDPR.",
   alternates: { canonical: "/privacy" },
+  openGraph: {
+    title: "Privacy Policy | Pyngyn ClientSpace",
+    description:
+      "How VIMOVI GlobalTech Private Limited (Pyngyn) collects, uses, and safeguards personal data under India's DPDP Act, 2023 and the GDPR.",
+    url: "/privacy",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | Pyngyn ClientSpace",
+    description:
+      "How Pyngyn safeguards personal data under India's DPDP Act, 2023 and the GDPR.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 export default function PrivacyPage() {

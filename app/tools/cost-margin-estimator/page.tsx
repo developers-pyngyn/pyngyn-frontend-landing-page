@@ -13,17 +13,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Project Cost & Margin Estimator | PYNGYN",
+  title: "Project Cost & Margin Estimator | Pyngyn Tools",
   description:
-    "Estimate effort, blended rate, and gross margin for a fixed-fee engagement before you send the proposal. See your breakeven fee and how scope creep erodes margin. Free, no signup.",
+    "Estimate effort, blended rate, and gross margin for fixed-fee client engagements before sending proposals. Free calculator, no signup required.",
   alternates: { canonical: "/tools/cost-margin-estimator" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Project Cost & Margin Estimator | PYNGYN",
+    title: "Project Cost & Margin Estimator | Pyngyn Tools",
     description:
-      "Price a fixed-fee engagement with confidence. Estimate cost to deliver, blended rate, gross margin, and breakeven fee. Free, no signup.",
+      "Price fixed-fee client engagements with confidence. Calculate delivery cost, blended rate, and gross margin. Free, no signup.",
     type: "website",
     url: "/tools/cost-margin-estimator",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Project Cost & Margin Estimator | Pyngyn Tools",
+    description:
+      "Price fixed-fee client engagements with confidence. Calculate delivery cost, blended rate, and gross margin. Free, no signup.",
+    images: [OG_IMAGE.url],
   },
 };
 

@@ -12,16 +12,22 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Branded Client Portal | Client Space | PYNGYN",
+  title: "White-Labeled Branded Client Portals | Pyngyn ClientSpace",
   description:
-    "White-labeled with your firm's logo, colors, and domain. Every client gets their own isolated, branded space, not a generic tool with your logo bolted on.",
+    "White-labeled with your firm's logo, colors, and custom domain. Every client gets their own isolated, branded space for seamless collaboration.",
   alternates: { canonical: "/clientspace/branded-portal" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Branded Client Portal | PYNGYN",
-    description: "A client portal that looks like your firm, not ours.",
+    title: "White-Labeled Branded Client Portals | Pyngyn ClientSpace",
+    description: "A client portal that looks like your firm, with your domain and branding.",
     url: "/clientspace/branded-portal",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "White-Labeled Branded Client Portals | Pyngyn ClientSpace",
+    description: "White-labeled with your firm's logo, colors, and domain. Branded client portals.",
+    images: [OG_IMAGE.url],
   },
 };
 

@@ -28,17 +28,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Practice Management Software for Chartered Accountants & CA Firms | Pyngyn ClientSpace",
+  title: "CA Practice Management Software for Firms | Pyngyn",
   description:
-    "The practice operating system for Chartered Accountants and multi-partner CA firms. Manage article staff workload, partner review gates, client entity hierarchies, and retainer profitability.",
+    "The practice operating system for Chartered Accountants. Manage article trainee workload, partner review gates, client entity hierarchies, and retainer fees.",
   alternates: { canonical: "/solutions/accountants" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Practice Management Software for Chartered Accountants & CA Firms | Pyngyn ClientSpace",
+    title: "CA Practice Management Software for Firms | Pyngyn",
     description:
       "Purpose-built practice management for Chartered Accountants. Balance partner & article workloads, enforce quality control gates, and track retainer realization.",
     url: "/solutions/accountants",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CA Practice Management Software for Firms | Pyngyn",
+    description:
+      "Purpose-built practice management for Chartered Accountants. Balance partner workloads, enforce review gates, and track realization.",
+    images: [OG_IMAGE.url],
   },
 };
 

@@ -32,17 +32,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Practice Management Solutions for Accounting & CA Firms | Pyngyn ClientSpace",
+  title: "Practice Management for Accounting & CA Firms | Pyngyn",
   description:
-    "Explore Pyngyn ClientSpace practice management solutions for Chartered Accountants, corporate tax teams, statutory audit firms, and secretarial compliance practices.",
+    "Explore Pyngyn ClientSpace practice management solutions for Chartered Accountants, corporate tax teams, statutory audit firms, and compliance practices.",
   alternates: { canonical: "/solutions/professional-services" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Practice Management Solutions for Accounting & CA Firms | Pyngyn ClientSpace",
+    title: "Practice Management for Accounting & CA Firms | Pyngyn",
     description:
-      "Purpose-built practice management for CA, accounting, tax, and audit teams. Eliminate missed deadlines, automate PBC document collection, and maintain 4-eye partner review gates.",
+      "Purpose-built practice management for CA, accounting, tax, and audit teams. Eliminate missed deadlines, automate PBC intake, and enforce partner review gates.",
     url: "/solutions/professional-services",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Practice Management for Accounting & CA Firms | Pyngyn",
+    description:
+      "Purpose-built practice management for CA, accounting, tax, and audit teams. Eliminate missed deadlines and automate intake.",
+    images: [OG_IMAGE.url],
   },
 };
 

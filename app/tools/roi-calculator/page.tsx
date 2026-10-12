@@ -13,17 +13,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Cost of Chaos ROI Calculator | PYNGYN",
+  title: "Firm Coordination ROI Calculator | Pyngyn Tools",
   description:
-    "See what coordination overhead, status-chasing, and tool-switching cost your firm every year, and how much you could win back. Free, no signup. Built for professional-services teams.",
+    "Calculate what status-chasing, scattered files, and manual coordination cost your firm annually, and see your ROI from switching to Pyngyn. Free tool.",
   alternates: { canonical: "/tools/roi-calculator" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Cost of Chaos ROI Calculator | PYNGYN",
+    title: "Firm Coordination ROI Calculator | Pyngyn Tools",
     description:
-      "Put a number on lost billable hours. Calculate the annual cost of project chaos and your potential ROI from fixing it. Free, no signup.",
+      "Put a number on lost billable hours. Calculate the annual cost of coordination chaos and your potential ROI. Free, no signup.",
     type: "website",
     url: "/tools/roi-calculator",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Firm Coordination ROI Calculator | Pyngyn Tools",
+    description:
+      "Put a number on lost billable hours. Calculate annual chaos cost and potential ROI from client portals. Free tool.",
+    images: [OG_IMAGE.url],
   },
 };
 

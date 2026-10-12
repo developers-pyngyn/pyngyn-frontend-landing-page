@@ -13,17 +13,24 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Free Status Report Generator | PYNGYN",
+  title: "Client Status Report Generator | Pyngyn Tools",
   description:
-    "Turn rough weekly notes into a clean client-ready status report in seconds: status colour, TL;DR, completed, in-flight, blockers, asks, and next week. Free, no signup. Export to Markdown, email, or Slack.",
+    "Turn rough weekly notes into clean, client-ready status reports in seconds: progress, deliverables, blockers, and next steps. Free, no signup required.",
   alternates: { canonical: "/tools/status-report" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Free Status Report Generator | PYNGYN",
+    title: "Client Status Report Generator | Pyngyn Tools",
     description:
       "Paste your raw weekly notes. Get a clean, client-ready status update in 30 seconds. Free, no signup.",
     type: "website",
     url: "/tools/status-report",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Client Status Report Generator | Pyngyn Tools",
+    description:
+      "Paste your raw weekly notes. Get a clean, client-ready status update in 30 seconds. Free, no signup.",
+    images: [OG_IMAGE.url],
   },
 };
 

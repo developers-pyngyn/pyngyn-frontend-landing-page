@@ -7,12 +7,29 @@ import {
   breadcrumbSchema,
   itemListSchema,
   webPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Announcements | PYNGYN",
-  description: "Product news, launches, and updates from the PYNGYN team.",
+  title: "Product Announcements & News | Pyngyn ClientSpace",
+  description:
+    "Read the latest news, feature releases, and company announcements from the Pyngyn team as we modernize client management for CA and accounting firms.",
   alternates: { canonical: "/announcements" },
+  openGraph: {
+    title: "Product Announcements & News | Pyngyn ClientSpace",
+    description:
+      "Read the latest news, feature releases, and company announcements from the Pyngyn team as we modernize client management for CA and accounting firms.",
+    url: "/announcements",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Product Announcements & News | Pyngyn ClientSpace",
+    description:
+      "Read the latest news, feature releases, and company announcements from Pyngyn ClientSpace.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 type Announcement = {

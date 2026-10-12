@@ -9,15 +9,31 @@ import {
   breadcrumbSchema,
   faqPageSchema,
   webPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 
 const REFERRAL_EMAIL = `referrals@${EMAIL_DOMAIN}`;
 
 export const metadata: Metadata = {
-  title: "Refer and earn | PYNGYN",
+  title: "Refer & Earn with Pyngyn | Practice Referral Rewards",
   description:
-    "Refer PYNGYN to your network and earn 20% on every paid referral. The friend you refer also gets 20% off their annual plan.",
+    "Recommend Pyngyn ClientSpace to fellow Chartered Accountants and firm leaders. Earn generous recurring commissions and credits for every practice that joins.",
   alternates: { canonical: "/refer-and-earn" },
+  openGraph: {
+    title: "Refer & Earn with Pyngyn | Practice Referral Rewards",
+    description:
+      "Recommend Pyngyn ClientSpace to fellow Chartered Accountants and firm leaders. Earn generous recurring commissions and credits for every practice that joins.",
+    url: "/refer-and-earn",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Refer & Earn with Pyngyn | Practice Referral Rewards",
+    description:
+      "Recommend Pyngyn ClientSpace to fellow Chartered Accountants and firm leaders. Earn generous recurring commissions.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 const STEPS = [

@@ -12,14 +12,30 @@ import {
   breadcrumbSchema,
   webPageSchema,
   faqPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
-  title: "Benefits | PYNGYN",
+  title: "Benefits & ROI of Pyngyn ClientSpace for Modern Firms",
   description:
-    "AI planning, auto status, and risk detection. See how PYNGYN turns plain-language goals into a living plan.",
+    "Explore the tangible benefits of Pyngyn ClientSpace: zero missed statutory deadlines, 65% faster document turnaround, 4-eye review assurance, and fee realization.",
   alternates: { canonical: "/benefits" },
+  openGraph: {
+    title: "Benefits & ROI of Pyngyn ClientSpace for Modern Firms",
+    description:
+      "Explore the tangible benefits of Pyngyn ClientSpace: zero missed statutory deadlines, 65% faster document turnaround, 4-eye review assurance, and fee realization.",
+    url: "/benefits",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Benefits & ROI of Pyngyn ClientSpace for Modern Firms",
+    description:
+      "Zero missed statutory deadlines, 65% faster document turnaround, and 4-eye review assurance with Pyngyn ClientSpace.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 const BENEFITS_FAQS = [

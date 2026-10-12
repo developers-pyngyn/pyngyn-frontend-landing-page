@@ -12,16 +12,22 @@ import {
 } from "@/components/schema";
 
 export const metadata: Metadata = {
-  title: "Reporting | PYNGYN",
+  title: "Real-Time Practice Reporting & Dashboards | Pyngyn",
   description:
-    "Portfolio health, engagement status, and financials, live, in one dashboard. Not a spreadsheet someone rebuilds every Friday afternoon.",
+    "Portfolio health, engagement status, and fee realization in one live dashboard. Stop rebuilding spreadsheets every Friday afternoon.",
   alternates: { canonical: "/benefits/reporting" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Reporting | PYNGYN",
-    description: "Real-time reporting, not a Friday-afternoon export.",
+    title: "Real-Time Practice Reporting & Dashboards | Pyngyn",
+    description: "Real-time reporting and portfolio health, not a Friday-afternoon export.",
     url: "/benefits/reporting",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Real-Time Practice Reporting & Dashboards | Pyngyn",
+    description: "Live practice reporting and portfolio health across client engagements.",
+    images: [OG_IMAGE.url],
   },
 };
 

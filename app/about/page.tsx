@@ -8,14 +8,30 @@ import {
   aboutPageSchema,
   breadcrumbSchema,
   faqPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
-  title: "About | PYNGYN",
+  title: "About Pyngyn | Operating System for CA & Accounting Firms",
   description:
-    "PYNGYN ClientSpace is the unified client management and practice operating system for professional-services firms. Learn why we're building it and what we believe.",
+    "Discover Pyngyn's mission: empowering Chartered Accountants and professional services firms with unified client portals, review gates, and automated workflows.",
   alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About Pyngyn | Operating System for CA & Accounting Firms",
+    description:
+      "Discover Pyngyn's mission: empowering Chartered Accountants and accounting firms with unified client portals, review gates, and automated workflows.",
+    url: "/about",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Pyngyn | Operating System for CA & Accounting Firms",
+    description:
+      "Empowering Chartered Accountants and accounting firms with unified client portals, review gates, and automated workflows.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 const values: [string, string][] = [

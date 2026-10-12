@@ -10,14 +10,30 @@ import {
   webPageSchema,
   itemListSchema,
   faqPageSchema,
+  OG_IMAGE,
 } from "@/components/schema";
 import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
-  title: "Free Tools for Professional-Services Firms | PYNGYN",
+  title: "Free Tools & Calculators for Accounting & CA Firms | Pyngyn",
   description:
-    "Free, no-signup tools for professional-services firms. Start with the \"Any Update?\" Cost Calculator: see what answering client status requests costs your firm every year.",
+    "Free calculators and generators for practice leaders: Status Cost Calculator, ROI Calculator, Engagement Plan Generator, and Team Utilization Estimator. No signup.",
   alternates: { canonical: "/tools" },
+  openGraph: {
+    title: "Free Tools & Calculators for Accounting & CA Firms | Pyngyn",
+    description:
+      "Free calculators and generators for practice leaders: Status Cost Calculator, ROI Calculator, Engagement Plan Generator, and Team Utilization Estimator.",
+    url: "/tools",
+    type: "website",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Tools & Calculators for Accounting & CA Firms | Pyngyn",
+    description:
+      "Free calculators and generators for practice leaders: Status Cost Calculator, ROI Calculator, Engagement Plan Generator, and Team Utilization Estimator.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 type Tool = {

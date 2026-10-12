@@ -27,17 +27,24 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Client Portal Software | Secure Client Portal for Modern Firms | Pyngyn ClientSpace",
+  title: "Client Portal Software for Professional Firms | Pyngyn",
   description:
-    "Pyngyn ClientSpace is secure client portal software purpose-built for accounting firms, CAs, and professional services. Give clients a branded portal with live status, bank-grade documents, approvals, and passwordless access.",
+    "Pyngyn ClientSpace is secure client portal software for CA and accounting firms. Deliver branded client portals, real-time milestones, and bank-grade documents.",
   alternates: { canonical: "/clientspace" },
   openGraph: {
     images: [OG_IMAGE],
-    title: "Client Portal Software | Secure Client Portal for Modern Firms | Pyngyn ClientSpace",
+    title: "Client Portal Software for Professional Firms | Pyngyn",
     description:
-      "Stop being the bottleneck between clients and their information. Pyngyn is the secure client portal software providing branded workspaces, encrypted documents, live milestones, and approvals.",
+      "Stop being the bottleneck between clients and their information. Deliver branded client portals, encrypted documents, live milestones, and approvals.",
     url: "/clientspace",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Client Portal Software for Professional Firms | Pyngyn",
+    description:
+      "Stop being the bottleneck between clients and their information. Deliver branded client portals, encrypted documents, and live milestones.",
+    images: [OG_IMAGE.url],
   },
 };
 
