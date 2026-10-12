@@ -9,7 +9,9 @@ import {
   breadcrumbSchema,
   webPageSchema,
   itemListSchema,
+  faqPageSchema,
 } from "@/components/schema";
+import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
   title: "Free Tools for Professional-Services Firms | PYNGYN",
@@ -100,6 +102,29 @@ const TOOLS: Tool[] = [
   },
 ];
 
+const TOOLS_FAQS = [
+  {
+    q: "Are PYNGYN's practice calculators and utilities completely free?",
+    a: "Yes. All calculators on this page—including the 'Any Update?' Cost Calculator, Engagement Plan Generator, Cost of Chaos ROI Calculator, and Team Utilization Calculator—are 100% free with no credit card or account creation required.",
+  },
+  {
+    q: "Is any sensitive financial or firm data saved on your servers?",
+    a: "No. All calculations run entirely client-side in your browser. None of your inputs, hourly rates, client figures, or project descriptions are stored, tracked, or transmitted to external databases.",
+  },
+  {
+    q: "How accurate are the utilization and margin estimates?",
+    a: "The calculators use standard professional services operational formulas (billable utilization %, blended billing rates, overhead margins, and opportunity cost models) vetted by practicing accountants and management consultants.",
+  },
+  {
+    q: "Can I export or share the calculation outputs with my leadership?",
+    a: "Yes. Tools like the Engagement Plan Generator and Status Report Generator support one-click Markdown and CSV exports, making it easy to copy formatted summaries into proposals, Slack, or email threads.",
+  },
+  {
+    q: "How do these standalone tools compare to the full PYNGYN platform?",
+    a: "These calculators perform one-off evaluations. PYNGYN ClientSpace automates these metrics continuously across all your active client engagements, updating live capacity, project margins, and client status automatically.",
+  },
+];
+
 export default function ToolsHubPage() {
   return (
     <>
@@ -128,6 +153,7 @@ export default function ToolsHubPage() {
               url: t.href || "/tools",
             })),
           }),
+          faqPageSchema(TOOLS_FAQS, "/tools"),
         ]}
       />
       <Navbar />
@@ -205,8 +231,15 @@ export default function ToolsHubPage() {
 
         <ToolConversionBridge
           eyebrow="One-off tools vs. the real thing"
-          title="These tools are one calculation. Workspace and Clientspace run this permanently."
-          body="Every tool above answers one question, once. Workspace tracks the plan, the margin, the utilization, and the status live, every week, without you opening a calculator. Clientspace shows your clients the result in their own branded portal, standalone or bundled with Workspace."
+          title="These tools are one calculation. ClientSpace runs this permanently."
+          body="Every tool above answers one question, once. ClientSpace tracks the plan, the margin, the utilization, and the status live, every week, without you opening a calculator. Your clients see the result in their own branded portal automatically."
+        />
+
+        <FaqSection
+          eyebrow="Free Tools FAQ"
+          title="Frequently asked questions about our free tools."
+          description="Everything you need to know about our calculators, data privacy, formulas, and exports."
+          faqs={TOOLS_FAQS}
         />
 
         <FinalCTA />

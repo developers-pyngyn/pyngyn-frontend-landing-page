@@ -148,8 +148,8 @@ export default function RoiCalculatorPage() {
         </section>
 
         <ToolConversionBridge
-          title="That recovered time shows up first in Workspace, then in front of your clients."
-          body="Workspace is where the billable-hours drag actually gets fixed: projects, timesheets, and AI keeping status current instead of your team chasing it. Pair it with Clientspace and your clients see the improvement too, standalone or bundled with Workspace, your call."
+          title="That recovered time shows up in your team's day, then in front of your clients."
+          body="ClientSpace is where the billable-hours drag actually gets fixed: live projects, timesheets, and AI keeping status current instead of your team chasing it. Your clients see the transparency in their branded portal automatically."
         />
 
         <FinalCTA />

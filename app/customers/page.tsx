@@ -7,7 +7,9 @@ import {
   JsonLd,
   breadcrumbSchema,
   webPageSchema,
+  faqPageSchema,
 } from "@/components/schema";
+import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
   title: "Customers | PYNGYN",
@@ -20,30 +22,30 @@ export const metadata: Metadata = {
 // used on /clientspace and /workspace, aggregated here rather than repeating
 // the homepage's testimonial block verbatim. Roles only, no names, no
 // invented company logos.
-const VOICES: { quote: string; role: string; product: "Clientspace" | "Workspace" }[] = [
+const VOICES: { quote: string; role: string; topic: string }[] = [
   {
     quote:
       "Every Monday starts with the same five emails: any update on our filing? The answer exists, it just lives in our tracker, not anywhere the client can see.",
     role: "Partner, CA firm",
-    product: "Clientspace",
+    topic: "Client visibility",
   },
   {
     quote:
       "We finally see whether an engagement is profitable while it's running, not after the invoice. We price and staff client work completely differently now.",
     role: "Partner, advisory firm",
-    product: "Workspace",
+    topic: "Engagement profitability",
   },
   {
     quote:
       "Sign-offs are our bottleneck. The engagement letter sits in someone's inbox for a week, and nobody notices until the deadline is already at risk.",
     role: "Practice manager, law firm",
-    product: "Clientspace",
+    topic: "Approvals & sign-offs",
   },
   {
     quote:
       "Internal work and client work finally live in one place. When a senior leaves, five years of client context doesn't walk out the door with them.",
     role: "Operations lead, consulting firm",
-    product: "Workspace",
+    topic: "Practice continuity",
   },
 ];
 
@@ -59,6 +61,29 @@ const CUSTOMER_BENEFITS = [
   {
     title: "Hands-on setup, not a help doc",
     body: "We personally help configure your first few client engagements, not a generic onboarding email sequence.",
+  },
+];
+
+const CUSTOMER_FAQS = [
+  {
+    q: "What types of firms get the most value from PYNGYN?",
+    a: "PYNGYN is built specifically for accounting firms, Chartered Accountants (CAs), tax advisors, audit practices, and professional-services partnerships ranging from 3 to 100+ practitioners who manage high-volume client deliverables and statutory deadlines.",
+  },
+  {
+    q: "How does migration work from our current spreadsheets or PM software?",
+    a: "We provide structured Excel and CSV import templates for client masters, active engagements, and recurring tasks. Our onboarding team directly assists with your initial data upload to ensure zero disruption to ongoing client work.",
+  },
+  {
+    q: "How do our clients react to using ClientSpace?",
+    a: "Clients appreciate the simplicity. Because ClientSpace requires no password (using secure magic links sent to email or WhatsApp), client adoption is frictionless. Clients get immediate visibility into active filing stages and pending document requests without asking.",
+  },
+  {
+    q: "What kind of ongoing training and support do customers receive?",
+    a: "Every customer receives dedicated onboarding support, video walkthroughs, and responsive email assistance. Business and Enterprise plans include dedicated practice consultation and priority SLA responses.",
+  },
+  {
+    q: "Can multiple partners manage separate service lines within the same firm account?",
+    a: "Yes. PYNGYN supports multi-team role permissions and branch hierarchy. Audit, Tax, Advisory, and ROC compliance teams can operate their respective pipelines while firm partners retain holistic practice oversight.",
   },
 ];
 
@@ -81,6 +106,7 @@ export default function CustomersPage() {
             ],
             "/customers"
           ),
+          faqPageSchema(CUSTOMER_FAQS, "/customers"),
         ]}
       />
       <Navbar />
@@ -91,8 +117,8 @@ export default function CustomersPage() {
             500+ professional-services firms run on PYNGYN.
           </h1>
           <p className="lead mt-4 max-w-[680px]">
-            Rather than show you a logo wall, here&apos;s what firms evaluating Clientspace
-            and Workspace actually tell us, and what customers get for coming on board.
+            Rather than show you a logo wall, here&apos;s what firms evaluating ClientSpace
+            actually tell us, and what customers get for coming on board.
           </p>
         </section>
         <Proof />
@@ -111,10 +137,10 @@ export default function CustomersPage() {
               </p>
             </div>
             <div className="mt-[46px] grid gap-[22px] md:grid-cols-2">
-              {VOICES.map(({ quote, role, product }) => (
-                <figure key={role + product} className="card flex h-full flex-col">
+              {VOICES.map(({ quote, role, topic }) => (
+                <figure key={role + topic} className="card flex h-full flex-col">
                   <span className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted">
-                    On {product}
+                    {topic}
                   </span>
                   <blockquote className="mt-3 flex-1 text-[16.5px] leading-relaxed">
                     &ldquo;{quote}&rdquo;
@@ -157,6 +183,13 @@ export default function CustomersPage() {
             </div>
           </div>
         </section>
+
+        <FaqSection
+          eyebrow="Customer FAQ"
+          title="Frequently asked questions from customers."
+          description="Everything you need to know about rollout, team adoption, data migration, and partner support."
+          faqs={CUSTOMER_FAQS}
+        />
 
         <FinalCTA />
       </main>

@@ -13,12 +13,12 @@ import {
 
 export const metadata: Metadata = {
   title: "PYNGYN for Architects | Design Phases, Permits & Client Portals",
-  description: "PYNGYN gives every client of your practice a standalone branded Client Space for design status, drawings, and approvals. Workspace, which runs your phases, consultants, and permit deadlines, is a separate product you can add.",
+  description: "PYNGYN ClientSpace runs design phases, drawings, and approvals for architecture practices. Branded client portals with unified practice operations for your team.",
   alternates: { canonical: "/solutions/architects" },
   openGraph: {
     images: [OG_IMAGE],
     title: "PYNGYN for Architects | Design Phases, Permits & Client Portals",
-    description: "PYNGYN gives every client of your practice a standalone branded Client Space for design status, drawings, and approvals. Workspace, which runs your phases, consultants, and permit deadlines, is a separate product you can add.",
+    description: "PYNGYN ClientSpace runs design phases, drawings, and approvals for architecture practices. Branded client portals with unified practice operations for your team.",
     url: "/solutions/architects",
     type: "website",
   },
@@ -93,7 +93,7 @@ export default function VerticalPage() {
           webPageSchema({
             url: "/solutions/architects",
             name: "PYNGYN for Architects | Design Phases, Permits & Client Portals",
-            description: "PYNGYN gives every client of your practice a standalone branded Client Space for design status, drawings, and approvals. Workspace, which runs your phases, consultants, and permit deadlines, is a separate product you can add.",
+            description: "PYNGYN ClientSpace runs design phases, drawings, and approvals for architecture practices. Branded client portals with unified practice operations for your team.",
             breadcrumbId: "/solutions/architects#breadcrumb",
           }),
           breadcrumbSchema(
@@ -118,7 +118,7 @@ export default function VerticalPage() {
             <br className="hidden sm:block" />{" "}
             <span className="text-accent">concept to approval.</span>
           </h1>
-          <p className="lead mt-5 max-w-[680px]">PYNGYN gives every client of your practice a standalone branded Client Space, design phase status, drawings, and phase-gate approvals in one place instead of email. Add Workspace, a separate product, to coordinate your drawings, consultants, and permit deadlines internally.</p>
+          <p className="lead mt-5 max-w-[680px]">PYNGYN ClientSpace gives every client of your practice a branded portal for design phase status, drawings, and phase-gate approvals in one place. Your team coordinates drawings, consultants, and permit deadlines seamlessly in the same unified platform.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={DEMO_URL} className="btn btn-accent">Book a demo</a>
             <a href={SIGNUP_URL} className="btn btn-primary">Start free trial</a>
@@ -200,19 +200,19 @@ export default function VerticalPage() {
           </div>
         </section>
 
-        {/* ===== Workspace ============================================= */}
+        {/* ===== Practice Operations ============================================= */}
         <section className="section bg-[#fbfbfd]">
           <div className="wrap">
             <div className="flex items-center gap-3">
-              <span className="eyebrow">The engine</span>
-              <span className="rounded-full border border-line px-2.5 py-0.5 text-[11px] font-bold text-muted">Workspace</span>
+              <span className="eyebrow">Practice Operations</span>
+              <span className="rounded-full border border-line px-2.5 py-0.5 text-[11px] font-bold text-muted">ClientSpace</span>
             </div>
             <h2 className="mt-3 max-w-[820px] font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
               Your firm&apos;s operating system.
-              <span className="block text-accent">$9 per seat / month.</span>
+              <span className="block text-accent">Built for architecture practices.</span>
             </h2>
             <p className="lead mt-4 max-w-[640px]">
-              Everything your team needs to run architecture practices work, with AI that keeps
+              Everything your team needs to run architecture projects, with AI that keeps
               plans, status, and risk current automatically.
             </p>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -234,21 +234,16 @@ export default function VerticalPage() {
               Simple and predictable.
             </h2>
             <p className="lead mx-auto mt-3 max-w-[520px]">
-              Choose Client Space, Workspace, or bundle both for $24.99/mo.
+              Transparent plans with unlimited client portals.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-[15px]">
-              <div className="rounded-2xl border border-accent bg-accent/5 px-6 py-4 text-center shadow-soft">
-                <div className="font-display text-[32px] font-semibold">$19</div>
-                <div className="mt-1 text-muted">per client / month · Client Space</div>
-              </div>
               <div className="rounded-2xl border border-line bg-white px-6 py-4 text-center shadow-card">
                 <div className="font-display text-[32px] font-semibold">$9</div>
-                <div className="mt-1 text-muted">per seat / month · Workspace</div>
+                <div className="mt-1 text-muted">per seat / month · Professional</div>
               </div>
-              <span className="text-[22px] text-muted">or bundle for</span>
-              <div className="rounded-2xl border border-line bg-white px-6 py-4 text-center shadow-card">
-                <div className="font-display text-[32px] font-semibold">$24.99</div>
-                <div className="mt-1 text-muted">/mo · both together</div>
+              <div className="rounded-2xl border border-accent bg-accent/5 px-6 py-4 text-center shadow-soft">
+                <div className="font-display text-[32px] font-semibold">$19</div>
+                <div className="mt-1 text-muted">per seat / month · Business</div>
               </div>
             </div>
             <div className="mt-8 flex flex-wrap justify-center gap-3">

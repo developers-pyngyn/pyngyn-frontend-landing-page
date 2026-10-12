@@ -35,7 +35,7 @@ const DETAILS: { title: string; body: string }[] = [
 const FAQS: { q: string; a: string }[] = [
   { q: "Is reporting real-time?", a: "Yes. Reports reflect current status pulled from the work itself, not a manually maintained spreadsheet that goes stale between updates." },
   { q: "Can I see financials and delivery status together?", a: "Yes. Revenue, margin, and utilization sit alongside project and engagement status, so you can see whether work is on track and profitable in one view." },
-  { q: "Is reporting part of Workspace or Client Space?", a: "Reporting is part of Workspace, your firm's internal operating layer. Clients see a simpler, relevant status view inside their own Client Space, not your internal reports." },
+  { q: "Do clients see these internal reports in ClientSpace?", a: "No. Internal portfolio reporting, billable margins, and team utilization are strictly visible to your firm's staff. Clients see a clean, curated project status and milestone view inside their own branded ClientSpace." },
   { q: "Can I export reports?", a: "Yes, for sharing outside the product when a meeting calls for it. The live version inside PYNGYN stays current regardless." },
 ];
 
@@ -85,7 +85,7 @@ export default function ReportingPage() {
             <a href={SIGNUP_URL} className="btn btn-primary">Start free trial</a>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Part of <Link href="/workspace" className="font-semibold text-accent">Workspace</Link>,
+            Part of <Link href="/clientspace" className="font-semibold text-accent">ClientSpace</Link>,
             from $9 per seat/month
           </p>
         </section>

@@ -4,6 +4,12 @@ import { DEMO_URL, SIGNUP_URL, ROI_URL } from "@/components/config";
 import { StickyCTABar } from "@/components/StickyCTABar";
 import { ExitIntentModal } from "@/components/ExitIntentModal";
 import { VIDEO_TESTIMONIALS, TestimonialVideo } from "@/components/VideoTestimonials";
+import {
+  JsonLd,
+  webPageSchema,
+  breadcrumbSchema,
+  faqPageSchema,
+} from "@/components/schema";
 
 // =============================================================================
 // PROFESSIONAL SERVICES LANDING PAGE  (paid traffic — noindex)
@@ -151,7 +157,7 @@ const FAQS = [
   { q: "Will it work with our existing tools?", a: "Yes. PYNGYN connects to Slack, Gmail, Google Workspace, QuickBooks, Xero, DocuSign, Stripe, Salesforce, HubSpot, n8n, Zapier, and Make, with more on the way." },
   { q: "How do you handle our data?", a: "256-bit AES encryption in transit and at rest, role-based access control, ISO 9001:2015 certified quality processes, and DPDP alignment. Your data is never used to train AI models without explicit consent." },
   { q: "Can we migrate from another tool?", a: "Yes. We support imports from common project tools and spreadsheets, and our team helps with the first migration so you do not lose history." },
-  { q: "How does pricing work?", a: "Client Space is $19 per client/month, standalone. Workspace is $9 per internal seat/month, standalone. Bundle both for $24.99/month. Enterprise pricing is custom. 7-day trial, no credit card required." },
+  { q: "How does pricing work?", a: "Professional is $9 per seat/month, and Business is $19 per seat/month. Enterprise pricing is custom. 7-day trial, no credit card required." },
   { q: "Will the team actually use it?", a: "Yes. Because PYNGYN replaces manual coordination work instead of adding to it, adoption is the rule rather than the exception in pilot teams." },
 ];
 
@@ -161,10 +167,30 @@ const FAQS = [
 
 export default function ProfessionalServicesLP() {
   return (
-    <main id="main" className="hero-dark relative min-h-screen text-white antialiased">
-      {/* Page-scoped style: keep the body background dark behind this LP so iOS
-          overscroll bounce does not show the grey canvas from globals.css. */}
-      <style dangerouslySetInnerHTML={{ __html: "html,body{background:#0b0d12 !important;}" }} />
+    <>
+      <JsonLd
+        data={[
+          webPageSchema({
+            url: "/lp/professional-services",
+            name: "The AI Operating System for Professional Services | PYNGYN",
+            description:
+              "Stop running client work through spreadsheets and WhatsApp. PYNGYN is the AI operations layer for consulting, agency, and services firms. Book a demo.",
+            breadcrumbId: "/lp/professional-services#breadcrumb",
+          }),
+          breadcrumbSchema(
+            [
+              { name: "Home", url: "/" },
+              { name: "Professional Services", url: "/lp/professional-services" },
+            ],
+            "/lp/professional-services"
+          ),
+          faqPageSchema(FAQS, "/lp/professional-services"),
+        ]}
+      />
+      <main id="main" className="hero-dark relative min-h-screen text-white antialiased">
+        {/* Page-scoped style: keep the body background dark behind this LP so iOS
+            overscroll bounce does not show the grey canvas from globals.css. */}
+        <style dangerouslySetInnerHTML={{ __html: "html,body{background:#0b0d12 !important;}" }} />
       {/* Persistent decorative grid behind everything */}
       <div className="pointer-events-none fixed inset-0 opacity-30" aria-hidden="true">
         <div className="hero-grid h-full w-full" />
@@ -201,6 +227,7 @@ export default function ProfessionalServicesLP() {
       />
       <ExitIntentModal ctaHref={PRIMARY_CTA} />
     </main>
+  </>
   );
 }
 
@@ -213,14 +240,14 @@ function WorkspaceClientspaceExplainer() {
   return (
     <section className="mx-auto w-full max-w-[1180px] px-5 py-20 sm:px-7 sm:py-28">
       <div className="text-center">
-        <SectionEyebrow>The product</SectionEyebrow>
+        <SectionEyebrow>The platform</SectionEyebrow>
         <h2 className="mt-4 font-display text-[clamp(30px,4.5vw,48px)] font-semibold leading-[1.05] tracking-[-0.03em] text-white">
-          Two products. One operating system.
+          Unified practice management. Effortless client portals.
         </h2>
         <p className="mx-auto mt-4 max-w-[580px] text-[16px] leading-relaxed text-white/65">
-          Client Space gives every client their own branded portal, and works on its own. Workspace runs
-          your firm behind the scenes. Buy either standalone, or bundle both to replace the
-          spreadsheets, WhatsApp threads, and status emails that eat your week.
+          ClientSpace gives every client their own branded portal, while running your
+          firm behind the scenes in one unified platform to replace the spreadsheets,
+          WhatsApp threads, and status emails that eat your week.
         </p>
       </div>
 
@@ -228,8 +255,8 @@ function WorkspaceClientspaceExplainer() {
         {/* Clientspace */}
         <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-8">
           <div className="flex items-center gap-3">
-            <span className="rounded-xl border border-accent/40 px-3 py-1.5 font-mono text-[12px] font-bold uppercase tracking-[0.1em] text-accent">Client Space</span>
-            <span className="text-[13px] text-white/50">$19 / client / month · standalone</span>
+            <span className="rounded-xl border border-accent/40 px-3 py-1.5 font-mono text-[12px] font-bold uppercase tracking-[0.1em] text-accent">Client Portals</span>
+            <span className="text-[13px] text-white/50">Included with ClientSpace</span>
           </div>
           <h3 className="mt-4 font-display text-[22px] font-semibold text-white">A branded portal for every client.</h3>
           <p className="mt-2 text-[14.5px] leading-relaxed text-white/65">
@@ -247,11 +274,11 @@ function WorkspaceClientspaceExplainer() {
             ))}
           </ul>
         </div>
-        {/* Workspace */}
+        {/* Firm Operations */}
         <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-8">
           <div className="flex items-center gap-3">
-            <span className="rounded-xl bg-accent/20 px-3 py-1.5 font-mono text-[12px] font-bold uppercase tracking-[0.1em] text-accent">Workspace</span>
-            <span className="text-[13px] text-white/50">$9 / seat / month · standalone</span>
+            <span className="rounded-xl bg-accent/20 px-3 py-1.5 font-mono text-[12px] font-bold uppercase tracking-[0.1em] text-accent">Firm Operations</span>
+            <span className="text-[13px] text-white/50">From $9 / seat / month</span>
           </div>
           <h3 className="mt-4 font-display text-[22px] font-semibold text-white">Your firm&apos;s operating system.</h3>
           <p className="mt-2 text-[14.5px] leading-relaxed text-white/65">

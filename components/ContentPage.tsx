@@ -4,7 +4,9 @@ import {
   JsonLd,
   breadcrumbSchema,
   webPageSchema,
+  faqPageSchema,
 } from "@/components/schema";
+import { FaqSection, type FaqItem } from "@/components/FaqSection";
 
 export type ContentSection = { heading: string; body: string };
 
@@ -16,6 +18,8 @@ export function ContentPage({
   showCTA = true,
   url,
   metaTitle,
+  faqs,
+  faqTitle,
 }: {
   eyebrow: string;
   title: string;
@@ -27,6 +31,8 @@ export function ContentPage({
   url?: string;
   // Optional override for the schema page name; defaults to `${eyebrow} | PYNGYN`.
   metaTitle?: string;
+  faqs?: FaqItem[];
+  faqTitle?: string;
 }) {
   return (
     <>
@@ -46,6 +52,7 @@ export function ContentPage({
               ],
               url
             ),
+            ...(faqs && faqs.length > 0 ? [faqPageSchema(faqs, url)] : []),
           ]}
         />
       )}
@@ -70,6 +77,14 @@ export function ContentPage({
               ))}
             </div>
           </section>
+        )}
+
+        {faqs && faqs.length > 0 && (
+          <FaqSection
+            eyebrow={`${eyebrow} FAQ`}
+            title={faqTitle ?? `Frequently asked questions about ${eyebrow.toLowerCase()}.`}
+            faqs={faqs}
+          />
         )}
 
         {showCTA && <FinalCTA />}

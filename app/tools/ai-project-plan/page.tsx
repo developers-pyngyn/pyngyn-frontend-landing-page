@@ -145,7 +145,7 @@ export default function ProjectPlanToolPage() {
 
         <ToolConversionBridge
           title="Turn this plan into tasks with owners, deadlines, and a client who can see it."
-          body="Workspace turns this draft into a real project: owners, deadlines, and AI keeping status current as work moves. Add Clientspace and the client watching this engagement sees progress in their own branded portal, no separate update required."
+          body="ClientSpace turns this draft into a live engagement: assign owners, track deadlines, and let AI keep status current as work moves. Your client sees progress in their own branded portal in real time, with no separate status decks required."
         />
 
         <FinalCTA />

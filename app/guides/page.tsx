@@ -4,6 +4,12 @@ import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, KB_URL, BLOG_URL } from "@/components/config";
 import { GUIDES, type Guide, CATEGORY_COLOR, type GuideCategory } from "@/components/guides-data";
+import {
+  JsonLd,
+  breadcrumbSchema,
+  collectionPageSchema,
+  itemListSchema,
+} from "@/components/schema";
 
 export const metadata: Metadata = {
   title: "CA Practice Playbooks & Operational Guides | Pyngyn",
@@ -60,6 +66,37 @@ function GuideCard({ g, size = "default" }: { g: Guide; size?: "default" | "larg
 export default function GuidesPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          collectionPageSchema({
+            url: "/guides",
+            name: "CA Practice Playbooks & Operational Guides | Pyngyn",
+            description:
+              "Practical playbooks for Chartered Accountants and accounting firms: statutory audit workflows, PBC checklists, 4-eye partner review gates, and firm scaling.",
+            hasPart: GUIDES.map((g) => ({
+              name: g.title,
+              url: `/guides/${g.slug}`,
+              description: g.excerpt,
+            })),
+          }),
+          breadcrumbSchema(
+            [
+              { name: "Home", url: "/" },
+              { name: "Guides", url: "/guides" },
+            ],
+            "/guides"
+          ),
+          itemListSchema({
+            url: "/guides",
+            name: "CA Practice Playbooks",
+            items: GUIDES.map((g) => ({
+              name: g.title,
+              url: `/guides/${g.slug}`,
+              description: g.excerpt,
+            })),
+          }),
+        ]}
+      />
       <Navbar />
       <main id="main">
         {/* Hero */}

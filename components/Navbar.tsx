@@ -42,7 +42,7 @@ interface DropdownItem {
 const PRODUCT_MENU: DropdownItem[] = [
   {
     name: "ClientSpace Hub",
-    desc: "The unified client workspace for modern accounting & CA firms",
+    desc: "The unified client portal & practice OS for professional services",
     href: "/clientspace",
     icon: Building2,
     badge: "Core",
@@ -79,7 +79,7 @@ const PRODUCT_MENU: DropdownItem[] = [
   },
   {
     name: "Interactive Tour",
-    desc: "Explore live interactive client & task workspace tour",
+    desc: "Explore live interactive client & task workflow tour",
     href: "/#tour",
     icon: Users,
   },

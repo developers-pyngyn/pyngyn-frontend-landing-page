@@ -37,7 +37,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Why does the tool cost default to a per-client price instead of per-seat?",
-    a: "This calculator models Clientspace, which is priced and sold per client, standalone, not per internal seat. That's different from PYNGYN's other free tools, which model Workspace at its per-seat price.",
+    a: "This calculator models the savings of client portals that give each client 24/7 visibility, replacing routine status requests so your team saves billable hours every week.",
   },
   {
     q: "Is the self-serve recovery rate realistic?",

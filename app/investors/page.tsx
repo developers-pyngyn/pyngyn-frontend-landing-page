@@ -3,6 +3,11 @@ import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SOCIAL_LINKEDIN, EMAIL_DOMAIN } from "@/components/config";
+import {
+  JsonLd,
+  breadcrumbSchema,
+  webPageSchema,
+} from "@/components/schema";
 
 const INVESTOR_EMAIL = "founder@pyngyn.com";
 
@@ -40,6 +45,24 @@ const WHY: { title: string; body: string }[] = [
 export default function InvestorsPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          webPageSchema({
+            url: "/investors",
+            name: "Investors | PYNGYN",
+            description:
+              "PYNGYN is building the AI operating system for professional-services firms. Learn about the opportunity and request investor materials.",
+            breadcrumbId: "/investors#breadcrumb",
+          }),
+          breadcrumbSchema(
+            [
+              { name: "Home", url: "/" },
+              { name: "Investors", url: "/investors" },
+            ],
+            "/investors"
+          ),
+        ]}
+      />
       <Navbar />
       <main id="main">
         {/* Hero */}

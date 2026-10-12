@@ -15,7 +15,9 @@ import {
   breadcrumbSchema,
   itemListSchema,
   webPageSchema,
+  faqPageSchema,
 } from "@/components/schema";
+import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
   title: "Client Management for CA & Accounting Firms | Compare | PYNGYN",
@@ -69,6 +71,29 @@ function CellMark({ v }: { v: Cell }) {
   );
 }
 
+const COMPARE_FAQS = [
+  {
+    q: "How does PYNGYN differ from generic project tools like Asana, Monday, and ClickUp?",
+    a: "Generic tools require manual custom fields and have zero understanding of statutory compliance. PYNGYN is purpose-built for CA and accounting firms with native statutory filing calendars (GST, TDS, ROC, Income Tax), 4-eye partner review gates, PBC document collection, and free passwordless client portals.",
+  },
+  {
+    q: "How does PYNGYN compare to accounting practice suites like Karbon, Canopy, or TaxDome?",
+    a: "While legacy platforms are optimized for US/UK practices, PYNGYN uniquely supports Indian statutory timelines, Tally Prime / Computax integrations, and automated WhatsApp document follow-ups, with predictable pricing starting at ₹999/user/month without per-client charges.",
+  },
+  {
+    q: "Can our firm import existing client masters and task history from Excel spreadsheets?",
+    a: "Yes. PYNGYN provides 1-click Excel and CSV import templates for your client directory, active recurring engagements, and staff assignments. Our onboarding team assists during your setup to ensure a seamless transition.",
+  },
+  {
+    q: "Do we have to pay extra fees as we invite more clients to their portal?",
+    a: "No. Unlike tools that charge per client seat or cap external portal logins, PYNGYN includes unlimited client spaces and magic-link client invitations on all plans with zero per-client add-on fees.",
+  },
+  {
+    q: "Can we test PYNGYN ClientSpace alongside our existing software before deciding?",
+    a: "Yes. We offer a 7-day free trial and a tailored 30-minute practice consultation where our team models one of your live engagements (such as a Corporate Tax Audit or GSTR-3B monthly cycle) so you can evaluate the platform risk-free.",
+  },
+];
+
 export default function CompareIndexPage() {
   return (
     <>
@@ -97,6 +122,7 @@ export default function CompareIndexPage() {
               description: COMPARE_CONTENT[c.slug]?.tagline,
             })),
           }),
+          faqPageSchema(COMPARE_FAQS, "/compare"),
         ]}
       />
       <Navbar />
@@ -313,6 +339,13 @@ export default function CompareIndexPage() {
             </div>
           </div>
         </section>
+
+        <FaqSection
+          eyebrow="Comparison FAQ"
+          title="Frequently asked questions about software comparison."
+          description="How PYNGYN compares to generic tools, legacy suites, and manual spreadsheets."
+          faqs={COMPARE_FAQS}
+        />
 
         <FinalCTA />
       </main>

@@ -245,7 +245,7 @@ export default function ProductShowcasePage() {
         {selectedExperience === 'wf8-documents' && (
           <div className="space-y-3">
             <div className="flex items-center justify-between text-[12px] font-bold text-[#627D98] px-1">
-              <span>Workflow 8: Client Workspace Documents &amp; Gauge Elevation</span>
+              <span>Workflow 8: Client Portal Documents &amp; Gauge Elevation</span>
               <span className="text-emerald-700 font-mono">Processing &rarr; Received &rarr; Circular Gauge 78% &rarr; 82%</span>
             </div>
             <div className="w-full h-full border border-[#CBD5E1] rounded-[12px] overflow-hidden shadow-soft">
@@ -330,7 +330,7 @@ export default function ProductShowcasePage() {
           </div>
         )}
 
-        {/* BASE EXPERIENCE 9: Client Workspace / Oswal Client Portal (Mockup #9) */}
+        {/* BASE EXPERIENCE 9: ClientSpace / Oswal Client Portal (Mockup #9) */}
         {selectedExperience === 'clientspace' && (
           <div className="space-y-3">
             <div className="flex items-center justify-between text-[12px] font-bold text-[#627D98] px-1">

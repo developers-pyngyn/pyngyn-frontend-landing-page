@@ -160,8 +160,8 @@ export default function TeamUtilizationPage() {
         </section>
 
         <ToolConversionBridge
-          title="See utilization live, per person, per engagement, in Workspace."
-          body="This calculator works from averages you enter by hand. Workspace tracks billable time per person and per engagement automatically, so the idle bench and the overloaded one both show up before quarter-end, not after."
+          title="See utilization live, per person, per engagement, in ClientSpace."
+          body="This calculator works from averages you enter by hand. ClientSpace tracks billable time per person and per engagement automatically, so the idle bench and the overloaded one both show up before quarter-end, not after."
         />
 
         <FinalCTA />

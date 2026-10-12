@@ -60,7 +60,7 @@ const AGENDA = [
   {
     time: "15–25 min",
     title: "The fit for your firm",
-    body: "Workspace for your internal ops if you want it, honest answers on what PYNGYN replaces vs. sits alongside, and pricing mapped to your team and client count.",
+    body: "How ClientSpace unifies internal tracking and client delivery, honest answers on what PYNGYN replaces vs. sits alongside, and pricing mapped to your team and client count.",
   },
   {
     time: "25–30 min",
@@ -84,7 +84,7 @@ const TAKEAWAYS = [
   {
     icon: Tag,
     title: "A pricing recommendation",
-    body: "Clientspace standalone, Workspace standalone, or the bundle, we'll tell you which actually fits, including when the answer is \"start smaller.\"",
+    body: "Tailored to your firm size and workflow, we'll tell you the plan that actually fits, including when the answer is \"start smaller.\"",
   },
 ];
 
@@ -146,11 +146,15 @@ export default function DemoPage() {
             name: "Book a demo | PYNGYN",
             description:
               "Book a free 30-minute live walkthrough. We set up a Clientspace on one of your real engagements and you leave with a written rollout plan.",
+            breadcrumbId: "/demo#breadcrumb",
           }),
-          breadcrumbSchema([
-            { name: "Home", url: "/" },
-            { name: "Book a demo", url: "/demo" },
-          ]),
+          breadcrumbSchema(
+            [
+              { name: "Home", url: "/" },
+              { name: "Book a demo", url: "/demo" },
+            ],
+            "/demo"
+          ),
           faqPageSchema(DEMO_FAQS, "/demo"),
         ]}
       />
@@ -291,8 +295,8 @@ export default function DemoPage() {
             </div>
             <ul className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[13.5px] text-muted">
               {[
-                "Standalone, no Workspace required",
-                "Branded to your firm",
+                "Fully branded to your firm",
+                "Instant client invite & setup",
                 "Live in the call, not a slide deck",
               ].map((t) => (
                 <li key={t} className="flex items-center gap-2">
@@ -408,7 +412,7 @@ export default function DemoPage() {
         ctaLabel="Start free trial"
         eyebrow="Before you go"
         title="Not ready for a 30-minute call?"
-        body="Skip the calendar. Start a 7-day free trial and explore Client Space or Workspace yourself, no credit card required."
+        body="Skip the calendar. Start a 7-day free trial and explore ClientSpace yourself, no credit card required."
         dismissLabel="No thanks, I'll come back later"
       />
     </>

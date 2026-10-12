@@ -7,20 +7,45 @@ import {
   JsonLd,
   aboutPageSchema,
   breadcrumbSchema,
+  faqPageSchema,
 } from "@/components/schema";
+import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
   title: "About | PYNGYN",
   description:
-    "PYNGYN builds Clientspace, a standalone branded client portal, and Workspace, the firm's back office, for professional-services firms. Learn why we're building it and what we believe.",
+    "PYNGYN ClientSpace is the unified client management and practice operating system for professional-services firms. Learn why we're building it and what we believe.",
   alternates: { canonical: "/about" },
 };
 
 const values: [string, string][] = [
-  ["Client experience over admin", "The best firms spend their time serving clients, not chasing updates and reporting. Clientspace removes the busywork that gets in the way of that relationship."],
+  ["Client experience over admin", "The best firms spend their time serving clients, not chasing updates and reporting. ClientSpace removes the busywork that gets in the way of that relationship."],
   ["AI as a teammate", "Our AI drafts the plan and keeps it honest, but you stay in control. It assists; it never overrides."],
   ["Clarity by default", "Everyone should be able to see what's on track and what's at risk, without a meeting to find out."],
   ["Trust is earned", "Your data is yours. We're transparent about how PYNGYN works and how we handle your information."],
+];
+
+const ABOUT_FAQS = [
+  {
+    q: "What is PYNGYN and who is it built for?",
+    a: "PYNGYN ClientSpace is the unified client management and practice operating system purpose-built for Chartered Accountants, accounting firms, tax teams, and professional-services partnerships to manage clients, statutory deadlines, document requests, and firm operations in one connected hub.",
+  },
+  {
+    q: "Who operates PYNGYN and where is the company based?",
+    a: "PYNGYN is developed and operated by VIMOVI GlobalTech Private Limited, headquartered in India. The company is officially recognized by the Department for Promotion of Industry and Internal Trade (DPIIT), Government of India, and is certified under ISO 9001:2015 for Quality Management Systems.",
+  },
+  {
+    q: "How does PYNGYN differ from generic task trackers like Asana or ClickUp?",
+    a: "Generic project management tools lack context for accounting and compliance workflows. PYNGYN is purpose-built with statutory calendars (GST, TDS, ROC, Income Tax), 4-eye partner review gates, PBC document chase workflows, capacity management, and client-facing white-labeled portals.",
+  },
+  {
+    q: "What security standards and data protections does PYNGYN follow?",
+    a: "PYNGYN enforces 256-bit AES encryption at rest, TLS 1.3 in transit, strict multi-tenant isolation, and role-based permissions. Our infrastructure and processes align with the Digital Personal Data Protection (DPDP) Act and international ISO quality benchmarks.",
+  },
+  {
+    q: "Does PYNGYN train public AI models on customer or client data?",
+    a: "No. Your firm data and client financial documents are strictly confidential and are never used to train public or foundation AI models. AI features operate within dedicated, secure tenant boundaries under strict access control.",
+  },
 ];
 
 export default function AboutPage() {
@@ -32,7 +57,7 @@ export default function AboutPage() {
             url: "/about",
             name: "About PYNGYN",
             description:
-              "PYNGYN builds Clientspace and Workspace for professional-services firms. Our mission, story, and what we believe.",
+              "PYNGYN ClientSpace is the practice operating system for professional-services firms. Our mission, story, and what we believe.",
           }),
           breadcrumbSchema(
             [
@@ -41,6 +66,7 @@ export default function AboutPage() {
             ],
             "/about"
           ),
+          faqPageSchema(ABOUT_FAQS, "/about"),
         ]}
       />
       <Navbar />
@@ -51,12 +77,12 @@ export default function AboutPage() {
             We&apos;re building the operating system for professional-services firms.
           </h1>
           <p className="lead mt-5 max-w-[680px]">
-            That&apos;s two products: Clientspace, a standalone branded portal your clients log
-            into, and Workspace, the back office your team runs on. PYNGYN started from a simple
-            frustration, services firms spend more time feeding their tools than doing the
-            client work those tools are supposed to track. We thought AI could flip that, so the
-            system does the planning, status, and risk-watching, and people get back to serving
-            clients.
+            ClientSpace unifies client collaboration, task execution, document collection,
+            and compliance tracking into one seamless platform. PYNGYN started from a simple
+            frustration: services firms spend more time feeding fragmented tools than doing the
+            high-value client work those tools are supposed to track. We thought AI could flip that,
+            so the system handles the planning, status tracking, and risk-watching, while your team
+            focuses on serving clients.
           </p>
         </section>
 
@@ -66,9 +92,9 @@ export default function AboutPage() {
               <h2 className="font-display text-[22px] font-semibold">Our mission</h2>
               <p className="mt-3 text-[16px] leading-[1.7] text-muted">
                 Give every firm the clarity of a great operations team without the overhead.
-                Workspace turns plain-language intent into a living plan that stays current on
-                its own, and Clientspace shows the client that same picture without anyone
-                writing a status update.
+                ClientSpace turns plain-language intent into a living plan that stays current on
+                its own, giving your team and your clients the same clear picture without anyone
+                having to chase or write manual status updates.
               </p>
             </div>
             <div className="card">
@@ -76,8 +102,8 @@ export default function AboutPage() {
               <p className="mt-3 text-[16px] leading-[1.7] text-muted">
                 Founded by people who&apos;d run too many projects across spreadsheets, chat
                 threads, and trackers that went stale by Monday, and clients who found out about
-                delays by asking. Workspace and Clientspace are the tools we wished we&apos;d
-                had, now built with AI at their core.
+                delays by asking. ClientSpace is the unified operating platform we wished we&apos;d
+                had, built with AI and modern practice workflows at its core.
               </p>
               <p className="mt-4">
                 <Link
@@ -113,6 +139,12 @@ export default function AboutPage() {
         </section>
 
         <Metrics />
+        <FaqSection
+          eyebrow="About PYNGYN FAQ"
+          title="Frequently asked questions about our company & platform."
+          description="Everything you need to know about our founding mission, company credentials, security practices, and technology."
+          faqs={ABOUT_FAQS}
+        />
         <FinalCTA />
       </main>
       <Footer />

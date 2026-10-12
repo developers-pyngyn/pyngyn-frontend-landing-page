@@ -45,9 +45,8 @@ export const metadata: Metadata = {
 // Data — grounded in real client-portal pain points from professional-services firms
 // ---------------------------------------------------------------------------
 
-// Anonymised observations from discovery calls with services firms, same
-// honest framing as the Workspace page: roles only, no names, clearly
-// labelled as discovery-call quotes rather than customer testimonials.
+// Anonymised observations from discovery calls with services firms:
+// roles only, no names, clearly labelled as discovery-call quotes rather than customer testimonials.
 const CS_VOICES: { quote: string; role: string }[] = [
   {
     quote:

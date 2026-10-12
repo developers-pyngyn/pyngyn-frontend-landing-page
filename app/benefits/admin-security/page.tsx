@@ -28,14 +28,14 @@ export const metadata: Metadata = {
 const DETAILS: { title: string; body: string }[] = [
   { title: "SSO / SAML", body: "Sign in through your firm's existing identity provider. One less password for your team, and one more control point for you." },
   { title: "Role-based permissions", body: "Directors, managers, and individual contributors see and can do different things. Client-facing roles are separate again, controlled per client." },
-  { title: "Data isolation by client", body: "Each Client Space is fully isolated. A client can never see another client's data, and internal Workspace data is never exposed to clients unless you explicitly share it." },
+  { title: "Data isolation by client", body: "Each ClientSpace portal is fully isolated. A client can never see another client's data, and internal practice data is never exposed to clients unless you explicitly share it." },
   { title: "Audit logs", body: "Key actions, logins, approvals, document access, are logged, so you can answer \"who did what, when\" if you're ever asked." },
 ];
 
 const FAQS: { q: string; a: string }[] = [
   { q: "Do you support SSO?", a: "Yes, SSO/SAML is available so your team signs in through your firm's existing identity provider." },
   { q: "What compliance standards and certifications does Pyngyn hold?", a: "Our operating entity (VIMOVI GlobalTech Private Limited) is a DPIIT Recognized Startup (DIPP194091) and holds ISO 9001:2015 Certification for Quality Management Systems. Our architecture is DPDP aligned (Digital Personal Data Protection Act 2023) with 256-bit AES encryption in transit and at rest." },
-  { q: "How is client data isolated?", a: "Every Client Space is fully isolated at the data level. A client can only ever access their own engagement, never another client's, and never your firm's internal Workspace data unless you choose to share something specific." },
+  { q: "How is client data isolated?", a: "Every ClientSpace portal is fully isolated at the data level. A client can only ever access their own engagement, never another client's, and never your firm's internal practice data unless you choose to share something specific." },
   { q: "Is my data used to train AI models?", a: "No. Customer data is not used to train AI models without explicit consent." },
 ];
 

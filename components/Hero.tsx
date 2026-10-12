@@ -153,11 +153,10 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.18 }}
             >
-              PYNGYN gives every client a branded portal where they see their
+              PYNGYN ClientSpace gives every client a branded portal where they see their
               status, documents, and approvals 24/7, instead of emailing you for
-              updates. It&apos;s a standalone product, no Workspace required, though
-              firms that also want to run projects and billable time internally
-              can add Workspace or bundle both.
+              updates. Your team manages projects, timelines, and billable time seamlessly
+              in one unified platform.
             </motion.p>
 
             {/* Live client-status accent: three items cycling through

@@ -4,6 +4,12 @@ import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { ReferralJoin } from "@/components/ReferralJoin";
 import { DEMO_URL, SUPPORT_URL, PRICING_URL, TERMS_URL, EMAIL_DOMAIN } from "@/components/config";
+import {
+  JsonLd,
+  breadcrumbSchema,
+  faqPageSchema,
+  webPageSchema,
+} from "@/components/schema";
 
 const REFERRAL_EMAIL = `referrals@${EMAIL_DOMAIN}`;
 
@@ -56,6 +62,25 @@ function Icon({ name }: { name: string }) {
 export default function ReferEarnPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          webPageSchema({
+            url: "/refer-and-earn",
+            name: "Refer and earn | PYNGYN",
+            description:
+              "Refer PYNGYN to your network and earn 20% on every paid referral. The friend you refer also gets 20% off their annual plan.",
+            breadcrumbId: "/refer-and-earn#breadcrumb",
+          }),
+          breadcrumbSchema(
+            [
+              { name: "Home", url: "/" },
+              { name: "Refer and earn", url: "/refer-and-earn" },
+            ],
+            "/refer-and-earn"
+          ),
+          faqPageSchema(FAQ, "/refer-and-earn"),
+        ]}
+      />
       <Navbar />
       <main id="main">
         {/* Hero */}

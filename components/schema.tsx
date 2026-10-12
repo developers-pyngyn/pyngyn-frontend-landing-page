@@ -36,7 +36,7 @@ export const OG_IMAGE = {
   url: "/og.png",
   width: 1200,
   height: 630,
-  alt: "PYNGYN: Clientspace, a standalone branded client portal, and Workspace, a standalone back office for professional-services firms",
+  alt: "PYNGYN ClientSpace: branded client portals, real-time collaboration, and practice management for professional-services firms",
 } as const;
 
 export function absoluteUrl(path: string = "/"): string {
@@ -138,7 +138,7 @@ export function organizationSchema() {
     },
     image: ORG_ICON,
     description:
-      "PYNGYN gives every client a branded Client Space (a standalone portal for status, documents, and approvals), with Workspace, the firm's back office for projects, finances, and billable time, available on its own or bundled together.",
+      "PYNGYN ClientSpace gives every client a branded portal for real-time status, documents, and approvals, integrated with project tracking, finances, and practice management for professional-services firms.",
     sameAs: [
       SOCIAL_X,
       SOCIAL_LINKEDIN,
@@ -263,13 +263,12 @@ export function softwareApplicationSchema(opts?: {
     operatingSystem: "Web, iOS, Android",
     url: SITE_URL + "/",
     description:
-      "PYNGYN is an operating system for professional-services firms: a standalone branded client portal (Client Space) and a standalone back office for projects, finances, and billable time (Workspace), with AI that drafts plans, keeps status current, and flags risk before it slips.",
+      "PYNGYN ClientSpace is the unified client portal and practice management operating system for professional-services firms, with AI that drafts plans, keeps status current, and flags risk before it slips.",
     publisher: { "@id": `${SITE_URL}/#organization` },
     offers: {
       "@type": "Offer",
-      // Lowest standalone entry price (Workspace, $9/seat/month) — the
-      // convention for a SoftwareApplication Offer. Matches the USD pricing
-      // shown everywhere else on the site (pricing page, PricingTiers, etc).
+      // Lowest entry price ($9/seat/month) — the convention for a SoftwareApplication Offer.
+      // Matches the USD pricing shown everywhere else on the site (pricing page, PricingTiers, etc).
       price: opts?.priceFromUsd ?? 9,
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",

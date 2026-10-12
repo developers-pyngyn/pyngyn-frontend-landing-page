@@ -160,8 +160,8 @@ export default function CostMarginEstimatorPage() {
         </section>
 
         <ToolConversionBridge
-          title="Stop estimating overrun after the fact. Workspace tracks it live."
-          body="Workspace logs billable vs. non-billable time against the plan as work happens, so margin erosion shows up while there's still time to act, not at invoicing. Pair it with Clientspace to share progress with the client without exposing your internal margin."
+          title="Stop estimating overrun after the fact. ClientSpace tracks it live."
+          body="ClientSpace logs billable vs. non-billable time against the plan as work happens, so margin erosion shows up while there's still time to act, not at invoicing. Share progress with your clients without exposing your internal margins."
         />
 
         <FinalCTA />

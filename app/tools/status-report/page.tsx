@@ -154,7 +154,7 @@ export default function StatusReportToolPage() {
 
         <ToolConversionBridge
           title="Skip the copy-paste. Your client sees this status without you sending it."
-          body="This tool turns your notes into an update you still have to send. Clientspace shows clients live status, deliverables, and approvals in their own branded portal, updated automatically as your team works in Workspace, no weekly write-up required."
+          body="This tool turns your notes into an update you still have to send. ClientSpace shows clients live status, deliverables, and approvals in their own branded portal, updated automatically as your team completes work, with no weekly manual write-up required."
         />
 
         <FinalCTA />

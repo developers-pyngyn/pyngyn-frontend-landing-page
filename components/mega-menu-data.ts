@@ -54,10 +54,9 @@ export const MEGA_MENUS: MegaMenu[] = [
     label: "Product",
     columns: [
       {
-        heading: "Products",
+        heading: "Platform",
         items: [
-          { label: "Clientspace", href: "/clientspace", icon: I.spark, color: C.indigo },
-          { label: "Workspace", href: "/workspace", icon: I.board, color: C.blue },
+          { label: "ClientSpace", href: "/clientspace", icon: I.spark, color: C.indigo },
           { label: "Benefits", href: BENEFITS_URL, icon: I.target, color: C.purple },
           { label: "Risk detection", href: RISK_DETECTION_URL, icon: I.pulse, color: C.red },
         ],

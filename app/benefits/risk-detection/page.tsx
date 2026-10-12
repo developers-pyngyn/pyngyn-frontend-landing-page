@@ -34,9 +34,9 @@ const DETAILS: { title: string; body: string }[] = [
 
 const FAQS: { q: string; a: string }[] = [
   { q: "How does risk detection actually work?", a: "It watches task dependencies, workload, and deadlines across an engagement, and flags items where a slip is becoming likely, before the date is actually missed." },
-  { q: "Is this a Workspace feature or a Client Space feature?", a: "Risk detection runs on Workspace, your firm's internal operating layer. It's built into every Workspace plan." },
+  { q: "Who can see risk detection alerts?", a: "Risk detection runs internally for your practice team. It helps your team resolve blockers before they impact the client, and is included in all ClientSpace plans." },
   { q: "Will it flood my team with false alarms?", a: "Risk flags are based on real dependency and workload signals, not just \"this date is close.\" The goal is a small number of flags worth acting on, not a noisy list." },
-  { q: "Can clients see risk flags in their portal?", a: "You control what's client-visible. Many firms keep raw risk flags internal and instead share the resulting status update in the client's Client Space." },
+  { q: "Can clients see risk flags in their portal?", a: "You control what's client-visible. Firms keep raw internal risk alerts private while sharing clean, polished milestone updates in the client's ClientSpace." },
 ];
 
 export default function RiskDetectionPage() {
@@ -86,7 +86,7 @@ export default function RiskDetectionPage() {
             <a href={SIGNUP_URL} className="btn btn-primary">Start free trial</a>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Part of <Link href="/workspace" className="font-semibold text-accent">Workspace</Link>,
+            Part of <Link href="/clientspace" className="font-semibold text-accent">ClientSpace</Link>,
             from $9 per seat/month
           </p>
         </section>

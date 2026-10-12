@@ -10,6 +10,7 @@ import {
   TrustSecuritySection,
   FinalCTASection,
 } from "@/components/clientspace/DeepDiveSections";
+import { FaqSection } from "@/components/FaqSection";
 import {
   JsonLd,
   softwareApplicationSchema,
@@ -99,7 +100,15 @@ export default function Home() {
         {/* 5. Trust, Security & Client Isolation (Bank-grade privacy) */}
         <TrustSecuritySection />
 
-        {/* 6. Final High-Conversion CTA */}
+        {/* 6. Frequently Asked Questions (AEO & Practice Clarity) */}
+        <FaqSection
+          eyebrow="Frequently Asked Questions"
+          title="Frequently asked questions about Pyngyn ClientSpace."
+          description="Everything you need to know about setting up client portals, practice workflows, and firm data security."
+          faqs={CLIENTSPACE_FAQS}
+        />
+
+        {/* 7. Final High-Conversion CTA */}
         <FinalCTASection />
       </main>
 
