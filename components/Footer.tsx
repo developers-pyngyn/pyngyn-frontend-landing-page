@@ -32,6 +32,7 @@ import {
   KB_URL,
   COMPARE_URL,
   COMPETITORS,
+  TOOLS_URL,
 } from "./config";
 
 const faqs: [string, string][] = [
@@ -193,6 +194,7 @@ export function Footer() {
       {
         heading: "Resources",
         links: [
+          { label: "Free Practice Tools", href: TOOLS_URL },
           { label: "Practice Blog", href: BLOG_URL },
           { label: "Setup Guides", href: GUIDES_URL },
           { label: "Knowledge Base", href: KB_URL },
