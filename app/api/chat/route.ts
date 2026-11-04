@@ -7,11 +7,7 @@
 
 import {
   SIGNUP_URL,
-  SOCIAL_X,
   SOCIAL_LINKEDIN,
-  SOCIAL_REDDIT,
-  SOCIAL_FACEBOOK,
-  SOCIAL_YOUTUBE,
   SOCIAL_INSTAGRAM,
 } from "@/components/config";
 
@@ -32,12 +28,8 @@ Key links (share the exact URL when relevant, written out in full so it is click
 - Book a demo or see it live: ${DEMO_LINK}
 - Start a free trial, sign up, or try it: ${SIGNUP_URL}
 - Social media:
-  - X (Twitter): ${SOCIAL_X}
   - LinkedIn: ${SOCIAL_LINKEDIN}
   - Instagram: ${SOCIAL_INSTAGRAM}
-  - YouTube: ${SOCIAL_YOUTUBE}
-  - Reddit: ${SOCIAL_REDDIT}
-  - Facebook: ${SOCIAL_FACEBOOK}
 
 When a visitor wants to see PYNGYN live or asks about a demo, give the demo link. When they want to try it, sign up, or start a trial, give the trial link. When they ask where to follow PYNGYN or for social media, share the relevant profile link or links. Only use the URLs listed above; do not make up any other links.`;
 

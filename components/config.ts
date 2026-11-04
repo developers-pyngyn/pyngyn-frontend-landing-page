@@ -72,9 +72,5 @@ export const COMPETITORS: { slug: string; name: string }[] = [
 
 // Social profiles (update to your real handles)
 // Social profiles
-export const SOCIAL_X = "https://x.com/Pyngyn_Official";
 export const SOCIAL_LINKEDIN = "https://www.linkedin.com/company/pyngyn/";
-export const SOCIAL_REDDIT = "https://www.reddit.com/user/Pyngyn_Official/";
-export const SOCIAL_FACEBOOK = "https://www.facebook.com/profile.php?id=61584474731354";
-export const SOCIAL_YOUTUBE = "https://www.youtube.com/@PyngynOfficial";
 export const SOCIAL_INSTAGRAM = "https://instagram.com/pyngyn_official";
