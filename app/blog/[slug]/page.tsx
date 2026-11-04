@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { posts, getPost, formatDate } from "@/components/posts";
+import { posts, getPost, getRelatedPosts, formatDate } from "@/components/posts";
+import { PostBody, stripLinks } from "@/components/PostBody";
 import { BlogCover } from "@/components/BlogCover";
 import { ContextualCTA } from "@/components/ContextualCTA";
 import {
@@ -11,6 +12,7 @@ import {
   JsonLd,
   articleSchema,
   breadcrumbSchema,
+  faqPageSchema,
   webPageSchema,
 } from "@/components/schema";
 
@@ -24,14 +26,16 @@ export function generateStaticParams(): Params[] {
 export function generateMetadata({ params }: { params: Params }): Metadata {
   const post = getPost(params.slug);
   if (!post) return { title: "Post not found | PYNGYN" };
+  const description = post.metaDescription ?? post.excerpt;
   return {
-    title: `${post.title} | PYNGYN Blog`,
-    description: post.excerpt,
+    title: post.seoTitle ?? `${post.title} | PYNGYN Blog`,
+    description,
+    keywords: post.keywords,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
       images: [OG_IMAGE],
       title: post.title,
-      description: post.excerpt,
+      description,
       type: "article",
       publishedTime: post.date,
       authors: [post.author],
@@ -40,7 +44,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
     twitter: {
       card: "summary_large_image",
       title: post.title,
-      description: post.excerpt,
+      description,
       images: [OG_IMAGE.url],
     },
   };
@@ -49,6 +53,8 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
 export default function BlogPost({ params }: { params: Params }) {
   const post = getPost(params.slug);
   if (!post) notFound();
+  const related = getRelatedPosts(post);
+  const faqs = post.faq?.map((f) => ({ q: f.q, a: stripLinks(f.a) }));
 
   return (
     <>
@@ -79,8 +85,9 @@ export default function BlogPost({ params }: { params: Params }) {
             dateModified: post.date,
             authorName: post.author,
             articleSection: post.category,
-            keywords: [post.category, "professional services", "PYNGYN"],
+            keywords: post.keywords ?? [post.category, "professional services", "PYNGYN"],
           }),
+          ...(faqs?.length ? [faqPageSchema(faqs, `/blog/${post.slug}`)] : []),
         ]}
       />
       <Navbar />
@@ -107,14 +114,63 @@ export default function BlogPost({ params }: { params: Params }) {
             <BlogCover post={post} rounded="" />
           </div>
 
-          <div className="mt-9 flex flex-col gap-5 text-[17px] leading-[1.7] text-ink">
-            {post.body.map((para, i) => (
-              <p key={i}>{para}</p>
-            ))}
-          </div>
+          <PostBody blocks={post.body} />
+
+          {post.faq?.length ? (
+            <section className="mt-12" aria-labelledby="post-faq">
+              <h2
+                id="post-faq"
+                className="font-display text-[clamp(22px,2.6vw,28px)] font-semibold leading-snug tracking-[-0.02em]"
+              >
+                Frequently asked questions
+              </h2>
+              <div className="mt-5 flex flex-col divide-y divide-line rounded-2xl border border-line">
+                {post.faq.map((f) => (
+                  <details key={f.q} className="group p-5">
+                    <summary className="cursor-pointer list-none font-semibold text-ink marker:hidden">
+                      <span className="flex items-start justify-between gap-4">
+                        {f.q}
+                        <span aria-hidden="true" className="text-accent transition-transform group-open:rotate-45">
+                          +
+                        </span>
+                      </span>
+                    </summary>
+                    <PostBody blocks={[f.a]} className="mt-3 text-[16px] text-muted" />
+                  </details>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           <ContextualCTA category={post.category} />
         </article>
+
+        {related.length ? (
+          <aside className="mx-auto mt-16 max-w-[1040px]" aria-labelledby="related-posts">
+            <h2 id="related-posts" className="font-display text-[24px] font-semibold tracking-[-0.02em]">
+              Related articles
+            </h2>
+            <div className="mt-6 grid gap-[22px] md:grid-cols-3">
+              {related.map((r) => (
+                <Link
+                  key={r.slug}
+                  href={`/blog/${r.slug}`}
+                  className="group flex flex-col overflow-hidden rounded-[20px] border border-line bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft"
+                >
+                  <div className="aspect-[16/9] w-full overflow-hidden">
+                    <BlogCover post={r} rounded="" />
+                  </div>
+                  <div className="p-5">
+                    <div className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-accent">
+                      {r.category}
+                    </div>
+                    <h3 className="mt-2 font-display text-[17px] font-semibold leading-snug">{r.title}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </aside>
+        ) : null}
       </main>
       <Footer />
     </>
