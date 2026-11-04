@@ -29,6 +29,9 @@ import {
   COMPARE_URL,
   COMPETITORS,
   TOOLS_URL,
+  CAREERS_URL,
+  PARTNERS_URL,
+  REFER_URL,
 } from "./config";
 
 const faqs: [string, string][] = [
@@ -140,95 +143,70 @@ type FooterLink = { label: string; href?: string }; // no href = "Soon" (muted, 
 type FooterGroup = { heading: string; links: FooterLink[] };
 
 export function Footer() {
-  // Each column holds stacked groups balanced to 6-11 links each so no column shoots down or leaves empty space.
-  const columns: FooterGroup[][] = [
-    // Column 1: Product & Get started (7 links)
-    [
-      {
-        heading: "Product",
-        links: [
-          { label: "ClientSpace", href: "/clientspace" },
-          { label: "Client Portal", href: "/client-portal-for-accounting-firms" },
-          { label: "Integrations", href: INTEGRATIONS_URL },
-          { label: "Benefits", href: BENEFITS_URL },
-          { label: "Pricing", href: PRICING_URL },
-        ],
-      },
-      {
-        heading: "Get started",
-        links: [
-          { label: "Book a demo", href: DEMO_URL },
-          { label: "Start free trial", href: SIGNUP_URL },
-        ],
-      },
-    ],
-    // Column 2: Solutions
-    [
-      {
-        heading: "Practice Solutions",
-        links: [
-          { label: "Chartered Accountants", href: "/solutions/accountants" },
-          { label: "Accounting & Bookkeeping", href: "/solutions/accounting-firms" },
-          { label: "Tax Teams", href: "/solutions/tax-teams" },
-          { label: "Audit Teams", href: "/solutions/audit-teams" },
-          { label: "Compliance Teams", href: "/solutions/compliance-teams" },
-        ],
-      },
-    ],
-    // Column 3: Compare (6 links)
-    [
-      {
-        heading: "Compare",
-        links: [
-          ...COMPETITORS.map((c) => ({ label: `vs ${c.name}`, href: `${COMPARE_URL}/${c.slug}` })),
-          { label: "All comparisons", href: COMPARE_URL },
-        ],
-      },
-    ],
-    // Column 4: Resources & Legal
-    [
-      {
-        heading: "Resources",
-        links: [
-          { label: "Free Practice Tools", href: TOOLS_URL },
-          { label: "Practice Blog", href: BLOG_URL },
-          { label: "Setup Guides", href: GUIDES_URL },
-          { label: "Knowledge Base", href: KB_URL },
-          { label: "System Status", href: STATUS_URL },
-          { label: "Practice FAQ", href: "/#faq" },
-        ],
-      },
-      {
-        heading: "Legal",
-        links: [
-          { label: "Privacy Policy", href: PRIVACY_URL },
-          { label: "Terms of Service", href: TERMS_URL },
-          { label: "Refund Policy", href: REFUND_URL },
-        ],
-      },
-    ],
-    // Column 5: Company & Client Portals
-    [
-      {
-        heading: "Company",
-        links: [
-          { label: "About Us", href: ABOUT_URL },
-          { label: "Founder Story", href: "/about/founder-story" },
-          { label: "Contact Us", href: DEMO_URL },
-        ],
-      },
-      {
-        heading: "Client Portals",
-        links: [
-          { label: "CA Client Portal", href: "/client-portal-for-accounting-firms" },
-          { label: "Secure Client Portal", href: "/secure-client-portal" },
-          { label: "Client Portal Software", href: "/client-portal-software" },
-          { label: "Branded Portal", href: "/clientspace/branded-portal" },
-          { label: "Document Vault", href: "/clientspace/secure-documents" },
-          { label: "Client Approvals", href: "/clientspace/approvals" },
-        ],
-      },
-    ],
+  // Six single-group columns of 5-6 links each, so every column ends at the
+  // same height. Legal links live in the bottom bar only.
+  const columns: FooterGroup[] = [
+    {
+      heading: "Product",
+      links: [
+        { label: "ClientSpace", href: "/clientspace" },
+        { label: "Integrations", href: INTEGRATIONS_URL },
+        { label: "Benefits", href: BENEFITS_URL },
+        { label: "Pricing", href: PRICING_URL },
+        { label: "Book a demo", href: DEMO_URL },
+        { label: "Start free trial", href: SIGNUP_URL },
+      ],
+    },
+    {
+      heading: "Solutions",
+      links: [
+        { label: "Chartered Accountants", href: "/solutions/accountants" },
+        { label: "Accounting Firms", href: "/solutions/accounting-firms" },
+        { label: "Tax Teams", href: "/solutions/tax-teams" },
+        { label: "Audit Teams", href: "/solutions/audit-teams" },
+        { label: "Compliance Teams", href: "/solutions/compliance-teams" },
+      ],
+    },
+    {
+      heading: "Client Portals",
+      links: [
+        { label: "CA Client Portal", href: "/client-portal-for-accounting-firms" },
+        { label: "Secure Client Portal", href: "/secure-client-portal" },
+        { label: "Client Portal Software", href: "/client-portal-software" },
+        { label: "Branded Portal", href: "/clientspace/branded-portal" },
+        { label: "Document Vault", href: "/clientspace/secure-documents" },
+        { label: "Client Approvals", href: "/clientspace/approvals" },
+      ],
+    },
+    {
+      heading: "Compare",
+      links: [
+        ...COMPETITORS.map((c) => ({ label: `vs ${c.name}`, href: `${COMPARE_URL}/${c.slug}` })),
+        { label: "All comparisons", href: COMPARE_URL },
+      ],
+    },
+    {
+      heading: "Resources",
+      links: [
+        { label: "Free Practice Tools", href: TOOLS_URL },
+        { label: "Practice Blog", href: BLOG_URL },
+        { label: "Setup Guides", href: GUIDES_URL },
+        { label: "Knowledge Base", href: KB_URL },
+        { label: "Practice FAQ", href: "/#faq" },
+        { label: "System Status", href: STATUS_URL },
+      ],
+    },
+    {
+      heading: "Company",
+      links: [
+        { label: "About Us", href: ABOUT_URL },
+        { label: "Founder Story", href: "/about/founder-story" },
+        { label: "Careers", href: CAREERS_URL },
+        { label: "Partners", href: PARTNERS_URL },
+        { label: "Refer & Earn", href: REFER_URL },
+        { label: "Contact Us", href: DEMO_URL },
+      ],
+    },
   ];
 
   const compliance = ["DPIIT Recognized", "ISO 9001:2015 Certified", "DPDP Aligned"];
@@ -267,35 +245,32 @@ export function Footer() {
   return (
     <footer className="border-t border-line bg-white pt-16 pb-10 text-sm text-muted">
       <div className="wrap">
-        {/* Logo + columns + Get in touch */}
-        <div className="grid items-start gap-10 sm:grid-cols-2 md:grid-cols-3 lg:gap-6 xl:gap-8 lg:grid-cols-[minmax(0,1.2fr)_repeat(5,minmax(0,1fr))_minmax(0,1.9fr)]">
+        {/* Logo + Get in touch */}
+        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div>
             <Link href="/" className="mb-4 inline-block" aria-label="pyngyn home">
               <Image src="/logo.webp" alt="pyngyn" width={150} height={40} className="h-8 w-auto" />
             </Link>
-            <p className="max-w-[230px] leading-relaxed">
+            <p className="max-w-[300px] leading-relaxed">
               The practice operating system for modern accounting &amp; CA firms.
             </p>
             <p className="mt-2 text-[11.5px] leading-relaxed text-muted/80">
-              DPIIT Recognized Startup<br />
-              ISO 9001:2015 Certified (QMS)<br />
-              DPDP Aligned
+              DPIIT Recognized Startup · ISO 9001:2015 Certified (QMS) · DPDP Aligned
             </p>
           </div>
+          <div className="w-full md:max-w-[380px]">
+            <GetInTouch />
+          </div>
+        </div>
 
-          {columns.map((groups, i) => (
-            <div key={i} className="flex flex-col gap-7">
-              {groups.map((g) => (
-                <div key={g.heading}>
-                  <h4 className="mb-2.5 text-[14px] font-bold text-ink">{g.heading}</h4>
-                  <div className="flex flex-col">{g.links.map(renderLink)}</div>
-                </div>
-              ))}
+        {/* Link columns */}
+        <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-line pt-10 md:grid-cols-3 lg:grid-cols-6">
+          {columns.map((g) => (
+            <div key={g.heading}>
+              <h4 className="mb-2.5 text-[14px] font-bold text-ink">{g.heading}</h4>
+              <div className="flex flex-col">{g.links.map(renderLink)}</div>
             </div>
           ))}
-
-          {/* Get in touch column */}
-          <GetInTouch />
         </div>
 
         {/* Social + compliance row */}
