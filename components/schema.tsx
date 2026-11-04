@@ -9,12 +9,8 @@
 // in Google's Rich Results test, regardless of where the site is rendered.
 
 import {
-  SOCIAL_FACEBOOK,
   SOCIAL_INSTAGRAM,
   SOCIAL_LINKEDIN,
-  SOCIAL_REDDIT,
-  SOCIAL_X,
-  SOCIAL_YOUTUBE,
 } from "./config";
 
 // Canonical site URL. Override via NEXT_PUBLIC_SITE_URL when the site is
@@ -140,11 +136,7 @@ export function organizationSchema() {
     description:
       "PYNGYN ClientSpace gives every client a branded portal for real-time status, documents, and approvals, integrated with project tracking, finances, and practice management for professional-services firms.",
     sameAs: [
-      SOCIAL_X,
       SOCIAL_LINKEDIN,
-      SOCIAL_REDDIT,
-      SOCIAL_FACEBOOK,
-      SOCIAL_YOUTUBE,
       SOCIAL_INSTAGRAM,
     ],
     contactPoint: [
