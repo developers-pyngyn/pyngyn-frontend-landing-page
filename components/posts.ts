@@ -1,3 +1,13 @@
+import { caPracticePosts } from "./blog/ca-practice-posts";
+import { caClientPosts } from "./blog/ca-client-posts";
+import { caGstTdsPosts } from "./blog/ca-gst-tds-posts";
+import { caTaxAuditPosts } from "./blog/ca-tax-audit-posts";
+import { caGrowthPosts } from "./blog/ca-growth-posts";
+
+// A body block is a paragraph (string), a subheading, or a bullet list.
+// Paragraphs and list items may contain inline links as [text](/path).
+export type PostBlock = string | { h2: string } | { h3: string } | { list: string[] };
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -9,11 +19,16 @@ export type BlogPost = {
   // Optional path to a real featured image (e.g. "/blog/foo.jpg").
   // If omitted, a generated on-brand SVG cover is shown instead.
   cover?: string;
-  // Body is an array of paragraphs for simple rendering.
-  body: string[];
+  // Optional SEO overrides; fall back to title / excerpt.
+  seoTitle?: string;
+  metaDescription?: string;
+  keywords?: string[];
+  body: PostBlock[];
+  // Rendered as an FAQ block with FAQPage schema.
+  faq?: { q: string; a: string }[];
 };
 
-export const posts: BlogPost[] = [
+const legacyPosts: BlogPost[] = [
   {
     slug: "stop-chasing-status-updates",
     title: "Stop chasing status updates",
@@ -573,6 +588,16 @@ export const posts: BlogPost[] = [
   },
 ];
 
+// Newest first; Array.prototype.sort is stable, so same-day posts keep file order.
+export const posts: BlogPost[] = [
+  ...caPracticePosts,
+  ...caClientPosts,
+  ...caGstTdsPosts,
+  ...caTaxAuditPosts,
+  ...caGrowthPosts,
+  ...legacyPosts,
+].sort((a, b) => b.date.localeCompare(a.date));
+
 export function getPost(slug: string): BlogPost | undefined {
   return posts.find((p) => p.slug === slug);
 }
@@ -583,4 +608,14 @@ export function formatDate(iso: string): string {
     month: "long",
     day: "numeric",
   });
+}
+
+// The next posts in the same category (wrapping around), so every post is
+// linked from its siblings; topped up with the most recent others.
+export function getRelatedPosts(post: BlogPost, count = 3): BlogPost[] {
+  const category = posts.filter((p) => p.category === post.category);
+  const i = category.findIndex((p) => p.slug === post.slug);
+  const same = [...category.slice(i + 1), ...category.slice(0, i)];
+  const rest = posts.filter((p) => p.category !== post.category);
+  return [...same, ...rest].slice(0, count);
 }

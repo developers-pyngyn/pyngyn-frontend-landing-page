@@ -119,6 +119,78 @@ const BY_CATEGORY: Record<string, Variant> = {
     href: DEMO_URL,
   },
 
+  // ---- CA practice blog categories ------------------------------------
+  "Practice Management": {
+    eyebrow: "Run the practice from one place",
+    title: "Clients, tasks, deadlines and reviews in one CA workspace.",
+    body: "ClientSpace replaces spreadsheets and WhatsApp threads with one system for every client, filing and team member.",
+    label: "Explore ClientSpace",
+    href: "/clientspace",
+  },
+  "Client Experience": {
+    eyebrow: "Give clients a better window",
+    title: "A branded portal for every client, at no extra cost per guest.",
+    body: "Secure document intake, approvals and live status, so clients stop calling to ask where things stand.",
+    label: "See the client portal",
+    href: "/client-portal-for-accounting-firms",
+  },
+  GST: {
+    eyebrow: "Never miss a GST due date",
+    title: "Track GSTR-1, GSTR-3B and annual returns across every client.",
+    body: "ClientSpace builds the statutory calendar, chases documents automatically and escalates before deadlines slip.",
+    label: "Start free trial",
+    href: SIGNUP_URL,
+  },
+  TDS: {
+    eyebrow: "Quarterly, without the scramble",
+    title: "Keep every client's TDS deposits and returns on schedule.",
+    body: "Recurring TDS tasks, document reminders and partner review gates, set up once for the whole year.",
+    label: "Start free trial",
+    href: SIGNUP_URL,
+  },
+  "Income Tax": {
+    eyebrow: "Calmer filing season",
+    title: "Plan ITR season, advance tax and notices in one tracker.",
+    body: "See every client's status, missing documents and reviewer at a glance, from July rush to tax audit.",
+    label: "Book a demo",
+    href: DEMO_URL,
+  },
+  Audit: {
+    eyebrow: "Audit with a trail",
+    title: "Plan audits, organise working papers and sign off with 4-eye review.",
+    body: "ClientSpace keeps audit programs, evidence and reviewer approvals together for every engagement.",
+    label: "See it for audit teams",
+    href: "/solutions/audit",
+  },
+  Compliance: {
+    eyebrow: "See every deadline coming",
+    title: "One compliance calendar for every client and every entity.",
+    body: "GST, TDS, Income Tax and ROC due dates with owners, reminders and escalations built in.",
+    label: "Explore ClientSpace",
+    href: "/clientspace",
+  },
+  Billing: {
+    eyebrow: "Stop writing off work",
+    title: "See effort against fees for every client and engagement.",
+    body: "Live effort tracking shows where fixed-fee work is overrunning before it turns into unbilled hours.",
+    label: "Try the margin estimator",
+    href: "/tools/cost-margin-estimator",
+  },
+  "Firm Growth": {
+    eyebrow: "Grow without the chaos",
+    title: "Add clients without adding WhatsApp groups and spreadsheets.",
+    body: "A 30-minute walkthrough of ClientSpace, set up around your own practice areas.",
+    label: "Book a demo",
+    href: DEMO_URL,
+  },
+  Technology: {
+    eyebrow: "Modernise the practice",
+    title: "Practice software that connects to Tally, Zoho Books and Google Drive.",
+    body: "Bank-grade encryption, role-based access and a 7-day free trial with no credit card required.",
+    label: "See integrations",
+    href: "/integrations",
+  },
+
   // ---- Knowledge-base categories --------------------------------------
   Collaboration: {
     eyebrow: "This is Clientspace",

@@ -43,7 +43,7 @@ export default function BlogIndex() {
             url: "/blog",
             name: "Blog | PYNGYN",
             description:
-              "Notes on running professional-services firms, client work, and operations, from the team building PYNGYN.",
+              "Practical guides for Chartered Accountants and CA firms on practice management, GST, TDS, income tax and audit workflows, client portals and firm growth.",
             breadcrumbId: "/blog#breadcrumb",
           }),
           breadcrumbSchema(
@@ -71,10 +71,10 @@ export default function BlogIndex() {
         <div className="max-w-[720px]">
           <span className="eyebrow">Blog</span>
           <h1 className="mt-3 font-display text-[clamp(34px,4.6vw,52px)] font-semibold leading-[1.05] tracking-[-0.025em]">
-            Notes on running a services firm with AI.
+            Practical guides for running a CA practice.
           </h1>
           <p className="lead mt-4">
-            Practical thinking on planning, status, and risk, from the team building PYNGYN.
+            Practice management, compliance workflows, client experience and firm growth for Chartered Accountants, from the team building PYNGYN ClientSpace.
           </p>
         </div>
 
