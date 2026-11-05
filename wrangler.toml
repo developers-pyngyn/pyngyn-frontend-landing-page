@@ -5,3 +5,9 @@ compatibility_flags = ["nodejs_compat"]
 
 [assets]
 directory = ".vercel/output/static"
+# The next-on-pages worker calls env.ASSETS.fetch(); without this binding every
+# request that reaches the worker (all /api/* routes) throws a 500.
+binding = "ASSETS"
+# Matches next.config.js `trailingSlash: true`, the canonicals and the sitemap:
+# /pricing redirects to /pricing/ instead of the other way round.
+html_handling = "force-trailing-slash"
