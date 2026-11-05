@@ -1,3 +1,5 @@
+import { sendEmail, escapeHtml } from "@/lib/resend";
+
 export const dynamic = "force-dynamic";
 export const runtime = "edge";
 
@@ -138,7 +140,145 @@ export async function GET(): Promise<Response> {
   });
 }
 
-// POST /api/demo: Validates date within 3 days, checks availability with mutex lock, prevents double booking
+// Bookings are only held in this isolate's memory, so they are NOT a record:
+// a booking counts as made only once the team has been notified by email
+// (Resend) or webhook. The in-memory map just stops obvious double-clicks.
+const NOTIFY_FROM = () => process.env.SUBSCRIBE_FROM || "sales@pyngyn.com";
+const NOTIFY_TO = () => process.env.DEMO_NOTIFY_TO || process.env.SUBSCRIBE_TO || "sales@pyngyn.com";
+const IST_OFFSET_MIN = 330;
+const DURATION_MIN = 30;
+
+/** Best-effort per-isolate limiter, same approach as /api/subscribe. */
+const RATE_LIMIT = 3;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const hits = new Map<string, number[]>();
+
+function rateLimited(request: Request): boolean {
+  const ip =
+    request.headers.get("cf-connecting-ip") ||
+    (request.headers.get("x-forwarded-for") || "").split(",")[0].trim() ||
+    "unknown";
+  const now = Date.now();
+  const recent = (hits.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  return recent.length > RATE_LIMIT;
+}
+
+function icsStamp(ms: number): string {
+  return new Date(ms).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+}
+
+/** "2026-11-06" + "14:00" (IST) -> "20261106T083000Z" (UTC, iCalendar format). */
+function icsUtc(date: string, time: string, plusMin = 0): string {
+  const [y, mo, d] = date.split("-").map(Number);
+  const [h, mi] = time.split(":").map(Number);
+  return icsStamp(Date.UTC(y, mo - 1, d, h, mi) + (plusMin - IST_OFFSET_MIN) * 60_000);
+}
+
+/** Escape text for an iCalendar property value. */
+function icsText(v: string): string {
+  return v.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+}
+
+function buildIcs(b: BookingRecord, organizer: string): string {
+  return [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//PYNGYN//Demo booking//EN",
+    "METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    `UID:${b.id}@pyngyn.ai`,
+    `DTSTAMP:${icsStamp(Date.now())}`,
+    `DTSTART:${icsUtc(b.date, b.time)}`,
+    `DTEND:${icsUtc(b.date, b.time, DURATION_MIN)}`,
+    `SUMMARY:${icsText(`PYNGYN ClientSpace walkthrough: ${b.company}`)}`,
+    `DESCRIPTION:${icsText(
+      `30-minute ClientSpace walkthrough with ${b.name} (${b.company}). The Google Meet link will be sent by the PYNGYN team.`
+    )}`,
+    `ORGANIZER;CN=PYNGYN:mailto:${organizer}`,
+    `ATTENDEE;CN=${icsText(b.name)}:mailto:${b.email}`,
+    "END:VEVENT",
+    "END:VCALENDAR",
+    "",
+  ].join("\r\n");
+}
+
+function detailsTable(rows: [string, string][]): string {
+  return rows
+    .map(
+      ([k, v]) =>
+        `<tr><td style="padding:8px 12px 8px 0;color:#6b7280;font:600 12px Arial,sans-serif;vertical-align:top;white-space:nowrap">${escapeHtml(k)}</td><td style="padding:8px 0;color:#0f1115;font:14px Arial,sans-serif">${escapeHtml(v)}</td></tr>`
+    )
+    .join("");
+}
+
+function bookingRows(b: BookingRecord, slotLabel: string, dayLabel: string): [string, string][] {
+  return [
+    ["When", `${dayLabel}, ${b.date} at ${slotLabel}`],
+    ["Name", b.name],
+    ["Email", b.email],
+    ["Firm", b.company],
+    ["Phone", b.phone || "(not given)"],
+    ["Practice", b.practiceType || "(not given)"],
+    ["Notes", b.notes || "(none)"],
+  ];
+}
+
+async function notifyTeam(b: BookingRecord, slotLabel: string, dayLabel: string): Promise<boolean> {
+  const rows = bookingRows(b, slotLabel, dayLabel);
+  const webhook = process.env.DEMO_WEBHOOK_URL;
+  const [mail, hook] = await Promise.all([
+    sendEmail({
+      from: NOTIFY_FROM(),
+      to: NOTIFY_TO(),
+      replyTo: b.email,
+      subject: `Demo booked: ${b.company}, ${dayLabel} ${slotLabel}`,
+      html: `<p style="font:15px Arial,sans-serif">New demo booking from pyngyn.ai. Send the Google Meet invite to <a href="mailto:${escapeHtml(b.email)}">${escapeHtml(b.email)}</a> (reply to this email to reach them).</p><table>${detailsTable(rows)}</table>`,
+      text: ["New demo booking from pyngyn.ai", "", ...rows.map(([k, v]) => `${k}: ${v}`), "", "Send the Google Meet invite to the attendee."].join("\n"),
+      attachments: [{ filename: "pyngyn-demo.ics", content: buildIcs(b, NOTIFY_FROM()), contentType: "text/calendar" }],
+    }),
+    webhook
+      ? fetch(webhook, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(b),
+        })
+          .then((r) => r.ok)
+          .catch(() => false)
+      : Promise.resolve(false),
+  ]);
+  if (!mail.ok) console.error("[demo] team email failed:", mail.reason);
+  if (webhook && !hook) console.error("[demo] webhook failed");
+  return mail.ok || hook;
+}
+
+async function confirmToVisitor(b: BookingRecord, slotLabel: string, dayLabel: string): Promise<boolean> {
+  const rows = bookingRows(b, slotLabel, dayLabel).slice(0, 4);
+  const first = b.name.split(" ")[0];
+  const result = await sendEmail({
+    from: NOTIFY_FROM(),
+    to: b.email,
+    replyTo: NOTIFY_TO(),
+    subject: `Your PYNGYN walkthrough: ${dayLabel}, ${slotLabel}`,
+    html: `<p style="font:15px Arial,sans-serif">Hi ${escapeHtml(first)},</p><p style="font:15px Arial,sans-serif">Thanks for booking a 30-minute ClientSpace walkthrough. Our team will send the Google Meet link shortly; the attached calendar file adds the slot to your calendar.</p><table>${detailsTable(rows)}</table><p style="font:15px Arial,sans-serif">Need a different time? Just reply to this email.</p><p style="font:15px Arial,sans-serif">The PYNGYN team</p>`,
+    text: [
+      `Hi ${first},`,
+      "",
+      "Thanks for booking a 30-minute ClientSpace walkthrough. Our team will send the Google Meet link shortly.",
+      "",
+      ...rows.map(([k, v]) => `${k}: ${v}`),
+      "",
+      "Need a different time? Just reply to this email.",
+      "The PYNGYN team",
+    ].join("\n"),
+    attachments: [{ filename: "pyngyn-demo.ics", content: buildIcs(b, NOTIFY_FROM()), contentType: "text/calendar" }],
+  });
+  if (!result.ok) console.error("[demo] visitor confirmation failed:", result.reason);
+  return result.ok;
+}
+
+// POST /api/demo: validates the slot, notifies the team, then confirms to the visitor
 export async function POST(request: Request): Promise<Response> {
   let body: Record<string, unknown>;
   try {
@@ -155,6 +295,9 @@ export async function POST(request: Request): Promise<Response> {
   const notes = clean(body.notes, 1000);
   const date = clean(body.date, 10);
   const time = clean(body.time, 5);
+
+  // Bots fill the hidden field. Look successful, send nothing.
+  if (clean(body.website)) return jsonResponse({ ok: true, booking: null });
 
   // Field validations
   if (!name || name.length < 2) {
@@ -197,6 +340,10 @@ export async function POST(request: Request): Promise<Response> {
     }
   }
 
+  if (rateLimited(request)) {
+    return jsonResponse({ error: "Too many booking attempts. Please try again in a few minutes." }, 429);
+  }
+
   const slotKey = `${date}_${time}`;
 
   // Execute booking inside mutex lock to prevent race conditions & double-booking
@@ -232,21 +379,23 @@ export async function POST(request: Request): Promise<Response> {
     // Atomically reserve the slot
     globalStore.bookings.set(slotKey, record);
 
-    // Optional upstream webhook (Slack, CRM, Zapier)
-    const webhook = process.env.DEMO_WEBHOOK_URL;
-    if (webhook) {
-      try {
-        await fetch(webhook, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(record),
-        }).catch((err) => console.error("[demo] webhook dispatch failed:", err));
-      } catch (err) {
-        console.error("[demo] webhook dispatch error:", err);
-      }
+    const dayInfo = allowedDays.find((d) => d.iso === date);
+    const dayLabel = dayInfo?.label || date;
+
+    // Only confirm once someone at PYNGYN actually knows about it.
+    const delivered = await notifyTeam(record, matchedSlot.label, dayLabel);
+    if (!delivered) {
+      globalStore.bookings.delete(slotKey);
+      return jsonResponse(
+        {
+          error:
+            "We couldn't confirm your booking right now. Please email sales@pyngyn.com with your preferred time and we'll set it up.",
+        },
+        503
+      );
     }
 
-    const dayInfo = allowedDays.find((d) => d.iso === date);
+    const confirmationSent = await confirmToVisitor(record, matchedSlot.label, dayLabel);
 
     return jsonResponse({
       ok: true,
@@ -255,12 +404,13 @@ export async function POST(request: Request): Promise<Response> {
         date: record.date,
         time: record.time,
         slotLabel: matchedSlot.label,
-        dayLabel: dayInfo?.label || date,
+        dayLabel,
         dateFormatted: dayInfo?.dateStr || date,
         name: record.name,
         email: record.email,
         company: record.company,
       },
+      confirmationSent,
     });
   });
 }

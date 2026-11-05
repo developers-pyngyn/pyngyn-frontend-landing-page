@@ -465,7 +465,7 @@ export function Navbar() {
             href={BETA_URL}
             target="_blank"
             rel="noopener"
-            className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent-lt px-3 py-1.5 text-[13px] font-semibold text-accent transition-colors hover:border-accent hover:bg-accent hover:text-white"
+            className="hidden xl:inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-accent/30 bg-accent-lt px-3 py-1.5 text-[13px] font-semibold text-accent transition-colors hover:border-accent hover:bg-accent hover:text-white"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse" aria-hidden="true" />
             Join Beta

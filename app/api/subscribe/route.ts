@@ -12,13 +12,14 @@
 //                      e.g. "sales@pyngyn.com" (default)
 //   SUBSCRIBE_TO     — where enquiries land (default sales@pyngyn.com)
 
+import { sendEmail, escapeHtml } from "@/lib/resend";
+
 export const dynamic = "force-dynamic";
 export const runtime = "edge";
 
 const DEFAULT_FROM = "sales@pyngyn.com";
 const DEFAULT_RECIPIENT = "sales@pyngyn.com";
 const SUBJECT = "New enquiry from pyngyn.com";
-const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
 /** Max submissions per IP per window. Best effort: module state is per server
  *  instance, so this trims abuse rather than guaranteeing a global cap. */
@@ -49,16 +50,6 @@ function isEmail(v: string): boolean {
 function clean(v: unknown, max = 200): string {
   if (typeof v !== "string") return "";
   return v.trim().slice(0, max);
-}
-
-/** Escape before interpolating anything user-supplied into the HTML body. */
-function escapeHtml(v: string): string {
-  return v
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
 }
 
 function clientIp(request: Request): string {
@@ -200,48 +191,6 @@ function buildText(d: Details): string {
   ].join("\n");
 }
 
-/* ── transport (Resend HTTPS API) ─────────────────────────────────── */
-
-type SendResult = { ok: true } | { ok: false; reason: string };
-
-async function sendEmail(opts: {
-  from: string;
-  to: string;
-  replyTo: string;
-  html: string;
-  text: string;
-}): Promise<SendResult> {
-  const key = process.env.RESEND_API_KEY;
-  if (!key) return { ok: false, reason: "no-key" };
-
-  let res: Response;
-  try {
-    res = await fetch(RESEND_ENDPOINT, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${key}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: `PYNGYN <${opts.from}>`,
-        to: [opts.to],
-        reply_to: opts.replyTo,
-        subject: SUBJECT,
-        html: opts.html,
-        text: opts.text,
-      }),
-    });
-  } catch (err) {
-    return { ok: false, reason: `network: ${String(err).slice(0, 200)}` };
-  }
-
-  if (!res.ok) {
-    const body = await res.text().catch(() => "");
-    return { ok: false, reason: `resend ${res.status}: ${body.slice(0, 300)}` };
-  }
-  return { ok: true };
-}
-
 /* ── handler ──────────────────────────────────────────────────────── */
 
 export async function POST(request: Request): Promise<Response> {
@@ -283,6 +232,7 @@ export async function POST(request: Request): Promise<Response> {
   const result = await sendEmail({
     from,
     to,
+    subject: SUBJECT,
     replyTo: email,
     html: buildHtml(details),
     text: buildText(details),

@@ -25,6 +25,7 @@ type ConfirmedBooking = {
   name: string;
   email: string;
   company: string;
+  confirmationSent?: boolean;
 };
 
 export function DemoBookingForm() {
@@ -46,11 +47,12 @@ export function DemoBookingForm() {
   const [phone, setPhone] = useState("");
   const [practiceType, setPracticeType] = useState("CA & Accounting Practice");
   const [notes, setNotes] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot, hidden from people
 
   const fetchSchedule = async () => {
     try {
       setLoadingSchedule(true);
-      const res = await fetch("/api/demo");
+      const res = await fetch("/api/demo/");
       if (res.ok) {
         const data = await res.json();
         setDays(data.days || []);
@@ -100,7 +102,7 @@ export function DemoBookingForm() {
 
     setSubmitting(true);
     try {
-      const res = await fetch("/api/demo", {
+      const res = await fetch("/api/demo/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -112,6 +114,7 @@ export function DemoBookingForm() {
           phone: phone.trim() || undefined,
           practiceType,
           notes: notes.trim() || undefined,
+          website,
         }),
       });
 
@@ -130,8 +133,8 @@ export function DemoBookingForm() {
         return;
       }
 
-      // Success
-      setConfirmedBooking(data.booking);
+      // Success (a null booking means the honeypot tripped)
+      if (data.booking) setConfirmedBooking({ ...data.booking, confirmationSent: data.confirmationSent });
     } catch {
       setErrorMsg("Network error. Please check your connection and try again.");
     } finally {
@@ -143,7 +146,7 @@ export function DemoBookingForm() {
   const getGoogleCalendarUrl = (b: ConfirmedBooking) => {
     const title = encodeURIComponent("Pyngyn 1:1 Strategy Walkthrough (30 min)");
     const details = encodeURIComponent(
-      `Pyngyn Strategy Walkthrough with ${b.name} (${b.company}).\n\nGoogle Meet link will be provided in your calendar confirmation.\n\nWebsite: https://pyngyn.ai`
+      `Pyngyn Strategy Walkthrough with ${b.name} (${b.company}).\n\nThe PYNGYN team will email the Google Meet link.\n\nWebsite: https://pyngyn.ai`
     );
     // Create UTC date string for Google Calendar URL
     const dateFormatted = b.date.replace(/-/g, "");
@@ -155,7 +158,7 @@ export function DemoBookingForm() {
     const endM = String(endMinutes % 60).padStart(2, "0");
     const endTimeFormatted = `${endH}${endM}00`;
 
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&dates=${dateFormatted}T${startTimeFormatted}/${dateFormatted}T${endTimeFormatted}`;
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&dates=${dateFormatted}T${startTimeFormatted}/${dateFormatted}T${endTimeFormatted}&ctz=Asia/Kolkata`;
   };
 
   if (confirmedBooking) {
@@ -174,8 +177,13 @@ export function DemoBookingForm() {
             You&apos;re scheduled with our team!
           </h3>
           <p className="mt-2 text-[14.5px] leading-relaxed text-muted">
-            A confirmation and Google Meet invitation have been reserved for{" "}
-            <strong className="text-ink">{confirmedBooking.email}</strong>.
+            {confirmedBooking.confirmationSent
+              ? "We've emailed a confirmation with a calendar invite to "
+              : "Our team has your booking and will email "}
+            <strong className="text-ink">{confirmedBooking.email}</strong>
+            {confirmedBooking.confirmationSent
+              ? ". The Google Meet link will follow from our team."
+              : " the Google Meet link shortly."}
           </p>
         </div>
 
@@ -453,6 +461,20 @@ export function DemoBookingForm() {
             </div>
           </div>
 
+          {/* Honeypot: invisible to people, filled in by bots. */}
+          <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+            <label>
+              Website
+              <input
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+              />
+            </label>
+          </div>
+
           <button
             type="submit"
             disabled={submitting || !selectedTime}
@@ -482,7 +504,7 @@ export function DemoBookingForm() {
               <Check className="w-3.5 h-3.5 text-emerald-600" /> No slideshow
             </span>
             <span className="flex items-center gap-1">
-              <Check className="w-3.5 h-3.5 text-emerald-600" /> Instant calendar invite
+              <Check className="w-3.5 h-3.5 text-emerald-600" /> Email confirmation
             </span>
           </div>
         </form>
