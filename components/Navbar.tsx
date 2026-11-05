@@ -29,7 +29,7 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
-import { SIGNIN_URL, SIGNUP_URL, DEMO_URL, PRICING_URL } from "./config";
+import { SIGNIN_URL, SIGNUP_URL, DEMO_URL, PRICING_URL, BETA_URL } from "./config";
 
 interface DropdownItem {
   name: string;
@@ -462,6 +462,15 @@ export function Navbar() {
         {/* Right CTA Actions */}
         <div className="hidden lg:flex items-center gap-3">
           <a
+            href={BETA_URL}
+            target="_blank"
+            rel="noopener"
+            className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent-lt px-3 py-1.5 text-[13px] font-semibold text-accent transition-colors hover:border-accent hover:bg-accent hover:text-white"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse" aria-hidden="true" />
+            Join Beta
+          </a>
+          <a
             href={SIGNIN_URL}
             className="text-[14px] font-semibold text-slate-700 hover:text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-100/70 transition-colors"
           >
@@ -640,6 +649,15 @@ export function Navbar() {
 
               {/* Mobile CTAs */}
               <div className="pt-4 border-t border-slate-200 space-y-2.5">
+                <a
+                  href={BETA_URL}
+                  target="_blank"
+                  rel="noopener"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="btn w-full justify-center border border-accent/30 bg-accent-lt py-2.5 text-center text-accent"
+                >
+                  Join the Beta →
+                </a>
                 <a
                   href={SIGNIN_URL}
                   className="btn btn-ghost w-full text-center py-2.5"

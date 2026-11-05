@@ -29,6 +29,7 @@ import {
   COMPARE_URL,
   COMPETITORS,
   TOOLS_URL,
+  BETA_URL,
   CAREERS_URL,
   PARTNERS_URL,
   REFER_URL,
@@ -155,6 +156,7 @@ export function Footer() {
         { label: "Pricing", href: PRICING_URL },
         { label: "Book a demo", href: DEMO_URL },
         { label: "Start free trial", href: SIGNUP_URL },
+        { label: "Join the Beta", href: BETA_URL },
       ],
     },
     {
