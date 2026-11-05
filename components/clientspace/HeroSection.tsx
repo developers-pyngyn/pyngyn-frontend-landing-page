@@ -13,7 +13,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { PyngynHeroMyWork } from "../product-demo/PyngynHeroMyWork";
-import { DEMO_URL, SIGNUP_URL } from "../config";
+import { DEMO_URL, SIGNUP_URL, BETA_URL } from "../config";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -64,6 +64,22 @@ export function HeroSection() {
           {/* LEFT SIDE: Content, Headline, Feature Pills, CTAs            */}
           {/* ============================================================ */}
           <div className="flex flex-col text-left min-w-0">
+            {/* Beta announcement */}
+            <a
+              href={BETA_URL}
+              target="_blank"
+              rel="noopener"
+              className="group mb-3 inline-flex w-fit items-center gap-2 rounded-full border border-accent/25 bg-white py-1 pl-1 pr-3 text-[12.5px] font-medium text-slate-700 shadow-2xs transition-colors hover:border-accent"
+            >
+              <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">
+                Beta
+              </span>
+              <span>
+                Join early access<span className="hidden sm:inline"> and help shape ClientSpace</span>
+              </span>
+              <ArrowRight className="h-3.5 w-3.5 text-accent transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+            </a>
+
             {/* Eyebrow Chip */}
             <div className="inline-block">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#004AAD]/25 bg-[#EEF5FF] px-3.5 py-1 text-[12px] font-semibold text-[#113353] shadow-2xs">

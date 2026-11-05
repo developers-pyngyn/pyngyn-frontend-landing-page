@@ -8,6 +8,8 @@ export const EMAIL_DOMAIN = "pyngyn.com";
 export const SIGNIN_URL = "https://app.pyngyn.ai/";
 export const SIGNUP_URL = "https://app.pyngyn.ai/?signup=true";
 export const DEMO_URL = "/demo";
+// Beta testing sign-up; everyone who joins here is added to the beta.
+export const BETA_URL = "https://app.pyngyn.ai/early-access";
 
 // --- Internal routed pages on this site ---
 export const BENEFITS_URL = "/benefits";   // formerly /features
