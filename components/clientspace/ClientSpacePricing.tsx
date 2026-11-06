@@ -66,14 +66,14 @@ export function ClientSpacePricing({ headingLevel = "h2" }: { headingLevel?: "h1
 
   return (
     <div className="w-full">
-      <div className="wrap max-w-[1200px]">
+      <div className="wrap">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)_minmax(0,1fr)] lg:gap-5">
           {/* Intro */}
           <div className="flex flex-col py-2 lg:pr-6">
             <span className="inline-flex w-fit items-center rounded-full border border-accent px-4 py-1 text-[13px] font-semibold text-accent">
               Pricing
             </span>
-            <Heading className="mt-5 font-display text-[clamp(32px,4vw,46px)] font-semibold leading-[1.08] tracking-[-0.025em] text-ink">
+            <Heading className="mt-5 font-display text-[clamp(32px,4vw,46px)] font-bold leading-[1.08] tracking-[-0.025em] text-ink">
               Simple plans for every firm
             </Heading>
             <p className="mt-4 text-[15.5px] leading-relaxed text-muted">
@@ -95,7 +95,7 @@ export function ClientSpacePricing({ headingLevel = "h2" }: { headingLevel?: "h1
             </div>
             <a
               href={SIGNUP_URL}
-              className="mt-8 hidden w-full items-center justify-center rounded-lg border border-accent/70 bg-white px-6 py-3.5 text-[15px] font-semibold text-accent transition-colors hover:bg-accent hover:text-white lg:mt-auto lg:inline-flex"
+              className="mt-8 hidden w-full items-center justify-center rounded-lg border border-accent/70 bg-white px-6 py-3.5 text-[15px] font-bold text-accent transition-colors hover:bg-accent hover:text-white lg:mt-auto lg:inline-flex"
             >
               Start free trial →
             </a>
@@ -103,7 +103,7 @@ export function ClientSpacePricing({ headingLevel = "h2" }: { headingLevel?: "h1
 
           {/* Common features (after the price card on mobile) */}
           <div className="order-3 rounded-2xl bg-white p-8 shadow-card lg:order-none">
-            <h3 className="font-display text-[22px] font-semibold text-ink">Common features</h3>
+            <h3 className="font-display text-[22px] font-bold text-ink">Common features</h3>
             <p className="mt-2 text-[15px] leading-relaxed text-muted">
               Included on every plan, starting from {formatUsd(PRICING_TIERS[0].monthly)} / month.
             </p>
@@ -119,8 +119,8 @@ export function ClientSpacePricing({ headingLevel = "h2" }: { headingLevel?: "h1
 
           {/* Plan picker */}
           <div className="order-2 flex flex-col rounded-2xl bg-white p-8 shadow-card lg:order-none">
-            <div className="flex items-center justify-between gap-3">
-              <h3 className="font-display text-[22px] font-semibold text-ink">ClientSpace</h3>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h3 className="font-display text-[22px] font-bold text-ink">ClientSpace</h3>
               <div className="inline-flex rounded-full bg-slate-100 p-0.5 text-[12px] font-semibold">
                 {(["monthly", "annual"] as const).map((cycle) => (
                   <button
@@ -128,7 +128,7 @@ export function ClientSpacePricing({ headingLevel = "h2" }: { headingLevel?: "h1
                     type="button"
                     onClick={() => setBillingCycle(cycle)}
                     aria-pressed={billingCycle === cycle}
-                    className={`rounded-full px-3 py-1 transition-colors ${
+                    className={`whitespace-nowrap rounded-full px-2.5 py-1 transition-colors ${
                       billingCycle === cycle ? "bg-white text-ink shadow-sm" : "text-muted hover:text-ink"
                     }`}
                   >
@@ -145,13 +145,13 @@ export function ClientSpacePricing({ headingLevel = "h2" }: { headingLevel?: "h1
               {tier ? (
                 <>
                   <span className="text-[26px] font-semibold text-ink">$</span>
-                  <span className="font-display text-[56px] font-semibold leading-none tracking-[-0.02em] text-ink">
+                  <span className="font-display text-[56px] font-bold leading-none tracking-[-0.02em] text-ink">
                     {(annual ? tier.annual : tier.monthly).toLocaleString("en-US")}
                   </span>
                   <span className="text-[17px] text-ink">/ month</span>
                 </>
               ) : (
-                <span className="font-display text-[44px] font-semibold leading-none text-ink">Custom</span>
+                <span className="font-display text-[44px] font-bold leading-none text-ink">Custom</span>
               )}
             </div>
             <div className="mt-1 min-h-[20px] text-[13px] text-muted">
@@ -185,14 +185,14 @@ export function ClientSpacePricing({ headingLevel = "h2" }: { headingLevel?: "h1
             {tier ? (
               <a
                 href={SIGNUP_URL}
-                className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-accent px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-accent-dk"
+                className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-accent px-6 py-3.5 text-[15px] font-bold text-white transition-colors hover:bg-accent-dk"
               >
                 Start 7-day free trial →
               </a>
             ) : (
               <Link
                 href={DEMO_URL}
-                className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-accent px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-accent-dk"
+                className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-accent px-6 py-3.5 text-[15px] font-bold text-white transition-colors hover:bg-accent-dk"
               >
                 Talk to us →
               </Link>
