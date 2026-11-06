@@ -94,7 +94,7 @@ const COMPARE_FAQS = [
   },
   {
     q: "How does PYNGYN compare to accounting practice suites like Karbon, Canopy, or TaxDome?",
-    a: "While legacy platforms are optimized for US/UK practices, PYNGYN uniquely supports Indian statutory timelines, Tally Prime / Computax integrations, and automated WhatsApp document follow-ups, with predictable pricing starting at ₹999/user/month without per-client charges.",
+    a: "While legacy platforms are optimized for US/UK practices, PYNGYN uniquely supports Indian statutory timelines, Tally Prime / Computax integrations, and automated WhatsApp document follow-ups, with predictable pricing from $49/month for 5 users and no per-client charges.",
   },
   {
     q: "Can our firm import existing client masters and task history from Excel spreadsheets?",

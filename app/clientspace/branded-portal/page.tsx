@@ -40,7 +40,7 @@ const DETAILS: { title: string; body: string }[] = [
 
 const FAQS: { q: string; a: string }[] = [
   { q: "Can I use my own domain for the client portal?", a: "Yes. Point a subdomain you own (like clients.yourfirm.com) at your Client Space so the address your clients visit is your firm's own." },
-  { q: "How are branded portals priced in ClientSpace?", a: "Custom branded client portals are included across our practice tiers starting at ₹499/mo ($14/mo). There is no setup fee, and all plans include your custom firm logo, brand styling, and friction-free magic link access for clients." },
+  { q: "How are branded portals priced in ClientSpace?", a: "Custom branded client portals are included on every plan, from $49/month for up to 5 users. There is no setup fee, and all plans include your custom firm logo, brand styling, and friction-free magic link access for clients." },
   { q: "Does every client get their own separate space?", a: "Yes. Each client's space is fully isolated, they see only their own engagement, documents, and status, never another client's." },
   { q: "How much can I customize?", a: "Logo, brand color, and domain are built in today. If you need deeper customization for a large rollout, tell us on a demo call and we'll scope it with you." },
 ];
@@ -92,7 +92,7 @@ export default function BrandedPortalPage() {
           </div>
           <p className="mt-4 text-[13px] text-muted">
             Part of <Link href="/clientspace" className="font-semibold text-accent">Client Space</Link>,
-            plans starting from ₹499/mo ($14/mo) · 7-day free trial · no credit card required
+            plans from $49/mo for 5 users · 7-day free trial · no credit card required
           </p>
         </section>
 

@@ -1,480 +1,101 @@
-import { SIGNUP_URL, DEMO_URL } from "./config";
-import { PLAN_ENTITLEMENTS } from "@/lib/entitlements";
-import { type MarketCode } from "@/lib/pricing/config";
+// Single source of truth for ClientSpace pricing. Every page that shows a
+// price reads from here, so a price change is a one-file edit.
+//
+// One plan with every feature; the only choice is team size. USD for every
+// visitor. Annual billing is 20% off, rounded down to a whole dollar.
 
-export interface PricingPlan {
-  id: "pro" | "business" | "enterprise";
-  name: string;
-  tagline: string;
-  monthlyPrice: number | null;
-  annualPrice: number | null;
-  currencySymbol: string;
-  currencyCode: string;
-  unit: string;
-  periodText: string;
-  featured?: boolean;
-  badge?: string;
-  ctaText: string;
-  ctaHref: string;
-  ctaStyle: "primary" | "accent" | "ghost";
-  summaryLimits: string[];
-  keyHighlights: string[];
-}
+export type PricingTier = {
+  users: number;
+  monthly: number; // USD per month, billed monthly
+  annual: number; // USD per month, billed yearly
+  popular?: boolean;
+};
 
-export interface FeatureRow {
-  name: string;
-  detail?: string;
-  pro: boolean | string;
-  business: boolean | string;
-  enterprise: boolean | string;
-}
+export const PRICING_TIERS: PricingTier[] = [
+  { users: 5, monthly: 49, annual: 39 },
+  { users: 10, monthly: 99, annual: 79, popular: true },
+  { users: 15, monthly: 149, annual: 119 },
+  { users: 20, monthly: 199, annual: 159 },
+  { users: 50, monthly: 499, annual: 399 },
+  { users: 100, monthly: 999, annual: 799 },
+];
 
-export interface FeatureCategory {
+export const ANNUAL_DISCOUNT_PCT = 20;
+export const ENTERPRISE_FROM_USERS = 100;
+
+const entry = PRICING_TIERS[0];
+/** e.g. "$49/month for up to 5 users" — use wherever a page says "from". */
+export const STARTING_PRICE_LABEL = `$${entry.monthly}/month for up to ${entry.users} users`;
+export const STARTING_PRICE_SHORT = `$${entry.monthly}/mo`;
+
+export const formatUsd = (n: number) => `$${n.toLocaleString("en-US")}`;
+
+export interface IncludedGroup {
   title: string;
-  features: FeatureRow[];
+  items: string[];
 }
+
+// Everything below is included in every team size.
+export const INCLUDED_FEATURES: IncludedGroup[] = [
+  {
+    title: "Tasks & compliance",
+    items: [
+      "Task lists, Kanban boards, timelines & milestones",
+      "Statutory due-date calendar for GST, TDS, Income Tax & ROC",
+      "Recurring compliance tasks & practice workflow templates",
+      "1-click client & task import from Excel / CSV",
+    ],
+  },
+  {
+    title: "Client portal",
+    items: [
+      "Branded client spaces with magic-link login",
+      "Unlimited client guests at no extra cost",
+      "PBC document request checklists & secure uploads",
+      "Deliverable sign-offs & client portal messaging",
+    ],
+  },
+  {
+    title: "Team & review",
+    items: [
+      "4-eye partner review gates (maker-checker)",
+      "Partner, Manager, Associate & Article Assistant roles",
+      "Workload Cockpit with capacity meters & rebalancing",
+      "Live effort tracking against fees",
+    ],
+  },
+  {
+    title: "AI, reporting & security",
+    items: [
+      "AI project plans, status reports & risk detection",
+      "Practice-level dashboards & firm reporting",
+      "100 GB AES-256 encrypted document vault",
+      "Full activity history & priority support",
+    ],
+  },
+];
 
 export interface PricingFaq {
   q: string;
   a: string;
 }
- 
-export type ClientSpaceMarketPrices = {
-  currencySymbol: string;
-  currencyCode: string;
-  proMonthly: number;
-  proAnnual: number;
-  bizMonthly: number;
-  bizAnnual: number;
-  taxNote: string;
-};
 
-export const MARKET_PRICING_MAP: Record<MarketCode, ClientSpaceMarketPrices> = {
-  IN: {
-    currencySymbol: "₹",
-    currencyCode: "INR",
-    proMonthly: 999,
-    proAnnual: 799,
-    bizMonthly: 1599,
-    bizAnnual: 1279,
-    taxNote: "+ GST 18%",
-  },
-  US: {
-    currencySymbol: "$",
-    currencyCode: "USD",
-    proMonthly: 29,
-    proAnnual: 24,
-    bizMonthly: 49,
-    bizAnnual: 39,
-    taxNote: "Sales tax (state)",
-  },
-  GB: {
-    currencySymbol: "£",
-    currencyCode: "GBP",
-    proMonthly: 24,
-    proAnnual: 19,
-    bizMonthly: 39,
-    bizAnnual: 32,
-    taxNote: "VAT 20% (incl.)",
-  },
-  CA: {
-    currencySymbol: "C$",
-    currencyCode: "CAD",
-    proMonthly: 39,
-    proAnnual: 32,
-    bizMonthly: 65,
-    bizAnnual: 52,
-    taxNote: "GST/HST/PST (varies)",
-  },
-  AU: {
-    currencySymbol: "A$",
-    currencyCode: "AUD",
-    proMonthly: 44,
-    proAnnual: 36,
-    bizMonthly: 75,
-    bizAnnual: 62,
-    taxNote: "GST 10% (incl.)",
-  },
-  AE: {
-    currencySymbol: "AED ",
-    currencyCode: "AED",
-    proMonthly: 110,
-    proAnnual: 89,
-    bizMonthly: 180,
-    bizAnnual: 149,
-    taxNote: "VAT 5% (itemized)",
-  },
-  DEFAULT: {
-    currencySymbol: "$",
-    currencyCode: "USD",
-    proMonthly: 29,
-    proAnnual: 24,
-    bizMonthly: 49,
-    bizAnnual: 39,
-    taxNote: "Tax calculated at checkout",
-  },
-};
-
-// ============================================================================
-// CLIENTSPACE PRICING PLANS (CENTRALIZED VIA LIB/ENTITLEMENTS)
-// ============================================================================
-export const CLIENTSPACE_PLANS: PricingPlan[] = [
-  {
-    id: "pro",
-    name: "Pyngyn Professional",
-    tagline: "Tasks, projects, client spaces, collaboration, knowledge, workflows, client communication.",
-    monthlyPrice: 999,
-    annualPrice: 799,
-    currencySymbol: "₹",
-    currencyCode: "INR",
-    unit: "user / month",
-    periodText: "billed monthly",
-    featured: false,
-    ctaText: "Start 7-Day Free Trial",
-    ctaHref: SIGNUP_URL,
-    ctaStyle: "primary",
-    summaryLimits: [
-      "Tasks, Kanban boards, project timelines & milestones",
-      "Branded client spaces with magic link login",
-      "Team collaboration, internal comments & activity feeds",
-      "Firm knowledge base & practice SOP documentation",
-      "Practice workflows, checklists & statutory due date calendar",
-      "Client communication & portal messaging",
-      "25 GB bank-grade encrypted document vault",
-      "Unlimited client portal guests",
-    ],
-    keyHighlights: [
-      "Task lists, Kanban boards & project timelines",
-      "Branded client spaces with frictionless magic links",
-      "Team collaboration, discussions & activity feeds",
-      "Practice knowledge base & firm SOPs",
-      "Standard practice workflows & statutory due date tracking",
-      "Client communication & portal messaging",
-      "PBC document request checklists & secure uploads",
-      "Standard role permissions (Owner, Member, Guest)",
-      "25 GB bank-grade encrypted document vault",
-      "Standard email & help center support",
-    ],
-  },
-  {
-    id: "business",
-    name: "Pyngyn Business",
-    tagline: "Everything + analytics, advanced permissions, AI, practice-level reporting.",
-    monthlyPrice: 1599,
-    annualPrice: 1279,
-    currencySymbol: "₹",
-    currencyCode: "INR",
-    unit: "user / month",
-    periodText: "billed monthly",
-    featured: true,
-    badge: "Most Popular for Growing Firms",
-    ctaText: "Start 7-Day Free Trial",
-    ctaHref: SIGNUP_URL,
-    ctaStyle: "accent",
-    summaryLimits: [
-      "Everything in Pyngyn Professional",
-      "Workload Cockpit: live capacity meters & 1-click rebalance",
-      "4-Eye partner review gates & advanced role permissions",
-      "AI project plan generation & executive status reports",
-      "Practice-level executive dashboards & firm reporting",
-      "Live effort tracking timers & capacity benchmarks",
-      "100 GB bank-grade encrypted document vault",
-      "Priority partner advisory support",
-    ],
-    keyHighlights: [
-      "Everything in Pyngyn Professional, plus:",
-      "Analytics: Workload Cockpit, capacity meters & 1-click team auto-rebalance",
-      "Advanced Permissions: 4-Eye partner review gates & granular role hierarchy",
-      "AI: AI project plans, living status reports & risk detection",
-      "Practice-Level Reporting: Executive partner dashboards & throughput radar",
-      "Live Effort Tracking: Practice timers & fee realization meters",
-      "Document Requests: Structured PBC intake & deliverable sign-offs",
-      "Audit Trail: Detailed activity history & file version control",
-      "100 GB secure document vault with audit trail history",
-      "Priority partner advisory support",
-    ],
-  },
-  {
-    id: "enterprise",
-    name: "Enterprise",
-    tagline: "Custom scale, dedicated compliance isolation, and white-glove migration for large partnerships.",
-    monthlyPrice: null,
-    annualPrice: null,
-    currencySymbol: "",
-    currencyCode: "INR",
-    unit: "Custom practice pricing",
-    periodText: "tailored to your firm",
-    featured: false,
-    badge: "Large Partnerships",
-    ctaText: "Contact Practice Advisory",
-    ctaHref: DEMO_URL,
-    ctaStyle: "ghost",
-    summaryLimits: [
-      "Unlimited Portfolios & Multi-Branch Entities",
-      "200 GB Storage (Customizable)",
-      "Unlimited Automations & Workflows",
-      "Unlimited Staff & Team Members",
-      "Unlimited Client Portal Guests",
-    ],
-    keyHighlights: [
-      "Everything in Business, plus:",
-      "Multi-Branch & Multi-Office Practice Partitions",
-      "Dedicated White-Glove Client & Document Migration Specialist",
-      "Custom DPA (Data Processing Agreement) & Sensitive Audit Isolation",
-      "Guaranteed 99.9% Uptime SLA & 24/7 Dedicated Account Partner",
-    ],
-  },
-];
-
-export function getPlansForMarket(market: MarketCode): PricingPlan[] {
-  const p = MARKET_PRICING_MAP[market] || MARKET_PRICING_MAP.DEFAULT;
-  // Hide Enterprise plan as requested; show only Professional and Business
-  return CLIENTSPACE_PLANS.filter((plan) => plan.id !== "enterprise").map((plan) => {
-    if (plan.id === "pro") {
-      return {
-        ...plan,
-        currencySymbol: p.currencySymbol,
-        currencyCode: p.currencyCode,
-        monthlyPrice: p.proMonthly,
-        annualPrice: p.proAnnual,
-      };
-    }
-    if (plan.id === "business") {
-      return {
-        ...plan,
-        currencySymbol: p.currencySymbol,
-        currencyCode: p.currencyCode,
-        monthlyPrice: p.bizMonthly,
-        annualPrice: p.bizAnnual,
-      };
-    }
-    return {
-      ...plan,
-      currencySymbol: p.currencySymbol,
-      currencyCode: p.currencyCode,
-    };
-  });
-}
-
-// ============================================================================
-// PROTOTYPE-ALIGNED FEATURE COMPARISON MATRIX
-// Grouped into the core practice categories:
-// 1. TASKS & PROJECTS
-// 2. CLIENT SPACES & PORTAL
-// 3. COLLABORATION & KNOWLEDGE
-// 4. WORKFLOWS & COMMUNICATION
-// 5. AUTOMATION (BUSINESS)
-// 6. ANALYTICS, PERMISSIONS & AI (BUSINESS)
-// 7. STORAGE, SECURITY & SUPPORT
-// ============================================================================
-export const FEATURE_CATEGORIES: FeatureCategory[] = [
-  {
-    title: "Tasks & Projects",
-    features: [
-      {
-        name: "Task Lists & Kanban Boards",
-        detail: "Interactive task execution tables, status columns, priorities, and flexible Kanban views",
-        pro: true,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Project Timelines & Milestones",
-        detail: "Structured phases, engagement milestones, and deliverable target tracking",
-        pro: true,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Due Dates & Target Tracking",
-        detail: "Custom due dates, recurring task schedules, and statutory filing target milestones",
-        pro: true,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Spreadsheet Importer (Excel / CSV)",
-        detail: "1-Click import of client master records and task lists with column auto-mapping",
-        pro: true,
-        business: true,
-        enterprise: true,
-      },
-    ],
-  },
-  {
-    title: "Client Spaces & Portal",
-    features: [
-      {
-        name: "Branded Client Spaces",
-        detail: "Dedicated, private portal for each client branded with your firm's name and logo",
-        pro: true,
-        business: true,
-        enterprise: "Custom Domain & Whitelabel",
-      },
-      {
-        name: "Frictionless Magic Link Access",
-        detail: "Clients log in securely via 1-click magic link with zero passwords to remember",
-        pro: true,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Unlimited Client Guest Accounts",
-        detail: "Invite client directors, accountants, and finance heads at zero additional cost",
-        pro: "Unlimited",
-        business: "Unlimited",
-        enterprise: "Unlimited",
-      },
-      {
-        name: "PBC Document Request Checklists",
-        detail: "Structured document intake lists with real-time status (Requested → Uploaded → Approved)",
-        pro: true,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Deliverable & Report Downloads",
-        detail: "Secure client access to finalized tax computations, reports, and acknowledgments",
-        pro: true,
-        business: true,
-        enterprise: true,
-      },
-    ],
-  },
-  {
-    title: "Collaboration & Knowledge",
-    features: [
-      {
-        name: "Team Collaboration & Discussions",
-        detail: "Internal comments, query notes, @mentions, and discussions linked directly to tasks",
-        pro: true,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Firm Knowledge Base & SOPs",
-        detail: "Centralized practice documentation, standard operating procedures, and compliance guidelines",
-        pro: true,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Activity Feeds & Audit History",
-        detail: "Chronological activity logging across all tasks, client spaces, and deliverables",
-        pro: "90-Day History",
-        business: "Unlimited History",
-        enterprise: "Unlimited History",
-      },
-    ],
-  },
-  {
-    title: "Workflows & Client Communication",
-    features: [
-      {
-        name: "Practice Workflows & Checklists",
-        detail: "Standardized workflow templates for routine accounting, tax, and audit procedures",
-        pro: true,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Client Portal Messaging",
-        detail: "Direct, contextual client communications attached directly to deliverables and requests",
-        pro: true,
-        business: true,
-        enterprise: true,
-      },
-    ],
-  },
-  {
-    title: "Analytics, Permissions & AI (Business Plan)",
-    features: [
-      {
-        name: "Practice Workload Cockpit",
-        detail: "Live capacity meters displaying practitioner allocations, active filings, and bottlenecks",
-        pro: false,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "1-Click Workload Auto-Rebalance",
-        detail: "Redistribute pending deliverables from overloaded staff or article assistants with one click",
-        pro: false,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "4-Eye Partner Review Gates",
-        detail: "Mandatory verification gate requiring partner or manager sign-off before deliverable dispatch",
-        pro: false,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Granular Role Hierarchy",
-        detail: "Role-based permissions tailored for Partner, Manager, Senior Associate, and Article Assistant",
-        pro: "Standard Roles",
-        business: "Enforced Hierarchy",
-        enterprise: "Custom Granular RBAC",
-      },
-      {
-        name: "Live Effort Tracking & Timers",
-        detail: "Track actual hours spent vs budgeted fees with persistent companion timers",
-        pro: "Basic Tracking",
-        business: "Full Timers & Meters",
-        enterprise: "Full Timers & Meters",
-      },
-      {
-        name: "AI Project Plan & Workflow Builder",
-        detail: "Generate end-to-end task breakdowns, milestones, and deliverables automatically",
-        pro: false,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "AI Status Reports & Risk Detection",
-        detail: "Automated synthesis of blocked tasks, pending client approvals, and deadline risks",
-        pro: false,
-        business: true,
-        enterprise: true,
-      },
-      {
-        name: "Practice-Level Executive Dashboards",
-        detail: "Cross-client visibility into partner capacity, filing completion rates, and team throughput",
-        pro: false,
-        business: true,
-        enterprise: true,
-      },
-    ],
-  },
-  {
-    title: "Storage, Security & Support",
-    features: [
-      {
-        name: "Encrypted Document Vault Storage",
-        detail: "Bank-grade 256-bit AES encrypted secure client document storage",
-        pro: "25 GB Storage",
-        business: "100 GB Storage",
-        enterprise: "200 GB Storage",
-      },
-      {
-        name: "Support Channels & Onboarding",
-        detail: "Direct assistance from practice operations specialists",
-        pro: "Email & Help Center",
-        business: "Priority Support",
-        enterprise: "Dedicated Account Partner",
-      },
-    ],
-  },
-];
-
-// ============================================================================
-// PRACTICE FAQS SPECIFIC TO CA & ACCOUNTING FIRMS
-// ============================================================================
 export const PRICING_FAQS: PricingFaq[] = [
   {
+    q: "How does team-size pricing work?",
+    a: `You pick the plan that covers the number of people in your firm who use Pyngyn: up to 5 users for $49/month, 10 for $99, 15 for $149, 20 for $199, 50 for $499 or 100 for $999. Every plan includes every feature; only the number of users changes. Firms with more than ${ENTERPRISE_FROM_USERS} users can talk to us about a custom plan.`,
+  },
+  {
+    q: "Who counts as a user?",
+    a: "A user is anyone at your firm with a Pyngyn login: partners, managers, associates and article assistants. Your clients are not users. Client portal guests are unlimited and free on every plan.",
+  },
+  {
+    q: "What happens when my team grows past my plan?",
+    a: "Move up to the next team size from your billing settings at any time. Upgrades take effect immediately and are prorated for the rest of your billing period, so you only pay the difference.",
+  },
+  {
     q: "Do my clients have to pay anything to access their Client Portal?",
-    a: "No, never. All client portal guest accounts are 100% free and unlimited on all plans. Your clients receive secure magic links, view their deliverables, approve drafts, and upload requested documents at zero additional cost to them or your firm.",
+    a: "No, never. All client portal guest accounts are free and unlimited on every plan. Your clients receive secure magic links, view their deliverables, approve drafts, and upload requested documents at no cost to them or your firm.",
   },
   {
     q: "How does the 7-day free trial work?",
@@ -482,26 +103,18 @@ export const PRICING_FAQS: PricingFaq[] = [
   },
   {
     q: "Can we switch between monthly and annual billing?",
-    a: "Yes. You can switch between monthly and annual billing at any time from your practice settings. Annual billing provides an immediate 20% discount (equivalent to getting over 2 months free).",
+    a: `Yes. You can switch between monthly and annual billing at any time from your practice settings. Annual billing saves ${ANNUAL_DISCOUNT_PCT}%: for example, the 5-user plan is $39/month billed yearly instead of $49/month.`,
   },
   {
-    q: "What is the difference between Pyngyn Professional and Pyngyn Business?",
-    a: "Pyngyn Professional (₹999/user/month) covers all essential day-to-day operations: tasks, projects, client spaces, team collaboration, firm knowledge base, standard workflows, and client communication. Pyngyn Business (₹1,599/user/month) adds full practice superpowers: live workload analytics with auto-rebalancing, 4-eye partner review gates, AI project planning & status reporting, and firm-wide executive reporting.",
-  },
-  {
-    q: "How does Pyngyn handle statutory deadlines and compliance workflows?",
-    a: "Pyngyn ClientSpace organizes compliance schedules, task checklists, and statutory target dates (such as GST and Income Tax filing milestones). It streamlines document collection, client follow-ups, and internal review queues so your team never misses a statutory deadline.",
+    q: "Are prices in US dollars?",
+    a: "Yes. All plans are priced in US dollars for every country. Applicable taxes, such as GST for Indian firms, are added at checkout.",
   },
   {
     q: "How do you protect client financial data and working papers?",
-    a: "All client records and audit files are encrypted with 256-bit AES at rest and in transit via TLS 1.3 in ISO 27001-certified data centers. Your data is isolated per firm, and under no circumstances is confidential client financial information used to train public AI models.",
-  },
-  {
-    q: "Can we import our existing client master list from Excel or CSV?",
-    a: "Yes. ClientSpace includes a 1-click spreadsheet importer that automatically maps entity names, PAN/GSTIN numbers, contact persons, and industrial sectors. For Business and Enterprise plans, our practice onboarding team assists with your migration.",
+    a: "All client records and audit files are encrypted with 256-bit AES at rest and TLS 1.3 in transit. Your data is isolated per firm, and confidential client financial information is never used to train public AI models.",
   },
   {
     q: "How do cancellations, prorated billing, and refunds work?",
-    a: "You can cancel your subscription at any time directly from your account billing settings. Cancellation stops future automatic renewals while your practice retains full access through the end of your current paid billing period. Plan upgrades and additional practitioner seats are prorated for the remaining days of your billing cycle. Payments for the ongoing billing period are non-refundable.",
+    a: "You can cancel your subscription at any time directly from your account billing settings. Cancellation stops future automatic renewals while your practice retains full access through the end of your current paid billing period. Upgrades to a larger team size are prorated for the remaining days of your billing cycle. Payments for the ongoing billing period are non-refundable; see the Refund & Subscription Cancellation Policy.",
   },
 ];

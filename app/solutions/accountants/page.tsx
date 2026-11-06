@@ -191,7 +191,7 @@ export default function AccountantsPage() {
             </Link>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Pro starts at <AccountantsPriceTag type="pro" />/user/mo · Built for CA &amp; global accounting practices · No credit card required
+            Plans from <AccountantsPriceTag />/month for up to 5 users · Built for CA &amp; accounting practices · No credit card required
           </p>
         </section>
 

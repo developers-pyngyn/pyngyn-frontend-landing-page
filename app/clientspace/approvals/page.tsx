@@ -93,7 +93,7 @@ export default function ApprovalsPage() {
           </div>
           <p className="mt-4 text-[13px] text-muted">
             Part of <Link href="/clientspace" className="font-semibold text-accent">Client Space</Link>,
-            plans starting from ₹499/mo ($14/mo) · 7-day free trial · no credit card required
+            plans from $49/mo for 5 users · 7-day free trial · no credit card required
           </p>
         </section>
 

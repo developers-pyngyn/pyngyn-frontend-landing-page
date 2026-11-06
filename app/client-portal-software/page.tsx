@@ -205,7 +205,7 @@ export default function ClientPortalSoftwarePage() {
             </a>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            $19 / client / month standalone · No credit card required to start · 1-click passwordless client login
+            From $49/month for 5 users · No credit card required to start · 1-click passwordless client login
           </p>
         </section>
 

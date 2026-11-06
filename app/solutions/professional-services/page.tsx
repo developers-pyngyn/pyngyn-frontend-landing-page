@@ -81,7 +81,7 @@ const CLIENTSPACE_FEATURES: { icon: LucideIcon; title: string; body: string }[] 
 
 const FAQS: { q: string; a: string }[] = [
   { q: "Who is PYNGYN ClientSpace built for?", a: "PYNGYN ClientSpace is designed specifically for Chartered Accountants, corporate tax practitioners, statutory audit firms, and accounting practices. Every feature is configured around how modern practices deliver client work." },
-  { q: "How does pricing work?", a: "ClientSpace Pro starts at ₹499/user/month (or $29/user/month globally) for essential statutory task tracking and white-labeled client portals. ClientSpace Business is ₹799/user/month ($49 globally) and adds the Workload Cockpit, 4-eye review gates, and WhatsApp chasers." },
+  { q: "How does pricing work?", a: "ClientSpace is one plan with every feature, priced by team size: from $49/month for up to 5 users to $999/month for 100, with 20% off annual billing. Every plan includes statutory task tracking, white-labeled client portals, the Workload Cockpit and 4-eye review gates." },
   { q: "How is PYNGYN different from generic PM tools like Asana or ClickUp?", a: "Generic tools have no concept of statutory tax deadlines, DSC registers, client PBC checklists, or 4-eye partner review gates. PYNGYN is purpose-built for accounting and CA practice workflows." },
   { q: "How long does setup take?", a: "Most firms are up and running within 48 hours. Import your client lists via CSV, apply standard statutory workflow templates, and invite your team immediately." },
 ];
@@ -139,7 +139,7 @@ export default function ProfessionalServicesPage() {
             </Link>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Pro starts at ₹499/mo ($29/mo) · Built for Indian CA &amp; global accounting practices · 7-day free trial
+            From $49/mo for 5 users · Built for Indian CA &amp; global accounting practices · 7-day free trial
           </p>
         </section>
 

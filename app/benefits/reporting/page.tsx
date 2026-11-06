@@ -92,7 +92,7 @@ export default function ReportingPage() {
           </div>
           <p className="mt-4 text-[13px] text-muted">
             Part of <Link href="/clientspace" className="font-semibold text-accent">ClientSpace</Link>,
-            from $9 per seat/month
+            from $49/month for 5 users
           </p>
         </section>
 

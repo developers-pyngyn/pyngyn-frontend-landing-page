@@ -57,7 +57,7 @@ const HERO_STATS: { value: string; label: string }[] = [
   { value: "35%", label: "Of your day lost to tool-switching" },
   { value: "5+", label: "Platforms to complete one engagement" },
   { value: "2x", label: "Task completion with Pyngyn" },
-  { value: "$9", label: "Per seat / month. Cancel anytime." },
+  { value: "$49", label: "Per month for up to 5 users. Cancel anytime." },
 ];
 
 const BEFORE_MONDAY: { time: string; icon: LucideIcon; body: string }[] = [
@@ -234,7 +234,7 @@ export default function SalesPitchPage() {
               Book a 30-min demo →
             </Link>
             <a href={SIGNUP_URL} className="btn btn-ghost">
-              Start a 30-day free trial
+              Start a 7-day free trial
             </a>
           </div>
 
@@ -428,16 +428,16 @@ export default function SalesPitchPage() {
           <div className="mt-7 grid gap-[22px] lg:grid-cols-[1.05fr_1fr]">
             <div className="rounded-[22px] border border-accent bg-white p-7 shadow-soft ring-1 ring-accent">
               <div className="text-[11px] font-bold uppercase tracking-wider text-accent">
-                Professional services plan
+                For teams of up to 5
               </div>
               <div className="mt-3 flex items-baseline gap-2">
                 <span className="font-display text-[44px] font-semibold leading-none tracking-[-0.02em]">
-                  ₹999
+                  $49
                 </span>
-                <span className="text-[14px] text-muted">/ user / month</span>
+                <span className="text-[14px] text-muted">/ month</span>
               </div>
               <div className="mt-1 text-[13.5px] text-muted">
-                Professional plan · tasks, projects, client spaces, collaboration, workflows
+                Every feature included · larger teams from $99/month for 10 users
               </div>
               <ul className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                 {PLAN_FEATURES.map((f) => (
@@ -452,7 +452,7 @@ export default function SalesPitchPage() {
                   Book a demo →
                 </Link>
                 <a href={SIGNUP_URL} className="btn btn-ghost">
-                  Start 30-day free trial
+                  Start 7-day free trial
                 </a>
               </div>
             </div>
@@ -465,7 +465,7 @@ export default function SalesPitchPage() {
                 pays for itself in the first month.
               </p>
               <h4 className="mt-6 text-[14px] font-bold uppercase tracking-wide text-muted">
-                Start with a 30-day free trial
+                Start with a 7-day free trial
               </h4>
               <p className="mt-2 text-[14px] leading-relaxed text-muted">
                 No credit card. No commitment. Set up in under an hour. If it doesn&apos;t save

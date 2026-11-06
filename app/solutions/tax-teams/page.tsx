@@ -183,7 +183,7 @@ export default function TaxTeamsPage() {
             </Link>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Starting at ₹499/mo ($29/mo) · Built for direct and indirect tax practices · No credit card required
+            From $49/mo for 5 users · Built for direct and indirect tax practices · No credit card required
           </p>
         </section>
 

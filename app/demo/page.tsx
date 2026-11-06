@@ -135,7 +135,7 @@ const DEMO_FAQS = [
   },
   {
     q: "Can I just try the product instead?",
-    a: "Absolutely. There's a 7-day free trial with no credit card required. Plans start at Professional (₹999/user/month) and Business (₹1,599/user/month) with auto-detected regional pricing. The demo is for teams who want a guided walkthrough and a tailored rollout plan.",
+    a: "Absolutely. There's a 7-day free trial with no credit card required. Plans start at $49/month for up to 5 users, with every feature on every plan. The demo is for teams who want a guided walkthrough and a tailored rollout plan.",
   },
   {
     q: "Is our data safe if we share our workflow on the call?",

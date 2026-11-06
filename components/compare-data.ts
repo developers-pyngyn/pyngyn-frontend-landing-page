@@ -298,7 +298,7 @@ export const COMPARE_CONTENT: Record<string, CompareContent> = {
       {
         title: "Seat Economics for CA Firm Hierarchies",
         pyngyn:
-          "Priced from ₹499 to ₹799/user/month with unlimited client guest portals, making full firm deployment viable for partners, managers, and article assistants.",
+          "From $49/month for a team of 5 (about $10 per user) with unlimited client guest portals, making full firm deployment viable for partners, managers, and article assistants.",
         them:
           "Priced between $59 and $89+ USD per user per month (approx. ₹5,000–₹7,500/seat/mo), which can become cost-prohibitive for large teams of trainees.",
       },
@@ -309,7 +309,7 @@ export const COMPARE_CONTENT: Record<string, CompareContent> = {
       "Teams that process heavy volumes of incoming client emails directly in Karbon Triage",
     ],
     pricingNote:
-      "Karbon plans range from approximately $59 to $89+ per user/month billed annually. Pyngyn ClientSpace plans start at ₹499/user/month with monthly and annual options and no per-client charges.",
+      "Karbon plans range from approximately $59 to $89+ per user/month billed annually. Pyngyn ClientSpace starts at $49/month for up to 5 users (about $10 per user), with monthly and annual options and no per-client charges.",
     migrationSteps: [
       {
         title: "Export Client Database",
@@ -397,7 +397,7 @@ export const COMPARE_CONTENT: Record<string, CompareContent> = {
       "Practices with Western clients comfortable with password-protected portal apps",
     ],
     pricingNote:
-      "TaxDome requires annual upfront payment starting around $50–$66 per user/month. Pyngyn ClientSpace starts at ₹499/user/month with transparent monthly and annual plans.",
+      "TaxDome requires annual upfront payment starting around $50–$66 per user/month. Pyngyn ClientSpace starts at $49/month for up to 5 users (about $10 per user), with transparent monthly and annual plans.",
     migrationSteps: [
       {
         title: "Export Client Records & Tags",
@@ -485,7 +485,7 @@ export const COMPARE_CONTENT: Record<string, CompareContent> = {
       "Practices with dedicated software budgets for multi-module procurement",
     ],
     pricingNote:
-      "Canopy charges modular pricing per user/month for each feature (e.g. $40/mo Document Management + $35/mo Workflow + $25/mo Time & Billing). Pyngyn ClientSpace bundles all core capabilities starting at ₹499/user/month.",
+      "Canopy charges modular pricing per user/month for each feature (e.g. $40/mo Document Management + $35/mo Workflow + $25/mo Time & Billing). Pyngyn ClientSpace includes every capability on every plan, from $49/month for up to 5 users.",
     migrationSteps: [
       {
         title: "Export Client Folders & Contacts",
@@ -661,7 +661,7 @@ export const COMPARE_CONTENT: Record<string, CompareContent> = {
       "Personal tracking of side engagements",
     ],
     pricingNote:
-      "Spreadsheets carry zero incremental software license fees, but the hidden cost of missed deadlines, article assistant downtime, and partner time spent chasing documents far exceeds the ₹499–₹799/month investment in Pyngyn ClientSpace.",
+      "Spreadsheets carry zero incremental software license fees, but the hidden cost of missed deadlines, article assistant downtime, and partner time spent chasing documents far exceeds the $49/month a 5-person team pays for Pyngyn ClientSpace.",
     migrationSteps: [
       {
         title: "Upload Existing Excel Trackers",
