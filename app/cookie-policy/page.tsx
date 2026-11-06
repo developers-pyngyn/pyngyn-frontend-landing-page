@@ -54,7 +54,7 @@ export default function CookiePolicyPage() {
           blocks: [
             {
               type: "p",
-              text: "We classify all cookies and client storage used across our platform into four transparent categories. Only strictly necessary storage is active by default; all optional analytics and marketing trackers require your affirmative consent:",
+              text: "We classify all cookies and client storage used across our platform into five transparent categories. Only strictly necessary storage is active by default; all optional analytics and marketing trackers require your affirmative consent:",
             },
             {
               type: "table",
@@ -65,6 +65,12 @@ export default function CookiePolicyPage() {
                   "Maintains secure sessions on app.pyngyn.ai (Clerk authentication tokens), protects against Cross-Site Request Forgery (CSRF) and DDoS attacks (Cloudflare security headers), and saves your cookie preference choice (`pyngyn_cookie_consent_v1`).",
                   "Session to 1 year",
                   "Always Active (Cannot be disabled)",
+                ],
+                [
+                  "Referral Program",
+                  "Needed for the Refer and earn program. When you open a referral link (`?ref=`), the `pyngyn_ref` cookie remembers which referral link you arrived from so a signup can be credited to the person who referred you. It holds only the referral code and the time of your first visit, and is never overwritten by a later link.",
+                  "90 days",
+                  "Active (Set only when you open a referral link)",
                 ],
                 [
                   "Functional Storage",

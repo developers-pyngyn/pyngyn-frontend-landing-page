@@ -5,6 +5,9 @@
 export const EMAIL_DOMAIN = "pyngyn.com";
 
 // --- External app (separate deployments) ---
+// Every link to app.pyngyn.ai also carries the visitor's referral (ref, ref_at)
+// when they arrived through a referral link: components/ReferralTracker.tsx adds it
+// in the browser, so keep these as plain URLs.
 export const SIGNIN_URL = "https://app.pyngyn.ai/";
 export const SIGNUP_URL = "https://app.pyngyn.ai/?signup=true";
 export const DEMO_URL = "/demo";

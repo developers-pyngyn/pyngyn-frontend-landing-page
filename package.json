@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "node --test --disable-warning=MODULE_TYPELESS_PACKAGE_JSON \"tests/*.test.mjs\"",
     "pages:build": "npx @cloudflare/next-on-pages@1",
     "postinstall": "node scripts/setup-build-shim.js"
   },

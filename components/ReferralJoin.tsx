@@ -1,14 +1,117 @@
 "use client";
 
-import { useState } from "react";
-import { SIGNUP_URL } from "./config";
+import { useEffect, useRef, useState } from "react";
+import { SIGNIN_URL } from "./config";
+import { cleanRefCode, makeReferralCode, referralLink } from "@/lib/referral";
 
-// Builds an illustrative referral link from the person's email/handle.
-// In production, your backend issues a unique code and tracks conversions.
-function makeCode(input: string) {
-  const base = input.split("@")[0].replace(/[^a-zA-Z0-9]/g, "").toLowerCase().slice(0, 10) || "friend";
-  const suffix = Math.random().toString(36).slice(2, 6);
-  return `${base}-${suffix}`;
+// Pyngyn saves referral codes through one public endpoint (a Supabase Edge Function),
+// reached with a plain fetch. No Supabase library or keys belong on this site.
+const REFERRAL_ENDPOINT = process.env.NEXT_PUBLIC_REFERRAL_ENDPOINT;
+// Cloudflare Turnstile, invisible mode. Without a site key no captcha is sent.
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+const TURNSTILE_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+
+const INVALID_EMAIL = "Enter a valid email to get your link.";
+
+type Turnstile = {
+  render: (el: HTMLElement, opts: Record<string, unknown>) => string;
+  execute: (id: string) => void;
+  reset: (id: string) => void;
+};
+declare global {
+  interface Window {
+    turnstile?: Turnstile;
+  }
+}
+
+type RegisterResult =
+  | { kind: "ok"; code: string | null }
+  | { kind: "invalid_email" }
+  | { kind: "rate_limited" }
+  | { kind: "failed" };
+
+async function register(email: string, captcha: string | null): Promise<RegisterResult> {
+  if (!REFERRAL_ENDPOINT) return { kind: "failed" };
+  try {
+    const res = await fetch(REFERRAL_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "register", email: email.trim(), ...(captcha ? { captcha } : {}) }),
+      signal: AbortSignal.timeout(6000),
+    });
+    const data = (await res.json().catch(() => null)) as { ok?: boolean; code?: string; reason?: string } | null;
+    if (res.status === 400 && data?.reason === "invalid_email") return { kind: "invalid_email" };
+    if (res.status === 429) return { kind: "rate_limited" };
+    if (!res.ok || !data?.ok) return { kind: "failed" };
+    return { kind: "ok", code: cleanRefCode(data.code) };
+  } catch {
+    return { kind: "failed" };
+  }
+}
+
+/** Loads Turnstile once and hands out a fresh token per call (null when it is off or fails). */
+function useTurnstile() {
+  const box = useRef<HTMLDivElement>(null);
+  const widget = useRef<string | null>(null);
+  const pending = useRef<((token: string | null) => void) | null>(null);
+
+  useEffect(() => {
+    if (!TURNSTILE_SITE_KEY) return;
+    const settle = (token: string | null) => {
+      pending.current?.(token);
+      pending.current = null;
+    };
+    const mount = () => {
+      if (!window.turnstile || !box.current || widget.current) return;
+      widget.current = window.turnstile.render(box.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+        execution: "execute",
+        callback: (token: string) => settle(token),
+        "error-callback": () => settle(null),
+        "expired-callback": () => settle(null),
+      });
+    };
+    if (window.turnstile) {
+      mount();
+      return;
+    }
+    let script = document.querySelector<HTMLScriptElement>(`script[src="${TURNSTILE_SRC}"]`);
+    if (!script) {
+      script = document.createElement("script");
+      script.src = TURNSTILE_SRC;
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+    script.addEventListener("load", mount);
+    return () => script?.removeEventListener("load", mount);
+  }, []);
+
+  function token(): Promise<string | null> {
+    const ts = window.turnstile;
+    const id = widget.current;
+    if (!ts || !id) return Promise.resolve(null);
+    return new Promise((resolve) => {
+      const timer = setTimeout(() => {
+        pending.current = null;
+        resolve(null);
+      }, 5000);
+      pending.current = (t) => {
+        clearTimeout(timer);
+        resolve(t);
+      };
+      try {
+        ts.reset(id); // a token is single-use: start a fresh challenge every time
+        ts.execute(id);
+      } catch {
+        clearTimeout(timer);
+        pending.current = null;
+        resolve(null);
+      }
+    });
+  }
+
+  return { box, token };
 }
 
 export function ReferralJoin() {
@@ -16,19 +119,45 @@ export function ReferralJoin() {
   const [link, setLink] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const retry = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const turnstile = useTurnstile();
+
+  useEffect(() => () => {
+    if (retry.current) clearTimeout(retry.current);
+  }, []);
 
   const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
-  function generate() {
+  async function generate() {
+    if (busy) return;
     if (!valid) {
-      setError("Enter a valid email to get your link.");
+      setError(INVALID_EMAIL);
       return;
     }
     setError(null);
-    const code = makeCode(email.trim());
-    const origin = typeof window !== "undefined" ? window.location.origin : "https://pyngyn.ai";
-    setLink(`${origin}/?ref=${code}`);
+    setBusy(true);
+    const typed = email.trim();
+    const local = await makeReferralCode(typed);
+    const result = await register(typed, await turnstile.token());
+    setBusy(false);
+
+    if (result.kind === "invalid_email") {
+      setError(INVALID_EMAIL);
+      return;
+    }
+    // Pyngyn's answer wins (someone with an older code keeps it). On any failure
+    // the link worked out here is shown, so nobody is left without one.
+    setLink(referralLink(result.kind === "ok" && result.code ? result.code : local));
     setCopied(false);
+    if (result.kind === "failed" && REFERRAL_ENDPOINT) {
+      if (retry.current) clearTimeout(retry.current);
+      retry.current = setTimeout(async () => {
+        retry.current = null;
+        const again = await register(typed, await turnstile.token());
+        if (again.kind === "ok" && again.code) setLink(referralLink(again.code));
+      }, 10000);
+    }
   }
 
   async function copy() {
@@ -76,9 +205,11 @@ export function ReferralJoin() {
             <button
               type="button"
               onClick={generate}
-              className="flex-none rounded-full bg-accent px-6 py-3.5 text-[15px] font-semibold text-white shadow-cta transition-transform hover:-translate-y-0.5 hover:bg-accent-dk"
+              disabled={busy}
+              aria-busy={busy}
+              className="flex-none rounded-full bg-accent px-6 py-3.5 text-[15px] font-semibold text-white shadow-cta transition-transform hover:-translate-y-0.5 hover:bg-accent-dk disabled:cursor-wait disabled:opacity-80 disabled:hover:translate-y-0"
             >
-              Get my link
+              {busy ? "Getting your link…" : "Get my link"}
             </button>
           </div>
           {error && <p className="mt-2 text-[13px] font-medium text-[#dc2626]">{error}</p>}
@@ -119,11 +250,14 @@ export function ReferralJoin() {
             </div>
           </div>
           <p className="mt-5 text-[12.5px] leading-relaxed text-muted">
-            This is your shareable link. Tracking and payouts are managed in your{" "}
-            <a href={SIGNUP_URL} className="font-semibold text-accent">PYNGYN account</a>.
+            This link is always the same for your email.{" "}
+            <a href={SIGNIN_URL} className="font-semibold text-accent">Sign in to Pyngyn</a> with this
+            email to follow your referrals and get paid.
           </p>
         </>
       )}
+      {/* Invisible Turnstile widget (renders nothing visible). */}
+      <div ref={turnstile.box} aria-hidden="true" />
     </div>
   );
 }
