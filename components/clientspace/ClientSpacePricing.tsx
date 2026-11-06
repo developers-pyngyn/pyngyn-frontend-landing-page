@@ -244,7 +244,7 @@ export function ClientSpacePricing({ headingLevel = "h2" }: { headingLevel?: "h1
             </div>
             <h3 className="text-sm font-bold text-slate-950 mb-1.5">Built for CA Hierarchy</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Native support for Partner &bull; Manager &bull; Senior Associate &bull; Article Assistant roles with strict 4-eye sign-off validation.
+              Native support for Partner &bull; Manager &bull; Senior &bull; Article roles, plus custom roles, with strict 4-eye sign-off validation.
             </p>
           </div>
 
