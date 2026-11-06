@@ -40,7 +40,7 @@ const STEPS = [
   { n: "01", title: "Join in 30 seconds", body: "Drop your email and we'll generate your unique referral link. No application, no minimums." },
   { n: "02", title: "Share with your network", body: "Send your link to peers, post it on LinkedIn, or include it in your newsletter." },
   { n: "03", title: "They get 20% off", body: "Anyone who buys an annual plan through your link gets 20% off their first year, automatically." },
-  { n: "04", title: "You earn 20%", body: "You earn 20% of every referred annual plan, paid out monthly once they're billed." },
+  { n: "04", title: "You earn 20%", body: "You earn 20% of every referred annual plan, paid monthly once their first annual payment has cleared the 30-day refund window." },
 ];
 
 const FOR_WHO = [
@@ -51,11 +51,11 @@ const FOR_WHO = [
 ];
 
 const FAQ: { q: string; a: string }[] = [
-  { q: "How much do I earn per referral?", a: "You earn 20% of the first year's annual subscription for every paid referral. Payouts are sent monthly after the customer is billed." },
+  { q: "How much do I earn per referral?", a: "You earn 20% of the first year's annual subscription for every paid referral. Commission is paid monthly, once the referred firm's first annual payment has cleared the 30-day refund window." },
   { q: "How much does my friend save?", a: "Anyone who signs up through your link gets a 20% discount on their first year of any annual plan. The discount is applied automatically at checkout." },
   { q: "Is there a cap on what I can earn?", a: "No cap. The more firms you refer, the more you earn. We do reserve the right to review unusually large or unusual patterns to make sure everything is genuine." },
   { q: "How long does my link stay attributed?", a: "When someone clicks your link, the attribution lasts for 90 days. If they sign up within that window, the referral counts to you." },
-  { q: "When and how do I get paid?", a: "Payouts go out monthly via bank transfer or PayPal, once the referred customer's first invoice is paid and clears the standard refund window." },
+  { q: "When and how do I get paid?", a: "Commission is paid monthly by bank transfer or PayPal, once the referred firm's first annual payment has cleared the 30-day refund window." },
   { q: "Does this work with monthly plans?", a: "Today the program rewards annual plan subscriptions only, that's how we can offer both sides 20%. Monthly customers can always upgrade later to qualify." },
   { q: "Can I refer my own company or use my own link?", a: "Self-referrals don't qualify. The program is for genuine third-party referrals, your peers, network, or audience." },
   { q: "What about taxes?", a: "Referral earnings are income. We'll send any tax documentation required in your country once you cross the relevant threshold." },

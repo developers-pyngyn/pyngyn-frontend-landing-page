@@ -10,6 +10,7 @@ import { FaviconScheme } from "@/components/FaviconScheme";
 import { ScrollbarActivity } from "@/components/ScrollbarActivity";
 import { ConsentScripts } from "@/components/ConsentScripts";
 import { CookieConsent } from "@/components/CookieConsent";
+import { ReferralTracker } from "@/components/ReferralTracker";
 
 import {
   JsonLd,
@@ -143,6 +144,7 @@ export default function RootLayout({
         <ConsentScripts />
         <FaviconScheme />
         <ScrollbarActivity />
+        <ReferralTracker />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-white"
