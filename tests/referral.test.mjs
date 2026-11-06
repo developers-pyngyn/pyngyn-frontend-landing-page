@@ -22,8 +22,19 @@ test("same email always gives the same code (shared with the Pyngyn app)", async
   }
 });
 
-test("links always point at pyngyn.ai", () => {
-  assert.equal(referralLink("anita-2e0428"), "https://pyngyn.ai/?ref=anita-2e0428");
+test("shared links open the Pyngyn app's sign-up page", () => {
+  delete process.env.NEXT_PUBLIC_APP_SIGNUP_URL;
+  assert.equal(referralLink("nikhilwevo-49fdae"), "https://app.pyngyn.ai/?signup=true&ref=nikhilwevo-49fdae");
+  assert.equal(referralLink("anita-2e0428"), "https://app.pyngyn.ai/?signup=true&ref=anita-2e0428");
+});
+
+test("NEXT_PUBLIC_APP_SIGNUP_URL points shared links at another app", () => {
+  process.env.NEXT_PUBLIC_APP_SIGNUP_URL = "https://staging.app.pyngyn.ai/?signup=true";
+  try {
+    assert.equal(referralLink("anita-2e0428"), "https://staging.app.pyngyn.ai/?signup=true&ref=anita-2e0428");
+  } finally {
+    delete process.env.NEXT_PUBLIC_APP_SIGNUP_URL;
+  }
 });
 
 test("ref values are validated and lowercased", () => {

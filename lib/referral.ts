@@ -19,8 +19,19 @@ export async function makeReferralCode(rawEmail: string): Promise<string> {
   return `${base}-${hex.slice(0, 6)}`;
 }
 
-/** Always the production site, so preview and staging builds never hand out wrong links. */
-export const referralLink = (code: string) => `https://pyngyn.ai/?ref=${code}`;
+const DEFAULT_APP_SIGNUP = "https://app.pyngyn.ai/?signup=true";
+
+/**
+ * The link people share: the Pyngyn app's sign-up page with `ref`. The app keeps the
+ * code itself (and records the first-open time), so no `ref_at` goes on this link.
+ * Defaults to production, so preview builds never hand out wrong links; a staging
+ * build can point it elsewhere with NEXT_PUBLIC_APP_SIGNUP_URL.
+ */
+export function referralLink(code: string): string {
+  const url = new URL(process.env.NEXT_PUBLIC_APP_SIGNUP_URL || DEFAULT_APP_SIGNUP);
+  url.searchParams.set("ref", code);
+  return url.toString(); // https://app.pyngyn.ai/?signup=true&ref=nikhilwevo-49fdae
+}
 
 /** Accepts current codes and the older 4-character ones. */
 export const REF_CODE_PATTERN = /^[a-z0-9]{1,10}-[a-z0-9]{4,6}$/;
