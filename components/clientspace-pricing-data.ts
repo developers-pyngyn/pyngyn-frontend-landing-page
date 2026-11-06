@@ -31,17 +31,20 @@ export const STARTING_PRICE_SHORT = `$${entry.monthly}/mo`;
 export const formatUsd = (n: number) => `$${n.toLocaleString("en-US")}`;
 
 // Headline list for the "Common features" card on the pricing section.
+// Only features that are live in the ClientSpace app (checked 6 Nov 2026). Pyngyn AI, the GST / TDS /
+// Income Tax return workspaces and the integrations are built but not switched on yet: keep them off
+// this list until they are.
 export const COMMON_FEATURES: string[] = [
   "Full platform access",
-  "Unlimited clients & client portals",
-  "Unlimited client portal guests",
-  "GST, TDS, Income Tax & ROC due-date calendar",
+  "Unlimited clients & client portal guests",
+  "GST, Income Tax, TDS & ROC due-date calendar",
   "PBC document requests & secure uploads",
-  "4-eye partner review gates",
-  "Workload Cockpit & effort tracking",
-  "AI plans, status reports & risk detection",
+  "4-eye partner review queue",
+  "Workload Cockpit & timesheets",
+  "Notices, DSC & statutory health registers",
+  "CRM, proposals, invoices & retainers",
+  "Dashboards, reports & custom builder",
   "100 GB encrypted document vault",
-  "Priority support",
 ];
 
 export interface IncludedGroup {
@@ -52,39 +55,41 @@ export interface IncludedGroup {
 // Everything below is included in every team size.
 export const INCLUDED_FEATURES: IncludedGroup[] = [
   {
-    title: "Tasks & compliance",
+    title: "Work & compliance",
     items: [
-      "Task lists, Kanban boards, timelines & milestones",
-      "Statutory due-date calendar for GST, TDS, Income Tax & ROC",
-      "Recurring compliance tasks & practice workflow templates",
-      "1-click client & task import from Excel / CSV",
+      "Task lists, Kanban boards, engagements & milestones",
+      "Statutory calendar for GST, Income Tax, TDS, ROC & PF/ESI",
+      "Recurring work, automations & a Template Center",
+      "Notices & scrutiny, DSC and statutory health registers",
+      "Excel / CSV import for clients & tasks",
     ],
   },
   {
     title: "Client portal",
     items: [
-      "Branded client spaces with magic-link login",
+      "Branded client portal with magic-link login",
       "Unlimited client guests at no extra cost",
-      "PBC document request checklists & secure uploads",
-      "Deliverable sign-offs & client portal messaging",
+      "PBC document request checklists, reminders & secure uploads",
+      "Client sign-offs, return approvals & project lobbies",
     ],
   },
   {
     title: "Team & review",
     items: [
-      "4-eye partner review gates (maker-checker)",
-      "Partner, Manager, Associate & Article Assistant roles",
-      "Workload Cockpit with capacity meters & rebalancing",
-      "Live effort tracking against fees",
+      "4-eye partner review queue (maker-checker)",
+      "Partner, Manager, Senior, Article & custom roles",
+      "Workload Cockpit with capacity views & 1-click rebalancing",
+      "Timesheets with live timer & team approval",
+      "Risks & issues log with automatic risk detection",
     ],
   },
   {
-    title: "AI, reporting & security",
+    title: "Growth, reporting & security",
     items: [
-      "AI project plans, status reports & risk detection",
-      "Practice-level dashboards & firm reporting",
-      "100 GB AES-256 encrypted document vault",
-      "Full activity history & priority support",
+      "CRM: pipeline, proposals, campaigns & referrals",
+      "Invoices, retainers and GST & Tally exports",
+      "Practice, client, financial & team dashboards with a custom builder",
+      "100 GB encrypted document vault, audit log & priority support",
     ],
   },
 ];
