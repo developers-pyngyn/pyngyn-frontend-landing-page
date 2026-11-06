@@ -482,20 +482,8 @@ export default function ClientspacePage() {
         </section>
 
         {/* ===== Pricing Section (Dynamic Geo-Detection & Regional Switcher) = */}
-        <section id="pricing" className="section border-t border-line bg-[#fcfcfd]">
-          <div className="wrap">
-            <div className="text-center mb-10">
-              <span className="eyebrow">Practice Pricing</span>
-              <h2 className="mt-3 font-display text-[clamp(28px,3.6vw,44px)] font-semibold tracking-[-0.025em]">
-                Simple, transparent practice pricing.
-              </h2>
-              <p className="lead mx-auto mt-4 max-w-[620px]">
-                Choose the right tier for your firm. Includes automated currency localization,
-                7-day free trial with no credit card required, and custom firm onboarding.
-              </p>
-            </div>
-            <ClientSpacePricing />
-          </div>
+        <section id="pricing" className="section border-t border-line bg-[#f5f8ff]">
+          <ClientSpacePricing />
         </section>
 
         {/* ===== Deep-dive SEO Pages Hub ================================= */}

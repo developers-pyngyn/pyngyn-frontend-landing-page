@@ -3,30 +3,62 @@
 import { useState } from "react";
 import Link from "next/link";
 import {
-  Check,
-  Sparkles,
   Shield,
   HelpCircle,
-  ArrowRight,
   ChevronDown,
   Building2,
   Users,
-  CheckCircle2,
+  Mail,
+  Phone,
 } from "lucide-react";
 import {
   PRICING_TIERS,
-  INCLUDED_FEATURES,
+  COMMON_FEATURES,
   PRICING_FAQS,
   ANNUAL_DISCOUNT_PCT,
   ENTERPRISE_FROM_USERS,
   formatUsd,
 } from "@/components/clientspace-pricing-data";
-import { SIGNUP_URL, DEMO_URL } from "@/components/config";
+import { SIGNUP_URL, DEMO_URL, SOCIAL_LINKEDIN } from "@/components/config";
 
-export function ClientSpacePricing() {
+// lucide-react no longer ships brand icons; same mark as the footer.
+function LinkedinIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M4.98 3.5a2 2 0 11-.02 4 2 2 0 01.02-4zM3 8.98h4V21H3zM10 8.98h3.8v1.64h.05c.53-1 1.83-2.06 3.76-2.06 4.02 0 4.76 2.65 4.76 6.1V21h-4v-5.36c0-1.28-.02-2.92-1.78-2.92-1.78 0-2.05 1.39-2.05 2.83V21h-4z" />
+    </svg>
+  );
+}
+
+const CONTACTS = [
+  { label: "Email sales@pyngyn.com", href: "mailto:sales@pyngyn.com", Icon: Mail, external: false },
+  { label: "PYNGYN on LinkedIn", href: SOCIAL_LINKEDIN, Icon: LinkedinIcon, external: true },
+  { label: "Call +91 91200 05593", href: "tel:+919120005593", Icon: Phone, external: false },
+];
+
+function CheckBox() {
+  return (
+    <svg className="mt-0.5 h-5 w-5 shrink-0 text-accent" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <rect x="1.5" y="1.5" width="17" height="17" rx="2" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M5.5 10.2l3 3 6-6.4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** 9.8 -> "9.80", 10 -> "10" */
+const perUser = (price: number, users: number) => {
+  const v = price / users;
+  return v % 1 ? v.toFixed(2) : String(v);
+};
+
+/** `headingLevel="h1"` when this section is the top of the page (/pricing). */
+export function ClientSpacePricing({ headingLevel = "h2" }: { headingLevel?: "h1" | "h2" }) {
+  const Heading = headingLevel;
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [selected, setSelected] = useState(String(PRICING_TIERS.find((t) => t.popular)?.users ?? PRICING_TIERS[0].users));
   const annual = billingCycle === "annual";
+  const tier = PRICING_TIERS.find((t) => String(t.users) === selected);
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -34,160 +66,164 @@ export function ClientSpacePricing() {
 
   return (
     <div className="w-full">
-      {/* Billing Switcher */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-14">
-        <div className="inline-flex items-center p-1 rounded-full bg-slate-100 border border-slate-200 shadow-inner">
-          <button
-            type="button"
-            onClick={() => setBillingCycle("monthly")}
-            aria-pressed={!annual}
-            className={`px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all ${
-              !annual
-                ? "bg-white text-slate-900 shadow-sm border border-slate-200/80 font-bold"
-                : "text-slate-600 hover:text-slate-900"
-            }`}
-          >
-            Monthly Billing
-          </button>
-          <button
-            type="button"
-            onClick={() => setBillingCycle("annual")}
-            aria-pressed={annual}
-            className={`relative px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all flex items-center gap-2 ${
-              annual
-                ? "bg-white text-slate-900 shadow-sm border border-slate-200/80 font-bold"
-                : "text-slate-600 hover:text-slate-900"
-            }`}
-          >
-            Annual Billing
-            <span className="inline-block px-2 py-0.5 text-[10px] font-bold text-emerald-700 bg-emerald-100 border border-emerald-300 rounded-full">
-              Save {ANNUAL_DISCOUNT_PCT}%
+      <div className="wrap max-w-[1200px]">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)_minmax(0,1fr)] lg:gap-5">
+          {/* Intro */}
+          <div className="flex flex-col py-2 lg:pr-6">
+            <span className="inline-flex w-fit items-center rounded-full border border-accent px-4 py-1 text-[13px] font-semibold text-accent">
+              Pricing
             </span>
-          </button>
-        </div>
-
-        <div className="text-xs text-slate-500 flex items-center gap-1.5 font-medium">
-          <CheckCircle2 className="w-3.5 h-3.5 text-[#14223d]" />
-          <span>Every feature on every plan &bull; 7-day free trial &bull; No credit card required</span>
-        </div>
-      </div>
-
-      {/* Team-size plans */}
-      <div className="wrap max-w-[1080px]">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 items-stretch">
-          {PRICING_TIERS.map((tier) => {
-            const price = annual ? tier.annual : tier.monthly;
-            const perUser = price / tier.users;
-            return (
-              <div
-                key={tier.users}
-                className={`relative flex flex-col rounded-3xl bg-white p-7 transition-all duration-300 ${
-                  tier.popular
-                    ? "border-2 border-[#14223d] shadow-2xl shadow-[#14223d]/15 ring-1 ring-[#14223d]"
-                    : "border-2 border-slate-200 hover:border-slate-300 shadow-lg hover:shadow-xl"
-                }`}
-              >
-                {tier.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                    <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase shadow-sm bg-[#14223d] text-white">
-                      <Sparkles className="w-3 h-3 text-amber-300" />
-                      Most popular
-                    </span>
-                  </div>
-                )}
-
-                <div className="flex items-center gap-2 text-slate-700">
-                  <Users className="w-4 h-4 text-[#14223d]" />
-                  <h3 className="text-base font-bold text-slate-950 font-display">Up to {tier.users} users</h3>
-                </div>
-
-                <div className="mt-5 flex items-baseline gap-1">
-                  <span className="text-4xl sm:text-5xl font-extrabold text-slate-950 tracking-tight font-display">
-                    {formatUsd(price)}
-                  </span>
-                  <span className="text-xs font-semibold text-slate-500 ml-1">/ month</span>
-                </div>
-                <div className="mt-2 text-xs text-slate-500">
-                  {annual ? `Billed yearly (${formatUsd(price * 12)}/yr)` : "Billed monthly"}
-                </div>
-                <div className="mt-1 flex items-center justify-between text-xs">
-                  <span className="text-slate-500">≈ ${perUser.toFixed(perUser % 1 ? 2 : 0)} per user</span>
-                  {annual && (
-                    <span className="text-emerald-700 font-bold">
-                      Save {formatUsd((tier.monthly - tier.annual) * 12)}/yr
-                    </span>
-                  )}
-                </div>
-
+            <Heading className="mt-5 font-display text-[clamp(32px,4vw,46px)] font-semibold leading-[1.08] tracking-[-0.025em] text-ink">
+              Simple plans for every firm
+            </Heading>
+            <p className="mt-4 text-[15.5px] leading-relaxed text-muted">
+              One plan with every feature, priced by the size of your team. Start your 7-day free trial now, no
+              credit card required.
+            </p>
+            <div className="mt-7 flex items-center gap-3">
+              {CONTACTS.map((c) => (
                 <a
-                  href={SIGNUP_URL}
-                  className={`mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold tracking-wide transition-all ${
-                    tier.popular
-                      ? "bg-[#14223d] hover:bg-[#0a1220] text-white shadow-md shadow-[#14223d]/25 hover:shadow-lg"
-                      : "bg-slate-900 hover:bg-slate-800 text-white"
-                  }`}
+                  key={c.label}
+                  href={c.href}
+                  aria-label={c.label}
+                  {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="grid h-14 w-14 place-items-center rounded-full border border-slate-300 text-slate-500 transition-colors hover:border-accent hover:text-accent"
                 >
-                  <span>Start 7-Day Free Trial</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <c.Icon className="h-5 w-5" />
                 </a>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Larger firms */}
-        <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-[#14223d] shrink-0">
-              <Building2 className="w-5 h-5" />
+              ))}
             </div>
-            <div>
-              <div className="text-sm font-bold text-slate-950">More than {ENTERPRISE_FROM_USERS} users?</div>
-              <div className="text-xs text-slate-600">
-                Custom plans for large partnerships and multi-branch firms, with migration help.
-              </div>
-            </div>
+            <a
+              href={SIGNUP_URL}
+              className="mt-8 hidden w-full items-center justify-center rounded-lg border border-accent/70 bg-white px-6 py-3.5 text-[15px] font-semibold text-accent transition-colors hover:bg-accent hover:text-white lg:mt-auto lg:inline-flex"
+            >
+              Start free trial →
+            </a>
           </div>
-          <Link
-            href={DEMO_URL}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-900 hover:border-slate-400"
-          >
-            Talk to us
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+
+          {/* Common features (after the price card on mobile) */}
+          <div className="order-3 rounded-2xl bg-white p-8 shadow-card lg:order-none">
+            <h3 className="font-display text-[22px] font-semibold text-ink">Common features</h3>
+            <p className="mt-2 text-[15px] leading-relaxed text-muted">
+              Included on every plan, starting from {formatUsd(PRICING_TIERS[0].monthly)} / month.
+            </p>
+            <ul className="mt-7 space-y-3.5">
+              {COMMON_FEATURES.map((f) => (
+                <li key={f} className="flex items-start gap-3 text-[15px] text-ink">
+                  <CheckBox />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Plan picker */}
+          <div className="order-2 flex flex-col rounded-2xl bg-white p-8 shadow-card lg:order-none">
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="font-display text-[22px] font-semibold text-ink">ClientSpace</h3>
+              <div className="inline-flex rounded-full bg-slate-100 p-0.5 text-[12px] font-semibold">
+                {(["monthly", "annual"] as const).map((cycle) => (
+                  <button
+                    key={cycle}
+                    type="button"
+                    onClick={() => setBillingCycle(cycle)}
+                    aria-pressed={billingCycle === cycle}
+                    className={`rounded-full px-3 py-1 transition-colors ${
+                      billingCycle === cycle ? "bg-white text-ink shadow-sm" : "text-muted hover:text-ink"
+                    }`}
+                  >
+                    {cycle === "monthly" ? "Monthly" : `Annual −${ANNUAL_DISCOUNT_PCT}%`}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <p className="mt-2 text-[15px] leading-relaxed text-muted">
+              Clients, statutory deadlines, documents and reviews for your whole team.
+            </p>
+
+            <div className="mt-6 flex min-h-[64px] items-baseline gap-2">
+              {tier ? (
+                <>
+                  <span className="text-[26px] font-semibold text-ink">$</span>
+                  <span className="font-display text-[56px] font-semibold leading-none tracking-[-0.02em] text-ink">
+                    {(annual ? tier.annual : tier.monthly).toLocaleString("en-US")}
+                  </span>
+                  <span className="text-[17px] text-ink">/ month</span>
+                </>
+              ) : (
+                <span className="font-display text-[44px] font-semibold leading-none text-ink">Custom</span>
+              )}
+            </div>
+            <div className="mt-1 min-h-[20px] text-[13px] text-muted">
+              {tier
+                ? annual
+                  ? `Billed yearly (${formatUsd(tier.annual * 12)}/yr), save ${formatUsd((tier.monthly - tier.annual) * 12)}`
+                  : "Billed monthly"
+                : "Tailored for large partnerships and multi-branch firms"}
+            </div>
+
+            <label className="sr-only" htmlFor="team-size">
+              Team size
+            </label>
+            <div className="relative mt-5">
+              <select
+                id="team-size"
+                value={selected}
+                onChange={(e) => setSelected(e.target.value)}
+                className="w-full appearance-none rounded-md border border-slate-300 bg-white px-4 py-3.5 pr-10 text-[15px] text-ink outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+              >
+                {PRICING_TIERS.map((t) => (
+                  <option key={t.users} value={String(t.users)}>
+                    Up to {t.users} users{t.popular ? " (most popular)" : ""}
+                  </option>
+                ))}
+                <option value="enterprise">More than {ENTERPRISE_FROM_USERS} users</option>
+              </select>
+              <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-600" />
+            </div>
+
+            {tier ? (
+              <a
+                href={SIGNUP_URL}
+                className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-accent px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-accent-dk"
+              >
+                Start 7-day free trial →
+              </a>
+            ) : (
+              <Link
+                href={DEMO_URL}
+                className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-accent px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-accent-dk"
+              >
+                Talk to us →
+              </Link>
+            )}
+
+            <ul className="mt-7 space-y-3.5">
+              {(tier
+                ? [
+                    "All common features",
+                    `Up to ${tier.users} team members`,
+                    `≈ $${perUser(annual ? tier.annual : tier.monthly, tier.users)} per user / month`,
+                    "Unlimited client portal guests",
+                    "Cancel anytime, no lock-in",
+                  ]
+                : [
+                    "All common features",
+                    "Custom number of team members",
+                    "Multi-branch practice set-up",
+                    "Guided data migration",
+                    "Dedicated account partner",
+                  ]
+              ).map((f) => (
+                <li key={f} className="flex items-start gap-3 text-[15px] text-ink">
+                  <CheckBox />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
-
-      {/* Everything included */}
-      <section className="mt-24 max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-10">
-          <span className="text-xs font-bold text-[#14223d] tracking-wider uppercase bg-[#f0f4fa] px-3 py-1 rounded-full border border-[#14223d]/20">
-            One plan, every feature
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-950 mt-3 font-display">
-            Everything is included in every plan
-          </h2>
-          <p className="text-slate-600 text-xs sm:text-sm mt-2 max-w-xl mx-auto">
-            No feature tiers and no add-ons. Pick the team size that fits your firm.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {INCLUDED_FEATURES.map((group) => (
-            <div key={group.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-4">{group.title}</h3>
-              <ul className="space-y-3">
-                {group.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-xs sm:text-[13px] text-slate-600">
-                    <Check className="w-4 h-4 text-[#14223d] shrink-0 mt-0.5" />
-                    <span className="leading-snug">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* CA Firm Value Pillars */}
       <section className="mt-20 max-w-6xl mx-auto px-4 sm:px-6">

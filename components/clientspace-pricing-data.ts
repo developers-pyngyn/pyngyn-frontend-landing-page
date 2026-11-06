@@ -30,6 +30,20 @@ export const STARTING_PRICE_SHORT = `$${entry.monthly}/mo`;
 
 export const formatUsd = (n: number) => `$${n.toLocaleString("en-US")}`;
 
+// Headline list for the "Common features" card on the pricing section.
+export const COMMON_FEATURES: string[] = [
+  "Full platform access",
+  "Unlimited clients & client portals",
+  "Unlimited client portal guests",
+  "GST, TDS, Income Tax & ROC due-date calendar",
+  "PBC document requests & secure uploads",
+  "4-eye partner review gates",
+  "Workload Cockpit & effort tracking",
+  "AI plans, status reports & risk detection",
+  "100 GB encrypted document vault",
+  "Priority support",
+];
+
 export interface IncludedGroup {
   title: string;
   items: string[];

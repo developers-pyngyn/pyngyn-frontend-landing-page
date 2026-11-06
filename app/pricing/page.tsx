@@ -82,23 +82,9 @@ export default function PricingPage() {
       />
       <Navbar />
       <main id="main">
-        {/* Page Hero Header */}
-        <section className="wrap pb-[30px] pt-[130px] sm:pt-[150px] text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#14223d]/20 bg-[#f0f4fa] px-3.5 py-1 text-[12px] font-semibold text-[#14223d] shadow-2xs mb-4">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#14223d] animate-pulse" />
-            <span>Pyngyn Practice Pricing &bull; Predictable Plans</span>
-          </div>
-          <h1 className="mx-auto mt-2 max-w-[840px] font-display text-[clamp(30px,4.5vw,52px)] font-bold leading-[1.12] tracking-[-0.025em] text-slate-950">
-            Predictable pricing designed for CA &amp; accounting practices.
-          </h1>
-          <p className="lead mx-auto mt-4 max-w-[680px] text-sm sm:text-base text-slate-600">
-            One plan with every feature, priced by team size. No per-client fees, no hidden setup costs, and unlimited client portal guests.
-          </p>
-        </section>
-
         {/* Pricing Matrix & Features */}
-        <section className="w-full pb-20">
-          <ClientSpacePricing />
+        <section className="w-full bg-[#f5f8ff] pb-20 pt-[120px] sm:pt-[140px]">
+          <ClientSpacePricing headingLevel="h1" />
         </section>
 
         {/* Security & Compliance Certifications */}
