@@ -10,6 +10,7 @@ export type Integration = {
 
 export const INTEGRATION_CATEGORIES = [
   "All",
+  "Tax & Compliance",
   "Communication",
   "Files",
   "Calendar",
@@ -64,6 +65,13 @@ const L = {
       <circle cx="19" cy="12" r="2.4" fill="#ea4b71" />
     </svg>
   ),
+  // text badge for statutory workflows (GST / TDS / ITR)
+  badge: (label: string, color: string) => (
+    <svg width="30" height="24" viewBox="0 0 30 24" aria-hidden="true">
+      <rect x="1" y="3" width="28" height="18" rx="4" fill={color} />
+      <text x="15" y="16" textAnchor="middle" fill="#fff" fontSize="9" fontWeight="700" fontFamily="Arial">{label}</text>
+    </svg>
+  ),
   // generic category icons (neutral)
   generic: (stroke: string, d: string) => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -76,6 +84,10 @@ const ACC = "#4f46e5";
 const GREY = "#6b7280";
 
 export const INTEGRATIONS: Integration[] = [
+  // Statutory workflows: tracked inside ClientSpace, not a direct portal API connection.
+  { name: "GST", categories: ["Tax & Compliance"], popular: true, description: "Track GSTR-1, GSTR-3B, GSTR-9 and GSTR-2B reconciliation for every client GSTIN on one statutory calendar, with automatic document reminders to clients and partner review before filing.", logo: L.badge("GST", "#0b7a4b") },
+  { name: "TDS", categories: ["Tax & Compliance"], popular: true, description: "Track monthly TDS deposits and quarterly 24Q, 26Q and 27Q returns per TAN, request deduction data from clients ahead of each due date, and escalate before late fees start.", logo: L.badge("TDS", "#b45309") },
+  { name: "Income Tax", categories: ["Tax & Compliance"], popular: true, description: "Run ITR filing, advance tax instalments, tax audit (Form 3CD) and notice responses per PAN, with document checklists for clients and 4-eye review before anything is submitted.", logo: L.badge("ITR", "#1d4ed8") },
   { name: "Slack", categories: ["Communication"], popular: true, description: "Turn requests and action items from Slack into trackable tasks, and push status back.", logo: L.slack },
   { name: "Gmail", categories: ["Communication"], popular: true, description: "Turn emails into tasks without leaving your inbox, and keep status in sync.", logo: L.gmail },
   { name: "QuickBooks", categories: ["Accounting & Billing"], popular: true, description: "Sync clients, invoices, and time entries so billable work flows into your books, and invoice status appears in the client's Clientspace automatically.", logo: L.generic("#2ca01c", "M12 2a10 10 0 100 20 10 10 0 000-20zm1 4v2.2a3.8 3.8 0 010 7.4V18h-2v-2.2a3.8 3.8 0 010-7.4V6z") },

@@ -27,6 +27,9 @@ import {
   AlertTriangle,
   RefreshCw,
   Lock,
+  Receipt,
+  Landmark,
+  FileText,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { DEMO_URL, SIGNUP_URL } from "../config";
@@ -661,6 +664,9 @@ export function IntegrationsSection() {
     category: string;
     icon: React.ComponentType<{ className?: string }>;
   }[] = [
+    { name: "GST", category: "GSTR-1, 3B, 9 & 2B Reconciliation", icon: Receipt },
+    { name: "TDS", category: "Monthly Deposits & Quarterly Returns", icon: Landmark },
+    { name: "Income Tax", category: "ITR, Advance Tax & Form 3CD", icon: FileText },
     { name: "Google Calendar", category: "Deadlines & Practice Meetings", icon: Calendar },
     { name: "Google Drive", category: "Client Folders & Document Storage", icon: Folder },
     { name: "Gmail", category: "Client Emails & Task Conversion", icon: Mail },
@@ -678,7 +684,7 @@ export function IntegrationsSection() {
             Connects with your firm&apos;s daily workflow.
           </h2>
           <p className="lead mx-auto mt-4 max-w-[620px]">
-            ClientSpace works alongside your firm&apos;s calendar, email, cloud storage, and client spreadsheets.
+            ClientSpace tracks your GST, TDS and Income Tax work and fits around your firm&apos;s calendar, email, cloud storage, and client spreadsheets.
           </p>
         </div>
 
