@@ -8,6 +8,7 @@
 // All URLs are produced as absolute URLs based on SITE_URL so they validate
 // in Google's Rich Results test, regardless of where the site is rendered.
 
+import { PRICING_TIERS } from "./clientspace-pricing-data";
 import {
   SOCIAL_INSTAGRAM,
   SOCIAL_LINKEDIN,
@@ -251,17 +252,16 @@ export function softwareApplicationSchema(opts?: {
     "@id": `${SITE_URL}/#software`,
     name: "PYNGYN",
     applicationCategory: "BusinessApplication",
-    applicationSubCategory: "Project Management Software",
+    applicationSubCategory: "Practice Management Software",
     operatingSystem: "Web, iOS, Android",
     url: SITE_URL + "/",
     description:
-      "PYNGYN ClientSpace is the unified client portal and practice management operating system for professional-services firms, with AI that drafts plans, keeps status current, and flags risk before it slips.",
+      "PYNGYN ClientSpace is the practice management and client portal software for Chartered Accountants and accounting firms: clients, statutory deadlines, documents, reviews and client communication in one workspace.",
     publisher: { "@id": `${SITE_URL}/#organization` },
     offers: {
       "@type": "Offer",
-      // Lowest entry price ($9/seat/month) — the convention for a SoftwareApplication Offer.
-      // Matches the USD pricing shown everywhere else on the site (pricing page, PricingTiers, etc).
-      price: opts?.priceFromUsd ?? 9,
+      // Lowest entry price (the 5-user plan), the convention for a SoftwareApplication Offer.
+      price: opts?.priceFromUsd ?? PRICING_TIERS[0].monthly,
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: absoluteUrl("/pricing"),
@@ -497,6 +497,7 @@ export function productSchema(opts: {
     name: string;
     priceMonthly?: number; // numeric amount in priceCurrency (default USD); pass undefined for "Custom"
     priceCurrency?: string;
+    users?: number; // team size the price covers (default 1)
     description: string;
     url: string;
     isCustom?: boolean;
@@ -544,12 +545,12 @@ export function productSchema(opts: {
               priceCurrency: o.priceCurrency ?? "USD",
               referenceQuantity: {
                 "@type": "QuantitativeValue",
-                value: 1,
+                value: o.users ?? 1,
                 unitText: "user",
               },
               billingIncrement: 1,
               unitText: "MON",
-              description: "per member per month, billed annually",
+              description: o.users ? `per month for up to ${o.users} users` : "per member per month",
             },
           }
     ),

@@ -184,7 +184,7 @@ export default function AuditTeamsPage() {
             </Link>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Starting at ₹499/mo ($29/mo) · Built for statutory &amp; internal audit teams · No credit card required
+            From $49/mo for 5 users · Built for statutory &amp; internal audit teams · No credit card required
           </p>
         </section>
 

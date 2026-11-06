@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
 import { DEMO_URL, SIGNUP_URL } from "@/components/config";
+import { PRICING_TIERS, formatUsd } from "@/components/clientspace-pricing-data";
 import {
   OG_IMAGE,
   JsonLd,
@@ -190,7 +191,7 @@ export default function VerticalPage() {
             </div>
             <h2 className="mt-3 max-w-[820px] font-display text-[clamp(26px,3.4vw,40px)] font-semibold leading-tight tracking-[-0.025em]">
               A branded portal for every client.
-              <span className="block text-accent">$19 per client / month, standalone.</span>
+              <span className="block text-accent">Unlimited client portals on every plan.</span>
             </h2>
             <p className="lead mt-4 max-w-[640px]">
               Give each client their own isolated, white-labeled portal. They see what you
@@ -244,21 +245,24 @@ export default function VerticalPage() {
               Transparent plans with unlimited client portals.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-[15px]">
-              <div className="rounded-2xl border border-line bg-white px-6 py-4 text-center shadow-card">
-                <div className="font-display text-[32px] font-semibold">$9</div>
-                <div className="mt-1 text-muted">per seat / month · Professional</div>
-              </div>
-              <div className="rounded-2xl border border-accent bg-accent/5 px-6 py-4 text-center shadow-soft">
-                <div className="font-display text-[32px] font-semibold">$19</div>
-                <div className="mt-1 text-muted">per seat / month · Business</div>
-              </div>
+              {PRICING_TIERS.slice(0, 3).map((t) => (
+                <div
+                  key={t.users}
+                  className={`rounded-2xl px-6 py-4 text-center ${
+                    t.popular ? "border border-accent bg-accent/5 shadow-soft" : "border border-line bg-white shadow-card"
+                  }`}
+                >
+                  <div className="font-display text-[32px] font-semibold">{formatUsd(t.monthly)}</div>
+                  <div className="mt-1 text-muted">per month · up to {t.users} users</div>
+                </div>
+              ))}
             </div>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <a href={SIGNUP_URL} className="btn btn-accent">Start free trial</a>
               <a href={DEMO_URL} className="btn btn-primary">Book a demo</a>
             </div>
             <p className="mt-4 text-[13px] text-muted">
-              Enterprise pricing available for larger firms ·{" "}
+              Plans up to 100 users, custom pricing above that ·{" "}
               <Link href="/pricing" className="underline underline-offset-2 hover:text-ink">Full pricing →</Link>
             </p>
           </div>

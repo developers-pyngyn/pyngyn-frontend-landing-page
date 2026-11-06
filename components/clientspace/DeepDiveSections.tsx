@@ -962,7 +962,7 @@ export function FinalCTASection() {
           </div>
 
           <p className="mt-4 text-[12.5px] text-slate-400">
-            Plans starting from ₹999/user/mo · 7-day free trial · 30-minute tailored practice walkthrough
+            Plans from $49/mo for 5 users · 7-day free trial · 30-minute tailored practice walkthrough
           </p>
         </div>
       </div>

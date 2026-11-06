@@ -13,26 +13,26 @@ import {
   faqPageSchema,
   OG_IMAGE,
 } from "@/components/schema";
-import { PRICING_FAQS } from "@/components/clientspace-pricing-data";
+import { PRICING_FAQS, PRICING_TIERS, ENTERPRISE_FROM_USERS } from "@/components/clientspace-pricing-data";
 
 export const metadata: Metadata = {
-  title: "Pyngyn Pricing | Professional & Business Practice Plans",
+  title: "Pyngyn Pricing | Plans from $49/month for 5 Users",
   description:
-    "Predictable pricing for Chartered Accountants, tax practitioners, and audit firms: Professional plan at ₹999/user/mo and Business plan at ₹1,599/user/mo with workload cockpit & practice reporting. 7-day free trial.",
+    "Simple team-size pricing for CA and accounting firms: every feature on every plan, from $49/month for up to 5 users to $999/month for 100. 7-day free trial, no credit card.",
   alternates: { canonical: "/pricing" },
   openGraph: {
-    title: "Pyngyn Pricing | Professional & Business Practice Plans",
+    title: "Pyngyn Pricing | Plans from $49/month for 5 Users",
     description:
-      "Predictable pricing for Chartered Accountants, tax practitioners, and audit firms: Professional plan at ₹999/user/mo and Business plan at ₹1,599/user/mo. 7-day free trial.",
+      "Simple team-size pricing for CA and accounting firms: every feature on every plan, from $49/month for up to 5 users to $999/month for 100. 7-day free trial, no credit card.",
     url: "/pricing",
     type: "website",
     images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pyngyn Pricing | Professional & Business Practice Plans",
+    title: "Pyngyn Pricing | Plans from $49/month for 5 Users",
     description:
-      "Predictable pricing for Chartered Accountants and audit firms: Professional at ₹999/user/mo and Business at ₹1,599/user/mo.",
+      "Every feature on every plan, from $49/month for up to 5 users. 7-day free trial, no credit card.",
     images: [OG_IMAGE.url],
   },
 };
@@ -46,7 +46,7 @@ export default function PricingPage() {
             url: "/pricing",
             name: "Pyngyn Practice Pricing",
             description:
-              "Pricing purpose-built for Chartered Accountants and accounting firms: Professional plan at ₹999/mo and Business plan at ₹1,599/mo.",
+              "Team-size pricing for Chartered Accountants and accounting firms, from $49/month for up to 5 users.",
             breadcrumbId: "/pricing#breadcrumb",
           }),
           breadcrumbSchema(
@@ -61,102 +61,19 @@ export default function PricingPage() {
             url: "/pricing",
             name: "Pyngyn ClientSpace",
             description:
-              "The practice operating system for Chartered Accountants, tax practitioners, and audit firms: Professional plan at ₹999/user/month and Business plan at ₹1,599/user/month.",
+              "The practice operating system for Chartered Accountants, tax practitioners, and audit firms. One plan with every feature, priced by team size.",
             offers: [
-              {
-                name: "Pyngyn Professional (India)",
-                priceMonthly: 999,
-                priceCurrency: "INR",
-                description:
-                  "Tasks, projects, client spaces, collaboration, knowledge, workflows, and client communication.",
+              ...PRICING_TIERS.map((t) => ({
+                name: `Pyngyn ClientSpace, up to ${t.users} users`,
+                priceMonthly: t.monthly,
+                users: t.users,
+                description: `Every ClientSpace feature for a team of up to ${t.users} users, billed monthly.`,
                 url: "/pricing",
-              },
+              })),
               {
-                name: "Pyngyn Business (India)",
-                priceMonthly: 1599,
-                priceCurrency: "INR",
-                description:
-                  "Everything in Professional plus workload cockpit, review workflows, practice-level reporting, and advanced permissions.",
-                url: "/pricing",
-              },
-              {
-                name: "Pyngyn Professional (Global USD)",
-                priceMonthly: 29,
-                priceCurrency: "USD",
-                description:
-                  "Tasks, projects, client spaces, collaboration, knowledge, workflows, and client communication.",
-                url: "/pricing",
-              },
-              {
-                name: "Pyngyn Business (Global USD)",
-                priceMonthly: 49,
-                priceCurrency: "USD",
-                description:
-                  "Everything in Professional plus workload cockpit, review workflows, practice-level reporting, and advanced permissions.",
-                url: "/pricing",
-              },
-              {
-                name: "Pyngyn Professional (United Kingdom)",
-                priceMonthly: 24,
-                priceCurrency: "GBP",
-                description:
-                  "Tasks, projects, client spaces, collaboration, knowledge, workflows, and client communication.",
-                url: "/pricing",
-              },
-              {
-                name: "Pyngyn Business (United Kingdom)",
-                priceMonthly: 39,
-                priceCurrency: "GBP",
-                description:
-                  "Everything in Professional plus workload cockpit, review workflows, practice-level reporting, and advanced permissions.",
-                url: "/pricing",
-              },
-              {
-                name: "Pyngyn Professional (Canada)",
-                priceMonthly: 39,
-                priceCurrency: "CAD",
-                description:
-                  "Tasks, projects, client spaces, collaboration, knowledge, workflows, and client communication.",
-                url: "/pricing",
-              },
-              {
-                name: "Pyngyn Business (Canada)",
-                priceMonthly: 65,
-                priceCurrency: "CAD",
-                description:
-                  "Everything in Professional plus workload cockpit, review workflows, practice-level reporting, and advanced permissions.",
-                url: "/pricing",
-              },
-              {
-                name: "Pyngyn Professional (Australia)",
-                priceMonthly: 44,
-                priceCurrency: "AUD",
-                description:
-                  "Tasks, projects, client spaces, collaboration, knowledge, workflows, and client communication.",
-                url: "/pricing",
-              },
-              {
-                name: "Pyngyn Business (Australia)",
-                priceMonthly: 75,
-                priceCurrency: "AUD",
-                description:
-                  "Everything in Professional plus workload cockpit, review workflows, practice-level reporting, and advanced permissions.",
-                url: "/pricing",
-              },
-              {
-                name: "Pyngyn Professional (UAE)",
-                priceMonthly: 109,
-                priceCurrency: "AED",
-                description:
-                  "Tasks, projects, client spaces, collaboration, knowledge, workflows, and client communication.",
-                url: "/pricing",
-              },
-              {
-                name: "Pyngyn Business (UAE)",
-                priceMonthly: 179,
-                priceCurrency: "AED",
-                description:
-                  "Everything in Professional plus workload cockpit, review workflows, practice-level reporting, and advanced permissions.",
+                name: `Pyngyn ClientSpace, more than ${ENTERPRISE_FROM_USERS} users`,
+                isCustom: true,
+                description: "Custom plan for large partnerships and multi-branch firms.",
                 url: "/pricing",
               },
             ],
@@ -175,7 +92,7 @@ export default function PricingPage() {
             Predictable pricing designed for CA &amp; accounting practices.
           </h1>
           <p className="lead mx-auto mt-4 max-w-[680px] text-sm sm:text-base text-slate-600">
-            No per-client penalty fees. No hidden setup costs. Start on Professional for core client workspaces, or unlock the full Business Cockpit with review gates and practice-level reporting.
+            One plan with every feature, priced by team size. No per-client fees, no hidden setup costs, and unlimited client portal guests.
           </p>
         </section>
 

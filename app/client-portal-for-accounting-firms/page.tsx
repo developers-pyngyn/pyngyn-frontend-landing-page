@@ -100,7 +100,7 @@ const FAQS = [
   },
   {
     q: "What does Pyngyn ClientSpace cost for accounting practices?",
-    a: "Pyngyn pricing starts at ₹999 per user/month for the Professional practice plan, making it highly cost-effective for boutique CA firms and scaling accounting partnerships alike.",
+    a: "Pyngyn pricing starts at $49/month for up to 5 users, with every feature included on every plan, so boutique CA firms and growing partnerships get the same product.",
   },
 ];
 
@@ -155,7 +155,7 @@ export default function ClientPortalForAccountingFirmsPage() {
             </Link>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Starting at ₹999/user/mo · Built for CA &amp; accounting practices · 1-click magic links
+            From $49/mo for 5 users · Built for CA &amp; accounting practices · 1-click magic links
           </p>
         </section>
 

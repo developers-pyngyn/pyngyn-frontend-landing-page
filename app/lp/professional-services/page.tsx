@@ -157,7 +157,7 @@ const FAQS = [
   { q: "Will it work with our existing tools?", a: "Yes. PYNGYN connects to Slack, Gmail, Google Workspace, QuickBooks, Xero, DocuSign, Stripe, Salesforce, HubSpot, n8n, Zapier, and Make, with more on the way." },
   { q: "How do you handle our data?", a: "256-bit AES encryption in transit and at rest, role-based access control, ISO 9001:2015 certified quality processes, and DPDP alignment. Your data is never used to train AI models without explicit consent." },
   { q: "Can we migrate from another tool?", a: "Yes. We support imports from common project tools and spreadsheets, and our team helps with the first migration so you do not lose history." },
-  { q: "How does pricing work?", a: "Professional is $9 per seat/month, and Business is $19 per seat/month. Enterprise pricing is custom. 7-day trial, no credit card required." },
+  { q: "How does pricing work?", a: "One plan with every feature, priced by team size: from $49/month for up to 5 users to $999/month for 100. Larger firms get custom pricing. 7-day trial, no credit card required." },
   { q: "Will the team actually use it?", a: "Yes. Because PYNGYN replaces manual coordination work instead of adding to it, adoption is the rule rather than the exception in pilot teams." },
 ];
 
@@ -278,7 +278,7 @@ function WorkspaceClientspaceExplainer() {
         <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-8">
           <div className="flex items-center gap-3">
             <span className="rounded-xl bg-accent/20 px-3 py-1.5 font-mono text-[12px] font-bold uppercase tracking-[0.1em] text-accent">Firm Operations</span>
-            <span className="text-[13px] text-white/50">From $9 / seat / month</span>
+            <span className="text-[13px] text-white/50">From $49 / month for 5 users</span>
           </div>
           <h3 className="mt-4 font-display text-[22px] font-semibold text-white">Your firm&apos;s operating system.</h3>
           <p className="mt-2 text-[14.5px] leading-relaxed text-white/65">

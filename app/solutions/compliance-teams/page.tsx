@@ -183,7 +183,7 @@ export default function ComplianceTeamsPage() {
             </Link>
           </div>
           <p className="mt-4 text-[13px] text-muted">
-            Starting at ₹499/mo ($29/mo) · Built for CS teams, CAs &amp; corporate compliance managers · No credit card required
+            From $49/mo for 5 users · Built for CS teams, CAs &amp; corporate compliance managers · No credit card required
           </p>
         </section>
 
