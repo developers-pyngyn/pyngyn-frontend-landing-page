@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTA, Footer } from "@/components/Footer";
-import { ReferEarnContent } from "@/components/refer/ReferEarnContent";
-import { getReferralProgram, referralCopy } from "@/lib/referralProgram";
+import { ReferEarnLive } from "@/components/refer/ReferEarnLive";
+import { DEFAULT_PROGRAM, referralCopy } from "@/lib/referralProgram";
 import {
   JsonLd,
   breadcrumbSchema,
@@ -11,12 +11,11 @@ import {
   OG_IMAGE,
 } from "@/components/schema";
 
-// The rewards are set in Pyngyn's internal dashboard and read from the referral
-// endpoint at request time, so a change shows here without a redeploy. Cloudflare
-// (next-on-pages) has no ISR, so the page renders on the edge on each request; the
-// endpoint caches its answer for 5 minutes and the page falls back to today's values.
-export const runtime = "edge";
-export const dynamic = "force-dynamic";
+// The rewards are set in Pyngyn's internal dashboard. This page is a static file built
+// with today's values (it must never fail, and next-on-pages has no ISR); ReferEarnLive
+// reads the current values from the referral endpoint in the browser and swaps them in.
+// Do not make this page server-rendered (runtime "edge" / force-dynamic): on 7 Nov 2026
+// every server-rendered route on the live site answered 500.
 
 export const metadata: Metadata = {
   title: "Refer & Earn with Pyngyn | Practice Referral Rewards",
@@ -40,9 +39,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ReferEarnPage() {
-  const program = await getReferralProgram();
-  const copy = referralCopy(program);
+export default function ReferEarnPage() {
+  // Search engines read the FAQ data built with the defaults; visitors see the live values.
+  const copy = referralCopy(DEFAULT_PROGRAM);
   return (
     <>
       <JsonLd
@@ -65,7 +64,7 @@ export default async function ReferEarnPage() {
       />
       <Navbar />
       <main id="main">
-        <ReferEarnContent program={program} />
+        <ReferEarnLive />
         <FinalCTA />
       </main>
       <Footer />
