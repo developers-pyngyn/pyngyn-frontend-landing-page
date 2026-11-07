@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ReferralJoin } from "@/components/ReferralJoin";
 import { DEMO_URL, SUPPORT_URL, PRICING_URL, TERMS_URL, EMAIL_DOMAIN } from "@/components/config";
-import { referralCopy, type ReferralProgram } from "@/lib/referralProgram";
+import { DEFAULT_PROGRAM, referralCopy, type ReferralProgram } from "@/lib/referralProgram";
+import { Skeleton } from "./Skeleton";
 
 const REFERRAL_EMAIL = `referrals@${EMAIL_DOMAIN}`;
 
@@ -13,15 +14,31 @@ const FOR_WHO = [
 ];
 
 /**
+ * Reward text, or a skeleton about its size while the live values load. `text` is
+ * always given (from the defaults while loading) only to size the skeleton; it is
+ * never shown then. `cpl` is roughly how many characters fit on one line there.
+ */
+function Live({ loading, text, cpl = 60, inline = false }: { loading: boolean; text: string; cpl?: number; inline?: boolean }) {
+  if (!loading) return <>{text}</>;
+  if (inline) return <Skeleton inline width={`${Math.max(3, Math.round(text.length * 0.55))}em`} />;
+  return <Skeleton lines={Math.max(1, Math.ceil(text.length / cpl))} />;
+}
+
+const hasNumber = (s: string) => /\d/.test(s);
+
+/**
  * Everything inside the Refer and earn page's <main>, before the closing CTA.
  * Every reward it mentions comes from `program` (see lib/referralProgram.ts).
+ * `program` is null until the live values arrive: every reward then shows a skeleton.
  */
-export function ReferEarnContent({ program }: { program: ReferralProgram }) {
-  const copy = referralCopy(program);
+export function ReferEarnContent({ program }: { program: ReferralProgram | null }) {
+  const loading = !program;
+  // While loading, the default copy only gives the shape (row names, questions, lengths).
+  const copy = referralCopy(program ?? DEFAULT_PROGRAM);
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden" aria-busy={loading}>
         <div className="hero-grid pointer-events-none absolute inset-0 opacity-50" aria-hidden="true" />
         <div className="pointer-events-none absolute -right-24 -top-24 h-[420px] w-[420px] rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
         <div className="relative mx-auto w-full max-w-content px-5 pb-12 pt-[140px] sm:px-7 sm:pb-16 sm:pt-[160px]">
@@ -35,17 +52,20 @@ export function ReferEarnContent({ program }: { program: ReferralProgram }) {
                 Share PYNGYN.{" "}
                 <span className="bg-gradient-to-r from-accent to-accent-dk bg-clip-text text-transparent">Everyone wins.</span>
               </h1>
-              <p className="mt-5 max-w-[520px] text-[18px] leading-relaxed text-muted">{copy.hero}</p>
+              <p className="mt-5 max-w-[520px] text-[18px] leading-relaxed text-muted">
+                {loading && <span className="sr-only">Loading the current rewards.</span>}
+                <Live loading={loading} text={copy.hero} cpl={50} />
+              </p>
 
               {/* Twin reward callouts */}
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                <RewardCard label="You earn" value={copy.youEarn.value} body={copy.youEarn.body} />
-                <RewardCard label="They save" value={copy.theySave.value} body={copy.theySave.body} />
+                <RewardCard loading={loading} label="You earn" value={copy.youEarn.value} body={copy.youEarn.body} />
+                <RewardCard loading={loading} label="They save" value={copy.theySave.value} body={copy.theySave.body} />
               </div>
 
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13.5px] font-medium text-muted">
                 {copy.badges.map((b) => (
-                  <span key={b} className="flex items-center gap-1.5"><Check /> {b}</span>
+                  <span key={b} className="flex items-center gap-1.5"><Check /> <Live loading={loading} inline text={b} /></span>
                 ))}
               </div>
             </div>
@@ -71,8 +91,12 @@ export function ReferEarnContent({ program }: { program: ReferralProgram }) {
           {copy.steps.map((s) => (
             <div key={s.n} className="rounded-2xl border border-line bg-white p-7 shadow-card">
               <div className="font-mono text-[14px] font-semibold text-accent">{s.n}</div>
-              <h3 className="mt-3 font-display text-[18px] font-semibold tracking-[-0.015em]">{s.title}</h3>
-              <p className="mt-2 text-[14.5px] leading-relaxed text-muted">{s.body}</p>
+              <h3 className="mt-3 font-display text-[18px] font-semibold tracking-[-0.015em]">
+                <Live loading={loading && s.live} inline text={s.title} />
+              </h3>
+              <p className="mt-2 text-[14.5px] leading-relaxed text-muted">
+                <Live loading={loading && s.live} text={s.body} cpl={30} />
+              </p>
             </div>
           ))}
         </div>
@@ -82,9 +106,9 @@ export function ReferEarnContent({ program }: { program: ReferralProgram }) {
       <section className="mx-auto w-full max-w-content px-5 pb-12 sm:px-7 sm:pb-16">
         <div className="overflow-hidden rounded-[28px] border border-line bg-white shadow-card">
           <div className="grid lg:grid-cols-2">
-            <RewardBreakdown side="referrer" title="What you earn" value={copy.referrer.value} rows={copy.referrer.rows} />
+            <RewardBreakdown loading={loading} side="referrer" title="What you earn" value={copy.referrer.value} rows={copy.referrer.rows} />
             <div className="border-t border-line lg:border-l lg:border-t-0">
-              <RewardBreakdown side="friend" title="What your friend gets" value={copy.friend.value} rows={copy.friend.rows} />
+              <RewardBreakdown loading={loading} side="friend" title="What your friend gets" value={copy.friend.value} rows={copy.friend.rows} />
             </div>
           </div>
         </div>
@@ -130,7 +154,9 @@ export function ReferEarnContent({ program }: { program: ReferralProgram }) {
                   <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </summary>
-              <p className="mt-3 text-[15px] leading-relaxed text-muted">{f.a}</p>
+              <p className="mt-3 text-[15px] leading-relaxed text-muted">
+                <Live loading={loading && hasNumber(f.a)} text={f.a} cpl={90} />
+              </p>
             </details>
           ))}
         </div>
@@ -170,7 +196,7 @@ export function ReferEarnContent({ program }: { program: ReferralProgram }) {
         <div className="mx-auto max-w-[820px] text-[12.5px] leading-relaxed text-muted">
           <p className="font-semibold text-ink">Program terms (summary):</p>
           <p className="mt-2">
-            {copy.terms}
+            {loading ? <Skeleton lines={Math.ceil(copy.terms.length / 130)} /> : copy.terms}
             Self-referrals, payments via prepaid/promotional credit, refunded subscriptions, and trial-only signups do
             not qualify. PYNGYN reserves the right to update, modify, or end the program
             at any time, and to disqualify activity it determines to be fraudulent, in
@@ -197,22 +223,28 @@ function Icon({ name }: { name: string }) {
   );
 }
 
-function RewardCard({ label, value, body }: { label: string; value: string; body: string }) {
+function RewardCard({ loading, label, value, body }: { loading: boolean; label: string; value: string; body: string }) {
   return (
     <div className="rounded-2xl border border-line bg-white p-5 shadow-card">
       <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">{label}</div>
-      <div className="mt-1 font-display text-[36px] font-semibold leading-none tracking-[-0.03em] text-accent">{value}</div>
-      <p className="mt-2 text-[14px] leading-snug text-muted">{body}</p>
+      <div className="mt-1 font-display text-[36px] font-semibold leading-none tracking-[-0.03em] text-accent">
+        <Live loading={loading} inline text={value} />
+      </div>
+      <p className="mt-2 text-[14px] leading-snug text-muted">
+        <Live loading={loading} text={body} cpl={28} />
+      </p>
     </div>
   );
 }
 
 function RewardBreakdown({
+  loading,
   side,
   title,
   value,
   rows,
 }: {
+  loading: boolean;
   side: "referrer" | "friend";
   title: string;
   value: string;
@@ -225,13 +257,17 @@ function RewardBreakdown({
       </div>
       <div className="mt-2 flex items-baseline gap-3">
         <h3 className="font-display text-[22px] font-semibold tracking-[-0.015em]">{title}</h3>
-        <span className="font-display text-[28px] font-semibold tracking-[-0.02em] text-accent">{value}</span>
+        <span className="font-display text-[28px] font-semibold tracking-[-0.02em] text-accent">
+          <Live loading={loading} inline text={value} />
+        </span>
       </div>
       <dl className="mt-6 divide-y divide-line">
         {rows.map(([k, v]) => (
           <div key={k} className="grid grid-cols-[140px_1fr] gap-4 py-3 text-[14.5px]">
             <dt className="text-muted">{k}</dt>
-            <dd className="font-medium text-ink">{v}</dd>
+            <dd className="font-medium text-ink">
+              <Live loading={loading} inline text={v} />
+            </dd>
           </div>
         ))}
       </dl>

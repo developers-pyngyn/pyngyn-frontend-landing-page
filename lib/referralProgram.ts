@@ -22,17 +22,24 @@ export interface ReferralProgram {
   referrer_text: string; // "20% of what they pay in their first year" / "$50 for every firm that pays"
 }
 
-// Today's values: used if the endpoint can't be reached, so the page never shows blanks.
+// The current program. Change the numbers here (one line) and every default follows: the
+// page while the endpoint can't be reached, the FAQ data for search engines and the meta
+// description. The live values always come from the endpoint.
+const CURRENT = { refereePercent: 10, referrerPercent: 10, minWithdrawalUsd: 100, attributionDays: 90 };
+
+const percent = (value: number): ReferralReward => ({ type: "percent", value, currency: "USD", label: `${value}%` });
+
+/** Built-in defaults: used if the endpoint can't be reached, so the page never shows blanks. */
 export const DEFAULT_PROGRAM: ReferralProgram = {
-  referee: { type: "percent", value: 20, currency: "USD", label: "20%" },
-  referrer: { type: "percent", value: 20, currency: "USD", label: "20%" },
-  min_withdrawal_usd: 100,
+  referee: percent(CURRENT.refereePercent),
+  referrer: percent(CURRENT.referrerPercent),
+  min_withdrawal_usd: CURRENT.minWithdrawalUsd,
   hold_days: 7,
-  attribution_days: 90,
-  discount_days: 90,
+  attribution_days: CURRENT.attributionDays,
+  discount_days: CURRENT.attributionDays,
   annual_only: true,
-  referee_text: "20% off their first annual plan",
-  referrer_text: "20% of what they pay in their first year",
+  referee_text: `${CURRENT.refereePercent}% off their first annual plan`,
+  referrer_text: `${CURRENT.referrerPercent}% of what they pay in their first year`,
 };
 
 /** Keeps only fields with the right type, so a malformed answer can't blank a sentence. */
@@ -65,26 +72,134 @@ export function mergeProgram(input: unknown): ReferralProgram {
   };
 }
 
-/** Never throws: every failure (no variable, network, timeout, non-200, bad JSON) gives the defaults. */
-export async function getReferralProgram(): Promise<ReferralProgram> {
+/** How long to wait for the endpoint before showing the defaults. */
+export const PROGRAM_TIMEOUT_MS = 5000;
+
+async function requestProgram(url: string, signal: AbortSignal | undefined): Promise<ReferralProgram | null> {
   try {
-    const url = typeof process !== "undefined" ? process.env.NEXT_PUBLIC_REFERRAL_ENDPOINT : undefined;
-    if (!url) return DEFAULT_PROGRAM;
-    // The timeout keeps a slow endpoint from holding things up; the defaults show instead.
-    const signal = typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function" ? AbortSignal.timeout(3000) : undefined;
+    // Always fresh: the endpoint answers with Cache-Control: no-store, and so does this request.
     const res = await fetch(url, {
       method: "GET",
       headers: { Accept: "application/json" },
+      cache: "no-store",
       ...(signal ? { signal } : {}),
-      next: { revalidate: 300 }, // matches the endpoint's 5-minute cache where Next.js caches fetches
-    } as RequestInit);
-    if (!res.ok) return DEFAULT_PROGRAM;
+    });
+    if (!res.ok) return null;
     const body = (await res.json()) as { ok?: boolean; program?: unknown };
-    if (!body || typeof body !== "object" || !body.program || typeof body.program !== "object") return DEFAULT_PROGRAM;
+    if (!body || typeof body !== "object" || !body.program || typeof body.program !== "object") return null;
     return mergeProgram(body.program);
   } catch {
-    return DEFAULT_PROGRAM;
+    return null;
   }
+}
+
+/**
+ * The values saved in the internal dashboard right now, or null if they can't be read
+ * (no variable, network error, non-200, bad JSON, or no answer within `timeoutMs`).
+ * Never throws.
+ */
+export async function fetchReferralProgram(timeoutMs: number = PROGRAM_TIMEOUT_MS): Promise<ReferralProgram | null> {
+  const url = typeof process !== "undefined" ? process.env.NEXT_PUBLIC_REFERRAL_ENDPOINT : undefined;
+  if (!url) return null;
+  const controller = typeof AbortController !== "undefined" ? new AbortController() : undefined;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  // A timer, not only an abort signal: it also covers a body that never finishes.
+  const timeout = new Promise<null>((resolve) => {
+    timer = setTimeout(() => {
+      controller?.abort();
+      resolve(null);
+    }, timeoutMs);
+  });
+  try {
+    return await Promise.race([requestProgram(url, controller?.signal), timeout]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/** Like fetchReferralProgram, but every failure gives the defaults. Never throws. */
+export async function getReferralProgram(timeoutMs?: number): Promise<ReferralProgram> {
+  return (await fetchReferralProgram(timeoutMs)) ?? DEFAULT_PROGRAM;
+}
+
+/** How often the open page reads the values again while its tab is visible. */
+export const PROGRAM_POLL_MS = 30_000;
+
+interface VisibilityTarget {
+  visibilityState: string;
+  addEventListener(type: "visibilitychange", fn: () => void): void;
+  removeEventListener(type: "visibilitychange", fn: () => void): void;
+}
+
+export interface WatchOptions {
+  doc?: VisibilityTarget;
+  pollMs?: number;
+  load?: () => Promise<ReferralProgram | null>;
+}
+
+const sameProgram = (a: ReferralProgram, b: ReferralProgram) => JSON.stringify(a) === JSON.stringify(b);
+
+/**
+ * Keeps the Refer and earn page on the live values: reads them now, again whenever the tab
+ * becomes visible, and every `pollMs` while it is visible (no polling while hidden).
+ * `onProgram` is called only when the values change. If the first read fails it gets the
+ * defaults; a later failure keeps what is shown, and a later success replaces it.
+ * Returns a function that stops watching.
+ */
+export function watchReferralProgram(onProgram: (p: ReferralProgram) => void, options: WatchOptions = {}): () => void {
+  const doc = options.doc ?? (typeof document !== "undefined" ? document : undefined);
+  const pollMs = options.pollMs ?? PROGRAM_POLL_MS;
+  const load = options.load ?? (() => fetchReferralProgram());
+  let current: ReferralProgram | null = null;
+  let stopped = false;
+  let inFlight = false;
+  let timer: ReturnType<typeof setInterval> | null = null;
+
+  async function refresh() {
+    if (inFlight || stopped) return;
+    inFlight = true;
+    let next: ReferralProgram | null = null;
+    try {
+      next = await load();
+    } catch {
+      next = null;
+    }
+    inFlight = false;
+    if (stopped) return;
+    if (!next) {
+      if (current) return; // keep what is on screen
+      next = DEFAULT_PROGRAM;
+    }
+    if (current && sameProgram(current, next)) return;
+    current = next;
+    onProgram(next);
+  }
+
+  const startPolling = () => {
+    if (timer === null) timer = setInterval(refresh, pollMs);
+  };
+  const stopPolling = () => {
+    if (timer !== null) clearInterval(timer);
+    timer = null;
+  };
+  const onVisibility = () => {
+    if (doc?.visibilityState === "hidden") {
+      stopPolling();
+    } else {
+      void refresh();
+      startPolling();
+    }
+  };
+
+  void refresh();
+  if (!doc || doc.visibilityState !== "hidden") startPolling();
+  doc?.addEventListener("visibilitychange", onVisibility);
+
+  return () => {
+    stopped = true;
+    stopPolling();
+    doc?.removeEventListener("visibilitychange", onVisibility);
+  };
 }
 
 // ---------------------------------------------------------------- wording used on the site
@@ -111,19 +226,21 @@ export function referralCopy(p: ReferralProgram) {
   const min = `$${p.min_withdrawal_usd.toLocaleString("en-US")}`;
   return {
     hero: `Refer a firm to PYNGYN. They get ${p.referee_text}, and you earn ${p.referrer_text}. No cap, no catch.`,
+    metaDescription: `Recommend PYNGYN to fellow Chartered Accountants and firm leaders. The firm you refer gets ${p.referee_text}, and you earn ${p.referrer_text}.`,
     schemaDescription: `Refer PYNGYN to your network. The firm you refer gets ${p.referee_text}, and you earn ${p.referrer_text}.`,
-    youEarn: { value: p.referrer.label, body: `${sentence(p.referrer_text)}, paid monthly.` },
+    youEarn: { value: p.referrer.label, body: `${sentence(p.referrer_text)}.` },
     theySave: { value: p.referee.label, body: `${sentence(p.referee_text)}.` },
-    badges: ["No cap on earnings", `${days}-day attribution`, "Monthly payouts"],
+    badges: ["No cap on earnings", `${days}-day attribution`, "Bank transfer payouts"],
     steps: [
-      { n: "01", title: "Join in 30 seconds", body: "Drop your email and we'll generate your unique referral link. No application needed." },
-      { n: "02", title: "Share with your network", body: "Send your link to peers, post it on LinkedIn, or include it in your newsletter." },
+      { n: "01", live: false, title: "Join in 30 seconds", body: "Drop your email and we'll generate your unique referral link. No application needed." },
+      { n: "02", live: false, title: "Share with your network", body: "Send your link to peers, post it on LinkedIn, or include it in your newsletter." },
       {
         n: "03",
+        live: true,
         title: `They get ${p.referee.label} off`,
         body: `Anyone who ${p.annual_only ? "buys an annual plan" : "subscribes"} through your link gets ${p.referee_text}, applied automatically.`,
       },
-      { n: "04", title: `You earn ${p.referrer.label}`, body: `You earn ${p.referrer_text}. ${WITHDRAWALS}` },
+      { n: "04", live: true, title: `You earn ${p.referrer.label}`, body: `You earn ${p.referrer_text}. ${WITHDRAWALS}` },
     ],
     card: `They save ${p.referee.label}, you earn ${p.referrer.label}. No cost to join.`,
     referrer: {

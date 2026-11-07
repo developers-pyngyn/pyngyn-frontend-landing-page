@@ -11,37 +11,38 @@ import {
   OG_IMAGE,
 } from "@/components/schema";
 
-// The rewards are set in Pyngyn's internal dashboard. This page is a static file built
-// with today's values (it must never fail, and next-on-pages has no ISR); ReferEarnLive
-// reads the current values from the referral endpoint in the browser and swaps them in.
-// Do not make this page server-rendered (runtime "edge" / force-dynamic): on 7 Nov 2026
-// every server-rendered route on the live site answered 500.
+// The rewards are set in Pyngyn's internal dashboard. This page is a static file (it must
+// never fail, and next-on-pages has no ISR). Its HTML holds skeletons where the rewards go;
+// ReferEarnLive reads the current values from the referral endpoint in the browser, fresh on
+// every load and again while the tab is open. Do not make this page server-rendered
+// (runtime "edge" / force-dynamic): on 7 Nov 2026 every server-rendered route on the live
+// site answered 500.
+//
+// Search engines read the numbers only from the meta description and the FAQ JSON-LD, both
+// built from DEFAULT_PROGRAM (lib/referralProgram.ts).
+const seo = referralCopy(DEFAULT_PROGRAM);
+const TITLE = "Refer & Earn with Pyngyn | Practice Referral Rewards";
 
 export const metadata: Metadata = {
-  title: "Refer & Earn with Pyngyn | Practice Referral Rewards",
-  description:
-    "Recommend Pyngyn ClientSpace to fellow Chartered Accountants and firm leaders. Earn generous recurring commissions and credits for every practice that joins.",
+  title: TITLE,
+  description: seo.metaDescription,
   alternates: { canonical: "/refer-and-earn" },
   openGraph: {
-    title: "Refer & Earn with Pyngyn | Practice Referral Rewards",
-    description:
-      "Recommend Pyngyn ClientSpace to fellow Chartered Accountants and firm leaders. Earn generous recurring commissions and credits for every practice that joins.",
+    title: TITLE,
+    description: seo.metaDescription,
     url: "/refer-and-earn",
     type: "website",
     images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Refer & Earn with Pyngyn | Practice Referral Rewards",
-    description:
-      "Recommend Pyngyn ClientSpace to fellow Chartered Accountants and firm leaders. Earn generous recurring commissions.",
+    title: TITLE,
+    description: seo.metaDescription,
     images: [OG_IMAGE.url],
   },
 };
 
 export default function ReferEarnPage() {
-  // Search engines read the FAQ data built with the defaults; visitors see the live values.
-  const copy = referralCopy(DEFAULT_PROGRAM);
   return (
     <>
       <JsonLd
@@ -49,7 +50,7 @@ export default function ReferEarnPage() {
           webPageSchema({
             url: "/refer-and-earn",
             name: "Refer and earn | PYNGYN",
-            description: copy.schemaDescription,
+            description: seo.schemaDescription,
             breadcrumbId: "/refer-and-earn#breadcrumb",
           }),
           breadcrumbSchema(
@@ -59,7 +60,7 @@ export default function ReferEarnPage() {
             ],
             "/refer-and-earn"
           ),
-          faqPageSchema(copy.faq, "/refer-and-earn"),
+          faqPageSchema(seo.faq, "/refer-and-earn"),
         ]}
       />
       <Navbar />

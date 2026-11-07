@@ -2,27 +2,21 @@
 
 import { useEffect, useState } from "react";
 import { ReferEarnContent } from "./ReferEarnContent";
-import { DEFAULT_PROGRAM, getReferralProgram, type ReferralProgram } from "@/lib/referralProgram";
+import { watchReferralProgram, type ReferralProgram } from "@/lib/referralProgram";
 
 /**
- * The Refer and earn page body. The HTML is built with today's values (so the page is
- * a plain static file that can never fail to render), then the browser reads the
- * current rewards from the referral endpoint and swaps them in. A dashboard change
- * shows within the endpoint's 5-minute cache, with no redeploy. Any failure keeps
- * the defaults.
+ * The Refer and earn page body. The static HTML shows skeletons where the rewards go
+ * (never the built-in defaults, which may be out of date). In the browser the current
+ * values are read from the referral endpoint on load, whenever the tab becomes visible
+ * and every 30 seconds while it is visible, and update in place. If the endpoint can't
+ * be read, the defaults replace the skeletons; a later successful read replaces them.
+ *
+ * `initial` is for tests: it renders a given program instead of the skeletons.
  */
-export function ReferEarnLive({ initial = DEFAULT_PROGRAM }: { initial?: ReferralProgram }) {
-  const [program, setProgram] = useState<ReferralProgram>(initial);
+export function ReferEarnLive({ initial = null }: { initial?: ReferralProgram | null }) {
+  const [program, setProgram] = useState<ReferralProgram | null>(initial);
 
-  useEffect(() => {
-    let alive = true;
-    getReferralProgram().then((p) => {
-      if (alive) setProgram(p);
-    });
-    return () => {
-      alive = false;
-    };
-  }, []);
+  useEffect(() => watchReferralProgram(setProgram), []);
 
   return <ReferEarnContent program={program} />;
 }
