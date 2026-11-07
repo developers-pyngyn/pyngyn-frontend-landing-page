@@ -1,6 +1,6 @@
 import { test, afterEach } from "node:test";
 import assert from "node:assert/strict";
-import { getReferralProgram, DEFAULT_PROGRAM, mergeProgram, shareMessage } from "../lib/referralProgram.ts";
+import { fetchReferralProgram, getReferralProgram, DEFAULT_PROGRAM, mergeProgram, shareMessage } from "../lib/referralProgram.ts";
 
 const ENDPOINT = "https://example.test/functions/v1/referral-code";
 const realFetch = globalThis.fetch;
@@ -14,7 +14,7 @@ afterEach(() => {
 function stubFetch(answer) {
   const calls = [];
   globalThis.fetch = async (url, init) => {
-    calls.push({ url: String(url), method: init?.method });
+    calls.push({ url: String(url), method: init?.method, cache: init?.cache });
     if (answer instanceof Error) throw answer;
     return answer;
   };
@@ -40,7 +40,8 @@ test("returns the endpoint's values, with a GET to the referral endpoint", async
   process.env.NEXT_PUBLIC_REFERRAL_ENDPOINT = ENDPOINT;
   const calls = stubFetch(json({ ok: true, program: FIXED, fallback: false }));
   assert.deepEqual(await getReferralProgram(), FIXED);
-  assert.deepEqual(calls, [{ url: ENDPOINT, method: "GET" }]);
+  // Fresh every time: no-store, and no Next.js revalidate
+  assert.deepEqual(calls, [{ url: ENDPOINT, method: "GET", cache: "no-store" }]);
 });
 
 test("returns the defaults when the endpoint variable is missing", async () => {
@@ -87,8 +88,8 @@ test("ignores fields with the wrong type, so nothing goes blank", () => {
 
 test("share text is written to the friend and follows the referee reward", () => {
   assert.deepEqual(shareMessage(DEFAULT_PROGRAM), {
-    text: "I use Pyngyn to run my practice. Sign up with my link and get 20% off your first annual plan:",
-    subject: "20% off Pyngyn",
+    text: "I use Pyngyn to run my practice. Sign up with my link and get 10% off your first annual plan:",
+    subject: "10% off Pyngyn",
   });
   // FIXED is not annual-only, so no "annual"
   assert.deepEqual(shareMessage(FIXED), {
@@ -107,4 +108,23 @@ test("never throws, even when AbortSignal.timeout is missing", async () => {
   } finally {
     AbortSignal.timeout = original;
   }
+});
+
+test("returns the defaults when the endpoint gives no answer in time", async () => {
+  process.env.NEXT_PUBLIC_REFERRAL_ENDPOINT = ENDPOINT;
+  let aborted = false;
+  globalThis.fetch = (_url, init) =>
+    new Promise(() => {
+      init?.signal?.addEventListener("abort", () => (aborted = true));
+    });
+  assert.deepEqual(await getReferralProgram(30), DEFAULT_PROGRAM);
+  assert.equal(aborted, true);
+});
+
+test("fetchReferralProgram gives null on failure, so the page can keep what it shows", async () => {
+  process.env.NEXT_PUBLIC_REFERRAL_ENDPOINT = ENDPOINT;
+  stubFetch(json({ ok: true, program: FIXED }, 500));
+  assert.equal(await fetchReferralProgram(), null);
+  stubFetch(json({ ok: true, program: FIXED }));
+  assert.deepEqual(await fetchReferralProgram(), FIXED);
 });

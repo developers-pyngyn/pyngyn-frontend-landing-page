@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { SIGNIN_URL } from "./config";
 import { cleanRefCode, makeReferralCode, referralLink } from "@/lib/referral";
 import { DEFAULT_PROGRAM, referralCopy, shareMessage, type ReferralProgram } from "@/lib/referralProgram";
+import { Skeleton } from "@/components/refer/Skeleton";
 
 // Pyngyn saves referral codes through one public endpoint (a Supabase Edge Function),
 // reached with a plain fetch. No Supabase library or keys belong on this site.
@@ -115,8 +116,30 @@ function useTurnstile() {
   return { box, token };
 }
 
-/** `program` comes from the page (server-rendered), so the rewards are in the HTML. */
-export function ReferralJoin({ program = DEFAULT_PROGRAM }: { program?: ReferralProgram }) {
+type ShareNetwork = "x" | "linkedin" | "whatsapp" | "email";
+
+/**
+ * The share URL for one network, built from the live values. None while the values
+ * load (the buttons are disabled then) or before a link exists.
+ */
+export function shareHref(network: ShareNetwork, link: string | null, program: ReferralProgram | null): string | undefined {
+  if (!link || !program) return undefined;
+  const message = shareMessage(program);
+  const text = encodeURIComponent(message.text);
+  const url = encodeURIComponent(link);
+  switch (network) {
+    case "x": return `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+    case "linkedin": return `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+    case "whatsapp": return `https://wa.me/?text=${text}%20${url}`;
+    case "email": return `mailto:?subject=${encodeURIComponent(message.subject)}&body=${text}%20${url}`;
+  }
+}
+
+/**
+ * `program` is the live program, or null while it loads: the reward line then shows a
+ * skeleton and the share buttons are disabled. Get my link works either way.
+ */
+export function ReferralJoin({ program }: { program: ReferralProgram | null }) {
   const [email, setEmail] = useState("");
   const [link, setLink] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -173,18 +196,7 @@ export function ReferralJoin({ program = DEFAULT_PROGRAM }: { program?: Referral
     }
   }
 
-  const share = (network: "x" | "linkedin" | "whatsapp" | "email") => {
-    if (!link) return "#";
-    const message = shareMessage(program);
-    const text = encodeURIComponent(message.text);
-    const url = encodeURIComponent(link);
-    switch (network) {
-      case "x": return `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
-      case "linkedin": return `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-      case "whatsapp": return `https://wa.me/?text=${text}%20${url}`;
-      case "email": return `mailto:?subject=${encodeURIComponent(message.subject)}&body=${text}%20${url}`;
-    }
-  };
+  const share = (network: ShareNetwork) => shareHref(network, link, program);
 
   return (
     <div className="rounded-[20px] border border-line bg-white p-6 shadow-card sm:p-8">
@@ -216,7 +228,9 @@ export function ReferralJoin({ program = DEFAULT_PROGRAM }: { program?: Referral
             </button>
           </div>
           {error && <p className="mt-2 text-[13px] font-medium text-[#dc2626]">{error}</p>}
-          <p className="mt-3 text-[12.5px] text-muted">{referralCopy(program).card}</p>
+          <p className="mt-3 text-[12.5px] text-muted">
+            {program ? referralCopy(program).card : <Skeleton lines={1} width={`${referralCopy(DEFAULT_PROGRAM).card.length * 0.5}em`} />}
+          </p>
         </>
       ) : (
         <>
@@ -245,7 +259,9 @@ export function ReferralJoin({ program = DEFAULT_PROGRAM }: { program?: Referral
                   href={share(net)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-line bg-white px-4 py-2 text-[13.5px] font-semibold text-ink transition-colors hover:border-accent hover:text-accent"
+                  aria-disabled={!program}
+                  tabIndex={program ? undefined : -1}
+                  className="rounded-full border border-line bg-white px-4 py-2 text-[13.5px] font-semibold text-ink transition-colors hover:border-accent hover:text-accent aria-disabled:pointer-events-none aria-disabled:opacity-50"
                 >
                   {label}
                 </a>
