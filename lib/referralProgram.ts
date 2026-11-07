@@ -65,17 +65,18 @@ export function mergeProgram(input: unknown): ReferralProgram {
   };
 }
 
+/** Never throws: every failure (no variable, network, timeout, non-200, bad JSON) gives the defaults. */
 export async function getReferralProgram(): Promise<ReferralProgram> {
-  const url = process.env.NEXT_PUBLIC_REFERRAL_ENDPOINT;
-  if (!url) return DEFAULT_PROGRAM;
   try {
-    // Next.js: revalidate every 5 minutes (matches the endpoint's cache). The timeout
-    // keeps a slow endpoint from holding up the page; the defaults show instead.
+    const url = typeof process !== "undefined" ? process.env.NEXT_PUBLIC_REFERRAL_ENDPOINT : undefined;
+    if (!url) return DEFAULT_PROGRAM;
+    // The timeout keeps a slow endpoint from holding things up; the defaults show instead.
+    const signal = typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function" ? AbortSignal.timeout(3000) : undefined;
     const res = await fetch(url, {
       method: "GET",
       headers: { Accept: "application/json" },
-      signal: AbortSignal.timeout(3000),
-      next: { revalidate: 300 },
+      ...(signal ? { signal } : {}),
+      next: { revalidate: 300 }, // matches the endpoint's 5-minute cache where Next.js caches fetches
     } as RequestInit);
     if (!res.ok) return DEFAULT_PROGRAM;
     const body = (await res.json()) as { ok?: boolean; program?: unknown };
@@ -90,19 +91,24 @@ export async function getReferralProgram(): Promise<ReferralProgram> {
 
 const sentence = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-/** Share text for X, LinkedIn, WhatsApp and Email. */
+/**
+ * Share text for X, LinkedIn, WhatsApp and Email. Built from the label, not referee_text:
+ * referee_text speaks about the firm ("their first annual plan"), this is sent to them.
+ */
 export function shareMessage(p: ReferralProgram): { text: string; subject: string } {
   return {
-    text: `I'm using PYNGYN to run client work. Get ${p.referee_text}:`,
-    subject: `${p.referee.label} off PYNGYN`,
+    text: `I use Pyngyn to run my practice. Sign up with my link and get ${p.referee.label} off your first ${p.annual_only ? "annual " : ""}plan:`,
+    subject: `${p.referee.label} off Pyngyn`,
   };
 }
+
+const WITHDRAWALS = "Withdrawals are paid by bank transfer and processed in 3 to 5 business days.";
+const NO_REFUND = "A plan bought with a referral discount is not refundable.";
 
 /** Every sentence on the Refer and earn page that mentions a reward. */
 export function referralCopy(p: ReferralProgram) {
   const days = p.attribution_days;
   const min = `$${p.min_withdrawal_usd.toLocaleString("en-US")}`;
-  const payout = "Commission is paid monthly, once the referred firm's first annual payment has cleared the 30-day refund window.";
   return {
     hero: `Refer a firm to PYNGYN. They get ${p.referee_text}, and you earn ${p.referrer_text}. No cap, no catch.`,
     schemaDescription: `Refer PYNGYN to your network. The firm you refer gets ${p.referee_text}, and you earn ${p.referrer_text}.`,
@@ -117,7 +123,7 @@ export function referralCopy(p: ReferralProgram) {
         title: `They get ${p.referee.label} off`,
         body: `Anyone who ${p.annual_only ? "buys an annual plan" : "subscribes"} through your link gets ${p.referee_text}, applied automatically.`,
       },
-      { n: "04", title: `You earn ${p.referrer.label}`, body: `You earn ${p.referrer_text}, paid monthly once their first annual payment has cleared the 30-day refund window.` },
+      { n: "04", title: `You earn ${p.referrer.label}`, body: `You earn ${p.referrer_text}. ${WITHDRAWALS}` },
     ],
     card: `They save ${p.referee.label}, you earn ${p.referrer.label}. No cost to join.`,
     referrer: {
@@ -126,7 +132,7 @@ export function referralCopy(p: ReferralProgram) {
         ["Commission", sentence(p.referrer_text)],
         ["Cap", "No cap on referrals or earnings"],
         ["Attribution", `${days} days from first click`],
-        ["Payout", `Monthly, bank transfer or PayPal, from ${min}`],
+        ["Payout", `Bank transfer in 3 to 5 business days, from ${min}`],
         ["Eligibility", "Open to anyone, free to join"],
       ] as [string, string][],
     },
@@ -141,12 +147,13 @@ export function referralCopy(p: ReferralProgram) {
       ] as [string, string][],
     },
     faq: [
-      { q: "How much do I earn per referral?", a: `You earn ${p.referrer_text} for every paid referral. ${payout}` },
+      { q: "How much do I earn per referral?", a: `You earn ${p.referrer_text} for every paid referral.` },
       { q: "How much does my friend save?", a: `Anyone who signs up through your link gets ${p.referee_text}. The discount is applied automatically at checkout.` },
       { q: "Is there a cap on what I can earn?", a: "No cap. The more firms you refer, the more you earn. We do reserve the right to review unusually large or unusual patterns to make sure everything is genuine." },
       { q: "How long does my link stay attributed?", a: `When someone clicks your link, the attribution lasts for ${days} days. If they sign up within that window, the referral counts to you.` },
-      { q: "When and how do I get paid?", a: `Commission is paid monthly by bank transfer or PayPal, once the referred firm's first annual payment has cleared the 30-day refund window and your balance has reached ${min}.` },
-      { q: "Is there a minimum payout?", a: `Yes. You can withdraw once your earnings reach ${min}. Anything below that carries over to the next month.` },
+      { q: "When and how do I get paid?", a: `You can withdraw once your earnings reach ${min}. ${WITHDRAWALS}` },
+      { q: "Is there a minimum payout?", a: `Yes. You can withdraw once your earnings reach ${min}. Anything below that stays in your balance. ${WITHDRAWALS}` },
+      { q: "Can the firm I referred get a refund?", a: "No. A plan bought with the referral discount is not refundable. This is shown at checkout before they pay." },
       p.annual_only
         ? { q: "Does this work with monthly plans?", a: "Today the program rewards annual plan subscriptions only. Monthly customers can always upgrade to an annual plan later to qualify." }
         : { q: "Does this work with monthly plans?", a: "Yes. Referrals on monthly and annual plans both qualify." },
@@ -155,7 +162,7 @@ export function referralCopy(p: ReferralProgram) {
     ],
     terms:
       `Under the PYNGYN referral program, referrers earn ${p.referrer_text} for each qualifying paid referral, ` +
-      `and the referred firm gets ${p.referee_text}. Payouts start once earnings reach ${min}. ` +
-      `${p.annual_only ? "Only annual plans qualify. " : ""}`,
+      `and the referred firm gets ${p.referee_text}. Payouts start once earnings reach ${min}. ${WITHDRAWALS} ` +
+      `${p.annual_only ? "Only annual plans qualify. " : ""}${NO_REFUND} `,
   };
 }

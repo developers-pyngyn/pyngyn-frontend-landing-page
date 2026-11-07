@@ -85,13 +85,26 @@ test("ignores fields with the wrong type, so nothing goes blank", () => {
   assert.deepEqual(p, DEFAULT_PROGRAM);
 });
 
-test("share text follows the referee reward", () => {
+test("share text is written to the friend and follows the referee reward", () => {
   assert.deepEqual(shareMessage(DEFAULT_PROGRAM), {
-    text: "I'm using PYNGYN to run client work. Get 20% off their first annual plan:",
-    subject: "20% off PYNGYN",
+    text: "I use Pyngyn to run my practice. Sign up with my link and get 20% off your first annual plan:",
+    subject: "20% off Pyngyn",
   });
+  // FIXED is not annual-only, so no "annual"
   assert.deepEqual(shareMessage(FIXED), {
-    text: "I'm using PYNGYN to run client work. Get $50 off their first annual plan:",
-    subject: "$50 off PYNGYN",
+    text: "I use Pyngyn to run my practice. Sign up with my link and get $50 off your first plan:",
+    subject: "$50 off Pyngyn",
   });
+});
+
+test("never throws, even when AbortSignal.timeout is missing", async () => {
+  process.env.NEXT_PUBLIC_REFERRAL_ENDPOINT = ENDPOINT;
+  const original = AbortSignal.timeout;
+  AbortSignal.timeout = undefined;
+  try {
+    stubFetch(json({ ok: true, program: FIXED }));
+    assert.deepEqual(await getReferralProgram(), FIXED);
+  } finally {
+    AbortSignal.timeout = original;
+  }
 });
