@@ -68,6 +68,8 @@ function useTurnstile() {
       widget.current = window.turnstile.render(box.current, {
         sitekey: TURNSTILE_SITE_KEY,
         execution: "execute",
+        // Shows only if Cloudflare needs the visitor to click; otherwise nothing renders.
+        appearance: "interaction-only",
         callback: (token: string) => settle(token),
         "error-callback": () => settle(null),
         "expired-callback": () => settle(null),
@@ -199,7 +201,7 @@ export function ReferralJoin({ program }: { program: ReferralProgram | null }) {
   const share = (network: ShareNetwork) => shareHref(network, link, program);
 
   return (
-    <div className="rounded-[20px] border border-line bg-white p-6 shadow-card sm:p-8">
+    <div className="relative rounded-[20px] border border-line bg-white p-6 shadow-card sm:p-8">
       {!link ? (
         <>
           <h3 className="font-display text-[22px] font-semibold tracking-[-0.015em]">Get your referral link</h3>
@@ -275,8 +277,9 @@ export function ReferralJoin({ program }: { program: ReferralProgram | null }) {
           </p>
         </>
       )}
-      {/* Invisible Turnstile widget (renders nothing visible). */}
-      <div ref={turnstile.box} aria-hidden="true" />
+      {/* Turnstile widget. Out of the card's flow, so the card keeps its size when the
+          script loads; it appears just below the card only if a check needs a click. */}
+      <div ref={turnstile.box} className="absolute inset-x-0 top-full z-10 mt-3 flex justify-center" />
     </div>
   );
 }
