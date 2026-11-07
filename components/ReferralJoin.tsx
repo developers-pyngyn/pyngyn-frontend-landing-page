@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { SIGNIN_URL } from "./config";
 import { cleanRefCode, makeReferralCode, referralLink } from "@/lib/referral";
+import { DEFAULT_PROGRAM, referralCopy, shareMessage, type ReferralProgram } from "@/lib/referralProgram";
 
 // Pyngyn saves referral codes through one public endpoint (a Supabase Edge Function),
 // reached with a plain fetch. No Supabase library or keys belong on this site.
@@ -114,7 +115,8 @@ function useTurnstile() {
   return { box, token };
 }
 
-export function ReferralJoin() {
+/** `program` comes from the page (server-rendered), so the rewards are in the HTML. */
+export function ReferralJoin({ program = DEFAULT_PROGRAM }: { program?: ReferralProgram }) {
   const [email, setEmail] = useState("");
   const [link, setLink] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -173,13 +175,14 @@ export function ReferralJoin() {
 
   const share = (network: "x" | "linkedin" | "whatsapp" | "email") => {
     if (!link) return "#";
-    const text = encodeURIComponent("I'm using PYNGYN to run client work. Get 20% off your annual plan:");
+    const message = shareMessage(program);
+    const text = encodeURIComponent(message.text);
     const url = encodeURIComponent(link);
     switch (network) {
       case "x": return `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
       case "linkedin": return `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
       case "whatsapp": return `https://wa.me/?text=${text}%20${url}`;
-      case "email": return `mailto:?subject=${encodeURIComponent("20% off PYNGYN")}&body=${text}%20${url}`;
+      case "email": return `mailto:?subject=${encodeURIComponent(message.subject)}&body=${text}%20${url}`;
     }
   };
 
@@ -213,7 +216,7 @@ export function ReferralJoin() {
             </button>
           </div>
           {error && <p className="mt-2 text-[13px] font-medium text-[#dc2626]">{error}</p>}
-          <p className="mt-3 text-[12.5px] text-muted">No cost to join. Earn on every paid referral.</p>
+          <p className="mt-3 text-[12.5px] text-muted">{referralCopy(program).card}</p>
         </>
       ) : (
         <>
