@@ -148,33 +148,6 @@ export const PyngynHomeSidebar: React.FC<PyngynHomeSidebarProps> = ({
           </div>
         </div>
 
-        {/* CLIENT CHATS */}
-        <div>
-          <div className="flex items-center justify-between px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-[#627D98]">
-            <span>Channels (5)</span>
-            <span className="text-[12px] text-[#113353] cursor-pointer">+</span>
-          </div>
-          <div className="space-y-0.5 text-[11.5px]">
-            {[
-              { name: 'tax-audit-fy26', badge: 1 },
-              { name: 'gst-scrutiny-portal', badge: 5 },
-              { name: 'roc-mca-approvals', badge: 3 },
-              { name: 'transfer-pricing-fy26', badge: 2 },
-              { name: 'customs-exim-desk', badge: 1 },
-            ].map((c) => (
-              <div
-                key={c.name}
-                className="flex items-center justify-between px-2 py-1 text-[#627D98] hover:text-[#113353] hover:bg-white rounded-[5px] cursor-pointer"
-              >
-                <span className="truncate"># {c.name}</span>
-                <span className="w-4 h-4 rounded-full bg-[#113353] text-white text-[9.5px] flex items-center justify-center font-bold">
-                  {c.badge}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* DIRECT MESSAGES */}
         <div>
           <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-[#627D98]">

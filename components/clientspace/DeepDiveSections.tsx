@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { DEMO_URL, SIGNUP_URL } from "../config";
+import { INTEGRATIONS } from "../integrations-data";
 import { ClientWorkspaceMockup } from "../mockups/ClientWorkspaceMockup";
 import { ClientPortalMockup } from "../mockups/ClientPortalMockup";
 import { WorkloadCockpitMockup } from "../mockups/WorkloadCockpitMockup";
@@ -656,19 +657,6 @@ export function DashboardSection() {
 // 9. INTEGRATIONS & FILE TOOLS
 // ============================================================================
 export function IntegrationsSection() {
-  const INTEGRATIONS: {
-    name: string;
-    category: string;
-    icon: React.ComponentType<{ className?: string }>;
-  }[] = [
-    { name: "Google Calendar", category: "Deadlines & Practice Meetings", icon: Calendar },
-    { name: "Google Drive", category: "Client Folders & Document Storage", icon: Folder },
-    { name: "Gmail", category: "Client Emails & Task Conversion", icon: Mail },
-    { name: "Excel & CSV", category: "1-Click Client & Task Import", icon: FileSpreadsheet },
-    { name: "Slack", category: "Team Notifications & Updates", icon: MessageSquare },
-    { name: "Document Vault", category: "Bank-Grade Encrypted Storage", icon: ShieldCheck },
-  ];
-
   return (
     <section id="integrations" className="section bg-white border-b border-slate-200">
       <div className="wrap">
@@ -678,26 +666,25 @@ export function IntegrationsSection() {
             Connects with your firm&apos;s daily workflow.
           </h2>
           <p className="lead mx-auto mt-4 max-w-[620px]">
-            ClientSpace works alongside your firm&apos;s calendar, email, cloud storage, and client spreadsheets.
+            ClientSpace works alongside your firm&apos;s email, calendar, cloud storage, payments and accounting software. More integrations are on the way.
           </p>
         </div>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-[960px] mx-auto">
           {INTEGRATIONS.map((tool) => {
-            const IconComp = tool.icon;
             return (
               <div
                 key={tool.name}
                 className="flex items-center gap-3.5 rounded-xl border border-slate-200 bg-white p-4 shadow-2xs hover:border-slate-300 transition-colors"
               >
-                <div className="flex h-10 w-10 flex-none items-center justify-center rounded-lg bg-slate-100 text-[#14223d] border border-slate-200">
-                  <IconComp className="h-5 w-5" />
+                <div className="flex h-10 w-10 flex-none items-center justify-center rounded-lg bg-white border border-slate-200">
+                  {tool.logo}
                 </div>
                 <div>
                   <h4 className="font-bold text-[13.5px] text-slate-900">
                     {tool.name}
                   </h4>
-                  <p className="text-[11.5px] text-slate-500">{tool.category}</p>
+                  <p className="text-[11.5px] text-slate-500">{tool.tagline}</p>
                 </div>
               </div>
             );

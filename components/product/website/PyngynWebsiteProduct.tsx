@@ -110,7 +110,7 @@ export const PyngynWebsiteProduct: React.FC<PyngynWebsiteProductProps> = ({
         </div>
 
         {/* Center: Command Search Bar */}
-        <div className="flex-1 max-w-[420px] mx-4 hidden md:flex items-center">
+        <div className="flex-1 max-w-[420px] mx-4 flex items-center">
           <div className="w-full bg-slate-50 hover:bg-white rounded-[20px] py-1.5 px-3.5 flex items-center justify-between border border-slate-200 hover:border-slate-300 shadow-2xs cursor-pointer transition-colors">
             <div className="flex items-center gap-2 text-slate-400">
               <Search className="w-3.5 h-3.5 text-slate-400" />
@@ -245,7 +245,7 @@ export const PyngynWebsiteProduct: React.FC<PyngynWebsiteProductProps> = ({
         </aside>
 
         {/* SECONDARY CONTEXTUAL SIDEBAR (Matching SidebarFacetedTree.tsx) */}
-        <aside className="w-[195px] min-w-[195px] bg-slate-50/70 border-r border-slate-200 hidden md:flex flex-col shrink-0 select-none">
+        <aside className="w-[195px] min-w-[195px] bg-slate-50/70 border-r border-slate-200 flex flex-col shrink-0 select-none">
           {currentScreen === "audit" ? (
             /* Sidebar for Dashboard / Audit Command */
             <div className="flex-1 flex flex-col p-2 space-y-3">
@@ -564,7 +564,7 @@ export const PyngynWebsiteProduct: React.FC<PyngynWebsiteProductProps> = ({
                   </button>
                 </div>
 
-                <div className="hidden lg:flex items-center gap-1.5 text-slate-500">
+                <div className="flex items-center gap-1.5 text-slate-500">
                   <span className="text-[10.5px] font-mono bg-white border border-slate-200 px-1.5 py-0.5 rounded">
                     Group by: <strong>Due Date</strong>
                   </span>
@@ -621,7 +621,7 @@ export const PyngynWebsiteProduct: React.FC<PyngynWebsiteProductProps> = ({
             <span>Start</span>
           </button>
 
-          <div className="hidden sm:flex items-center gap-1.5 text-slate-300 truncate max-w-[340px]">
+          <div className="flex items-center gap-1.5 text-slate-300 truncate max-w-[340px]">
             <span className="text-slate-400">TASK:</span>
             <span className="text-slate-100 font-semibold truncate">
               [{isOswal ? "Oswal Exports" : "Shreeji Constructions"}] GSTR-1 sales ledger scrutiny...

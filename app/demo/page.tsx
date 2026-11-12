@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Laptop, FileText, Tag } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -7,6 +6,8 @@ import { DemoBookingForm } from "@/components/DemoBookingForm";
 import { ExitIntentModal } from "@/components/ExitIntentModal";
 import { DemoConversionBar, DemoStory, DemoTestimonials } from "@/components/DemoStory";
 import { SIGNUP_URL } from "@/components/config";
+import { ClientPortalMockup } from "@/components/mockups/ClientPortalMockup";
+import { MobilePan } from "@/components/mockups/MobilePan";
 import {
   OG_IMAGE,
   JsonLd,
@@ -290,16 +291,23 @@ export default function DemoPage() {
                 your logo, your colors, so you leave knowing exactly what your clients see.
               </p>
             </div>
-            <div className="mx-auto mt-10 max-w-[860px] overflow-hidden rounded-[22px] border border-line bg-white shadow-art">
-              <Image
-                src="/screens/clientspace-space.webp"
-                alt="Clientspace portal showing needs-your-attention items, active engagements, engagement value, and upcoming sessions for a client logging in"
-                width={1909}
-                height={940}
-                sizes="(max-width: 768px) 100vw, 860px"
-                className="h-auto w-full"
-              />
-            </div>
+            {/* The live Clientspace in the current product design (not a static screenshot). */}
+            <MobilePan minWidth={660} className="mx-auto mt-10 max-w-[1000px]">
+              <div className="overflow-hidden rounded-[18px] border border-line bg-white shadow-art">
+                <div className="flex h-9 items-center gap-3 border-b border-slate-200/90 bg-slate-100/95 px-3.5" aria-hidden="true">
+                  <span className="flex gap-1.5">
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f56]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#27c93f]" />
+                  </span>
+                  <span className="mx-auto truncate rounded-md border border-slate-200/80 bg-white px-3 py-0.5 font-mono text-[11px] text-slate-600">
+                    clients.sharmaassociates.in/oswal-exports
+                  </span>
+                  <span className="w-[46px]" />
+                </div>
+                <ClientPortalMockup className="rounded-none border-0 shadow-none" />
+              </div>
+            </MobilePan>
             <ul className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[13.5px] text-muted">
               {[
                 "Fully branded to your firm",

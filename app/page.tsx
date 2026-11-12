@@ -57,7 +57,7 @@ const CLIENTSPACE_FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Does ClientSpace work alongside our existing firm tools?",
-    a: "Yes. ClientSpace connects with Google Calendar, Google Drive, Gmail, Slack, and supports 1-click Excel/CSV spreadsheet imports for your client masters and tasks, ensuring your team does not need to duplicate records or change how you work.",
+    a: "Yes. ClientSpace connects with Gmail, Google Calendar, Google Drive, Razorpay, Zoho Books and Tally Prime, and supports 1-click Excel/CSV spreadsheet imports for your client masters and tasks, ensuring your team does not need to duplicate records or change how you work.",
   },
   {
     q: "Can we book a personalized practice walkthrough for our firm?",
@@ -100,7 +100,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 4. Integrations (Accounting ecosystem: Tally, Computax, QuickBooks, Drive, Calendar, WhatsApp) */}
+        {/* 4. Integrations (Gmail, Calendar, Drive, Razorpay, Zoho Books, Tally Prime) */}
         <IntegrationsSection />
 
         {/* 5. Trust, Security & Client Isolation (Bank-grade privacy) */}

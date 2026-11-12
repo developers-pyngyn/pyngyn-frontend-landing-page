@@ -14,43 +14,43 @@ import {
 import { FaqSection } from "@/components/FaqSection";
 
 export const metadata: Metadata = {
-  title: "Pyngyn Integrations | Tally, Zoho, Drive, WhatsApp & More",
+  title: "Pyngyn Integrations | Gmail, Google Drive, Razorpay, Zoho Books & Tally",
   description:
-    "Connect Pyngyn ClientSpace with Tally, Computax, Zoho Books, QuickBooks, Google Drive, WhatsApp, and Slack to automate document collection and practice workflows.",
+    "Connect Pyngyn ClientSpace with Gmail, Google Calendar, Google Drive, Razorpay, Zoho Books and Tally Prime to automate document collection, payments and practice workflows.",
   alternates: { canonical: "/integrations" },
   openGraph: {
-    title: "Pyngyn Integrations | Tally, Zoho, Drive, WhatsApp & More",
+    title: "Pyngyn Integrations | Gmail, Google Drive, Razorpay, Zoho Books & Tally",
     description:
-      "Connect Pyngyn ClientSpace with Tally, Computax, Zoho Books, QuickBooks, Google Drive, WhatsApp, and Slack to automate document collection and practice workflows.",
+      "Connect Pyngyn ClientSpace with Gmail, Google Calendar, Google Drive, Razorpay, Zoho Books and Tally Prime to automate document collection, payments and practice workflows.",
     url: "/integrations",
     type: "website",
     images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pyngyn Integrations | Tally, Zoho, Drive, WhatsApp & More",
+    title: "Pyngyn Integrations | Gmail, Google Drive, Razorpay, Zoho Books & Tally",
     description:
-      "Connect Pyngyn ClientSpace with Tally Prime, Zoho Books, Computax, QuickBooks, and Google Drive.",
+      "Connect Pyngyn ClientSpace with Gmail, Google Calendar, Google Drive, Razorpay, Zoho Books and Tally Prime.",
     images: [OG_IMAGE.url],
   },
 };
 
 const INTEGRATION_FAQS = [
   {
-    q: "Which accounting and practice software integrate with PYNGYN?",
-    a: "PYNGYN integrates with Tally Prime, Zoho Books, Computax, QuickBooks, and Xero for ledger and invoice sync. It also connects with communication and cloud suites including Slack, Microsoft Teams, Gmail, Google Calendar, Google Drive, and DocuSign for end-to-end client collaboration.",
+    q: "Which tools integrate with PYNGYN today?",
+    a: "PYNGYN integrates with Gmail, Google Calendar and Google Drive for email, deadlines and client files, Razorpay for fee collection, and Zoho Books and Tally Prime for invoices, ledgers and vouchers. More integrations are on the way.",
   },
   {
     q: "How does data synchronize from external tools to the client portal?",
-    a: "Data syncs automatically via secure webhooks and API connectors. When an invoice is generated in QuickBooks, a document is signed in DocuSign, or a deliverable status updates in Pyngyn, the client's branded ClientSpace portal reflects the change in real time without manual re-entry.",
+    a: "Data syncs automatically through secure connectors. When a client pays through Razorpay, an invoice is raised in Zoho Books, or a deliverable status updates in Pyngyn, the client's branded ClientSpace portal reflects the change without manual re-entry.",
   },
   {
     q: "Do we need engineering or IT staff to connect our tools?",
-    a: "No. Standard integrations connect in under two minutes with standard OAuth authentication. Our team provides complimentary setup assistance during your initial onboarding to ensure your cloud storage, calendars, and accounting software are mapped properly.",
+    a: "No. Integrations connect with a standard sign-in in a couple of minutes. Our team provides complimentary setup assistance during your initial onboarding to ensure your email, calendars, cloud storage and accounting software are mapped properly.",
   },
   {
-    q: "Can we build custom workflows using Zapier, Make, or n8n?",
-    a: "Yes. PYNGYN offers native webhook endpoints and connects seamlessly to Zapier, Make, and n8n. You can trigger automated notifications, intake workflows, or status syncs across more than 5,000 third-party business applications.",
+    q: "Will you add more integrations?",
+    a: "Yes. We add integrations as they are ready. Tell us which tools your firm uses and we will let you know when they arrive.",
   },
   {
     q: "Is data transferred through integrations encrypted and secure?",
@@ -97,9 +97,9 @@ export default function IntegrationsPage() {
             Your favorite tools, feeding one place your clients can see.
           </h1>
           <p className="lead mx-auto mt-5">
-            Connect ClientSpace to QuickBooks, Xero, DocuSign, Slack, and the other tools your
-            firm already runs on. Plans, status, and approvals flow in automatically, and the
-            result shows up live in your clients&apos; ClientSpace, no manual updates required.
+            Connect ClientSpace to Gmail, Google Calendar, Google Drive, Razorpay, Zoho Books and
+            Tally Prime. Emails, deadlines, files, payments and invoices flow in automatically, and
+            the result shows up live in your clients&apos; ClientSpace, no manual updates required.
           </p>
         </section>
         <IntegrationsDirectory />
@@ -112,8 +112,8 @@ export default function IntegrationsPage() {
                 Integrations feed your workflow. ClientSpace keeps clients informed.
               </h2>
               <p className="mt-3 max-w-[640px] text-[15px] leading-relaxed text-muted">
-                A signed DocuSign envelope, a synced QuickBooks invoice, a Slack update — all of
-                it lands in PYNGYN ClientSpace. From there it surfaces automatically in the
+                A Razorpay payment, a synced Zoho Books invoice, a file added in Google Drive — all
+                of it lands in PYNGYN ClientSpace. From there it surfaces automatically in the
                 specific client&apos;s portal, so nobody on your team
                 has to re-type a status update just because the source system changed.
               </p>

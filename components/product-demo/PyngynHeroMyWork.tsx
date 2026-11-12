@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import {
@@ -27,6 +27,9 @@ import {
   MoreHorizontal,
 } from 'lucide-react';
 import { PyngynCelebrationOverlay } from './PyngynCelebrationOverlay';
+
+// useLayoutEffect in the browser (measure before paint), useEffect on the server.
+const useLayoutEffectSafe = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 // ============================================================================
 // Types & Central Task Model
@@ -348,6 +351,21 @@ export function PyngynHeroMyWork({
     };
   }, [loopCount, autoPlay, shouldReduceMotion]);
 
+  const fitRef = useRef<HTMLDivElement>(null);
+  const [fitScale, setFitScale] = useState<number | null>(null);
+  useLayoutEffectSafe(() => {
+    const el = fitRef.current;
+    if (!el) return;
+    const update = () => {
+      const w = el.offsetWidth;
+      if (w > 0) setFitScale(Math.min(1, w / 780));
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   return (
     <div
       ref={containerRef}
@@ -357,18 +375,24 @@ export function PyngynHeroMyWork({
     >
       {/* Outer Scaled Layout Box (Pure CSS Container Query scaling: zero layout shift, zero hydration jump) */}
       <div
+        ref={fitRef}
         style={{
           containerType: 'inline-size',
+          // aspect-ratio boxes otherwise grow to their (unscaled, 520px) content height,
+          // leaving a blank gap under the mockup on phones
+          minHeight: 0,
         }}
         className="relative w-full max-w-[780px] aspect-[780/520] flex-none overflow-visible"
       >
-        {/* Unscaled 780x520 Canvas Container - Immediately scaled by CSS on first paint */}
+        {/* Unscaled 780x520 Canvas Container, scaled to the box width. The CSS value covers
+            first paint where length division is supported; the measured scale replaces it
+            (Safari on iPhone can't divide lengths, so without it the canvas overflowed). */}
         <div
           style={{
             width: '780px',
             height: '520px',
             transformOrigin: 'top left',
-            transform: 'scale(min(1, max(0.38, calc(100cqw / 780px))))',
+            transform: fitScale === null ? 'scale(min(1, max(0.38, calc(100cqw / 780px))))' : `scale(${fitScale})`,
           }}
           className="relative flex-none overflow-visible"
         >
@@ -522,7 +546,7 @@ export function PyngynHeroMyWork({
                       </div>
 
                       <div className="flex items-center gap-2.5">
-                        <div className="hidden sm:flex items-center gap-1.5 rounded-md border border-slate-200 bg-slate-50/80 px-2.5 py-1 text-[11px] text-slate-400">
+                        <div className="flex items-center gap-1.5 rounded-md border border-slate-200 bg-slate-50/80 px-2.5 py-1 text-[11px] text-slate-400">
                           <Search size={11} />
                           <span>Search...</span>
                           <kbd className="rounded border border-slate-200 bg-white px-1 font-mono text-[9px] text-slate-500">
@@ -578,10 +602,10 @@ export function PyngynHeroMyWork({
                           <span>My Engagements</span>
                           <span className="text-[9.5px] text-slate-400">32</span>
                         </div>
-                        <div className="pb-1.5 hover:text-slate-800 cursor-pointer hidden sm:block">
+                        <div className="pb-1.5 hover:text-slate-800 cursor-pointer block">
                           <span>My Timesheet</span>
                         </div>
-                        <div className="pb-1.5 hover:text-slate-800 cursor-pointer hidden md:block">
+                        <div className="pb-1.5 hover:text-slate-800 cursor-pointer block">
                           <span>Shared with Me</span>
                         </div>
                       </div>
@@ -1440,7 +1464,7 @@ export function PyngynHeroMyWork({
                           <div className="w-6 h-6 rounded-md bg-[#113353] text-white flex items-center justify-center font-bold text-[10px] shadow-3xs">
                             SO
                           </div>
-                          <div className="text-left leading-tight hidden sm:block">
+                          <div className="text-left leading-tight block">
                             <span className="font-bold text-[#113353] block text-[10.5px]">Sunita Oswal</span>
                             <span className="text-[8.5px] text-[#627D98]">Authorized Signatory</span>
                           </div>
