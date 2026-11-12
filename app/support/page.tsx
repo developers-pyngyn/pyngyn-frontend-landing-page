@@ -35,7 +35,7 @@ const SUPPORT_FAQS = [
   },
   {
     q: "Do you provide live onboarding and migration support?",
-    a: "Yes. We offer complimentary hands-on onboarding sessions to help you import your client masters, set up recurring statutory workflows, and connect third-party integrations like Google Drive, Slack, and accounting software.",
+    a: "Yes. We offer complimentary hands-on onboarding sessions to help you import your client masters, set up recurring statutory workflows, and connect integrations like Gmail, Google Drive, Razorpay, Zoho Books and Tally Prime.",
   },
   {
     q: "Where can I check real-time platform uptime and scheduled maintenance?",

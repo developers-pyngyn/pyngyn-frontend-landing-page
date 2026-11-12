@@ -422,7 +422,7 @@ export default function ClientspacePage() {
                         <span className="font-bold text-[#14223d]">Accounting Ecosystem</span>
                         <span className="text-[12px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Included</span>
                       </div>
-                      <p className="mt-1 text-[12.5px] text-muted">Direct sync with Tally, Computax, Zoho, QuickBooks, and automated client chase workflows.</p>
+                      <p className="mt-1 text-[12.5px] text-muted">Sync with Tally Prime, Zoho Books and Razorpay, plus automated client chase workflows.</p>
                     </div>
                   </div>
                 </div>

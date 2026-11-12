@@ -118,7 +118,7 @@ const ACCOUNTING_FAQS = [
   },
   {
     q: "Does Pyngyn integrate with our existing accounting ledger software?",
-    a: "Yes. Pyngyn integrates with the core tools accounting practices rely on, including Tally, Computax, Zoho Books, QuickBooks, Google Drive, and Gmail.",
+    a: "Yes. Pyngyn integrates with Gmail, Google Calendar, Google Drive, Razorpay, Zoho Books and Tally Prime, with more integrations on the way.",
   },
   {
     q: "Can we track whether our monthly bookkeeping retainers are profitable?",

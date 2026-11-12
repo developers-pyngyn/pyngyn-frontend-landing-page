@@ -85,7 +85,7 @@ const PRODUCT_MENU: DropdownItem[] = [
   },
   {
     name: "Integrations",
-    desc: "Connects with Google Calendar, Drive, Gmail, Slack & spreadsheets",
+    desc: "Connects with Gmail, Google Calendar, Drive & spreadsheets",
     href: "/integrations",
     icon: Plug,
   },
@@ -153,7 +153,7 @@ const RESOURCES_MENU: DropdownItem[] = [
   },
   {
     name: "Accounting Integrations",
-    desc: "Connect Tally Prime, Computax, Zoho Books, QuickBooks & WhatsApp",
+    desc: "Connect Tally Prime, Zoho Books & Razorpay",
     href: "/integrations",
     icon: Plug,
   },

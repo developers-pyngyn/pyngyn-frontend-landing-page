@@ -323,7 +323,7 @@ export function Compare() {
 }
 
 export function Integrations() {
-  const apps = ["Slack", "QuickBooks", "Google", "Figma", "Zoom", "Xero", "Salesforce", "DocuSign"];
+  const apps = ["Gmail", "Google Calendar", "Google Drive", "Razorpay", "Zoho Books", "Tally Prime"];
   return (
     <section className="section-tight">
       <div className="wrap text-center">
