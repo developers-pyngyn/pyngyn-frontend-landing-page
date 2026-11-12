@@ -1,3 +1,5 @@
+// Drawn on a fixed 1440px desktop canvas that is scaled to fit, so its layout must not
+// follow the visitor's screen width (no sm:/md:/lg: variants), or phones get a stacked layout.
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -129,7 +131,7 @@ export const PyngynClientSpaceView: React.FC<PyngynClientSpaceViewProps> = ({
         </div>
 
         {/* Live CA Practice Sync Indicator */}
-        <div className="hidden md:flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-[#F1F5F9] border border-[#CBD5E1] text-[10.5px]">
+        <div className="flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-[#F1F5F9] border border-[#CBD5E1] text-[10.5px]">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span className="text-[#475569] font-medium">Live CA Sync:</span>
           <span className="text-[#113353] font-bold">{firmName}</span>
@@ -140,7 +142,7 @@ export const PyngynClientSpaceView: React.FC<PyngynClientSpaceViewProps> = ({
             <div className="w-7 h-7 rounded-md bg-[#113353] text-white flex items-center justify-center font-bold text-[11px] shadow-3xs">
               SO
             </div>
-            <div className="hidden sm:block text-left leading-tight">
+            <div className="block text-left leading-tight">
               <span className="font-bold text-[#113353] block text-[11.5px]">Sunita Oswal</span>
               <span className="text-[9.5px] text-[#627D98]">Authorized Signatory</span>
             </div>
@@ -304,7 +306,7 @@ export const PyngynClientSpaceView: React.FC<PyngynClientSpaceViewProps> = ({
       </div>
 
       {/* 4. Top Widget Row (4 Primary Cards) */}
-      <div className="px-5 py-1.5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5">
+      <div className="px-5 py-1.5 grid grid-cols-4 gap-3.5">
         {/* Card 1: Compliance Progress (Smoothly transitions 78% -> 80% -> 82%) */}
         <motion.div
           data-product-target="portal-card-progress"
@@ -552,7 +554,7 @@ export const PyngynClientSpaceView: React.FC<PyngynClientSpaceViewProps> = ({
       </div>
 
       {/* 5. Lower Dashboard: Compliance Overview & Service Progress */}
-      <div className="px-5 py-1.5 grid grid-cols-1 lg:grid-cols-2 gap-3.5">
+      <div className="px-5 py-1.5 grid grid-cols-2 gap-3.5">
         {/* Card 5: Compliance Overview (Donut Chart) */}
         <div
           data-product-target="portal-card-compliance-overview"

@@ -104,8 +104,8 @@ export function IntegrationsDirectory() {
       <div className="mt-14 flex flex-col items-center gap-4 rounded-[22px] border border-line bg-[#fbfbfd] p-10 text-center">
         <h2 className="font-display text-[26px] font-semibold tracking-[-0.02em]">Don&apos;t see your tool?</h2>
         <p className="max-w-[460px] text-[15px] text-muted">
-          We&apos;re adding integrations all the time, and our API lets you connect anything.
-          Tell us what you use and we&apos;ll help you wire it up.
+          More integrations are on the way. Tell us which tools your firm uses and we&apos;ll
+          let you know when they arrive.
         </p>
         <a href={DEMO_URL} className="btn btn-primary mt-1">Talk to us →</a>
       </div>

@@ -42,7 +42,7 @@ export function ClientWorkspaceMockup({
       </WebsiteProductAnimator>
 
       {/* Floating Celebration Overlay on top / outer side */}
-      <div className="absolute -top-3 sm:-top-5 right-4 sm:right-10 z-50 pointer-events-none drop-shadow-2xl">
+      <div className="absolute -top-3 sm:-top-5 right-2 sm:right-10 z-50 pointer-events-none drop-shadow-2xl origin-top-right scale-[0.6] sm:scale-100">
         <PyngynCelebrationOverlay
           title="GST Portal Live-Synced"
           subtitle="Oswal Exports · ₹14.8L ITC Reconciled"

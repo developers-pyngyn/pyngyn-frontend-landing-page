@@ -463,7 +463,7 @@ export const PyngynWorkloadView: React.FC<PyngynWorkloadViewProps> = ({
           {/* 3. Dashboard Body with 4 KPI Cards + 3 Content Cards */}
           <div className="p-4 space-y-3">
             {/* 4 KPI Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-4 gap-3">
               {/* Card 1: Active Tasks */}
               <div
                 data-product-target="workload-tasks-card"
@@ -611,11 +611,11 @@ export const PyngynWorkloadView: React.FC<PyngynWorkloadViewProps> = ({
             </div>
 
             {/* 3 Lower Content Cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5">
+            <div className="grid grid-cols-12 gap-3.5">
               {/* Card 1: Task Lengths / Scope Distribution (4 cols) */}
               <div
                 data-product-target="workload-scope"
-                className="lg:col-span-4 bg-white border border-[#E5EAF2] rounded-[12px] p-3.5 shadow-3xs flex flex-col justify-between"
+                className="col-span-4 bg-white border border-[#E5EAF2] rounded-[12px] p-3.5 shadow-3xs flex flex-col justify-between"
               >
                 <div className="space-y-0.5 border-b border-[#E5EAF2] pb-2">
                   <div className="flex items-center justify-between">
@@ -687,7 +687,7 @@ export const PyngynWorkloadView: React.FC<PyngynWorkloadViewProps> = ({
               {/* Card 2: Tasks Status / Filing Stage (Donut Chart - 4 cols) */}
               <div
                 data-product-target="workload-donut"
-                className="lg:col-span-4 bg-white border border-[#E5EAF2] rounded-[12px] p-3.5 shadow-3xs flex flex-col justify-between"
+                className="col-span-4 bg-white border border-[#E5EAF2] rounded-[12px] p-3.5 shadow-3xs flex flex-col justify-between"
               >
                 <div className="space-y-0.5 border-b border-[#E5EAF2] pb-2">
                   <div className="flex items-center justify-between">
@@ -781,7 +781,7 @@ export const PyngynWorkloadView: React.FC<PyngynWorkloadViewProps> = ({
               {/* Card 3: Workload / Team Breakdown (4 cols) */}
               <div
                 data-product-target="workload-team"
-                className="lg:col-span-4 bg-white border border-[#E5EAF2] rounded-[12px] p-3.5 shadow-3xs flex flex-col justify-between"
+                className="col-span-4 bg-white border border-[#E5EAF2] rounded-[12px] p-3.5 shadow-3xs flex flex-col justify-between"
               >
                 <div className="space-y-0.5 border-b border-[#E5EAF2] pb-2">
                   <div className="flex items-center justify-between">

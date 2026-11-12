@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { DesktopMockupFrame } from "./DesktopMockupFrame";
+import { MobilePan } from "../mockups/MobilePan";
 import { PyngynTaskWorkflowView } from "@/components/product-demo";
 
 export function WorkflowShowcaseSection() {
@@ -51,6 +52,7 @@ export function WorkflowShowcaseSection() {
         </div>
 
         {/* Unified Desktop Mockup Frame with Real Product Components */}
+        <MobilePan minWidth={720}>
         <DesktopMockupFrame
           url="app.pyngyn.com/clients/corporate-client/tasks"
           imageHeight={880}
@@ -64,6 +66,7 @@ export function WorkflowShowcaseSection() {
             />
           </div>
         </DesktopMockupFrame>
+        </MobilePan>
       </div>
     </section>
   );

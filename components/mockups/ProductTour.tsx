@@ -8,6 +8,7 @@ import { MyWorkMockup } from "./MyWorkMockup";
 import { WorkloadCockpitMockup } from "./WorkloadCockpitMockup";
 import { AutomationWorkflowMockup } from "./AutomationWorkflowMockup";
 import { ClientPortalMockup } from "./ClientPortalMockup";
+import { MobilePan } from "./MobilePan";
 
 type TourTab =
   | "Clients"
@@ -178,8 +179,9 @@ export function ProductTour() {
         </div>
 
         {/* Tab Selection Bar */}
-        <div className="mt-8 flex justify-center overflow-x-auto pb-2">
-          <div className="inline-flex rounded-xl border border-slate-200 bg-white p-1 shadow-2xs">
+        {/* mx-auto (not justify-center) so the first tabs stay reachable when the row scrolls on phones */}
+        <div className="-mx-4 mt-8 flex overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto inline-flex flex-none rounded-xl border border-slate-200 bg-white p-1 shadow-2xs">
             {(
               [
                 "Clients",
@@ -219,6 +221,7 @@ export function ProductTour() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
+                <MobilePan minWidth={660}>
                 {activeTab === "Clients" ? (
                   <ClientWorkspaceMockup initialClient="oswal" viewMode="dossier" enableCameraZoom={false} />
                 ) : activeTab === "Engagements" ? (
@@ -234,6 +237,7 @@ export function ProductTour() {
                 ) : (
                   <ClientWorkspaceMockup />
                 )}
+                </MobilePan>
               </motion.div>
             </AnimatePresence>
           </div>

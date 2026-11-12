@@ -333,7 +333,7 @@ export const PyngynMyWorkDetailedView: React.FC<PyngynMyWorkDetailedViewProps> =
             <span>Group: Due Date</span>
             <PyngynIcons.chevronDown size={10} className="text-[#627D98]" />
           </button>
-          <button type="button" className="px-2 py-0.5 rounded-[6px] border border-[#CBD5E1] bg-white text-[#113353] font-semibold flex items-center gap-1 shadow-3xs hidden sm:flex">
+          <button type="button" className="px-2 py-0.5 rounded-[6px] border border-[#CBD5E1] bg-white text-[#113353] font-semibold flex items-center gap-1 shadow-3xs flex">
             <span>All Tasks</span>
             <span className="text-[9.5px] bg-[#E5EAF2] px-1 rounded-full text-[#627D98] font-bold">48</span>
             <PyngynIcons.chevronDown size={10} className="text-[#627D98]" />
