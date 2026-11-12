@@ -76,7 +76,7 @@ const CLIENTSPACE_FEATURES: { icon: LucideIcon; title: string; body: string }[] 
   { icon: CheckCircle2, title: "Automated multi-channel client intake", body: "Automate document collection via WhatsApp and email, routing bank statements and PBC files directly into client portfolios." },
   { icon: Users, title: "Practice workload cockpit", body: "Real-time capacity tracking across partners, managers, qualified accountants, and article assistants with 1-click rebalancing." },
   { icon: Calendar, title: "Connected statutory radar", body: "Unified timeline aggregating filing deadlines across Income Tax, GST, MCA, TDS, and statutory audit milestones." },
-  { icon: Zap, title: "Tally & core ledger sync", body: "Connect Tally Prime, Computax, QuickBooks, and Zoho Books with frictionless two-way sync for faster reconciliations." },
+  { icon: Zap, title: "Tally & core ledger sync", body: "Connect Tally Prime and Zoho Books for faster reconciliations, and Razorpay to collect fees." },
 ];
 
 const FAQS: { q: string; a: string }[] = [

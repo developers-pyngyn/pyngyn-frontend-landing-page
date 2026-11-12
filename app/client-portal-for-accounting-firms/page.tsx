@@ -96,7 +96,7 @@ const FAQS = [
   },
   {
     q: "Does Pyngyn integrate with common accounting software?",
-    a: "Pyngyn connects with accounting tools including Tally, Computax, Zoho Books, QuickBooks, and Excel. You can sync client lists and deliver exports directly into client spaces.",
+    a: "Pyngyn connects with Tally Prime and Zoho Books for accounting, Razorpay for payments, and Gmail, Google Calendar and Google Drive, and imports client lists from Excel. More integrations are on the way.",
   },
   {
     q: "What does Pyngyn ClientSpace cost for accounting practices?",

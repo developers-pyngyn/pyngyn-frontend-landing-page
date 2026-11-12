@@ -154,7 +154,7 @@ const OBJECTIONS = [
 
 const FAQS = [
   { q: "How fast can we go live?", a: "A typical mid-market services firm has the first engagement running in under a week, and most of the team using it inside two." },
-  { q: "Will it work with our existing tools?", a: "Yes. PYNGYN connects to Slack, Gmail, Google Workspace, QuickBooks, Xero, DocuSign, Stripe, Salesforce, HubSpot, n8n, Zapier, and Make, with more on the way." },
+  { q: "Will it work with our existing tools?", a: "Yes. PYNGYN connects to Gmail, Google Calendar, Google Drive, Razorpay, Zoho Books and Tally Prime, with more on the way." },
   { q: "How do you handle our data?", a: "256-bit AES encryption in transit and at rest, role-based access control, ISO 9001:2015 certified quality processes, and DPDP alignment. Your data is never used to train AI models without explicit consent." },
   { q: "Can we migrate from another tool?", a: "Yes. We support imports from common project tools and spreadsheets, and our team helps with the first migration so you do not lose history." },
   { q: "How does pricing work?", a: "One plan with every feature, priced by team size: from $49/month for up to 5 users to $999/month for 100. Larger firms get custom pricing. 7-day trial, no credit card required." },

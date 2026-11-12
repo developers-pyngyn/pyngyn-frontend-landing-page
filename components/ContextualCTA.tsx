@@ -223,7 +223,7 @@ const BY_CATEGORY: Record<string, Variant> = {
   Integrations: {
     eyebrow: "Connect your stack",
     title: "See the rest of your tools feeding Workspace.",
-    body: "QuickBooks, Xero, DocuSign, Slack, and more sync into Workspace, and the result shows up in each client's Clientspace automatically.",
+    body: "Gmail, Google Drive, Razorpay, Zoho Books, Tally Prime and more sync into Pyngyn, and the result shows up in each client's Clientspace automatically.",
     label: "See all integrations",
     href: "/integrations",
   },
