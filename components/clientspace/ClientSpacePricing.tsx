@@ -17,6 +17,8 @@ import {
   PRICING_FAQS,
   ANNUAL_DISCOUNT_PCT,
   ENTERPRISE_FROM_USERS,
+  ENTERPRISE_EXTRAS,
+  ENTERPRISE_EXTRAS_NOTE,
   formatUsd,
 } from "@/components/clientspace-pricing-data";
 import { SIGNUP_URL, DEMO_URL, SOCIAL_LINKEDIN } from "@/components/config";
@@ -77,7 +79,7 @@ export function ClientSpacePricing({ headingLevel = "h2" }: { headingLevel?: "h1
               Simple plans for every firm
             </Heading>
             <p className="mt-4 text-[15.5px] leading-relaxed text-muted">
-              One plan with every feature, priced by the size of your team. Start your 7-day free trial now, no
+              One plan with every core feature, priced by the size of your team. Start your 7-day free trial now, no
               credit card required.
             </p>
             <div className="mt-7 flex items-center gap-3">
@@ -194,7 +196,7 @@ export function ClientSpacePricing({ headingLevel = "h2" }: { headingLevel?: "h1
                 href={DEMO_URL}
                 className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-accent px-6 py-3.5 text-[15px] font-bold text-white transition-colors hover:bg-accent-dk"
               >
-                Talk to us →
+                Contact sales →
               </Link>
             )}
 
@@ -221,6 +223,21 @@ export function ClientSpacePricing({ headingLevel = "h2" }: { headingLevel?: "h1
                 </li>
               ))}
             </ul>
+
+            {!tier && (
+              <div className="mt-7 border-t border-slate-200 pt-6">
+                <h4 className="font-display text-[17px] font-bold text-ink">Enterprise extras</h4>
+                <p className="mt-1.5 text-[13px] leading-relaxed text-muted">{ENTERPRISE_EXTRAS_NOTE}</p>
+                <ul className="mt-4 space-y-3.5">
+                  {ENTERPRISE_EXTRAS.map((f) => (
+                    <li key={f} className="flex items-start gap-3 text-[15px] text-ink">
+                      <CheckBox />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>

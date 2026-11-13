@@ -1,7 +1,8 @@
 // Single source of truth for ClientSpace pricing. Every page that shows a
 // price reads from here, so a price change is a one-file edit.
 //
-// One plan with every feature; the only choice is team size. USD for every
+// One plan with every core feature; the only choice is team size (Workload Cockpit and CRM are
+// Enterprise-only, see ENTERPRISE_EXTRAS). USD for every
 // visitor. Annual billing is 20% off, rounded down to a whole dollar.
 
 export type PricingTier = {
@@ -40,19 +41,27 @@ export const COMMON_FEATURES: string[] = [
   "GST, Income Tax, TDS & ROC due-date calendar",
   "PBC document requests & secure uploads",
   "4-eye partner review queue",
-  "Workload Cockpit & timesheets",
+  "Timesheets",
   "Notices, DSC & statutory health registers",
-  "CRM, proposals, invoices & retainers",
+  "Proposals, invoices and retainers",
   "Dashboards, reports & custom builder",
   "100 GB encrypted document vault",
 ];
+
+// Only on the Enterprise plan (more than ENTERPRISE_FROM_USERS users), arranged with sales.
+// Shown on the "More than 100 users" option of the pricing card.
+export const ENTERPRISE_EXTRAS: string[] = [
+  "Workload Cockpit: live capacity, allocations and one-click rebalancing",
+  "CRM and sales pipeline: leads, deals, follow-ups, proposals and campaigns",
+];
+export const ENTERPRISE_EXTRAS_NOTE = "Available only on the Enterprise plan, arranged with sales.";
 
 export interface IncludedGroup {
   title: string;
   items: string[];
 }
 
-// Everything below is included in every team size.
+// Everything below is included in every team size (Workload Cockpit and CRM: Enterprise only).
 export const INCLUDED_FEATURES: IncludedGroup[] = [
   {
     title: "Work & compliance",
@@ -78,7 +87,6 @@ export const INCLUDED_FEATURES: IncludedGroup[] = [
     items: [
       "4-eye partner review queue (maker-checker)",
       "Partner, Manager, Senior, Article & custom roles",
-      "Workload Cockpit with capacity views & 1-click rebalancing",
       "Timesheets with live timer & team approval",
       "Risks & issues log with automatic risk detection",
     ],
@@ -86,7 +94,7 @@ export const INCLUDED_FEATURES: IncludedGroup[] = [
   {
     title: "Growth, reporting & security",
     items: [
-      "CRM: pipeline, proposals, campaigns & referrals",
+      "Proposals, campaigns & referrals",
       "Invoices, retainers and GST & Tally exports",
       "Practice, client, financial & team dashboards with a custom builder",
       "100 GB encrypted document vault, audit log & priority support",
@@ -102,7 +110,7 @@ export interface PricingFaq {
 export const PRICING_FAQS: PricingFaq[] = [
   {
     q: "How does team-size pricing work?",
-    a: `You pick the plan that covers the number of people in your firm who use Pyngyn: up to 5 users for $49/month, 10 for $99, 15 for $149, 20 for $199, 50 for $499 or 100 for $999. Every plan includes every feature; only the number of users changes. Firms with more than ${ENTERPRISE_FROM_USERS} users can talk to us about a custom plan.`,
+    a: `You pick the plan that covers the number of people in your firm who use Pyngyn: up to 5 users for $49/month, 10 for $99, 15 for $149, 20 for $199, 50 for $499 or 100 for $999. Every plan includes every common feature; only the number of users changes. Firms with more than ${ENTERPRISE_FROM_USERS} users can talk to us about a custom Enterprise plan, which also offers the Workload Cockpit and CRM.`,
   },
   {
     q: "Who counts as a user?",
