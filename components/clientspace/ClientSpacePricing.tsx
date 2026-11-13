@@ -196,7 +196,7 @@ export function ClientSpacePricing({ headingLevel = "h2" }: { headingLevel?: "h1
                 href={DEMO_URL}
                 className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-accent px-6 py-3.5 text-[15px] font-bold text-white transition-colors hover:bg-accent-dk"
               >
-                Talk to us →
+                Contact sales →
               </Link>
             )}
 
